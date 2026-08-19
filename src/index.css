@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'SK Modernist';
+  src: url('/fonts/sk-modernist-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SK Modernist';
+  src: url('/fonts/sk-modernist-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --breakpoint-tablet: 40rem;
+  --breakpoint-laptop: 64rem;
+
+  --font-modernist: 'SK Modernist', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+
+  --color-page: rgb(228 222 202);
+  --color-ink: rgb(0 0 0);
+  --color-hyacinth: rgb(63 44 23);
+  --color-hyacinth-hover: rgb(90 64 37);
+  --color-graphite: rgb(31 21 14);
+
+  --grid-template-columns-14: repeat(14, minmax(0, 1fr));
+}
+
+/* Dark mode: system preference is honored unless a `data-theme` override is
+   set (via the toggle button, persisted to localStorage). An explicit
+   data-theme="light" always wins over a dark system preference, and
+   data-theme="dark" always wins over a light one. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-page: rgb(20 16 10);
+    --color-ink: rgb(230 222 202);
+    --color-hyacinth: rgb(196 161 110);
+    --color-hyacinth-hover: rgb(214 184 140);
+    --color-graphite: rgb(10 8 5);
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-page: rgb(20 16 10);
+  --color-ink: rgb(230 222 202);
+  --color-hyacinth: rgb(196 161 110);
+  --color-hyacinth-hover: rgb(214 184 140);
+  --color-graphite: rgb(10 8 5);
+}
+
+:root {
+  --h1-size: 2rem;
+  --h2-size: 1.5rem;
+  --h3-size: 1.15rem;
+  --project-title-size: 1.05rem;
+  --p-size: 1rem;
+  background: var(--color-page);
+}
+
+.section-wrapper {
+  --h1-size: 2rem;
+  --h2-size: 1.5rem;
+  --h3-size: 1.15rem;
+  --project-title-size: 1.05rem;
+  --p-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  .section-wrapper {
+    --h1-size: 2.53125rem;
+    --h2-size: 1.828125rem;
+    --h3-size: 1.40625rem;
+    --project-title-size: 1.265625rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-wrapper {
+    --h1-size: 2.8125rem;
+    --h2-size: 2.03125rem;
+    --h3-size: 1.5625rem;
+    --project-title-size: 1.265625rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-page);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-blend-mode: overlay;
+    color: var(--color-ink);
+    font-family: var(--font-poppins);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-page);
+  }
+}
+
+.custom-h1 {
+  font-family: var(--font-modernist);
+  font-size: var(--h1-size);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-hyacinth);
+}
+
+.custom-h2 {
+  font-family: var(--font-modernist);
+  font-size: var(--h2-size);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-hyacinth);
+}
+
+.custom-h3 {
+  font-family: var(--font-modernist);
+  font-size: var(--h3-size);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-hyacinth);
+}
+
+.custom-h4 {
+  font-family: var(--font-modernist);
+  font-size: var(--project-title-size);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.custom-h4-bold {
+  font-weight: 700;
+}
+
+/* Fixed light color for captions overlaid on a photo (behind a dark gradient) —
+   deliberately NOT theme-aware, since it must stay light regardless of
+   light/dark site mode. */
+.custom-h4-invert {
+  color: rgb(255 255 255);
+}
+
+.custom-p {
+  font-family: var(--font-poppins);
+  font-size: var(--p-size);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.custom-h2-sm {
+  font-size: 1.4rem;
+}
+
+@media (min-width: 40rem) {
+  .custom-h2-sm {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .custom-h2-sm {
+    font-size: 1.8rem;
+  }
+}
+
+/* Mobile-only reductions: revert to the normal responsive size from `tablet` up */
+.nav-brand-sm {
+  font-size: 1.05rem;
+}
+
+@media (min-width: 40rem) {
+  .nav-brand-sm {
+    font-size: var(--h3-size);
+  }
+}
+
+.custom-p-sm {
+  font-size: 0.75rem;
+}
+
+@media (min-width: 40rem) {
+  .custom-p-sm {
+    font-size: var(--p-size);
+  }
+}
+
+.custom-button-label {
+  font-family: var(--font-poppins);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-left 34s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+.space-y-text-block > * + * {
+  margin-top: 1rem;
+}
+
+input[type='range'].scrubber {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-hyacinth) 30%, var(--color-page));
+}
+
+input[type='range'].scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--color-page);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--color-graphite) 25%, transparent);
+  cursor: pointer;
+}
+
+input[type='range'].scrubber::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-page);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--color-graphite) 25%, transparent);
+  cursor: pointer;
+}
