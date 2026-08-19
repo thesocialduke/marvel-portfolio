@@ -21,7 +21,7 @@ export const logos = ['/logos/binance.svg', '/logos/bitget.svg', '/logos/base.sv
 
 export const clients = [
   {
-    href: '/zola-growth-paid-social',
+    href: '/bitget',
     title: 'Bitget (Growth, Organic Social, Community)',
     shortName: 'Bitget',
     category: 'Growth & Community',
@@ -31,7 +31,7 @@ export const clients = [
     bold: false,
   },
   {
-    href: '/gameloft-social-ads',
+    href: '/base-southern-africa',
     title: 'Base Southern Africa (Coinbase: Ambassadors Consultant and Creative Lead)',
     shortName: 'Base',
     category: 'Web3 Infrastructure',
@@ -41,7 +41,7 @@ export const clients = [
     bold: true,
   },
   {
-    href: '/better-sleep-growth-creative-strategy-and-production',
+    href: '/binance-street-interviews',
     title: 'Binance: Viral Street Interviews',
     shortName: 'Binance',
     category: 'Crypto Education',
@@ -71,17 +71,14 @@ export type EventPhoto = {
   location: string
 }
 
-// TEMP placeholder photos (via Picsum) for local layout preview only — swap every
-// entry for a real event photo (and real event/location) before this goes live.
 export const events: EventPhoto[] = [
-  { image: 'https://picsum.photos/seed/lagos-1/800/800', event: 'Bitget Community Meetup', location: 'Lagos, Nigeria' },
-  { image: 'https://picsum.photos/seed/nairobi-1/800/800', event: 'Binance Street Interviews', location: 'Nairobi, Kenya' },
-  { image: 'https://picsum.photos/seed/accra-1/800/800', event: 'Base Ambassador Activation', location: 'Accra, Ghana' },
-  { image: 'https://picsum.photos/seed/capetown-1/800/800', event: 'Web3 Founders Mixer', location: 'Cape Town, South Africa' },
-  { image: 'https://picsum.photos/seed/johannesburg-1/800/800', event: 'Crypto Onboarding Day', location: 'Johannesburg, South Africa' },
-  { image: 'https://picsum.photos/seed/kampala-1/800/800', event: 'Creator Workshop', location: 'Kampala, Uganda' },
-  { image: 'https://picsum.photos/seed/abuja-1/800/800', event: 'Community Town Hall', location: 'Abuja, Nigeria' },
-  { image: 'https://picsum.photos/seed/kigali-1/800/800', event: 'Blockchain Summit Afterparty', location: 'Kigali, Rwanda' },
+  { image: '/events/ethiopia-blockchain-week.jpg', event: 'Ethiopia Blockchain Week', location: 'Addis Ababa, Ethiopia, 2025' },
+  { image: '/events/university-of-nairobi.jpg', event: 'University of Nairobi', location: 'Nairobi, Kenya, 2025' },
+  { image: '/events/crypto-experience-month-warri.jpg', event: 'Crypto Experience Month', location: 'Warri, Nigeria, 2024' },
+  { image: '/events/padel-event-capetown.jpg', event: 'Padel Event', location: 'Cape Town, South Africa, 2025' },
+  { image: '/events/pizza-day-johannesburg.jpg', event: 'Bitcoin Pizza Day', location: 'Johannesburg, South Africa, 2025' },
+  { image: '/events/p2p-merchant-meetup-nairobi.jpg', event: 'P2P Merchant Meetup', location: 'Nairobi, Kenya, 2025' },
+  { image: '/events/p2p-merchant-meetup-kenya.jpg', event: 'P2P Merchant Meetup', location: 'Kenya, 2026' },
 ]
 
 export const services = [
@@ -134,101 +131,178 @@ export const faqs = [
   },
 ]
 
-export const zolaPortrait: VideoItem[] = [
-  {
-    title: 'Brand awareness',
-    description:
-      'Solution-driven video showing how Zola’s wedding website keeps everything organized — from guests to gifts to the big day.',
-    src: media('videos/Zola - Questions - Webiste.mp4'),
-    poster: media('videos/thumbnails/thumbnail_Zola - Questions - Webiste.webp'),
-  },
-  {
-    title: 'Brand awareness',
-    description:
-      'Produced emotional storytelling videos highlighting the joy and ease of wedding planning with Zola.',
-    src: media('videos/ZolaWeddings.mp4'),
-    poster: media('videos/thumbnails/thumbnail_ZolaWeddings.webp'),
-  },
-  {
-    title: 'Feature focused',
-    description: 'Trend-inspired video for Meta',
-    src: media('videos/Zola - Trend.mp4'),
-    poster: media('videos/thumbnails/thumbnail_Zola - Trend.webp'),
-  },
-  {
-    title: 'Brand feature',
-    description: 'Swipe-inspired concept to browse through your dream registry.',
-    src: media('videos/Screen Recording 2024-04-05 at 10.20.25\u202FAM.mp4'),
-    poster: media('videos/thumbnails/thumbnail_Screen Recording 2024-04-05 at 10.20.25\u202FAM.webp'),
-  },
-]
+export const avatar = '/avatar.jpg'
 
-export const zolaLandscape: VideoItem[] = [
-  {
-    title: 'TV Ad Fall Campaign 2023 - Explainer',
-    src: media(
-      'videos/Zola _ The one place to start your wedding planning journey _ Vendors, invites, websites, registry (1).mp4',
-    ),
-    poster: media(
-      'videos/thumbnails/thumbnail_Zola _ The one place to start your wedding planning journey _ Vendors, invites, websites, registry (1).webp',
-    ),
-  },
-  {
-    title: 'TV Ad Fall Campaign 2023 - Explainer',
-    src: media(
-      'videos/Zola _ Easy Wedding Planning All In One Place _ Vendors, Invitations, Websites, Registry.mp4',
-    ),
-    poster: media(
-      'videos/thumbnails/thumbnail_Zola _ Easy Wedding Planning All In One Place _ Vendors, Invitations, Websites, Registry.webp',
-    ),
-  },
-]
+export type CaseStudyStat = { value: string; label: string }
+export type BeforeAfter = { before: string; after: string }
+export type Testimonial = { quote: string; name: string; role: string }
+export type GalleryPhoto = { image: string; caption?: string }
+export type ProofSection = { title: string; photos: GalleryPhoto[] }
 
-export const gameloftVideos: VideoItem[] = [
-  {
-    title: 'Gameloft: Lego',
-    description: 'Paid social edit',
-    src: media('videos/LEGO_EXT20_UA006_ChooseYourTeam_Team4_B_1080x1920.mp4'),
-    poster: media('videos/thumbnails/thumbnail_LEGO_EXT20_UA006_ChooseYourTeam_Team4_B_1080x1920.webp'),
-  },
-  {
-    title: 'Gameloft: Lego Battle',
-    description: 'Paid social edit',
-    src: media('videos/GAMELOFT_Snapchat_attacks_Argenta_1080x1920_Zoom copy (1).mp4'),
-    poster: media('videos/thumbnails/thumbnail_GAMELOFT_Snapchat_attacks_Argenta_1080x1920_Zoom copy (1).webp'),
-  },
-  {
-    title: 'Gameloft: Disney',
-    description: 'Multiple placements',
-    src: media('videos/005-DGB_EXT20_UA015_VisitLowkeyBeach_1080x1920 (1).mp4'),
-    poster: media('videos/thumbnails/thumbnail_005-DGB_EXT20_UA015_VisitLowkeyBeach_1080x1920 (1).webp'),
-  },
-  {
-    title: 'Gameloft: Lego',
-    description: 'Paid social edit',
-    src: media('videos/LEGO_EXT20_UA008_WheelOfFortune_HandSpin_Lloyd_1080x1920 (1) (1).mp4'),
-    poster: media(
-      'videos/thumbnails/thumbnail_LEGO_EXT20_UA008_WheelOfFortune_HandSpin_Lloyd_1080x1920 (1) (1).webp',
-    ),
-  },
-]
+export type CaseStudyData = {
+  href: string
+  eyebrow: string
+  title: string
+  summary: string
+  roleTitle: string
+  roleBullets: string[]
+  beforeAfter?: BeforeAfter[]
+  beforeImages?: GalleryPhoto[]
+  afterImages?: GalleryPhoto[]
+  proofSections?: ProofSection[]
+  videos?: VideoItem[]
+  results?: CaseStudyStat[]
+  keyMoment?: string
+  testimonial?: Testimonial
+  gallery?: GalleryPhoto[]
+  closing: string[]
+}
 
-export const betterSleep = {
-  rain: {
-    src: media('videos/UA_Q2_25_June_W3_EG_Rain_SoundTherapy_13s_CO_1080x1920.mp4'),
-    poster: media('videos/thumbnails/thumbnail_UA_Q2_25_June_W3_EG_Rain_SoundTherapy_13s_CO_1080x1920.webp'),
+export const bitgetCaseStudy: CaseStudyData = {
+  href: '/bitget',
+  eyebrow: 'Case study',
+  title: 'Bitget — Top #3 Crypto Exchange Globally',
+  summary:
+    'I lead Social Media and Community for Bitget across Africa, driving strategy and growth in one of the world’s most fast-moving markets — from viral campaigns and live community programming to offline activations and full-cycle content production.',
+  roleTitle: 'Head of Social Media, Content and Community',
+  roleBullets: [
+    'Ran viral listing campaigns for $DOGS, $PI, and $PAWS, each built for awareness and follower growth',
+    'Built and led #BitQuest, a 7-day gamified educational campaign that simplified key crypto concepts',
+    'Hosted AMAs, Twitter Spaces, and YouTube Lives with BDs and KOLs across the region',
+    'Led the fastest-growing regional Telegram community at Bitget Africa',
+    'Took Bitget’s content to the street — handled the full UGC process from scripting to editing, growing one channel from 0 to 10K followers',
+    'Planned and executed offline activations across East, West & South Africa',
+  ],
+  proofSections: [
+    {
+      title: 'Campaigns',
+      photos: [
+        { image: '/case-studies/bitget/campaign-dogs.jpg', caption: '$DOGS listing — over 2M+ impressions' },
+        { image: '/case-studies/bitget/campaign-pi.jpg', caption: '$PI listing — over 1M+ impressions' },
+        { image: '/case-studies/bitget/campaign-bitquest.jpg', caption: '#BitQuest — 11.9M+ total reach' },
+        { image: '/case-studies/bitget/campaign-stocks-vs-crypto.jpg', caption: 'Stocks vs Crypto Showdown challenge' },
+      ],
+    },
+    {
+      title: 'The OKX exit',
+      photos: [
+        { image: '/case-studies/bitget/okx-news.jpg', caption: 'OKX ends Nigerian operations' },
+        { image: '/case-studies/bitget/okx-top-app.jpg', caption: 'Bitget Wallet becomes Nigeria’s #1 downloaded app' },
+      ],
+    },
+    {
+      title: 'Educational sessions',
+      photos: [
+        { image: '/case-studies/bitget/education-youtube-live.jpg', caption: 'Hosting a YouTube Live session' },
+        { image: '/case-studies/bitget/education-twitter-space.jpg', caption: 'Hosting a Twitter Space' },
+      ],
+    },
+  ],
+  results: [
+    { value: '30M+', label: 'Total impressions' },
+    { value: '1M+', label: 'Views on education programs' },
+    { value: '150K+', label: 'New followers gained' },
+    { value: '20K', label: 'Users from ambassador program' },
+    { value: '3,500', label: 'Followers gained in one day' },
+    { value: '84.35%', label: 'CSAT across offline events' },
+  ],
+  keyMoment:
+    'When OKX exited the market, campaigns I ran were instrumental in driving Bitget Wallet to become the top-downloaded crypto app in Nigeria — making “Bitget” a trending topic.',
+  testimonial: {
+    quote:
+      'Marvellous has his own instinct for the sense of humor, and for running social and community campaigns. Leading our Africa social media runs pretty well and is very engaging. He’s fully embedded in the AF market.',
+    name: 'Aka Leung',
+    role: 'Regional Director (MENA, Africa, OC, JP), Bitget',
   },
-  lea: {
-    src: media('videos/UA_Q2_25_May_W4_PS_LeaSalonga_Teaser_30s_CO_1080x1920.mp4'),
-    poster: media('videos/thumbnails/thumbnail_UA_Q2_25_May_W4_PS_LeaSalonga_Teaser_30s_CO_1080x1920.webp'),
-  },
-  phone: media('cropped_cmgpgiilw000i04jsatirdftb.jpeg'),
-  strengths: [
-    'Creative direction & strategy',
-    'Production management & process optimization',
-    'Paid social creative strategy, analysis and iterations',
-    'Cross-functional alignment (ASO, CRM, Web, Product)',
+  gallery: [
+    { image: '/events/ethiopia-blockchain-week.jpg', caption: 'Ethiopia Blockchain Week, Addis Ababa, 2025' },
+    { image: '/events/university-of-nairobi.jpg', caption: 'University of Nairobi, Nairobi, 2025' },
+    { image: '/events/crypto-experience-month-warri.jpg', caption: 'Crypto Experience Month, Warri, 2024' },
+    { image: '/events/padel-event-capetown.jpg', caption: 'Padel Event, Cape Town, 2025' },
+    { image: '/events/pizza-day-johannesburg.jpg', caption: 'Bitcoin Pizza Day, Johannesburg, 2025' },
+    { image: '/events/p2p-merchant-meetup-nairobi.jpg', caption: 'P2P Merchant Meetup, Nairobi, 2025' },
+  ],
+  closing: [
+    'Planned and executed localized offline activations across East, West & South Africa, onboarding 100+ new users per event on average.',
+    'Made “Bitget” a trending topic in Nigeria during one of the market’s biggest moments.',
   ],
 }
 
-export const avatar = '/avatar.jpg'
+export const baseCaseStudy: CaseStudyData = {
+  href: '/base-southern-africa',
+  eyebrow: 'Case study',
+  title: 'Coinbase (Base): Base Southern Africa',
+  summary:
+    'Base had an active network of ambassadors and creators producing consistently, but content quality and depth varied — inconsistent camera, lighting and framing, content that leaned too promotional, limited variety in formats, and no clear creative direction.',
+  roleTitle: 'Ambassadors Consultant & Creative Lead',
+  roleBullets: [
+    '**Coaching**: improved production quality across the ambassador network',
+    '**Creative direction**: developed hooks, scripts, and content concepts',
+    'Introduced new formats, including street interviews, to diversify content',
+    'Created regional social and promotional content for the Base App',
+    'Directed and produced **AI-generated video concepts** for regional campaigns',
+  ],
+  beforeAfter: [
+    { before: 'Low-quality production', after: 'Stronger visual' },
+    { before: 'Surface-level content', after: 'Better hooks & storytelling' },
+    { before: 'Repetitive formats', after: 'More diverse, localized content' },
+    { before: 'No direction', after: 'Clear direction with personalized scripts' },
+  ],
+  beforeImages: [
+    { image: '/case-studies/base/before-1.jpg' },
+    { image: '/case-studies/base/before-2.jpg' },
+  ],
+  afterImages: [
+    { image: '/case-studies/base/after-liseli.jpg', caption: '“Getting started on Base” — Liseli Akayombokwa' },
+    { image: '/case-studies/base/after-tebogo.jpg', caption: '“Base on the street” — Tebogo Nong' },
+    { image: '/case-studies/base/after-nobantu.jpg', caption: '“Base Batches” — Nobantu Gumbi' },
+  ],
+  videos: [
+    {
+      title: 'Base.Dev — “In this place, nothing moves”',
+      description: 'AI-generated narrative on the barriers people face without access or connections.',
+      src: '/videos/base/base-dev-update.mp4',
+      poster: '/videos/thumbnails/base-dev-update.jpg',
+    },
+    {
+      title: 'Base Batches — Student Track',
+      description: 'AI-generated narrative built around curiosity and access to opportunity.',
+      src: '/videos/base/base-batches.mp4',
+      poster: '/videos/thumbnails/base-batches.jpg',
+    },
+    {
+      title: '“Trading is better together” — Referral campaign',
+      description: 'AI-generated concept promoting the Base referral program.',
+      src: '/videos/base/trading-together-referral.mp4',
+      poster: '/videos/thumbnails/trading-together-referral.jpg',
+    },
+  ],
+  gallery: [{ image: '/case-studies/base.jpg', caption: 'Base Southern Africa activation' }],
+  closing: [
+    'Turned an inconsistent creator network into a source of sharper, localized, on-brand content.',
+    'Directed AI-generated concepts for Base.Dev’s dashboard update and the Base Batches Program.',
+  ],
+}
+
+export const binanceCaseStudy: CaseStudyData = {
+  href: '/binance-street-interviews',
+  eyebrow: 'Case study',
+  title: 'Binance Africa — Viral Street Interviews',
+  summary:
+    'Bringing crypto education to the street to make crypto feel less abstract and foreign to ordinary people — short, punchy street-interview content built to travel.',
+  roleTitle: 'Content Creator',
+  roleBullets: [
+    'Concept, shoot, and produce street-interview style short-form video',
+    'Turn crypto concepts into shareable hooks — “Gold or Bitcoin?”, “BTC vs Gold”, “Heard about Crypto?”',
+    'Distribute natively across Instagram and TikTok',
+  ],
+  results: [
+    { value: '39.7K', label: '“Gold or Bitcoin?”' },
+    { value: '17.6K', label: '“Give a Bitcoin to someone!”' },
+    { value: '15.4K', label: '“Heard about Crypto?”' },
+    { value: '11.8K', label: '“Learn Crypto for FREE”' },
+    { value: '10.5K', label: '“BTC vs Gold”' },
+  ],
+  gallery: [{ image: '/case-studies/binance-street-interviews.jpg', caption: 'Viral street interview series' }],
+  closing: ['Made crypto feel like a conversation you’d overhear on your own street, not a pitch aimed at you.'],
+}

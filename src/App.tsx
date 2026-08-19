@@ -1,10 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import { BetterSleep } from './pages/BetterSleep'
+import { CaseStudy } from './pages/CaseStudy'
 import { Contact } from './pages/Contact'
-import { Gameloft } from './pages/Gameloft'
 import { Home } from './pages/Home'
 import { Services } from './pages/Services'
-import { Zola } from './pages/Zola'
+import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from './data/site'
 
 export default function App() {
   return (
@@ -12,9 +11,9 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/services" element={<Services />} />
       <Route path="/contact-me" element={<Contact />} />
-      <Route path="/zola-growth-paid-social" element={<Zola />} />
-      <Route path="/gameloft-social-ads" element={<Gameloft />} />
-      <Route path="/better-sleep-growth-creative-strategy-and-production" element={<BetterSleep />} />
+      <Route path="/bitget" element={<CaseStudy data={bitgetCaseStudy} />} />
+      <Route path="/base-southern-africa" element={<CaseStudy data={baseCaseStudy} />} />
+      <Route path="/binance-street-interviews" element={<CaseStudy data={binanceCaseStudy} />} />
     </Routes>
   )
 }
