@@ -3,7 +3,13 @@ import { useLocation } from 'react-router-dom'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({
+  overlay,
+  children,
+}: {
+  overlay?: boolean
+  children: ReactNode
+}) {
   const { pathname } = useLocation()
 
   useEffect(() => {
@@ -13,7 +19,7 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-svh flex-col bg-page">
       <div className="section-wrapper flex flex-1 flex-col">
-        <Navbar />
+        <Navbar overlay={overlay} />
         <main className="flex-1">{children}</main>
         <Footer />
       </div>

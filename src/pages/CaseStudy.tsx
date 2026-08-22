@@ -37,7 +37,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
   let section = 2
 
   return (
-    <Layout>
+    <Layout overlay>
       <section className="relative w-full bg-hyacinth/5 pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="relative space-y-4 py-18">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
