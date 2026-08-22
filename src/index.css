@@ -24,11 +24,11 @@
   --font-modernist: 'SK Modernist', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
 
-  --color-page: rgb(228 222 202);
+  --color-page: rgb(246 246 246);
   --color-ink: rgb(0 0 0);
-  --color-hyacinth: rgb(63 44 23);
-  --color-hyacinth-hover: rgb(90 64 37);
-  --color-graphite: rgb(31 21 14);
+  --color-hyacinth: rgb(0 0 0);
+  --color-hyacinth-hover: rgb(102 102 102);
+  --color-graphite: rgb(10 10 10);
 
   --grid-template-columns-14: repeat(14, minmax(0, 1fr));
 }
@@ -39,20 +39,20 @@
    data-theme="dark" always wins over a light one. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --color-page: rgb(20 16 10);
-    --color-ink: rgb(230 222 202);
-    --color-hyacinth: rgb(196 161 110);
-    --color-hyacinth-hover: rgb(214 184 140);
-    --color-graphite: rgb(10 8 5);
+    --color-page: rgb(15 15 15);
+    --color-ink: rgb(246 246 246);
+    --color-hyacinth: rgb(246 246 246);
+    --color-hyacinth-hover: rgb(160 160 160);
+    --color-graphite: rgb(0 0 0);
   }
 }
 
 :root[data-theme='dark'] {
-  --color-page: rgb(20 16 10);
-  --color-ink: rgb(230 222 202);
-  --color-hyacinth: rgb(196 161 110);
-  --color-hyacinth-hover: rgb(214 184 140);
-  --color-graphite: rgb(10 8 5);
+  --color-page: rgb(15 15 15);
+  --color-ink: rgb(246 246 246);
+  --color-hyacinth: rgb(246 246 246);
+  --color-hyacinth-hover: rgb(160 160 160);
+  --color-graphite: rgb(0 0 0);
 }
 
 :root {
