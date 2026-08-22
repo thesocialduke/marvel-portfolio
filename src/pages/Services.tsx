@@ -8,7 +8,7 @@ export function Services() {
   return (
     <Layout>
       <section>
-        <Grid className="pt-12 pb-8 tablet:pt-18 laptop:pt-24 laptop:pb-12">
+        <Grid className="pt-18 pb-8 tablet:pt-[5rem] laptop:pt-[8.5rem] laptop:pb-12">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <h2 className="custom-h2 relative text-balance">
               I’m open for new projects — see what I can do for you below.

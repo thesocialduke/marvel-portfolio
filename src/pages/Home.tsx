@@ -10,7 +10,7 @@ import { avatar, clients, events, logos, services, site, stats } from '../data/s
 
 export function Home() {
   return (
-    <Layout overlay>
+    <Layout>
       <section className="bg-hyacinth/10 pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="space-y-6 pt-6 pb-12 tablet:space-y-8 tablet:pt-8 tablet:pb-18 laptop:space-y-12 laptop:pt-8 laptop:pb-32">
           <div className="col-span-full">
