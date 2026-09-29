@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
 const classes =
-  'custom-button-label flex min-h-[3.5rem] min-w-[6rem] w-full items-center justify-center gap-3 rounded-full px-8 py-2 text-[1rem] uppercase ring-1 ring-inset ring-hyacinth transition-colors hover:bg-hyacinth hover:text-page tablet:w-auto'
+  'custom-button-label flex min-h-[3.5rem] min-w-[6rem] w-full items-center justify-center gap-3 rounded-full px-8 py-2 text-[1rem] uppercase ring-1 ring-inset ring-hyacinth transition-colors hover:bg-hyacinth hover:text-page tablet:w-auto outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-page focus-visible:ring-hyacinth-hover'
 
 export function Button({
   children,

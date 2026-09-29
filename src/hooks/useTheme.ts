@@ -18,7 +18,22 @@ export function useTheme() {
     window.localStorage.setItem(STORAGE_KEY, theme)
   }, [theme])
 
-  const toggleTheme = () => setTheme((current) => (current === 'light' ? 'dark' : 'light'))
+  const toggleTheme = () => {
+    // Suppress every transition for one frame so the theme flip snaps
+    // uniformly instead of some elements fading (only `body` declares a
+    // color transition) while everything else changes instantly.
+    const style = document.createElement('style')
+    style.textContent = '*,*::before,*::after{transition:none!important}'
+    document.head.appendChild(style)
+
+    setTheme((current) => (current === 'light' ? 'dark' : 'light'))
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        style.remove()
+      })
+    })
+  }
 
   return { theme, toggleTheme }
 }

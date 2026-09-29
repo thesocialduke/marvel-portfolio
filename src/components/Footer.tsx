@@ -12,7 +12,7 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   to={item.href}
-                  className="group relative inline-flex h-10 items-center text-hyacinth"
+                  className="group relative inline-flex h-10 items-center rounded-sm text-hyacinth outline-none focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
                 >
                   <div className="relative text-hyacinth group-hover:underline group-hover:decoration-1 group-hover:underline-offset-8">
                     {item.label}

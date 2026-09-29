@@ -53,11 +53,15 @@ export function StatCounter({ value }: { value: string }) {
   const count = useCountUp(target, active)
 
   if (!match) {
-    return <span ref={ref}>{value}</span>
+    return (
+      <span ref={ref} className="tabular-nums">
+        {value}
+      </span>
+    )
   }
 
   return (
-    <span ref={ref}>
+    <span ref={ref} className="tabular-nums">
       {match[1]}
       {count}
       {match[3]}

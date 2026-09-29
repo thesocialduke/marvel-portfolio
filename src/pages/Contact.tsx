@@ -7,7 +7,7 @@ const fieldChrome =
   'inline-flex h-full w-full flex-col rounded-xl bg-ink/10 text-ink ring-inset transition-colors group-focus-within:ring-2 group-focus-within:ring-ink/80 hover:ring-2 hover:ring-ink/80'
 
 const control =
-  'size-full min-w-0 flex-1 resize-none appearance-none overflow-hidden rounded-none bg-transparent px-4 py-3 focus:outline-none placeholder:text-ink/50'
+  'size-full min-w-0 flex-1 resize-none appearance-none overflow-hidden rounded-none bg-transparent px-4 py-3 focus:outline-none placeholder:text-ink/60'
 
 export function Contact() {
   const [name, setName] = useState('')
@@ -24,9 +24,9 @@ export function Contact() {
   return (
     <Layout>
       <section>
-        <Grid className="pt-12 pb-8 tablet:pt-18 laptop:pt-24 laptop:pb-12">
+        <Grid className="pt-18 pb-8 tablet:pt-[5rem] laptop:pt-[8.5rem] laptop:pb-12">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <h2 className="custom-h2 relative text-balance">Let’s work together, I’m just a message away.</h2>
+            <h1 className="custom-h2 relative text-balance">Let’s work together, I’m just a message away.</h1>
           </div>
         </Grid>
       </section>
@@ -47,6 +47,7 @@ export function Contact() {
                     id="name"
                     name="name"
                     type="text"
+                    autoComplete="name"
                     placeholder="Your Name"
                     aria-invalid={false}
                     className={control}
@@ -60,6 +61,7 @@ export function Contact() {
                     id="email"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     placeholder="name@email.com"
                     aria-invalid={false}
                     className={control}
@@ -83,7 +85,7 @@ export function Contact() {
               </div>
               <button
                 type="submit"
-                className="custom-button-label flex min-h-[3.5rem] min-w-[6rem] w-full items-center justify-center gap-3 rounded-full px-8 py-2 text-[1rem] uppercase ring-1 ring-inset ring-hyacinth transition-colors hover:bg-hyacinth hover:text-page tablet:w-auto"
+                className="custom-button-label flex min-h-[3.5rem] min-w-[6rem] w-full items-center justify-center gap-3 rounded-full px-8 py-2 text-[1rem] uppercase ring-1 ring-inset ring-hyacinth transition-colors outline-none hover:bg-hyacinth hover:text-page focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-page focus-visible:ring-hyacinth-hover tablet:w-auto"
               >
                 Send Mail
               </button>

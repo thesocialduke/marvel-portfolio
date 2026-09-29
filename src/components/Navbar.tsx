@@ -13,7 +13,7 @@ function ThemeToggle() {
       type="button"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       onClick={toggleTheme}
-      className="relative z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-full text-ink transition-colors hover:text-hyacinth"
+      className="relative z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-full text-ink outline-none transition-colors hover:text-hyacinth focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
     >
       {isDark ? (
         <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -29,7 +29,7 @@ function ThemeToggle() {
   )
 }
 
-export function Navbar({ overlay }: { overlay?: boolean }) {
+export function Navbar() {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -40,71 +40,67 @@ export function Navbar({ overlay }: { overlay?: boolean }) {
   }, [open])
 
   return (
-    <div className={`relative ${overlay ? '' : 'bg-page'}`}>
-      <div className={overlay ? 'absolute inset-x-0 top-0 bg-transparent' : 'bg-page'}>
-        <Grid>
-          <div
-            className={`col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-11 ${overlay ? '' : 'bg-page'}`}
+    <div className="fixed inset-x-0 top-0 z-50 bg-page/70 backdrop-blur-md">
+      <Grid>
+        <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-11">
+          <Link
+            to="/"
+            className="custom-h3 nav-brand-sm relative z-10 flex h-8 items-center rounded-sm py-2 outline-none tablet:h-10 laptop:h-12 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
           >
-            <Link
-              to="/"
-              className="custom-h3 nav-brand-sm relative z-10 flex h-8 items-center py-2 tablet:h-10 laptop:h-12"
+            {site.name}
+          </Link>
+          <div className="flex items-center gap-2 tablet:gap-6">
+            <button
+              type="button"
+              aria-label="Toggle navigation"
+              aria-controls="site-nav"
+              aria-expanded={open}
+              className="custom-h3 z-20 -mx-3 inline-flex cursor-pointer items-center justify-center rounded-sm p-3 outline-none tablet:hidden focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+              onClick={() => setOpen((v) => !v)}
             >
-              {site.name}
-            </Link>
-            <div className="flex items-center gap-2 tablet:gap-6">
-              <button
-                type="button"
-                aria-label="Toggle navigation"
-                aria-controls="site-nav"
-                aria-expanded={open}
-                className="custom-h3 z-20 -mx-3 inline-flex cursor-pointer items-center justify-center p-3 tablet:hidden"
-                onClick={() => setOpen((v) => !v)}
-              >
-                {open ? (
-                  <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                ) : (
-                  <svg className="h-6" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 15h18v2H3zM3 7h18v2H3z" />
-                  </svg>
-                )}
-              </button>
-              <nav
-                id="site-nav"
-                className={`fixed inset-0 z-10 flex max-h-screen items-center justify-center bg-page tablet:static tablet:visible tablet:bg-transparent tablet:pointer-events-auto ${open ? 'visible pointer-events-auto' : 'invisible pointer-events-none'}`}
-              >
-                <ul className="custom-p flex flex-col items-center space-y-4 leading-snug tablet:flex-row tablet:flex-wrap tablet:gap-x-16 tablet:space-y-0">
-                  {nav.map((item) => (
-                    <li key={item.href}>
-                      <NavLink
-                        to={item.href}
-                        end={item.href === '/'}
-                        onClick={() => setOpen(false)}
-                        className="group relative inline-flex h-12 items-center text-ink hover:text-hyacinth"
-                      >
-                        {({ isActive }) => (
-                          <div
-                            className={`relative text-hyacinth ${
-                              isActive
-                                ? 'underline decoration-1 underline-offset-8'
-                                : 'group-hover:underline group-hover:decoration-1 group-hover:underline-offset-8'
-                            }`}
-                          >
-                            <p>{item.label}</p>
-                          </div>
-                        )}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-              <ThemeToggle />
-            </div>
+              {open ? (
+                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" />
+                </svg>
+              ) : (
+                <svg className="h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 15h18v2H3zM3 7h18v2H3z" />
+                </svg>
+              )}
+            </button>
+            <nav
+              id="site-nav"
+              className={`fixed inset-0 z-10 flex max-h-screen items-center justify-center bg-page tablet:static tablet:visible tablet:bg-transparent tablet:pointer-events-auto ${open ? 'visible pointer-events-auto' : 'invisible pointer-events-none'}`}
+            >
+              <ul className="custom-p flex flex-col items-center space-y-4 leading-snug tablet:flex-row tablet:flex-wrap tablet:gap-x-16 tablet:space-y-0">
+                {nav.map((item) => (
+                  <li key={item.href}>
+                    <NavLink
+                      to={item.href}
+                      end={item.href === '/'}
+                      onClick={() => setOpen(false)}
+                      className="group relative inline-flex h-12 items-center rounded-sm text-ink outline-none hover:text-hyacinth focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+                    >
+                      {({ isActive }) => (
+                        <div
+                          className={`relative text-hyacinth ${
+                            isActive
+                              ? 'underline decoration-1 underline-offset-8'
+                              : 'group-hover:underline group-hover:decoration-1 group-hover:underline-offset-8'
+                          }`}
+                        >
+                          <p>{item.label}</p>
+                        </div>
+                      )}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <ThemeToggle />
           </div>
-        </Grid>
-      </div>
+        </div>
+      </Grid>
     </div>
   )
 }

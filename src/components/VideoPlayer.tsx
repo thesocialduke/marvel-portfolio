@@ -52,6 +52,10 @@ export function VideoPlayer({
           <button
             type="button"
             aria-label="Play video"
+            onClick={(e) => {
+              e.stopPropagation()
+              togglePlay()
+            }}
             className="absolute top-1/2 left-1/2 size-16 -translate-x-1/2 -translate-y-1/2"
           >
             <svg viewBox="0 0 64 64" className="size-16">
@@ -60,11 +64,23 @@ export function VideoPlayer({
             </svg>
           </button>
         )}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#000a] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#000a] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100" />
         <div
-          className="absolute bottom-6 left-1/2 flex w-full -translate-x-1/2 items-center gap-6 px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          className="absolute bottom-6 left-1/2 flex w-full -translate-x-1/2 items-center gap-6 px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
           onClick={(e) => e.stopPropagation()}
         >
+          {playing && (
+            <button
+              type="button"
+              aria-label="Pause video"
+              onClick={togglePlay}
+              className="shrink-0 rounded-full bg-black/15 p-[2px] backdrop-blur-sm"
+            >
+              <svg viewBox="0 0 24 24" className="size-6 fill-white">
+                <path d="M8 5h3v14H8zM13 5h3v14h-3z" />
+              </svg>
+            </button>
+          )}
           <input
             type="range"
             min={0}

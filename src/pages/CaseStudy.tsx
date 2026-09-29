@@ -37,7 +37,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
   let section = 2
 
   return (
-    <Layout overlay>
+    <Layout>
       <section className="relative w-full bg-hyacinth/5 pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="relative space-y-4 py-18">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
@@ -92,7 +92,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
                 <div className="grid grid-cols-1 gap-8 tablet:grid-cols-5 tablet:gap-6">
                   {data.beforeImages && (
                     <div className="tablet:col-span-2">
-                      <p className="custom-p custom-p-sm mb-4 tracking-wide text-ink/50 uppercase">Before</p>
+                      <p className="custom-p custom-p-sm mb-4 tracking-wide text-ink/60 uppercase">Before</p>
                       <div className="grid grid-cols-2 gap-3">
                         {data.beforeImages.map((img) => (
                           <div key={img.image} className="aspect-[9/16] overflow-hidden">
@@ -129,7 +129,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
               <div className="space-y-6">
                 {data.beforeAfter.map((row) => (
                   <div key={row.before} className="flex flex-wrap items-center gap-3">
-                    <span className="custom-p text-ink/50">{row.before}</span>
+                    <span className="custom-p text-ink/60">{row.before}</span>
                     <span className="text-hyacinth" aria-hidden="true">
                       →
                     </span>
