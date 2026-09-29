@@ -26,7 +26,7 @@ export function Home() {
         <Grid className="relative pt-16 tablet:pt-28 laptop:pt-32">
           <div className="col-span-full flex flex-col gap-8 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse tablet:items-start tablet:justify-between laptop:col-span-12 laptop:col-start-2">
             <div className="tablet:max-w-[62%]">
-              <h1 className="font-modernist text-[9vw] leading-[1.05] font-bold tracking-tight text-black tablet:text-right tablet:text-[5.8vw] laptop:text-[clamp(2.75rem,4.3vw,3.9rem)]">
+              <h1 className="font-modernist text-[9vw] leading-[1.05] font-bold tracking-tight text-ink tablet:text-right tablet:text-[5.8vw] laptop:text-[clamp(2.75rem,4.3vw,3.9rem)]">
                 Building Social And Community-Led Growth Engines For Brands Entering And Scaling
                 Across Africa.
               </h1>
@@ -51,17 +51,17 @@ export function Home() {
           <div className="col-span-full flex items-end justify-between gap-4 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse laptop:col-span-12 laptop:col-start-2">
             <a
               href="#about"
-              className="flex shrink-0 cursor-pointer flex-col items-center gap-2 text-black/70 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-black/40"
+              className="flex shrink-0 cursor-pointer flex-col items-center gap-2 text-ink/70 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ink/40"
             >
               <span className="text-lg laptop:text-2xl">↓</span>
               <span className="font-modernist text-[10px] font-semibold tracking-[0.2em] laptop:text-xs">SCROLL</span>
             </a>
 
             <div className="min-w-0 max-w-[70%] text-right tablet:text-left">
-              <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-black/80 tablet:justify-start tablet:text-sm">
-                <span className="text-black/40">—</span> HI, I'M
+              <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-ink/80 tablet:justify-start tablet:text-sm">
+                <span className="text-ink/40">—</span> HI, I'M
               </p>
-              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-black tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
+              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-ink tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
                 NDUBUISI
                 <br />
                 MARVELLOUS
