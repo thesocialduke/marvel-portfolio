@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import type { CaseStudyData } from '../data/site'
 
 // Supports a light `**bold**` markup inside plain-text data strings.
@@ -35,6 +36,11 @@ function ProofGrid({ photos }: { photos: { image: string; caption?: string }[] }
 
 export function CaseStudy({ data }: { data: CaseStudyData }) {
   let section = 2
+
+  useDocumentMeta({
+    title: `${data.title} — Case Study | Ndubuisi Marvellous`,
+    description: data.summary,
+  })
 
   return (
     <Layout>

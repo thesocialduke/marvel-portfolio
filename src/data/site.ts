@@ -9,6 +9,7 @@ export const site = {
   email: 'marvellousndubuisi98@gmail.com',
   linkedin: 'https://www.linkedin.com/in/thesocialduke',
   instagram: 'https://instagram.com/thesocialduke',
+  bookingUrl: 'https://calendar.app.google/kLHEDtD3JrEdKgGd8',
   copyright: '© Ndubuisi Marvellous, 2026',
 }
 

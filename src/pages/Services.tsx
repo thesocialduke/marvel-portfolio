@@ -2,9 +2,30 @@ import { Accordion } from '../components/Accordion'
 import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { useJsonLd } from '../hooks/useJsonLd'
 import { faqs, services } from '../data/site'
 
 export function Services() {
+  useDocumentMeta({
+    title: 'Services — Ndubuisi Marvellous',
+    description:
+      'Social media strategy, community building, content creation, creator/KOL partnerships, and event planning for brands entering or scaling across Africa.',
+  })
+
+  useJsonLd('faq-jsonld', {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  })
+
   return (
     <Layout>
       <section>

@@ -5,6 +5,7 @@ import { Layout } from '../components/Layout'
 import { StaggeredReveal } from '../components/StaggeredReveal'
 import { StatCounter } from '../components/StatCounter'
 import { TestimonialsSection } from '../components/ui/testimonials-1'
+import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { Link } from 'react-router-dom'
 import { avatar, bitgetCaseStudy, clients, logos, services, stats } from '../data/site'
 
@@ -12,6 +13,12 @@ const GRAIN_URL =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
 
 export function Home() {
+  useDocumentMeta({
+    title: 'Ndubuisi Marvellous — Social & Community Growth for Fintech, Web3 and Tech Brands in Africa',
+    description:
+      'Ndubuisi Marvellous drives social media strategy, growth, and community for fintech, Web3, and tech brands entering or scaling across Africa. Case studies from Bitget, Binance, and Base.',
+  })
+
   return (
     <Layout>
       <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-page">
@@ -200,7 +207,7 @@ export function Home() {
               >
                 <img
                   src={clients[0].image}
-                  alt=""
+                  alt={clients[0].title}
                   className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
@@ -219,7 +226,7 @@ export function Home() {
                   >
                     <img
                       src={client.image}
-                      alt=""
+                      alt={client.title}
                       className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
@@ -241,7 +248,12 @@ export function Home() {
             <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-4">
               <TestimonialsSection
                 icon={<img src="/logos/bitget.svg" alt="Bitget" className="h-7 w-auto" />}
-                quote={bitgetCaseStudy.testimonial.quote}
+                quote={
+                  <>
+                    <b className="font-bold">Marvellous</b>
+                    {bitgetCaseStudy.testimonial.quote.slice('Marvellous'.length)}
+                  </>
+                }
                 name={bitgetCaseStudy.testimonial.name}
                 role={bitgetCaseStudy.testimonial.role}
                 avatarSrc="/testimonials/aka-leung.jpg?v=2"

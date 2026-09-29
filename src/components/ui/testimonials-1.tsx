@@ -22,7 +22,7 @@ export function TestimonialsSection({
     <figure className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center">
       <div className="mb-8 flex items-center">{icon}</div>
 
-      <blockquote className="font-modernist text-center text-xl leading-tight font-bold tracking-tight sm:text-2xl md:text-3xl">
+      <blockquote className="font-modernist text-center text-xl leading-tight font-normal tracking-tight sm:text-2xl md:text-3xl">
         &quot;{quote}&quot;
       </blockquote>
 
