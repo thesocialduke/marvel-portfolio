@@ -1,36 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Link, NavLink } from 'react-router-dom'
 import { Grid } from './Grid'
 import { nav, site } from '../data/site'
-import { useTheme } from '../hooks/useTheme'
 
-function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
-  const isDark = theme === 'dark'
+const listVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+}
 
-  return (
-    <button
-      type="button"
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      onClick={toggleTheme}
-      className="relative z-10 inline-flex size-9 cursor-pointer items-center justify-center rounded-full text-ink outline-none transition-colors hover:text-hyacinth focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-    >
-      {isDark ? (
-        <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-        </svg>
-      ) : (
-        <svg className="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-      )}
-    </button>
-  )
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.2, 0, 0, 1] as const } },
 }
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -39,68 +27,150 @@ export function Navbar() {
     }
   }, [open])
 
+  useEffect(() => {
+    if (!open) return
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [open])
+
+  // Move focus into the overlay on open, and back to the button that
+  // opened it on close, so keyboard focus never gets lost. Skipped on
+  // first mount so page load doesn't steal focus onto the toggle button.
+  const hasOpenedRef = useRef(false)
+  useEffect(() => {
+    if (open) {
+      hasOpenedRef.current = true
+      closeRef.current?.focus()
+    } else if (hasOpenedRef.current) {
+      toggleRef.current?.focus()
+    }
+  }, [open])
+
   return (
-    <div className="fixed inset-x-0 top-0 z-50 bg-page/70 backdrop-blur-md">
-      <Grid>
-        <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-11">
-          <Link
-            to="/"
-            className="custom-h3 nav-brand-sm relative z-10 flex h-8 items-center rounded-sm py-2 outline-none tablet:h-10 laptop:h-12 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-          >
-            {site.name}
-          </Link>
-          <div className="flex items-center gap-2 tablet:gap-6">
+    <>
+      {/* Flat, chrome-free bar — fixed so the logo never scrolls away, but
+          no pill, border or blur; just the logo and the menu trigger. */}
+      <div className="fixed inset-x-0 top-0 z-50" inert={open}>
+        <Grid>
+          <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-5">
+            <Link
+              to="/"
+              className="font-poppins relative z-10 flex h-8 items-center rounded-sm text-sm font-normal tracking-tight text-ink/50 outline-none focus-visible:ring-2 focus-visible:ring-hyacinth-hover tablet:text-base"
+            >
+              {site.name}
+            </Link>
+
             <button
+              ref={toggleRef}
               type="button"
               aria-label="Toggle navigation"
               aria-controls="site-nav"
               aria-expanded={open}
-              className="custom-h3 z-20 -mx-3 inline-flex cursor-pointer items-center justify-center rounded-sm p-3 outline-none tablet:hidden focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+              className="relative z-20 inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-ink/5 focus-visible:ring-2 focus-visible:ring-hyacinth-hover laptop:size-9"
               onClick={() => setOpen((v) => !v)}
             >
-              {open ? (
-                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" />
-                </svg>
-              ) : (
-                <svg className="h-6" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3 15h18v2H3zM3 7h18v2H3z" />
-                </svg>
-              )}
+              <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                <path d="M3 7h18M3 13h18" />
+              </svg>
             </button>
-            <nav
-              id="site-nav"
-              className={`fixed inset-0 z-10 flex max-h-screen items-center justify-center bg-page tablet:static tablet:visible tablet:bg-transparent tablet:pointer-events-auto ${open ? 'visible pointer-events-auto' : 'invisible pointer-events-none'}`}
-            >
-              <ul className="custom-p flex flex-col items-center space-y-4 leading-snug tablet:flex-row tablet:flex-wrap tablet:gap-x-16 tablet:space-y-0">
-                {nav.map((item) => (
-                  <li key={item.href}>
-                    <NavLink
-                      to={item.href}
-                      end={item.href === '/'}
-                      onClick={() => setOpen(false)}
-                      className="group relative inline-flex h-12 items-center rounded-sm text-ink outline-none hover:text-hyacinth focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-                    >
-                      {({ isActive }) => (
-                        <div
-                          className={`relative text-hyacinth ${
-                            isActive
-                              ? 'underline decoration-1 underline-offset-8'
-                              : 'group-hover:underline group-hover:decoration-1 group-hover:underline-offset-8'
-                          }`}
-                        >
-                          <p>{item.label}</p>
-                        </div>
-                      )}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <ThemeToggle />
           </div>
-        </div>
-      </Grid>
-    </div>
+        </Grid>
+      </div>
+
+      {/* Full-screen navigation, every breakpoint. Deliberately inverted
+          (ink background, page-colored text) regardless of light/dark
+          theme, matching the editorial index-list menu at
+          studioolimpo.it. Mounted only while open so enter/exit motion
+          and focus management stay simple. */}
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            id="site-nav"
+            key="site-nav"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.3, ease: 'easeOut' }}
+            className="fixed inset-0 z-[60] flex flex-col bg-ink text-page"
+          >
+            <div className="flex items-center justify-between px-6 pt-5 tablet:px-10 tablet:pt-6 laptop:px-14 laptop:pt-8">
+              <span className="font-poppins flex h-8 items-center text-xs font-medium tracking-[0.15em] uppercase">
+                {site.name}
+              </span>
+              <button
+                ref={closeRef}
+                type="button"
+                aria-label="Close navigation"
+                className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-page outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-page/10 focus-visible:ring-2 focus-visible:ring-page/40 laptop:size-9"
+                onClick={() => setOpen(false)}
+              >
+                <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex flex-1 items-center justify-center px-8 tablet:px-16 laptop:px-24">
+              <motion.ul
+                variants={prefersReducedMotion ? undefined : listVariants}
+                initial="hidden"
+                animate="visible"
+                className="w-full max-w-4xl"
+              >
+                {nav.map((item, i) => {
+                  const linkClassName =
+                    'group relative flex items-start gap-3 py-3 outline-none transition-[color] focus-visible:ring-2 focus-visible:ring-page/40 tablet:gap-4'
+                  const content = (
+                    <>
+                      <span className="font-poppins w-6 shrink-0 pt-2 text-xs tabular-nums opacity-60 tablet:w-8 tablet:pt-3 tablet:text-sm">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="font-modernist flex-1 text-right text-[clamp(2.25rem,8vw,5.5rem)] leading-[0.95] font-normal transition-[color,transform] duration-200 group-hover:translate-x-[-0.25rem] group-hover:text-page/70">
+                        {item.label}
+                      </span>
+                    </>
+                  )
+
+                  return (
+                    <motion.li
+                      key={item.href}
+                      variants={prefersReducedMotion ? undefined : itemVariants}
+                      className="border-b border-page/20 py-2 first:border-t tablet:py-3"
+                    >
+                      {item.href.startsWith('#') ? (
+                        // Same-page scroll anchor (the footer's contact section
+                        // exists on every route) instead of a route change.
+                        <a href={item.href} onClick={() => setOpen(false)} className={linkClassName}>
+                          {content}
+                        </a>
+                      ) : (
+                        <NavLink to={item.href} end={item.href === '/'} onClick={() => setOpen(false)} className={linkClassName}>
+                          {content}
+                        </NavLink>
+                      )}
+                    </motion.li>
+                  )
+                })}
+              </motion.ul>
+            </div>
+
+            <div className="font-poppins flex items-center justify-between px-6 pb-5 text-xs tracking-wide text-page/60 tablet:px-10 tablet:pb-6 laptop:px-14 laptop:pb-8">
+              <span>{site.copyright}</span>
+              <a
+                href={site.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-sm outline-none transition-colors hover:text-page focus-visible:ring-2 focus-visible:ring-page/40"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

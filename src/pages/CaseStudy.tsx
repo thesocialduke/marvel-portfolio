@@ -50,7 +50,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
       <section>
         <Grid className="items-start space-y-12 py-12 laptop:space-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2 laptop:row-start-1">
-            <h3 className="custom-h3 relative text-balance">01 — Overview</h3>
+            <h3 className="custom-h3 relative text-balance">01. Overview</h3>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-8 laptop:row-start-1">
             <h3 className="custom-h3 relative text-balance">{data.summary}</h3>
@@ -62,7 +62,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         <Grid className="items-start space-y-12 py-12 laptop:space-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2 laptop:row-start-1">
             <div className="space-y-text-block text-left">
-              <h3 className="custom-h3 relative text-balance">02 — My Role</h3>
+              <h3 className="custom-h3 relative text-balance">02. My Role</h3>
               <h3 className="custom-h3 relative text-balance">{data.roleTitle}</h3>
             </div>
           </div>
@@ -82,7 +82,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         <section className="py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-              <h3 className="custom-h3 relative text-balance">0{++section} — Before → After</h3>
+              <h3 className="custom-h3 relative text-balance">0{++section}. Before → After</h3>
             </div>
           </Grid>
 
@@ -150,7 +150,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         <section className="py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-              <h3 className="custom-h3 relative text-balance">0{++section} — Proof</h3>
+              <h3 className="custom-h3 relative text-balance">0{++section}. Proof</h3>
             </div>
           </Grid>
           <div className="space-y-10">
@@ -170,7 +170,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         <section className="py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-              <h3 className="custom-h3 relative text-balance">0{++section} — Results</h3>
+              <h3 className="custom-h3 relative text-balance">0{++section}. Results</h3>
             </div>
             <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
               <div className="grid grid-cols-2 gap-x-6 gap-y-10 tablet:grid-cols-3">

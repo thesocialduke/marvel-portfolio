@@ -29,7 +29,7 @@
   --font-modernist: 'SK Modernist', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
 
-  --color-page: rgb(246 246 246);
+  --color-page: rgb(231 230 226);
   --color-ink: rgb(0 0 0);
   --color-hyacinth: rgb(0 0 0);
   --color-hyacinth-hover: rgb(102 102 102);
@@ -232,6 +232,10 @@
   color: var(--color-hyacinth);
 }
 
+.custom-h1-bold {
+  font-weight: 700;
+}
+
 .custom-h2 {
   font-family: var(--font-modernist);
   font-size: var(--h2-size);
@@ -240,12 +244,20 @@
   color: var(--color-hyacinth);
 }
 
+.custom-h2-bold {
+  font-weight: 700;
+}
+
 .custom-h3 {
   font-family: var(--font-modernist);
   font-size: var(--h3-size);
   font-weight: 400;
   line-height: 1.25;
   color: var(--color-hyacinth);
+}
+
+.custom-h3-bold {
+  font-weight: 700;
 }
 
 .custom-h4 {
@@ -316,25 +328,6 @@
   font-family: var(--font-poppins);
   font-weight: 700;
   line-height: 1.25;
-}
-
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee-left 34s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
-  }
 }
 
 .space-y-text-block > * + * {

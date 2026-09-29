@@ -8,13 +8,14 @@ export const site = {
   name: 'Ndubuisi Marvellous',
   email: 'marvellousndubuisi98@gmail.com',
   linkedin: 'https://www.linkedin.com/in/thesocialduke',
+  instagram: 'https://instagram.com/thesocialduke',
   copyright: '© Ndubuisi Marvellous, 2026',
 }
 
 export const nav = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
-  { label: 'Contact me', href: '/contact-me' },
+  { label: 'Contact me', href: '#contact' },
 ] as const
 
 export const logos = [
@@ -22,6 +23,7 @@ export const logos = [
   { src: '/logos/bitget.svg', name: 'Bitget' },
   { src: '/logos/base.svg', name: 'Base' },
   { src: '/logos/kyshi.png', name: 'Kyshi' },
+  { src: '/logos/hyperbridge.svg', name: 'Hyperbridge' },
 ]
 
 export const clients = [
@@ -33,7 +35,6 @@ export const clients = [
     description:
       'Owned social and community growth and education for Africa, from campaign strategy to execution across X, Telegram, Blog, Discord & Meta.',
     image: '/case-studies/bitget.jpg',
-    bold: false,
   },
   {
     href: '/base-southern-africa',
@@ -43,7 +44,6 @@ export const clients = [
     description:
       'Took an untrained creator community and gave it direction, turning inconsistent clips into branded, clear, on-message content & direction.',
     image: '/case-studies/base.jpg',
-    bold: true,
   },
   {
     href: '/binance-street-interviews',
@@ -53,7 +53,6 @@ export const clients = [
     description:
       'Bringing crypto education to the street to make crypto feel less abstract and foreign to ordinary people.',
     image: '/case-studies/binance.jpg',
-    bold: true,
   },
 ]
 
@@ -61,6 +60,7 @@ export const stats = [
   { value: '+5', label: 'years experience' },
   { value: '40M+', label: 'Cumulative views' },
   { value: '150K+', label: 'Followers' },
+  { value: '20K', label: 'Users from ambassador program' },
 ]
 
 export type VideoItem = {
@@ -88,24 +88,24 @@ export const events: EventPhoto[] = [
 
 export const services = [
   {
-    title: 'Social media strategy',
-    body: 'For brands running paid ads that need stronger creative direction. I help shape the visual and messaging strategy behind your campaigns — from identifying hooks worth testing to making sure each asset fits your funnel and goals.',
+    title: 'Social Media Strategy & Growth',
+    body: 'For brands that want to grow a real audience on social media. I plan and run your presence across X, Telegram, Instagram, TikTok, Discord and Meta, with localized campaigns that speak to each audience and move the numbers that matter.',
   },
   {
-    title: 'Ad & Content Production',
-    body: "Need scroll-stopping content for Meta, TikTok, or YouTube? I design and edit ad creatives that are made to perform — including UGC-style videos, motion design, and production support across formats. Whether it's a full campaign or a quick edit, I’ve got it.",
+    title: 'B2B/B2C Community Building & Management',
+    body: 'A community needs someone showing up every day. I handle your channel growth, programs, and operations, keep conversations active, and host AMAs, Spaces, and lives that turn followers into advocates.',
   },
   {
-    title: 'Creative Performance Support',
-    body: 'Already running ads but not seeing results? I can audit your creatives, break down what’s working (and what’s not), and suggest clear next steps. From testing structures to content iterations, I help you use data to make better creative decisions.',
+    title: 'Content Creation',
+    body: 'Need content that feels native to each platform? I create short & long form videos, from UGC-style ads to polished brand promos, educational pieces and brand stories that make complex products easy to understand and fun to watch.',
   },
   {
-    title: 'Copy & Scripting',
-    body: 'Whether you need hooks, headlines, or scripts for UGC or short-form video — I write ad copy that’s built to convert. Fast, clear, and on-brand. I also help refine your messaging to match your audience and platform.',
+    title: 'B2B/B2C Creator, KOL & Ambassador Partnerships',
+    body: 'I find the right creators for your brand, train them, and manage them from brief to delivery. The result is consistent, on-message content from voices your audience already trusts.',
   },
   {
-    title: 'Video editing',
-    body: 'From UGC-style ads to polished brand promos, I edit short-form videos optimized for social platforms like Meta, TikTok, and YouTube. Whether it’s cutting fast-paced creatives for campaigns or adapting content across formats, I make sure each piece feels on-brand, scroll-stopping, and built to perform.',
+    title: 'Event Planning & Experiential Marketing',
+    body: 'From meetups to activations, I plan and run events that bring your brand offline. Each one is built to connect with your community in person, create moments people want to share, and gather feedback.',
   },
 ]
 
@@ -166,25 +166,25 @@ export type CaseStudyData = {
 export const bitgetCaseStudy: CaseStudyData = {
   href: '/bitget',
   eyebrow: 'Case study',
-  title: 'Bitget — Top #3 Crypto Exchange Globally',
+  title: 'Bitget: Top #3 Crypto Exchange Globally',
   summary:
-    'I lead Social Media and Community for Bitget across Africa, driving strategy and growth in one of the world’s most fast-moving markets — from viral campaigns and live community programming to offline activations and full-cycle content production.',
+    'I lead Social Media and Community for Bitget across Africa, driving strategy and growth in one of the world’s most fast-moving markets, from viral campaigns and live community programming to offline activations and full-cycle content production.',
   roleTitle: 'Head of Social Media, Content and Community',
   roleBullets: [
     'Ran viral listing campaigns for $DOGS, $PI, and $PAWS, each built for awareness and follower growth',
     'Built and led #BitQuest, a 7-day gamified educational campaign that simplified key crypto concepts',
     'Hosted AMAs, Twitter Spaces, and YouTube Lives with BDs and KOLs across the region',
     'Led the fastest-growing regional Telegram community at Bitget Africa',
-    'Took Bitget’s content to the street — handled the full UGC process from scripting to editing, growing one channel from 0 to 10K followers',
+    'Took Bitget’s content to the street: handled the full UGC process from scripting to editing, growing one channel from 0 to 10K followers',
     'Planned and executed offline activations across East, West & South Africa',
   ],
   proofSections: [
     {
       title: 'Campaigns',
       photos: [
-        { image: '/case-studies/bitget/campaign-dogs.jpg', caption: '$DOGS listing — over 2M+ impressions' },
-        { image: '/case-studies/bitget/campaign-pi.jpg', caption: '$PI listing — over 1M+ impressions' },
-        { image: '/case-studies/bitget/campaign-bitquest.jpg', caption: '#BitQuest — 11.9M+ total reach' },
+        { image: '/case-studies/bitget/campaign-dogs.jpg', caption: '$DOGS listing: over 2M+ impressions' },
+        { image: '/case-studies/bitget/campaign-pi.jpg', caption: '$PI listing: over 1M+ impressions' },
+        { image: '/case-studies/bitget/campaign-bitquest.jpg', caption: '#BitQuest: 11.9M+ total reach' },
         { image: '/case-studies/bitget/campaign-stocks-vs-crypto.jpg', caption: 'Stocks vs Crypto Showdown challenge' },
       ],
     },
@@ -212,7 +212,7 @@ export const bitgetCaseStudy: CaseStudyData = {
     { value: '84.35%', label: 'CSAT across offline events' },
   ],
   keyMoment:
-    'When OKX exited the market, campaigns I ran were instrumental in driving Bitget Wallet to become the top-downloaded crypto app in Nigeria — making “Bitget” a trending topic.',
+    'When OKX exited the market, campaigns I ran were instrumental in driving Bitget Wallet to become the top-downloaded crypto app in Nigeria, making “Bitget” a trending topic.',
   testimonial: {
     quote:
       'Marvellous has his own instinct for the sense of humor, and for running social and community campaigns. Leading our Africa social media runs pretty well and is very engaging. He’s fully embedded in the AF market.',
@@ -238,7 +238,7 @@ export const baseCaseStudy: CaseStudyData = {
   eyebrow: 'Case study',
   title: 'Coinbase (Base): Base Southern Africa',
   summary:
-    'Base had an active network of ambassadors and creators producing consistently, but content quality and depth varied — inconsistent camera, lighting and framing, content that leaned too promotional, limited variety in formats, and no clear creative direction.',
+    'Base had an active network of ambassadors and creators producing consistently, but content quality and depth varied: inconsistent camera, lighting and framing, content that leaned too promotional, limited variety in formats, and no clear creative direction.',
   roleTitle: 'Ambassadors Consultant & Creative Lead',
   roleBullets: [
     '**Coaching**: improved production quality across the ambassador network',
@@ -258,25 +258,25 @@ export const baseCaseStudy: CaseStudyData = {
     { image: '/case-studies/base/before-2.jpg' },
   ],
   afterImages: [
-    { image: '/case-studies/base/after-liseli.jpg', caption: '“Getting started on Base” — Liseli Akayombokwa' },
-    { image: '/case-studies/base/after-tebogo.jpg', caption: '“Base on the street” — Tebogo Nong' },
-    { image: '/case-studies/base/after-nobantu.jpg', caption: '“Base Batches” — Nobantu Gumbi' },
+    { image: '/case-studies/base/after-liseli.jpg', caption: '“Getting started on Base,” by Liseli Akayombokwa' },
+    { image: '/case-studies/base/after-tebogo.jpg', caption: '“Base on the street,” by Tebogo Nong' },
+    { image: '/case-studies/base/after-nobantu.jpg', caption: '“Base Batches,” by Nobantu Gumbi' },
   ],
   videos: [
     {
-      title: 'Base.Dev — “In this place, nothing moves”',
+      title: 'Base.Dev: “In this place, nothing moves”',
       description: 'AI-generated narrative on the barriers people face without access or connections.',
       src: '/videos/base/base-dev-update.mp4',
       poster: '/videos/thumbnails/base-dev-update.jpg',
     },
     {
-      title: 'Base Batches — Student Track',
+      title: 'Base Batches: Student Track',
       description: 'AI-generated narrative built around curiosity and access to opportunity.',
       src: '/videos/base/base-batches.mp4',
       poster: '/videos/thumbnails/base-batches.jpg',
     },
     {
-      title: '“Trading is better together” — Referral campaign',
+      title: '“Trading is better together” (Referral campaign)',
       description: 'AI-generated concept promoting the Base referral program.',
       src: '/videos/base/trading-together-referral.mp4',
       poster: '/videos/thumbnails/trading-together-referral.jpg',
@@ -292,13 +292,13 @@ export const baseCaseStudy: CaseStudyData = {
 export const binanceCaseStudy: CaseStudyData = {
   href: '/binance-street-interviews',
   eyebrow: 'Case study',
-  title: 'Binance Africa — Viral Street Interviews',
+  title: 'Binance Africa: Viral Street Interviews',
   summary:
-    'Bringing crypto education to the street to make crypto feel less abstract and foreign to ordinary people — short, punchy street-interview content built to travel.',
+    'Bringing crypto education to the street to make crypto feel less abstract and foreign to ordinary people, through short, punchy street-interview content built to travel.',
   roleTitle: 'Content Creator',
   roleBullets: [
     'Concept, shoot, and produce street-interview style short-form video',
-    'Turn crypto concepts into shareable hooks — “Gold or Bitcoin?”, “BTC vs Gold”, “Heard about Crypto?”',
+    'Turn crypto concepts into shareable hooks: “Gold or Bitcoin?”, “BTC vs Gold”, “Heard about Crypto?”',
     'Distribute natively across Instagram and TikTok',
   ],
   results: [

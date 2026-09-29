@@ -16,7 +16,7 @@ export function EventGallery({ title, photos }: { title: string; photos: EventPh
               <div key={i} className="group relative aspect-square overflow-hidden">
                 <img
                   src={photo.image}
-                  alt={`${photo.event} — ${photo.location}`}
+                  alt={`${photo.event}, ${photo.location}`}
                   className="size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                 />
                 <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-graphite/85 via-graphite/10 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">

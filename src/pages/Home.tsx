@@ -1,13 +1,12 @@
-import { Link } from 'react-router-dom'
 import { Accordion } from '../components/Accordion'
 import { ButtonLink } from '../components/Button'
-import { EventGallery } from '../components/EventGallery'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { StaggeredReveal } from '../components/StaggeredReveal'
 import { StatCounter } from '../components/StatCounter'
-import TestimonialsComponent from '../components/shadcn-studio/blocks/testimonials-component-26/testimonials-component-26'
-import { avatar, clients, events, logos, services, stats } from '../data/site'
+import { TestimonialsSection } from '../components/ui/testimonials-1'
+import { Link } from 'react-router-dom'
+import { avatar, bitgetCaseStudy, clients, logos, services, stats } from '../data/site'
 
 const GRAIN_URL =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
@@ -15,22 +14,24 @@ const GRAIN_URL =
 export function Home() {
   return (
     <Layout>
-      <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-[#e7e6e2]">
+      <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-page">
+        {/* Background texture bleeds full-width; only the content below is
+            bounded by the same Grid container every other section uses, so
+            the hero no longer runs the full width of ultra-wide screens. */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
           style={{ backgroundImage: `url("${GRAIN_URL}")` }}
         />
 
-        <div className="relative flex flex-1 flex-col gap-8 px-8 pt-24 pb-8 tablet:px-12 tablet:pt-28 tablet:pb-12 laptop:px-16 laptop:pt-40 laptop:pb-16">
-          {/* top row: headline + photo */}
-          <div className="flex flex-col gap-8 tablet:flex-row-reverse tablet:items-start tablet:justify-between">
-            <div className="tablet:max-w-[720px] tablet:text-right laptop:max-w-[880px]">
-              <h1 className="font-modernist text-[9vw] leading-[1.05] font-bold tracking-tight text-black tablet:text-[5.8vw] laptop:text-[4.3vw]">
+        <Grid className="relative pt-16 tablet:pt-28 laptop:pt-32">
+          <div className="col-span-full flex flex-col gap-8 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse tablet:items-start tablet:justify-between laptop:col-span-12 laptop:col-start-2">
+            <div className="tablet:max-w-[62%]">
+              <h1 className="font-modernist text-[9vw] leading-[1.05] font-bold tracking-tight text-black tablet:text-right tablet:text-[5.8vw] laptop:text-[clamp(2.75rem,4.3vw,3.9rem)]">
                 Building Social And Community-Led Growth Engines For Brands Entering And Scaling
                 Across Africa.
               </h1>
-              <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-black/80 tablet:justify-end tablet:text-sm">
-                <span className="text-black/40">—</span> FINTECH | WEB3/CRYPTO | TECH | AI
+              <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-red-600 tablet:justify-end tablet:text-sm">
+                <span className="text-red-600/50">—</span> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
               </p>
             </div>
 
@@ -42,78 +43,77 @@ export function Home() {
               />
             </div>
           </div>
+        </Grid>
 
-          {/* spacer */}
-          <div className="flex-1" />
+        <div className="relative flex-1" />
 
-          {/* bottom row: scroll + name */}
-          <div className="flex items-end justify-between gap-4 tablet:flex-row-reverse">
-            <div className="flex shrink-0 flex-col items-center gap-2 text-black/70">
-              <span className="text-lg">↓</span>
-              <span className="font-modernist text-[10px] font-semibold tracking-[0.2em]">SCROLL</span>
-            </div>
+        <Grid className="relative pb-8 tablet:pb-12 laptop:pb-16">
+          <div className="col-span-full flex items-end justify-between gap-4 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse laptop:col-span-12 laptop:col-start-2">
+            <a
+              href="#about"
+              className="flex shrink-0 cursor-pointer flex-col items-center gap-2 text-black/70 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-black/40"
+            >
+              <span className="text-lg laptop:text-2xl">↓</span>
+              <span className="font-modernist text-[10px] font-semibold tracking-[0.2em] laptop:text-xs">SCROLL</span>
+            </a>
 
             <div className="min-w-0 max-w-[70%] text-right tablet:text-left">
               <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-black/80 tablet:justify-start tablet:text-sm">
                 <span className="text-black/40">—</span> HI, I'M
               </p>
-              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-black tablet:text-[4.5vw] laptop:text-[3.4vw]">
+              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-black tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
                 NDUBUISI
                 <br />
                 MARVELLOUS
               </h2>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="py-12 tablet:py-14 laptop:py-18">
-        <Grid>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <p className="custom-p custom-p-sm mb-6 text-center tracking-wide text-ink/60 uppercase">Trusted by</p>
-
-            {/* Single row, auto-scrolling marquee at every breakpoint */}
-            <div className="overflow-hidden">
-              <div className="animate-marquee flex w-max items-center gap-10 tablet:gap-14 laptop:gap-16">
-                {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
-                  <img
-                    key={`${logo.src}-${i}`}
-                    src={logo.src}
-                    alt={logo.name}
-                    className="h-6 w-20 shrink-0 object-scale-down grayscale transition-[filter] duration-300 hover:grayscale-0 tablet:h-8 tablet:w-28 laptop:h-10 laptop:w-36"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
         </Grid>
       </section>
 
-      <section className="py-12 tablet:py-14 laptop:py-18">
+      <section id="about" className="scroll-mt-20 py-12 tablet:py-14 laptop:py-18">
         <Grid className="gap-y-8 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-2 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-wide text-ink/60 uppercase">About</p>
+            <h2 className="custom-h1 custom-h1-bold uppercase">About</h2>
           </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-4">
-            <h2 className="custom-h2 custom-h2-sm relative text-left text-balance">
-              <StaggeredReveal
-                lines={[
-                  <b key="lead">
-                    I drive growth and acquisition for brands entering or scaling across Africa, turning strategy
-                    into audience growth, engagement, and measurable results.
-                  </b>,
-                  'With 5+ years of experience across crypto, fintech, SaaS, and emerging tech, I’ve led growth, content, and community initiatives for brands including Bitget, Binance, and Coinbase.',
-                  'My work spans localized campaigns, creator/KOL partnerships, platform-native content, GTM and data-driven growth across African markets and beyond.',
-                ]}
-              />
-            </h2>
-            <div className="mt-12 grid grid-cols-1 gap-8 tablet:mt-16 tablet:grid-cols-3 tablet:gap-6">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-7 laptop:col-start-7">
+            <StaggeredReveal
+              lines={[
+                <p key="lead" className="custom-h3 custom-h3-bold relative text-left text-balance uppercase">
+                  I drive growth and acquisition for brands entering or scaling across Africa, turning strategy
+                  into audience growth, engagement, and measurable results.
+                </p>,
+                <p key="brands" className="custom-p mt-4 text-left text-ink/70">
+                  With 5+ years of experience across crypto, fintech, SaaS, and emerging tech, I’ve led growth,
+                  content, and community initiatives for brands including{' '}
+                  <a href="https://www.bitget.com" target="_blank" rel="noreferrer" className="underline">
+                    Bitget
+                  </a>
+                  ,{' '}
+                  <a href="https://www.binance.com" target="_blank" rel="noreferrer" className="underline">
+                    Binance
+                  </a>
+                  , and{' '}
+                  <a href="https://www.base.org" target="_blank" rel="noreferrer" className="underline">
+                    Coinbase
+                  </a>
+                  .
+                </p>,
+                <p key="work" className="custom-p mt-2 text-left text-ink/70">
+                  My work spans localized campaigns, creator/KOL partnerships, platform-native content, GTM and
+                  data-driven growth across African markets and beyond.
+                </p>,
+              ]}
+            />
+            <div className="mt-12 grid grid-cols-4 items-start justify-items-center gap-2 text-center tablet:mt-16 tablet:gap-6">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <h2 className="custom-h1">
+                  <h2 className="custom-h1 custom-h1-bold" style={{ color: 'rgb(220 38 38)' }}>
                     <StatCounter value={stat.value} />
                   </h2>
-                  <p className="custom-p mt-2 text-ink/60">{stat.label}</p>
+                  <p className="custom-p mt-2 leading-tight text-ink/60" style={{ fontSize: '0.65rem' }}>
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -122,10 +122,51 @@ export function Home() {
       </section>
 
       <section className="py-12 tablet:py-14 laptop:py-18">
+        <Grid>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+            <p className="mb-2 text-center text-[10px] font-medium tracking-wide text-ink/60 uppercase tablet:text-xs">
+              Trusted by
+            </p>
+          </div>
+        </Grid>
+
+        {/* Full-bleed, edge to edge — deliberately breaks out of the Grid
+            container so this row spans the whole viewport width. Vertical
+            dividers run through every row (including the decorative empty
+            top/bottom rows) and extend past the logo row's own top/bottom
+            edges. The new horizontal lines are scoped to the logo row's
+            cells only, so they stop at the row's edges instead of running
+            all the way down to where the verticals end. */}
+        <div className="grid w-full grid-cols-5 divide-x divide-ink/10">
+          {logos.map((_, i) => (
+            <div key={`top-${i}`} className="hidden h-12 tablet:block laptop:h-16" />
+          ))}
+          {logos.map((logo) => (
+            <div
+              key={logo.src}
+              className="flex h-24 items-center justify-center border-y border-ink/10 p-2 transition-colors hover:bg-ink/5 tablet:h-28 laptop:h-36"
+            >
+              <img
+                src={logo.src}
+                alt={logo.name}
+                className={`object-contain ${
+                  logo.name === 'Binance' || logo.name === 'Hyperbridge'
+                    ? 'h-16 w-28 tablet:h-20 tablet:w-36 laptop:h-28 laptop:w-48'
+                    : 'h-9 w-20 tablet:h-11 tablet:w-28 laptop:h-14 laptop:w-32'
+                }`}
+              />
+            </div>
+          ))}
+          {logos.map((_, i) => (
+            <div key={`bottom-${i}`} className="hidden h-12 tablet:block laptop:h-16" />
+          ))}
+        </div>
+      </section>
+
+      <section className="py-12 tablet:py-14 laptop:py-18">
         <Grid className="items-end gap-y-8 pb-12 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-wide text-ink/60 uppercase">Services</p>
-            <h2 className="custom-h1 mt-4 text-left text-balance">This is what I do</h2>
+            <h2 className="custom-h1 custom-h1-bold text-left text-balance uppercase">What I do</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
             <ButtonLink to="/services">See all services →</ButtonLink>
@@ -133,7 +174,7 @@ export function Home() {
         </Grid>
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <Accordion size="lg" items={services.map((service) => ({ q: service.title, a: service.body }))} />
+            <Accordion items={services.map((service) => ({ q: service.title, a: service.body }))} />
           </div>
         </Grid>
       </section>
@@ -141,7 +182,7 @@ export function Home() {
       <section className="py-12 tablet:py-14 laptop:py-18">
         <Grid>
           <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <h2 className="custom-h2 text-left">Selected Case Studies</h2>
+            <h2 className="custom-h1 custom-h1-bold text-left uppercase">Selected Case Studies</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-col gap-4 tablet:gap-6">
@@ -155,10 +196,10 @@ export function Home() {
                   className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
-                <p className="custom-h4 custom-h4-invert absolute inset-x-0 bottom-0 p-6 tablet:p-8">
-                  <span className={clients[0].bold ? 'custom-h4-bold' : ''}>{clients[0].shortName}</span>
+                <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute inset-x-0 bottom-0 p-6 tablet:p-8">
+                  {clients[0].shortName}
                   <span style={{ color: 'rgba(255,255,255,0.7)' }}>, {clients[0].category}</span>
-                </p>
+                </h3>
               </Link>
 
               <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 tablet:gap-6">
@@ -174,10 +215,10 @@ export function Home() {
                       className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
-                    <p className="custom-h4 custom-h4-invert absolute inset-x-0 bottom-0 p-6 tablet:p-8">
-                      <span className={client.bold ? 'custom-h4-bold' : ''}>{client.shortName}</span>
+                    <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute inset-x-0 bottom-0 p-6 tablet:p-8">
+                      {client.shortName}
                       <span style={{ color: 'rgba(255,255,255,0.7)' }}>, {client.category}</span>
-                    </p>
+                    </h3>
                   </Link>
                 ))}
               </div>
@@ -186,24 +227,24 @@ export function Home() {
         </Grid>
       </section>
 
-      <EventGallery title="Event Gallery" photos={events} />
-
-      <TestimonialsComponent />
-
-      <section>
-        <Grid className="space-y-12 py-12 laptop:space-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2 laptop:row-start-1">
-            <div className="flex flex-col space-y-8">
-              <h2 className="custom-h2 text-left">
-                Want to work together? Drop me a message and I’ll get back to you soon.
-              </h2>
-              <div className="self-start">
-                <ButtonLink to="/contact-me">Get in touch today →</ButtonLink>
-              </div>
+      {bitgetCaseStudy.testimonial && (
+        <section className="py-12 tablet:py-14 laptop:py-18">
+          <Grid>
+            <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-4">
+              <TestimonialsSection
+                icon={<img src="/logos/bitget.svg" alt="Bitget" className="h-7 w-auto" />}
+                quote={bitgetCaseStudy.testimonial.quote}
+                name={bitgetCaseStudy.testimonial.name}
+                role={bitgetCaseStudy.testimonial.role}
+                avatarSrc="/testimonials/aka-leung.jpg?v=2"
+                avatarAlt={bitgetCaseStudy.testimonial.name}
+                avatarFallback={bitgetCaseStudy.testimonial.name.charAt(0)}
+              />
             </div>
-          </div>
-        </Grid>
-      </section>
+          </Grid>
+        </section>
+      )}
+
     </Layout>
   )
 }

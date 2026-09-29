@@ -15,7 +15,7 @@ export function Accordion({
   return (
     <div className="divide-y divide-hyacinth/15">
       {items.map((item) => (
-        <details key={item.q} className="group py-6 first:pt-0 last:pb-0">
+        <details key={item.q} className="group py-3 first:pt-0 last:pb-0">
           <summary
             className={`${questionClass} relative flex cursor-pointer list-none items-center justify-between gap-4 text-balance transition-colors group-open:text-hyacinth [&::-webkit-details-marker]:hidden`}
           >
