@@ -168,13 +168,18 @@ export function Home() {
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <h2 className="custom-h1 custom-h1-bold text-left text-balance uppercase">What I do</h2>
           </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
+          <div className="col-span-full hidden tablet:col-span-6 tablet:col-start-2 tablet:block laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
             <ButtonLink to="/services">See all services →</ButtonLink>
           </div>
         </Grid>
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <Accordion items={services.map((service) => ({ q: service.title, a: service.body }))} />
+          </div>
+        </Grid>
+        <Grid className="mt-8 tablet:hidden">
+          <div className="col-span-full">
+            <ButtonLink to="/services">See all services →</ButtonLink>
           </div>
         </Grid>
       </section>
