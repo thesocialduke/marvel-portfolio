@@ -105,10 +105,13 @@ export function Home() {
                 </p>,
               ]}
             />
-            <div className="mt-12 grid grid-cols-4 items-start justify-items-center gap-2 text-center tablet:mt-16 tablet:gap-6">
+            <div className="mt-12 grid grid-cols-2 items-start justify-items-center gap-x-2 gap-y-8 text-center tablet:mt-16 tablet:grid-cols-4 tablet:gap-6">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <h2 className="custom-h1 custom-h1-bold" style={{ color: 'rgb(220 38 38)' }}>
+                  <h2
+                    className="custom-h1 custom-h1-bold custom-h1-stat-mobile-lg italic"
+                    style={{ color: 'rgb(220 38 38)' }}
+                  >
                     <StatCounter value={stat.value} />
                   </h2>
                   <p className="custom-p mt-2 leading-tight text-ink/60" style={{ fontSize: '0.65rem' }}>

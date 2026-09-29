@@ -146,6 +146,12 @@
   font-weight: 700;
 }
 
+@media (max-width: 39.99rem) {
+  .custom-h1-stat-mobile-lg {
+    font-size: 2.75rem;
+  }
+}
+
 .custom-h2 {
   font-family: var(--font-modernist);
   font-size: var(--h2-size);
