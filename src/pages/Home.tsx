@@ -109,7 +109,7 @@ export function Home() {
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <h2
-                    className="custom-h1 custom-h1-bold custom-h1-stat-mobile-lg italic"
+                    className="custom-h1 custom-h1-bold custom-h1-stat-mobile-lg"
                     style={{ color: 'rgb(220 38 38)' }}
                   >
                     <StatCounter value={stat.value} />
