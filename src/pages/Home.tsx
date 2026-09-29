@@ -6,35 +6,65 @@ import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { StaggeredReveal } from '../components/StaggeredReveal'
 import { StatCounter } from '../components/StatCounter'
-import { avatar, clients, events, logos, services, site, stats } from '../data/site'
+import TestimonialsComponent from '../components/shadcn-studio/blocks/testimonials-component-26/testimonials-component-26'
+import { avatar, clients, events, logos, services, stats } from '../data/site'
+
+const GRAIN_URL =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
 
 export function Home() {
   return (
-    <Layout overlay>
-      <section className="bg-hyacinth/10 pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
-        <Grid className="space-y-6 pt-6 pb-12 tablet:space-y-8 tablet:pt-8 tablet:pb-18 laptop:space-y-12 laptop:pt-8 laptop:pb-32">
-          <div className="col-span-full">
-            <div className="relative m-auto aspect-square w-32 rounded-full tablet:w-36 laptop:w-[172px]">
-              <img src={avatar} alt="" className="size-full rounded-full object-cover" />
+    <Layout>
+      <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-[#e7e6e2]">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
+          style={{ backgroundImage: `url("${GRAIN_URL}")` }}
+        />
+
+        <div className="relative flex flex-1 flex-col gap-8 px-8 pt-24 pb-8 tablet:px-12 tablet:pt-28 tablet:pb-12 laptop:px-16 laptop:pt-40 laptop:pb-16">
+          {/* top row: headline + photo */}
+          <div className="flex flex-col gap-8 tablet:flex-row-reverse tablet:items-start tablet:justify-between">
+            <div className="tablet:max-w-[720px] tablet:text-right laptop:max-w-[880px]">
+              <h1 className="font-modernist text-[9vw] leading-[1.05] font-bold tracking-tight text-black tablet:text-[5.8vw] laptop:text-[4.3vw]">
+                Building Social And Community-Led Growth Engines For Brands Entering And Scaling
+                Across Africa.
+              </h1>
+              <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-black/80 tablet:justify-end tablet:text-sm">
+                <span className="text-black/40">—</span> FINTECH | WEB3/CRYPTO | TECH | AI
+              </p>
+            </div>
+
+            <div className="w-full shrink-0 tablet:w-[26%] laptop:w-[22%]">
+              <img
+                src={avatar}
+                alt="Ndubuisi Marvellous"
+                className="aspect-[4/3.4] w-full object-cover object-top tablet:aspect-[3/4] tablet:object-center"
+              />
             </div>
           </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-4">
-            <div className="relative flex flex-col items-stretch space-y-8">
-              <div className="space-y-text-block text-center">
-                <h2 className="custom-h2 relative text-balance">
-                  <StaggeredReveal
-                    lines={["Hi, I'm Marvellous,", 'a Growth, Socials & Community Growth Manager.', 'I Make Global Brands Feel Local In Africa.']}
-                  />
-                </h2>
-              </div>
-              <div className="self-center">
-                <ButtonLink to={site.linkedin} external>
-                  Connect on Linkedin
-                </ButtonLink>
-              </div>
+
+          {/* spacer */}
+          <div className="flex-1" />
+
+          {/* bottom row: scroll + name */}
+          <div className="flex items-end justify-between gap-4 tablet:flex-row-reverse">
+            <div className="flex shrink-0 flex-col items-center gap-2 text-black/70">
+              <span className="text-lg">↓</span>
+              <span className="font-modernist text-[10px] font-semibold tracking-[0.2em]">SCROLL</span>
+            </div>
+
+            <div className="min-w-0 max-w-[70%] text-right tablet:text-left">
+              <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-black/80 tablet:justify-start tablet:text-sm">
+                <span className="text-black/40">—</span> HI, I'M
+              </p>
+              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-black tablet:text-[4.5vw] laptop:text-[3.4vw]">
+                NDUBUISI
+                <br />
+                MARVELLOUS
+              </h2>
             </div>
           </div>
-        </Grid>
+        </div>
       </section>
 
       <section className="py-12 tablet:py-14 laptop:py-18">
@@ -45,11 +75,11 @@ export function Home() {
             {/* Single row, auto-scrolling marquee at every breakpoint */}
             <div className="overflow-hidden">
               <div className="animate-marquee flex w-max items-center gap-10 tablet:gap-14 laptop:gap-16">
-                {[...logos, ...logos, ...logos, ...logos].map((file, i) => (
+                {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
                   <img
-                    key={`${file}-${i}`}
-                    src={file}
-                    alt=""
+                    key={`${logo.src}-${i}`}
+                    src={logo.src}
+                    alt={logo.name}
                     className="h-6 w-20 shrink-0 object-scale-down grayscale transition-[filter] duration-300 hover:grayscale-0 tablet:h-8 tablet:w-28 laptop:h-10 laptop:w-36"
                   />
                 ))}
@@ -157,6 +187,8 @@ export function Home() {
       </section>
 
       <EventGallery title="Event Gallery" photos={events} />
+
+      <TestimonialsComponent />
 
       <section>
         <Grid className="space-y-12 py-12 laptop:space-y-0">

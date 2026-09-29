@@ -17,7 +17,12 @@ export const nav = [
   { label: 'Contact me', href: '/contact-me' },
 ] as const
 
-export const logos = ['/logos/binance.svg', '/logos/bitget.svg', '/logos/base.svg', '/logos/kyshi.png']
+export const logos = [
+  { src: '/logos/binance.svg', name: 'Binance' },
+  { src: '/logos/bitget.svg', name: 'Bitget' },
+  { src: '/logos/base.svg', name: 'Base' },
+  { src: '/logos/kyshi.png', name: 'Kyshi' },
+]
 
 export const clients = [
   {
