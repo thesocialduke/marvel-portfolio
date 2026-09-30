@@ -4,7 +4,7 @@ import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { StaggeredReveal } from '../components/StaggeredReveal'
 import { StatCounter } from '../components/StatCounter'
-import { TestimonialsSection } from '../components/ui/testimonials-1'
+import { TestimonialsSection } from '../components/ui/testimonials-2'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { Link } from 'react-router-dom'
 import { avatar, bitgetCaseStudy, clients, logos, services, stats } from '../data/site'
@@ -247,7 +247,6 @@ export function Home() {
           <Grid>
             <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-4">
               <TestimonialsSection
-                icon={<img src="/logos/bitget.svg" alt="Bitget" className="h-7 w-auto" />}
                 quote={
                   <>
                     <b className="font-bold">Marvellous</b>

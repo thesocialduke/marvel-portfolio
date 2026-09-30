@@ -1,61 +1,72 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Grid } from './Grid'
-import { nav, site } from '../data/site'
+import { ButtonLink } from './Button'
+import { site } from '../data/site'
+
+function BackToTop() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    function onScroll() {
+      setVisible(window.scrollY > 400)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <button
+      type="button"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Back to top"
+      className={`fixed right-6 bottom-6 z-40 flex size-12 items-center justify-center rounded-full bg-ink text-page shadow-lg outline-none transition-[opacity,transform] hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover ${
+        visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0'
+      }`}
+    >
+      <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
+  )
+}
 
 export function Footer() {
   return (
-    // Deliberately inverted (ink background, page-colored text) regardless
-    // of light/dark theme — same treatment as the full-screen nav overlay,
-    // so the site closes on a consistent high-contrast bookend.
-    <footer id="contact" className="scroll-mt-20 bg-ink text-page tablet:scroll-mt-24">
-      <Grid className="gap-y-6 py-6 tablet:py-8 laptop:py-10">
-        <div className="col-span-full flex flex-col gap-6 tablet:col-span-3 tablet:col-start-1 laptop:col-span-4 laptop:col-start-2">
-          <div>
-            <p
-              className="custom-p custom-p-sm mb-3 tracking-wide uppercase"
-              style={{ color: 'color-mix(in srgb, var(--color-page) 50%, transparent)' }}
-            >
-              Quick links
+    <>
+      <footer id="contact" className="scroll-mt-20 bg-page text-ink tablet:scroll-mt-24">
+        {/* Full-bleed, edge to edge — same technique as the Trusted-by
+            logo grid, breaking out of the Grid container. */}
+        <div className="h-px w-full bg-ink/15" />
+
+        <Grid className="gap-y-10 py-10 tablet:py-14 laptop:py-18">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+            <h2 className="custom-h2 custom-h2-bold relative text-balance">
+              Would love to hear from you <span aria-hidden="true">↓</span>.
+            </h2>
+            <p className="custom-p mt-4 text-ink/70">
+              If you have requests or questions, kindly do not hesitate to contact me.
             </p>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              {nav.map((item) =>
-                item.href.startsWith('#') ? (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="custom-h4 relative inline-flex items-center rounded-sm outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/40"
-                    style={{ color: 'var(--color-page)' }}
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className="custom-h4 relative inline-flex items-center rounded-sm outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/40"
-                    style={{ color: 'var(--color-page)' }}
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
+            <a
+              href={`mailto:${site.email}`}
+              className="custom-h3 relative mt-6 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+            >
+              {site.email}
+            </a>
+            <div className="mt-8">
+              <ButtonLink to={site.bookingUrl} external>
+                Book a call →
+              </ButtonLink>
             </div>
           </div>
 
-          <div>
-            <p
-              className="custom-p custom-p-sm mb-3 tracking-wide uppercase"
-              style={{ color: 'color-mix(in srgb, var(--color-page) 50%, transparent)' }}
-            >
-              Follow
-            </p>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
+            <div className="flex flex-wrap items-center gap-6">
               <a
                 href={site.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-h4 relative inline-flex items-center rounded-sm outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/40"
-                style={{ color: 'var(--color-page)' }}
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
               >
                 LinkedIn
               </a>
@@ -63,40 +74,17 @@ export function Footer() {
                 href={site.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-h4 relative inline-flex items-center rounded-sm outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/40"
-                style={{ color: 'var(--color-page)' }}
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
               >
                 Instagram
               </a>
             </div>
+            <p className="custom-p custom-p-sm text-ink/60">{site.copyright}</p>
           </div>
-        </div>
+        </Grid>
+      </footer>
 
-        <div className="col-span-full flex flex-col items-start gap-3 tablet:col-span-5 tablet:col-start-4 laptop:col-span-8 laptop:col-start-7">
-          <a
-            href={`mailto:${site.email}`}
-            className="custom-h3 relative inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/40"
-            style={{ color: 'var(--color-page)' }}
-          >
-            {site.email}
-          </a>
-          <a
-            href={site.bookingUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="custom-h4 relative inline-block underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/40"
-            style={{ color: 'var(--color-page)' }}
-          >
-            Book a call →
-          </a>
-        </div>
-
-        <div className="col-span-full border-t border-page/15 pt-4 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
-          <p className="custom-p" style={{ color: 'color-mix(in srgb, var(--color-page) 50%, transparent)' }}>
-            {site.copyright}
-          </p>
-        </div>
-      </Grid>
-    </footer>
+      <BackToTop />
+    </>
   )
 }
