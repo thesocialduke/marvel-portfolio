@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
+import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import type { CaseStudyData } from '../data/site'
+import { baseCaseStudy, bitgetCaseStudy, type CaseStudyData } from '../data/site'
 
 // Supports a light `**bold**` markup inside plain-text data strings.
 function withBold(text: string): ReactNode {
@@ -262,6 +264,33 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
                 </span>
               ))}
             </h3>
+          </div>
+        </Grid>
+      </section>
+
+      {/* NEXT / PREVIOUS / CTA */}
+      <section className="case-study-serif border-t border-ink/15 py-12 tablet:py-14 laptop:py-18">
+        <Grid className="items-center gap-y-8">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Previous case study</p>
+            <Link
+              to={baseCaseStudy.href}
+              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+            >
+              ← {baseCaseStudy.title}
+            </Link>
+          </div>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-3 laptop:col-start-7">
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Next case study</p>
+            <Link
+              to={bitgetCaseStudy.href}
+              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+            >
+              {bitgetCaseStudy.title} →
+            </Link>
+          </div>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
+            <ButtonLink to="#contact">Work with me</ButtonLink>
           </div>
         </Grid>
       </section>

@@ -99,9 +99,7 @@ export function Navbar() {
           >
             <Grid>
               <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-5">
-                <span className="font-poppins flex h-8 items-center text-xs font-medium tracking-[0.15em] uppercase">
-                  {site.name}
-                </span>
+                <img src="/brand-logo-white.svg" alt={site.name} className="h-6 w-auto tablet:h-7" />
                 <button
                   ref={closeRef}
                   type="button"

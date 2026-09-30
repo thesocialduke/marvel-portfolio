@@ -17,7 +17,7 @@ export const nav = [
   { label: 'Home', href: '/' },
   { label: 'Case Study', href: '/#case-studies' },
   { label: 'Services', href: '/services' },
-  { label: 'Contact me', href: '#contact' },
+  { label: 'Contact me', href: '/contact' },
 ] as const
 
 export const logos = [
@@ -82,10 +82,12 @@ export const events: EventPhoto[] = [
   { image: '/events/ethiopia-blockchain-week.jpg', event: 'Ethiopia Blockchain Week', location: 'Addis Ababa, Ethiopia, 2025' },
   { image: '/events/university-of-nairobi.jpg', event: 'University of Nairobi', location: 'Nairobi, Kenya, 2025' },
   { image: '/events/crypto-experience-month-warri.jpg', event: 'El Clasico Watch Party', location: 'Lagos, Nigeria, 2024' },
-  { image: '/events/padel-event-capetown.jpg', event: 'Padel Event', location: 'Cape Town, South Africa, 2025' },
+  { image: '/events/padel-event-capetown.jpg', event: 'VIP Padel Event', location: 'Cape Town, South Africa, 2025' },
   { image: '/events/pizza-day-johannesburg.jpg', event: 'Bitcoin Pizza Day', location: 'Johannesburg, South Africa, 2025' },
   { image: '/events/p2p-merchant-meetup-nairobi.jpg', event: 'P2P Merchant Meetup', location: 'Nairobi, Kenya, 2025' },
   { image: '/events/p2p-merchant-meetup-kenya.jpg', event: 'P2P Merchant Meetup', location: 'Kenya, 2026' },
+  { image: '/events/bitget-pizza-day-lagos.jpg', event: 'Bitget Pizza Day', location: 'Lagos, Nigeria, 2025' },
+  { image: '/events/kol-community-meetup.jpg', event: 'KOL Community Meetup', location: '2024' },
 ]
 
 export const services = [
@@ -230,9 +232,12 @@ export const bitgetCaseStudy: CaseStudyData = {
     { image: '/events/ethiopia-blockchain-week.jpg', caption: 'Ethiopia Blockchain Week, Addis Ababa, 2025' },
     { image: '/events/university-of-nairobi.jpg', caption: 'University of Nairobi, Nairobi, 2025' },
     { image: '/events/crypto-experience-month-warri.jpg', caption: 'El Clasico Watch Party, Lagos, 2024' },
-    { image: '/events/padel-event-capetown.jpg', caption: 'Padel Event, Cape Town, 2025' },
+    { image: '/events/padel-event-capetown.jpg', caption: 'VIP Padel Event, Cape Town, 2025' },
     { image: '/events/pizza-day-johannesburg.jpg', caption: 'Bitcoin Pizza Day, Johannesburg, 2025' },
     { image: '/events/p2p-merchant-meetup-nairobi.jpg', caption: 'P2P Merchant Meetup, Nairobi, 2025' },
+    { image: '/events/p2p-merchant-meetup-kenya.jpg', caption: 'P2P Merchant Meetup, Kenya, 2026' },
+    { image: '/events/bitget-pizza-day-lagos.jpg', caption: 'Bitget Pizza Day, Lagos, 2025' },
+    { image: '/events/kol-community-meetup.jpg', caption: 'KOL Community Meetup, 2024' },
   ],
   closing: [
     'Planned and executed localized offline activations across East, West & South Africa, onboarding 100+ new users per event on average.',

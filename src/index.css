@@ -309,7 +309,7 @@
 }
 
 .trusted-by-track {
-  animation: trusted-by-scroll 28s linear infinite;
+  animation: trusted-by-scroll 14s linear infinite;
 }
 
 @keyframes trusted-by-scroll {

@@ -4,7 +4,7 @@ import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
+import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
 const BLUE = 'rgb(0 82 255)'
 
@@ -194,19 +194,28 @@ export function BaseCaseStudy() {
         </Grid>
       </section>
 
-      {/* NEXT / CTA */}
+      {/* NEXT / PREVIOUS / CTA */}
       <section className="case-study-serif border-t border-ink/15 py-12 tablet:py-14 laptop:py-18">
         <Grid className="items-center gap-y-8">
-          <div className="col-span-full tablet:col-span-4 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Next case study</p>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Previous case study</p>
             <Link
               to={bitgetCaseStudy.href}
               className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
             >
-              Bitget Africa →
+              ← Bitget Africa
             </Link>
           </div>
-          <div className="col-span-full tablet:col-span-4 tablet:col-start-6 laptop:col-span-4 laptop:col-start-11 laptop:justify-self-end">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-3 laptop:col-start-7">
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Next case study</p>
+            <Link
+              to={binanceCaseStudy.href}
+              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+            >
+              {binanceCaseStudy.title} →
+            </Link>
+          </div>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
             <ButtonLink to="#contact">Work with me</ButtonLink>
           </div>
         </Grid>

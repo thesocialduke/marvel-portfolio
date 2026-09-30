@@ -3,14 +3,27 @@ import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
+import { ZoomParallax } from '../components/ui/zoom-parallax'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
+import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
 const RED = 'rgb(220 38 38)'
 
 const [dogsPhoto, piPhoto, bitquestPhoto, stocksPhoto] = bitgetCaseStudy.proofSections![0].photos
 const [okxNewsPhoto, okxTopAppPhoto] = bitgetCaseStudy.proofSections![1].photos
 const [youtubeLivePhoto, twitterSpacePhoto] = bitgetCaseStudy.proofSections![2].photos
+
+// ZoomParallax's first image (index 0) is the only one with no offset
+// override, so it lands centered in the middle of the collage. The P2P
+// Kenya photo is pinned there; later gallery additions fill the other
+// slots in order instead of displacing it.
+const CENTER_PHOTO_SRC = '/events/p2p-merchant-meetup-kenya.jpg'
+const parallaxGallery = bitgetCaseStudy.gallery!
+const centerPhotoIndex = parallaxGallery.findIndex((photo) => photo.image === CENTER_PHOTO_SRC)
+const parallaxPhotos =
+  centerPhotoIndex >= 0
+    ? [parallaxGallery[centerPhotoIndex], ...parallaxGallery.filter((_, i) => i !== centerPhotoIndex)]
+    : parallaxGallery
 
 const campaigns = [
   {
@@ -114,7 +127,7 @@ export function BitgetCaseStudy() {
 
       {/* FEATURED STORY */}
       <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
-        <Grid className="items-start gap-y-10 laptop:gap-y-0">
+        <Grid className="items-center gap-y-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">01. Featured story</p>
             <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">When OKX left Nigeria, Bitget took the top spot</h2>
@@ -185,22 +198,6 @@ export function BitgetCaseStudy() {
         </Grid>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="case-study-serif py-2 tablet:py-4 laptop:py-6">
-        <Grid>
-          <div className="col-span-full px-6 tablet:col-span-6 tablet:col-start-2 tablet:px-12 laptop:col-span-12 laptop:col-start-2">
-            <TestimonialsSection
-              quote={bitgetCaseStudy.testimonial!.quote}
-              name={bitgetCaseStudy.testimonial!.name}
-              role={bitgetCaseStudy.testimonial!.role}
-              avatarSrc="/testimonials/aka-leung.jpg?v=2"
-              avatarAlt={bitgetCaseStudy.testimonial!.name}
-              avatarFallback={bitgetCaseStudy.testimonial!.name.charAt(0)}
-            />
-          </div>
-        </Grid>
-      </section>
-
       {/* COMMUNITY & EDUCATION */}
       <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
         <Grid className="gap-y-8 pb-10 laptop:gap-y-0">
@@ -234,12 +231,28 @@ export function BitgetCaseStudy() {
         </Grid>
       </section>
 
-      {/* OFFLINE ACTIVATIONS */}
+      {/* TESTIMONIAL */}
+      <section className="case-study-serif py-2 tablet:py-4 laptop:py-6">
+        <Grid>
+          <div className="col-span-full px-6 tablet:col-span-6 tablet:col-start-2 tablet:px-12 laptop:col-span-12 laptop:col-start-2">
+            <TestimonialsSection
+              quote={bitgetCaseStudy.testimonial!.quote}
+              name={bitgetCaseStudy.testimonial!.name}
+              role={bitgetCaseStudy.testimonial!.role}
+              avatarSrc="/testimonials/aka-leung.jpg?v=2"
+              avatarAlt={bitgetCaseStudy.testimonial!.name}
+              avatarFallback={bitgetCaseStudy.testimonial!.name.charAt(0)}
+            />
+          </div>
+        </Grid>
+      </section>
+
+      {/* EVENTS */}
       <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
         <Grid className="items-end gap-y-6 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Offline activations</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Taking Bitget to the street</h2>
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Events</p>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Offline events &amp; activations</h2>
           </div>
           <div className="col-span-full flex flex-wrap gap-8 tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
             {offlineStats.map((stat, i) => (
@@ -250,15 +263,17 @@ export function BitgetCaseStudy() {
             ))}
           </div>
         </Grid>
+      </section>
+
+      <ZoomParallax images={parallaxPhotos.map((photo) => ({ src: photo.image, alt: photo.caption }))} />
+
+      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
         <Grid>
-          <div className="col-span-full grid grid-cols-2 gap-5 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-3 laptop:col-span-12 laptop:col-start-2">
+          <div className="col-span-full grid grid-cols-1 gap-x-6 gap-y-5 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-3 laptop:col-span-12 laptop:col-start-2">
             {bitgetCaseStudy.gallery!.map((photo) => {
               const [eventName, ...rest] = photo.caption!.split(', ')
               return (
-                <div key={photo.image} className="flex flex-col gap-3">
-                  <div className="aspect-square overflow-hidden">
-                    <img src={photo.image} alt={photo.caption ?? ''} className="size-full object-cover" />
-                  </div>
+                <div key={photo.image} className="flex flex-col gap-1 border-t border-ink/15 pt-4">
                   <p className="custom-h4 custom-h4-bold">{eventName}</p>
                   <p className="custom-p custom-p-sm tracking-wide text-ink/50 uppercase">{rest.join(' · ')}</p>
                 </div>
@@ -268,10 +283,19 @@ export function BitgetCaseStudy() {
         </Grid>
       </section>
 
-      {/* NEXT / CTA */}
+      {/* NEXT / PREVIOUS / CTA */}
       <section className="case-study-serif border-t border-ink/15 py-12 tablet:py-14 laptop:py-18">
         <Grid className="items-center gap-y-8">
-          <div className="col-span-full tablet:col-span-4 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Previous case study</p>
+            <Link
+              to={binanceCaseStudy.href}
+              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+            >
+              ← {binanceCaseStudy.title}
+            </Link>
+          </div>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-3 laptop:col-start-7">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Next case study</p>
             <Link
               to={baseCaseStudy.href}
@@ -280,7 +304,7 @@ export function BitgetCaseStudy() {
               {baseCaseStudy.title} →
             </Link>
           </div>
-          <div className="col-span-full tablet:col-span-4 tablet:col-start-6 laptop:col-span-4 laptop:col-start-11 laptop:justify-self-end">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
             <ButtonLink to="#contact">Work with me</ButtonLink>
           </div>
         </Grid>
