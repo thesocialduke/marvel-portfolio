@@ -59,7 +59,7 @@ export function VideoPlayer({
             className="absolute top-1/2 left-1/2 size-16 -translate-x-1/2 -translate-y-1/2"
           >
             <svg viewBox="0 0 64 64" className="size-16">
-              <rect width="64" height="64" rx="32" fill="#000" fillOpacity="0.36" />
+              <rect width="64" height="64" fill="#000" fillOpacity="0.36" />
               <path d="M26 20v24l20-12z" fill="#fff" />
             </svg>
           </button>
@@ -74,7 +74,7 @@ export function VideoPlayer({
               type="button"
               aria-label="Pause video"
               onClick={togglePlay}
-              className="shrink-0 rounded-full bg-black/15 p-[2px] backdrop-blur-sm"
+              className="shrink-0 bg-black/15 p-[2px] backdrop-blur-sm"
             >
               <svg viewBox="0 0 24 24" className="size-6 fill-white">
                 <path d="M8 5h3v14H8zM13 5h3v14h-3z" />
@@ -98,7 +98,7 @@ export function VideoPlayer({
           <button
             type="button"
             aria-label={muted ? 'Unmute' : 'Mute'}
-            className="rounded-full bg-black/15 p-[2px] backdrop-blur-sm"
+            className="bg-black/15 p-[2px] backdrop-blur-sm"
             onClick={() => {
               setMuted((v) => !v)
               if (videoRef.current) videoRef.current.muted = !muted

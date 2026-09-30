@@ -58,7 +58,7 @@ export function Navbar() {
           <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-5">
             <Link
               to="/"
-              className="font-poppins relative z-10 flex h-8 items-center rounded-sm text-sm font-normal tracking-tight text-ink/50 outline-none focus-visible:ring-2 focus-visible:ring-hyacinth-hover tablet:text-base"
+              className="font-poppins relative z-10 flex h-8 items-center text-sm font-normal tracking-tight text-ink/50 outline-none focus-visible:ring-2 focus-visible:ring-hyacinth-hover tablet:text-base"
             >
               {site.name}
             </Link>
@@ -69,7 +69,7 @@ export function Navbar() {
               aria-label="Toggle navigation"
               aria-controls="site-nav"
               aria-expanded={open}
-              className="relative z-20 inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-ink/5 focus-visible:ring-2 focus-visible:ring-hyacinth-hover laptop:size-9"
+              className="relative z-20 inline-flex size-8 shrink-0 cursor-pointer items-center justify-center text-ink outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-ink/5 focus-visible:ring-2 focus-visible:ring-hyacinth-hover laptop:size-9"
               onClick={() => setOpen((v) => !v)}
             >
               <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
@@ -104,7 +104,7 @@ export function Navbar() {
                 ref={closeRef}
                 type="button"
                 aria-label="Close navigation"
-                className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-page outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-page/10 focus-visible:ring-2 focus-visible:ring-page/40 laptop:size-9"
+                className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center text-page outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-page/10 focus-visible:ring-2 focus-visible:ring-page/40 laptop:size-9"
                 onClick={() => setOpen(false)}
               >
                 <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
@@ -163,7 +163,7 @@ export function Navbar() {
                 href={site.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-sm outline-none transition-colors hover:text-page focus-visible:ring-2 focus-visible:ring-page/40"
+                className="outline-none transition-colors hover:text-page focus-visible:ring-2 focus-visible:ring-page/40"
               >
                 LinkedIn
               </a>

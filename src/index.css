@@ -203,6 +203,13 @@
   color: var(--color-ink);
 }
 
+/* Case study pages use SK Modernist throughout instead of the site's
+   default Poppins body copy — scoped so the rest of the site (nav,
+   footer, home, services) keeps Poppins for body text. */
+.case-study-serif .custom-p {
+  font-family: var(--font-modernist);
+}
+
 .custom-h2-sm {
   font-size: 1.15rem;
 }
@@ -254,7 +261,6 @@ input[type='range'].scrubber {
   -webkit-appearance: none;
   appearance: none;
   height: 5px;
-  border-radius: 9999px;
   background: color-mix(in srgb, var(--color-hyacinth) 30%, var(--color-page));
 }
 
@@ -263,7 +269,6 @@ input[type='range'].scrubber::-webkit-slider-thumb {
   appearance: none;
   width: 14px;
   height: 14px;
-  border-radius: 9999px;
   background: var(--color-page);
   box-shadow: 0 2px 6px color-mix(in srgb, var(--color-graphite) 25%, transparent);
   cursor: pointer;
@@ -273,7 +278,6 @@ input[type='range'].scrubber::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border: 0;
-  border-radius: 9999px;
   background: var(--color-page);
   box-shadow: 0 2px 6px color-mix(in srgb, var(--color-graphite) 25%, transparent);
   cursor: pointer;

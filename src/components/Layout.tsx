@@ -4,11 +4,16 @@ import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
 export function Layout({ children }: { children: ReactNode }) {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    if (!hash) {
+      window.scrollTo(0, 0)
+      return
+    }
+    const el = document.querySelector(hash)
+    if (el) el.scrollIntoView()
+  }, [pathname, hash])
 
   return (
     <div className="flex min-h-svh flex-col bg-page">

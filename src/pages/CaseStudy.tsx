@@ -44,7 +44,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
 
   return (
     <Layout>
-      <section className="relative w-full bg-hyacinth/5 pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
+      <section className="case-study-serif relative w-full bg-hyacinth/5 pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="relative space-y-4 py-18">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm mb-4 tracking-wide text-ink/60 uppercase">{data.eyebrow}</p>
@@ -53,7 +53,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         </Grid>
       </section>
 
-      <section>
+      <section className="case-study-serif">
         <Grid className="items-start space-y-12 py-12 laptop:space-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2 laptop:row-start-1">
             <h3 className="custom-h3 relative text-balance">01. Overview</h3>
@@ -64,7 +64,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         </Grid>
       </section>
 
-      <section>
+      <section className="case-study-serif">
         <Grid className="items-start space-y-12 py-12 laptop:space-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2 laptop:row-start-1">
             <div className="space-y-text-block text-left">
@@ -85,7 +85,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
       </section>
 
       {data.beforeAfter && (
-        <section className="py-12 tablet:py-14 laptop:py-18">
+        <section className="case-study-serif py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
               <h3 className="custom-h3 relative text-balance">0{++section}. Before → After</h3>
@@ -149,11 +149,11 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
       )}
 
       {data.videos && data.videos.length > 0 && (
-        <VideoGallery title="AI Creative Direction" videos={data.videos} orientation="landscape" rounded={12} showDescriptions />
+        <VideoGallery title="AI Creative Direction" videos={data.videos} orientation="landscape" rounded={0} showDescriptions />
       )}
 
       {data.proofSections && data.proofSections.length > 0 && (
-        <section className="py-12 tablet:py-14 laptop:py-18">
+        <section className="case-study-serif py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
               <h3 className="custom-h3 relative text-balance">0{++section}. Proof</h3>
@@ -173,7 +173,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
       )}
 
       {data.results && (
-        <section className="py-12 tablet:py-14 laptop:py-18">
+        <section className="case-study-serif py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
               <h3 className="custom-h3 relative text-balance">0{++section}. Results</h3>
@@ -193,7 +193,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
       )}
 
       {data.keyMoment && (
-        <section>
+        <section className="case-study-serif">
           <Grid className="py-12">
             <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
               <p className="custom-h2 custom-h2-sm relative text-balance">{data.keyMoment}</p>
@@ -203,7 +203,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
       )}
 
       {data.gallery && data.gallery.length > 0 && (
-        <section className="py-12 tablet:py-14 laptop:py-18">
+        <section className="case-study-serif py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
               <div className="grid grid-cols-2 gap-4 tablet:grid-cols-3">
@@ -228,7 +228,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
       )}
 
       {data.testimonial && (
-        <section className="py-12 tablet:py-14 laptop:py-18">
+        <section className="case-study-serif py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-3">
               <blockquote className="relative space-y-8 bg-hyacinth/5 px-6 py-10 tablet:px-12 tablet:py-14">
@@ -237,7 +237,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
                 </svg>
                 <p className="custom-h2 custom-h2-sm relative text-balance">{data.testimonial.quote}</p>
                 <footer className="flex items-center gap-4">
-                  <span className="custom-h4 flex size-12 shrink-0 items-center justify-center rounded-full bg-hyacinth/10 text-hyacinth">
+                  <span className="custom-h4 flex size-12 shrink-0 items-center justify-center bg-hyacinth/10 text-hyacinth">
                     {data.testimonial.name.charAt(0)}
                   </span>
                   <span>
@@ -251,7 +251,7 @@ export function CaseStudy({ data }: { data: CaseStudyData }) {
         </section>
       )}
 
-      <section>
+      <section className="case-study-serif">
         <Grid className="pt-12 pb-8 tablet:pt-18 laptop:pt-24 laptop:pb-12">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <h3 className="custom-h3 relative text-balance">

@@ -34,7 +34,7 @@ export function TestimonialsSection({
           <div className="text-muted-foreground text-sm">{role}</div>
         </div>
 
-        <Avatar className="size-12 rounded-full border object-cover">
+        <Avatar className="size-12 rounded-none border object-cover">
           {avatarSrc && <AvatarImage alt={avatarAlt} src={avatarSrc} />}
           <AvatarFallback>{avatarFallback}</AvatarFallback>
         </Avatar>

@@ -23,7 +23,7 @@ export function VideoGallery({
       : 'col-span-full tablet:col-span-6 tablet:col-start-2 laptop:!col-start-auto laptop:first:!col-start-2 laptop:[&:nth-child(2n+1)]:!col-start-2'
 
   return (
-    <section className="space-y-6 py-12 tablet:py-14 laptop:py-18">
+    <section className="case-study-serif space-y-6 py-12 tablet:py-14 laptop:py-18">
       {title ? (
         <Grid>
           <div className="col-span-full col-start-1 py-2 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-8 laptop:col-start-2 laptop:py-6">

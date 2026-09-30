@@ -15,6 +15,7 @@ export const site = {
 
 export const nav = [
   { label: 'Home', href: '/' },
+  { label: 'Case Study', href: '/#case-studies' },
   { label: 'Services', href: '/services' },
   { label: 'Contact me', href: '#contact' },
 ] as const
@@ -80,7 +81,7 @@ export type EventPhoto = {
 export const events: EventPhoto[] = [
   { image: '/events/ethiopia-blockchain-week.jpg', event: 'Ethiopia Blockchain Week', location: 'Addis Ababa, Ethiopia, 2025' },
   { image: '/events/university-of-nairobi.jpg', event: 'University of Nairobi', location: 'Nairobi, Kenya, 2025' },
-  { image: '/events/crypto-experience-month-warri.jpg', event: 'Crypto Experience Month', location: 'Warri, Nigeria, 2024' },
+  { image: '/events/crypto-experience-month-warri.jpg', event: 'El Clasico Watch Party', location: 'Lagos, Nigeria, 2024' },
   { image: '/events/padel-event-capetown.jpg', event: 'Padel Event', location: 'Cape Town, South Africa, 2025' },
   { image: '/events/pizza-day-johannesburg.jpg', event: 'Bitcoin Pizza Day', location: 'Johannesburg, South Africa, 2025' },
   { image: '/events/p2p-merchant-meetup-nairobi.jpg', event: 'P2P Merchant Meetup', location: 'Nairobi, Kenya, 2025' },
@@ -223,7 +224,7 @@ export const bitgetCaseStudy: CaseStudyData = {
   gallery: [
     { image: '/events/ethiopia-blockchain-week.jpg', caption: 'Ethiopia Blockchain Week, Addis Ababa, 2025' },
     { image: '/events/university-of-nairobi.jpg', caption: 'University of Nairobi, Nairobi, 2025' },
-    { image: '/events/crypto-experience-month-warri.jpg', caption: 'Crypto Experience Month, Warri, 2024' },
+    { image: '/events/crypto-experience-month-warri.jpg', caption: 'El Clasico Watch Party, Lagos, 2024' },
     { image: '/events/padel-event-capetown.jpg', caption: 'Padel Event, Cape Town, 2025' },
     { image: '/events/pizza-day-johannesburg.jpg', caption: 'Bitcoin Pizza Day, Johannesburg, 2025' },
     { image: '/events/p2p-merchant-meetup-nairobi.jpg', caption: 'P2P Merchant Meetup, Nairobi, 2025' },

@@ -20,7 +20,7 @@ function BackToTop() {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top"
-      className={`fixed right-6 bottom-6 z-40 flex size-12 items-center justify-center rounded-full bg-ink text-page shadow-lg outline-none transition-[opacity,transform] hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover ${
+      className={`fixed right-6 bottom-6 z-40 flex size-12 items-center justify-center bg-ink text-page shadow-lg outline-none transition-[opacity,transform] hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover ${
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0'
       }`}
     >
@@ -41,21 +41,13 @@ export function Footer() {
 
         <Grid className="gap-y-10 py-10 tablet:py-14 laptop:py-18">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <h2 className="custom-h2 custom-h2-bold relative text-balance">
-              Would love to hear from you <span aria-hidden="true">↓</span>.
-            </h2>
+            <h2 className="custom-h2 custom-h2-bold relative text-balance">Would love to hear from you.</h2>
             <p className="custom-p mt-4 text-ink/70">
               If you have requests or questions, kindly do not hesitate to contact me.
             </p>
-            <a
-              href={`mailto:${site.email}`}
-              className="custom-h3 relative mt-6 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-            >
-              {site.email}
-            </a>
             <div className="mt-8">
-              <ButtonLink to={site.bookingUrl} external>
-                Book a call →
+              <ButtonLink to={`mailto:${site.email}`} external>
+                {site.email}
               </ButtonLink>
             </div>
           </div>
