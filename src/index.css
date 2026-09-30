@@ -300,6 +300,50 @@
   background-position: 0% 100%;
 }
 
+/* Trusted-by marquee: fades out at both edges, and its track (logos
+   duplicated once in the markup) scrolls right-to-left, looping
+   seamlessly at a -50% translate since that's exactly one set's width. */
+.trusted-by-fade {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.trusted-by-track {
+  animation: trusted-by-scroll 28s linear infinite;
+}
+
+@keyframes trusted-by-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Desktop track: logos are duplicated 4x in the markup (wider, fixed-width
+   bordered cells need more copies to always fill even very wide viewports),
+   so it loops at -25% (one quarter = one full set) instead of -50%. */
+.trusted-by-track-x4 {
+  animation: trusted-by-scroll-x4 40s linear infinite;
+}
+
+@keyframes trusted-by-scroll-x4 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trusted-by-track,
+  .trusted-by-track-x4 {
+    animation: none;
+  }
+}
+
 .space-y-text-block > * + * {
   margin-top: 1rem;
 }

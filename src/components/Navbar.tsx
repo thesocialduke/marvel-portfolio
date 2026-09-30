@@ -58,9 +58,10 @@ export function Navbar() {
           <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-5">
             <Link
               to="/"
-              className="font-poppins relative z-10 -mx-2 -my-1 flex h-8 items-center bg-red-600/10 px-2 py-1 text-sm font-normal tracking-tight text-ink outline-none active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-hyacinth-hover tablet:text-base"
+              aria-label={site.name}
+              className="relative z-10 flex h-8 items-center outline-none active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
             >
-              {site.name}
+              <img src="/brand-logo.svg" alt={site.name} className="h-5 w-auto tablet:h-8" />
             </Link>
 
             <button

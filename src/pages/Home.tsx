@@ -65,9 +65,66 @@ export function Home() {
           </div>
         </Grid>
 
-        <div className="relative flex-1" />
+        {/* On mobile this spacer sits before the marquee (unchanged, liked
+            as-is). On tablet+ it's reordered (see order-* below) to sit
+            AFTER the desktop marquee instead, so the marquee stays close
+            under the hero picture and the spacer absorbs the leftover
+            space down to the "Hi, I'm" row. */}
+        <div className="relative flex-1 tablet:order-3" />
 
-        <Grid className="relative pb-8 tablet:pb-12 laptop:pb-16">
+        {/* Trusted-by marquee: an infinite right-to-left scroll, faded out
+            at both edges via a mask, sitting right under the hero picture. */}
+
+        {/* Mobile: compact row, logos duplicated 2x, track loops at -50%. */}
+        <div className="trusted-by-fade relative w-full overflow-hidden py-4 tablet:hidden">
+          <p className="mb-3 text-center text-[10px] font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
+          <div className="trusted-by-track flex w-max items-center gap-12">
+            {[...logos, ...logos].map((logo, i) => (
+              <img
+                key={`mobile-${logo.src}-${i}`}
+                src={logo.src}
+                alt={logo.name}
+                className={`shrink-0 object-contain opacity-70 ${
+                  logo.name === 'Binance' || logo.name === 'Hyperbridge' ? 'h-7' : 'h-4'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Tablet/laptop: the original bordered-cell design, now scrolling.
+            Logos repeat 4x (track loops at -25%) so the track is always
+            wider than the viewport, and the loop never shows a gap before
+            the next set arrives. Wrapped in the same Grid every other
+            section uses, so its edges line up instead of bleeding full
+            width; a little extra top margin gives it room to breathe. */}
+        <div className="hidden tablet:order-2 tablet:block">
+          <Grid className="relative mt-4">
+            <div className="trusted-by-fade relative col-span-full overflow-hidden py-4 tablet:col-span-6 tablet:col-start-2 tablet:py-6 laptop:col-span-12 laptop:col-start-2">
+              <p className="mb-3 text-center text-xs font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
+              <div className="trusted-by-track-x4 flex w-max items-center">
+                {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
+                  <div
+                    key={`desktop-${logo.src}-${i}`}
+                    className="flex h-28 w-40 shrink-0 items-center justify-center border-y border-r border-ink/10 p-2 laptop:h-36 laptop:w-56"
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      className={`object-contain ${
+                        logo.name === 'Binance' || logo.name === 'Hyperbridge'
+                          ? 'h-20 w-36 laptop:h-28 laptop:w-48'
+                          : 'h-11 w-28 laptop:h-14 laptop:w-32'
+                      }`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Grid>
+        </div>
+
+        <Grid className="relative pb-8 tablet:order-4 tablet:pb-12 laptop:pb-16">
           <div className="col-span-full flex items-end justify-between gap-4 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse laptop:col-span-12 laptop:col-start-2">
             <a
               href="#about"
@@ -93,8 +150,17 @@ export function Home() {
 
       <section id="about" className="scroll-mt-20 py-12 tablet:py-14 laptop:py-18">
         <Grid className="gap-y-8 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-2 laptop:col-start-2">
-            <h2 className="custom-h1 custom-h1-bold uppercase">About</h2>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
+            <StaggeredReveal
+              lines={[
+                <img
+                  key="about-photo"
+                  src="/about-heat-culture.webp"
+                  alt="Ndubuisi Marvellous"
+                  className="mx-auto block aspect-[4/5] w-full max-w-[220px] object-cover object-[center_25%] tablet:aspect-[3/4] tablet:max-w-md tablet:object-center laptop:h-[26rem] laptop:w-auto laptop:max-w-none"
+                />,
+              ]}
+            />
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-7 laptop:col-start-7">
             <StaggeredReveal
@@ -142,54 +208,6 @@ export function Home() {
             </div>
           </div>
         </Grid>
-      </section>
-
-      <section className="py-12 tablet:py-14 laptop:py-18">
-        <Grid>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <p className="mb-2 text-center text-[10px] font-medium tracking-wide text-ink/60 uppercase tablet:text-xs">
-              Trusted by
-            </p>
-          </div>
-        </Grid>
-
-        {/* Full-bleed, edge to edge — deliberately breaks out of the Grid
-            container so this row spans the whole viewport width. Vertical
-            dividers run through every row (including the decorative empty
-            top/bottom rows) and extend past the logo row's own top/bottom
-            edges. The new horizontal lines are scoped to the logo row's
-            cells only, so they stop at the row's edges instead of running
-            all the way down to where the verticals end.
-
-            Sizing is identical at every breakpoint (no mobile-only shrink),
-            so mobile matches desktop exactly; below the tablet breakpoint
-            the row scrolls horizontally instead of squeezing the logos. */}
-        <div className="w-full overflow-x-auto tablet:overflow-visible">
-          <div className="grid w-full min-w-[47rem] grid-cols-5 divide-x divide-ink/10 tablet:min-w-0">
-            {logos.map((_, i) => (
-              <div key={`top-${i}`} className="h-12 laptop:h-16" />
-            ))}
-            {logos.map((logo) => (
-              <div
-                key={logo.src}
-                className="flex h-28 items-center justify-center border-y border-ink/10 p-2 transition-colors hover:bg-ink/5 laptop:h-36"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.name}
-                  className={`object-contain ${
-                    logo.name === 'Binance' || logo.name === 'Hyperbridge'
-                      ? 'h-20 w-36 laptop:h-28 laptop:w-48'
-                      : 'h-11 w-28 laptop:h-14 laptop:w-32'
-                  }`}
-                />
-              </div>
-            ))}
-            {logos.map((_, i) => (
-              <div key={`bottom-${i}`} className="h-12 laptop:h-16" />
-            ))}
-          </div>
-        </div>
       </section>
 
       <section className="py-12 tablet:py-14 laptop:py-18">
