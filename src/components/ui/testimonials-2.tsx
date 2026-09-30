@@ -38,7 +38,7 @@ export function TestimonialsSection({
         </blockquote>
 
         <div>
-          <cite className="font-modernist text-foreground text-xs font-medium not-italic">{name}</cite>
+          <cite className="font-modernist text-foreground text-sm font-bold tracking-wide uppercase not-italic">{name}</cite>
           <div className="text-muted-foreground text-[10px]">{role}</div>
         </div>
       </figcaption>

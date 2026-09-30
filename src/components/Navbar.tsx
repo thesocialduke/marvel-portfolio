@@ -96,22 +96,24 @@ export function Navbar() {
             transition={{ duration: prefersReducedMotion ? 0 : 0.3, ease: 'easeOut' }}
             className="fixed inset-0 z-[60] flex flex-col bg-ink text-page"
           >
-            <div className="flex items-center justify-between px-6 pt-5 tablet:px-10 tablet:pt-6 laptop:px-14 laptop:pt-8">
-              <span className="font-poppins flex h-8 items-center text-xs font-medium tracking-[0.15em] uppercase">
-                {site.name}
-              </span>
-              <button
-                ref={closeRef}
-                type="button"
-                aria-label="Close navigation"
-                className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center text-page outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-page/10 focus-visible:ring-2 focus-visible:ring-page/40 laptop:size-9"
-                onClick={() => setOpen(false)}
-              >
-                <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
-                  <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-              </button>
-            </div>
+            <Grid>
+              <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-5">
+                <span className="font-poppins flex h-8 items-center text-xs font-medium tracking-[0.15em] uppercase">
+                  {site.name}
+                </span>
+                <button
+                  ref={closeRef}
+                  type="button"
+                  aria-label="Close navigation"
+                  className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center text-page outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-page/10 focus-visible:ring-2 focus-visible:ring-page/40 laptop:size-9"
+                  onClick={() => setOpen(false)}
+                >
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
+                </button>
+              </div>
+            </Grid>
 
             <div className="flex flex-1 items-center justify-center px-8 tablet:px-16 laptop:px-24">
               <motion.ul
@@ -128,7 +130,7 @@ export function Navbar() {
                       <span className="font-poppins w-6 shrink-0 pt-2 text-xs tabular-nums opacity-60 tablet:w-8 tablet:pt-3 tablet:text-sm">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-modernist flex-1 text-right text-[clamp(2.25rem,8vw,5.5rem)] leading-[0.95] font-normal transition-[color,transform] duration-200 group-hover:translate-x-[-0.25rem] group-hover:text-page/70">
+                      <span className="hover-red-text font-modernist flex-1 text-right text-[clamp(2.25rem,8vw,5.5rem)] leading-[0.95] font-bold uppercase group-hover:translate-x-[-0.25rem]">
                         {item.label}
                       </span>
                     </>

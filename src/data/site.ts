@@ -170,7 +170,7 @@ export const bitgetCaseStudy: CaseStudyData = {
   eyebrow: 'Case study',
   title: 'Bitget: Top #3 Crypto Exchange Globally',
   summary:
-    'I lead Social Media and Community for Bitget across Africa, driving strategy and growth in one of the world’s most fast-moving markets, from viral campaigns and live community programming to offline activations and full-cycle content production.',
+    'I led Social Media and Community for Bitget across Africa, driving strategy and growth in one of the world’s most fast-moving markets, from viral campaigns and live community programming to offline activations and full-cycle content production.',
   roleTitle: 'Head of Social Media, Content and Community',
   roleBullets: [
     'Ran viral listing campaigns for $DOGS, $PI, and $PAWS, each built for awareness and follower growth',

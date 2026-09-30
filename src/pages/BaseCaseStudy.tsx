@@ -81,7 +81,7 @@ export function BaseCaseStudy() {
         <Grid className="items-start gap-y-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">01. The problem</p>
-            <h2 className="custom-h2 mt-4 text-balance">Plenty of content, no shared direction</h2>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Plenty of content, no shared direction</h2>
             <p className="custom-p mt-4 text-ink/70">
               The network was active and posting often. Quality and depth varied from creator to creator, and
               nobody was setting the creative bar.
@@ -104,7 +104,7 @@ export function BaseCaseStudy() {
         <Grid className="items-end gap-y-6 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. Before and after</p>
-            <h2 className="custom-h2 mt-4 text-balance">Same creators, sharper work</h2>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Same creators, sharper work</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10">
             <p className="custom-p text-ink/60">Each pair shows one creator’s video before coaching and after it.</p>
@@ -156,7 +156,7 @@ export function BaseCaseStudy() {
         <Grid className="items-end gap-y-6 pb-4 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">03. AI creative direction</p>
-            <h2 className="custom-h2 mt-4 text-balance">Campaign films made with AI</h2>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Campaign films made with AI</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10">
             <p className="custom-p text-ink/60">
@@ -185,7 +185,7 @@ export function BaseCaseStudy() {
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-8">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Outcome</p>
-            <h2 className="custom-h2 mt-4 text-balance">
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">
               An uneven network turned into a steady source of on-brand content
             </h2>
             <p className="custom-p mt-4 text-ink/70">{baseCaseStudy.closing[0]}</p>

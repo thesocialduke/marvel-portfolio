@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Accordion } from '../components/Accordion'
 import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
@@ -13,6 +14,12 @@ const GRAIN_URL =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
 
 export function Home() {
+  const [underlineOn, setUnderlineOn] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setUnderlineOn(true), 300)
+    return () => clearTimeout(t)
+  }, [])
+
   useDocumentMeta({
     title: 'Ndubuisi Marvellous — Social & Community Growth for Fintech, Web3 and Tech Brands in Africa',
     description:
@@ -33,9 +40,15 @@ export function Home() {
         <Grid className="relative pt-16 tablet:pt-28 laptop:pt-32">
           <div className="col-span-full flex flex-col gap-8 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse tablet:items-start tablet:justify-between laptop:col-span-12 laptop:col-start-2">
             <div className="tablet:max-w-[62%]">
-              <h1 className="font-modernist text-[9vw] leading-[1.05] font-bold tracking-tight text-ink tablet:text-right tablet:text-[5.8vw] laptop:text-[clamp(2.75rem,4.3vw,3.9rem)]">
-                Building Social And Community-Led Growth Engines For Brands Entering And Scaling
-                Across Africa.
+              <h1 className="font-modernist text-[7.5vw] leading-[1.1] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[4.8vw] laptop:text-[clamp(2.25rem,3.6vw,3.25rem)]">
+                Building{' '}
+                <span
+                  className="underline decoration-[3px] underline-offset-[0.2em] transition-colors duration-[1200ms] ease-out"
+                  style={{ textDecorationColor: underlineOn ? 'rgb(220 38 38)' : 'transparent' }}
+                >
+                  Social And Community-Led Growth Engines For Brands Entering
+                </span>{' '}
+                And Scaling Across Africa.
               </h1>
               <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-red-600 tablet:justify-end tablet:text-sm">
                 <span className="text-red-600/50">—</span> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
@@ -68,7 +81,7 @@ export function Home() {
               <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-ink/80 tablet:justify-start tablet:text-sm">
                 <span className="text-ink/40">—</span> HI, I'M
               </p>
-              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-ink tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
+              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-ink/60 tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
                 NDUBUISI
                 <br />
                 MARVELLOUS
@@ -146,30 +159,36 @@ export function Home() {
             top/bottom rows) and extend past the logo row's own top/bottom
             edges. The new horizontal lines are scoped to the logo row's
             cells only, so they stop at the row's edges instead of running
-            all the way down to where the verticals end. */}
-        <div className="grid w-full grid-cols-5 divide-x divide-ink/10">
-          {logos.map((_, i) => (
-            <div key={`top-${i}`} className="hidden h-12 tablet:block laptop:h-16" />
-          ))}
-          {logos.map((logo) => (
-            <div
-              key={logo.src}
-              className="flex h-24 items-center justify-center border-y border-ink/10 p-2 transition-colors hover:bg-ink/5 tablet:h-28 laptop:h-36"
-            >
-              <img
-                src={logo.src}
-                alt={logo.name}
-                className={`object-contain ${
-                  logo.name === 'Binance' || logo.name === 'Hyperbridge'
-                    ? 'h-16 w-28 tablet:h-20 tablet:w-36 laptop:h-28 laptop:w-48'
-                    : 'h-9 w-20 tablet:h-11 tablet:w-28 laptop:h-14 laptop:w-32'
-                }`}
-              />
-            </div>
-          ))}
-          {logos.map((_, i) => (
-            <div key={`bottom-${i}`} className="hidden h-12 tablet:block laptop:h-16" />
-          ))}
+            all the way down to where the verticals end.
+
+            Sizing is identical at every breakpoint (no mobile-only shrink),
+            so mobile matches desktop exactly; below the tablet breakpoint
+            the row scrolls horizontally instead of squeezing the logos. */}
+        <div className="w-full overflow-x-auto tablet:overflow-visible">
+          <div className="grid w-full min-w-[47rem] grid-cols-5 divide-x divide-ink/10 tablet:min-w-0">
+            {logos.map((_, i) => (
+              <div key={`top-${i}`} className="h-12 laptop:h-16" />
+            ))}
+            {logos.map((logo) => (
+              <div
+                key={logo.src}
+                className="flex h-28 items-center justify-center border-y border-ink/10 p-2 transition-colors hover:bg-ink/5 laptop:h-36"
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  className={`object-contain ${
+                    logo.name === 'Binance' || logo.name === 'Hyperbridge'
+                      ? 'h-20 w-36 laptop:h-28 laptop:w-48'
+                      : 'h-11 w-28 laptop:h-14 laptop:w-32'
+                  }`}
+                />
+              </div>
+            ))}
+            {logos.map((_, i) => (
+              <div key={`bottom-${i}`} className="h-12 laptop:h-16" />
+            ))}
+          </div>
         </div>
       </section>
 

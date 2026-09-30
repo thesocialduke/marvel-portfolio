@@ -63,7 +63,7 @@ export function BitgetCaseStudy() {
               <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
               <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Case study · Bitget Africa</p>
             </div>
-            <h1 className="custom-h1 relative max-w-4xl text-balance">Growing Bitget’s community across Africa</h1>
+            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">Growing Bitget’s community across Africa</h1>
             <p className="custom-p mt-6 max-w-2xl text-ink/70">{bitgetCaseStudy.summary}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:grid-cols-3">
@@ -117,7 +117,7 @@ export function BitgetCaseStudy() {
         <Grid className="items-start gap-y-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">01. Featured story</p>
-            <h2 className="custom-h2 mt-4 text-balance">When OKX left Nigeria, Bitget took the top spot</h2>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">When OKX left Nigeria, Bitget took the top spot</h2>
             <div className="mt-8 space-y-6">
               <div>
                 <p className="custom-h4 custom-h4-bold tracking-[0.06em] uppercase">The moment</p>
@@ -159,7 +159,7 @@ export function BitgetCaseStudy() {
         <Grid className="items-end gap-y-6 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. Campaigns</p>
-            <h2 className="custom-h2 mt-4 text-balance">Listings and challenges built to spread</h2>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Listings and challenges built to spread</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10">
             <p className="custom-p text-ink/60">
@@ -206,7 +206,7 @@ export function BitgetCaseStudy() {
         <Grid className="gap-y-8 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">03. Community &amp; education</p>
-            <h2 className="custom-h2 mt-4 max-w-3xl text-balance">
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 max-w-3xl text-balance">
               The fastest-growing Telegram community at Bitget Africa
             </h2>
           </div>
@@ -239,7 +239,7 @@ export function BitgetCaseStudy() {
         <Grid className="items-end gap-y-6 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Offline activations</p>
-            <h2 className="custom-h2 mt-4 text-balance">Taking Bitget to the street</h2>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Taking Bitget to the street</h2>
           </div>
           <div className="col-span-full flex flex-wrap gap-8 tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
             {offlineStats.map((stat, i) => (

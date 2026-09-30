@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -24,8 +25,10 @@
   --breakpoint-tablet: 40rem;
   --breakpoint-laptop: 64rem;
 
-  --font-modernist: 'SK Modernist', sans-serif;
-  --font-poppins: 'Poppins', sans-serif;
+  /* TEST: swapped for Space Grotesk (headline) / Geist Sans (body) — revert
+     these two lines to 'SK Modernist' / 'Poppins' to go back. */
+  --font-modernist: 'Space Grotesk', sans-serif;
+  --font-poppins: 'Geist Variable', sans-serif;
 
   --color-page: rgb(231 230 226);
   --color-ink: rgb(0 0 0);
@@ -144,6 +147,7 @@
 
 .custom-h1-bold {
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 @media (max-width: 39.99rem) {
@@ -162,6 +166,11 @@
 
 .custom-h2-bold {
   font-weight: 700;
+  text-transform: uppercase;
+}
+
+.custom-h2-lg {
+  font-size: calc(var(--h2-size) * 1.2);
 }
 
 .custom-h3 {
@@ -174,6 +183,7 @@
 
 .custom-h3-bold {
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 .custom-h4 {
@@ -186,6 +196,7 @@
 
 .custom-h4-bold {
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 /* Fixed light color for captions overlaid on a photo (behind a dark gradient) —
@@ -251,6 +262,38 @@
   font-family: var(--font-poppins);
   font-weight: 700;
   line-height: 1.25;
+}
+
+/* Red hover reveal: the new color rises from the bottom edge upward
+   instead of swapping instantly, by sliding a two-tone gradient that's
+   twice the element's height. */
+.tone-red-fill {
+  background-image: linear-gradient(to bottom, transparent 50%, rgb(220 38 38) 50%);
+  background-size: 100% 200%;
+  background-position: 0% 0%;
+  transition:
+    background-position 0.35s ease,
+    color 0.35s ease;
+}
+
+.tone-red-fill:hover {
+  background-position: 0% 100%;
+}
+
+.hover-red-text {
+  background-image: linear-gradient(to bottom, currentColor 50%, rgb(220 38 38) 50%);
+  background-size: 100% 200%;
+  background-position: 0% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition:
+    background-position 0.35s ease,
+    transform 0.2s ease;
+}
+
+.group:hover .hover-red-text {
+  background-position: 0% 100%;
 }
 
 .space-y-text-block > * + * {
