@@ -31,7 +31,7 @@ export function Accordion({
               <path d="M12 5v14M5 12h14" />
             </svg>
           </summary>
-          <p className="custom-p relative mt-4 min-h-[1.5rem]">{item.a}</p>
+          <p className="custom-p relative mt-4 min-h-[1.5rem] text-ink/60">{item.a}</p>
         </details>
       ))}
     </div>

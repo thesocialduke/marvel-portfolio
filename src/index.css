@@ -280,8 +280,12 @@
   background-position: 0% 100%;
 }
 
+/* `currentColor` can't be used for the first stop here: this rule also
+   sets `color: transparent` on the same element, and currentColor
+   resolves against that element's own final color (transparent), not
+   the inherited one — so the "default" state color is hardcoded instead. */
 .hover-red-text {
-  background-image: linear-gradient(to bottom, currentColor 50%, rgb(220 38 38) 50%);
+  background-image: linear-gradient(to bottom, var(--color-page) 50%, rgb(220 38 38) 50%);
   background-size: 100% 200%;
   background-position: 0% 0%;
   -webkit-background-clip: text;

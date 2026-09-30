@@ -92,22 +92,27 @@ export const services = [
   {
     title: 'Social Media Strategy & Growth',
     body: 'For brands that want to grow a real audience on social media. I plan and run your presence across X, Telegram, Instagram, TikTok, Discord and Meta, with localized campaigns that speak to each audience and move the numbers that matter.',
+    shortBody: 'Localized campaigns across X, Telegram, Instagram, TikTok, Discord and Meta',
   },
   {
     title: 'B2B/B2C Community Building & Management',
     body: 'A community needs someone showing up every day. I handle your channel growth, programs, and operations, keep conversations active, and host AMAs, Spaces, and lives that turn followers into advocates.',
+    shortBody: 'Channel growth, community programs, AMAs, Spaces and lives',
   },
   {
     title: 'Content Creation',
     body: 'Need content that feels native to each platform? I create short & long form videos, from UGC-style ads to polished brand promos, educational pieces and brand stories that make complex products easy to understand and fun to watch.',
+    shortBody: 'UGC-style ads, brand promos and educational videos, short and long form',
   },
   {
     title: 'B2B/B2C Creator, KOL & Ambassador Partnerships',
     body: 'I find the right creators for your brand, train them, and manage them from brief to delivery. The result is consistent, on-message content from voices your audience already trusts.',
+    shortBody: 'Creator sourcing, training and management from brief to delivery',
   },
   {
     title: 'Event Planning & Experiential Marketing',
     body: 'From meetups to activations, I plan and run events that bring your brand offline. Each one is built to connect with your community in person, create moments people want to share, and gather feedback.',
+    shortBody: 'Meetups, activations and in-person community events',
   },
 ]
 

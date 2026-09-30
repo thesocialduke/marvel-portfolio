@@ -46,9 +46,9 @@ export function Home() {
                   className="underline decoration-[3px] underline-offset-[0.2em] transition-colors duration-[1200ms] ease-out"
                   style={{ textDecorationColor: underlineOn ? 'rgb(220 38 38)' : 'transparent' }}
                 >
-                  Social And Community-Led Growth Engines For Brands Entering
+                  Social And Community-Led Growth Engines
                 </span>{' '}
-                And Scaling Across Africa.
+                For Brands Entering And Scaling Across Africa.
               </h1>
               <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-red-600 tablet:justify-end tablet:text-sm">
                 <span className="text-red-600/50">—</span> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
@@ -203,7 +203,7 @@ export function Home() {
         </Grid>
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <Accordion items={services.map((service) => ({ q: service.title, a: service.body }))} />
+            <Accordion items={services.map((service) => ({ q: service.title, a: service.shortBody }))} />
           </div>
         </Grid>
         <Grid className="mt-8 tablet:hidden">
@@ -230,7 +230,7 @@ export function Home() {
                   className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
-                <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute inset-x-0 bottom-0 p-6 tablet:p-8">
+                <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute bottom-6 left-6 inline-block bg-red-600 px-3 py-2 tablet:bottom-8 tablet:left-8">
                   {clients[0].shortName}
                   <span style={{ color: 'rgba(255,255,255,0.7)' }}>, {clients[0].category}</span>
                 </h3>
@@ -249,7 +249,7 @@ export function Home() {
                       className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
-                    <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute inset-x-0 bottom-0 p-6 tablet:p-8">
+                    <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute bottom-6 left-6 inline-block bg-red-600 px-3 py-2 tablet:bottom-8 tablet:left-8">
                       {client.shortName}
                       <span style={{ color: 'rgba(255,255,255,0.7)' }}>, {client.category}</span>
                     </h3>

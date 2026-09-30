@@ -23,7 +23,7 @@ function EmailAction() {
         external
         tone="red"
         fullWidth={false}
-        className="min-w-0 flex-1 shrink px-4 break-all tablet:flex-none tablet:px-8"
+        className="min-w-0 flex-1 shrink px-3 text-[0.65rem] tracking-tight whitespace-nowrap tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
       >
         {site.email}
       </ButtonLink>
@@ -85,7 +85,7 @@ export function Footer() {
             keeps it clear of whatever section (e.g. the testimonial)
             precedes the footer; the Grid below then only needs a small
             top padding so the heading sits close under the line. */}
-        <div className="mt-16 h-px w-full bg-ink/15 tablet:mt-20 laptop:mt-24" />
+        <div className="mt-12 h-px w-full bg-ink/15 tablet:mt-14 laptop:mt-18" />
 
         <Grid className="gap-y-10 pt-6 pb-10 tablet:pt-8 tablet:pb-14 laptop:pt-10 laptop:pb-18">
           <div className="col-span-full flex flex-col gap-6 tablet:col-span-6 tablet:col-start-2 tablet:flex-row tablet:items-end tablet:justify-between laptop:col-span-12 laptop:col-start-2">
