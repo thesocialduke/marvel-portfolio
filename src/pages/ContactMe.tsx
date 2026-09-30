@@ -1,4 +1,5 @@
 import { ButtonLink } from '../components/Button'
+import { FramerCarouselThumbnails } from '../components/ui/framer-thumbnails'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
@@ -11,8 +12,8 @@ export function ContactMe() {
   })
 
   return (
-    <Layout>
-      <section className="flex min-h-[70svh] items-center pt-18 tablet:pt-[5rem] laptop:pt-0">
+    <Layout hideFooter>
+      <section className="flex min-h-[60svh] items-center pt-18 tablet:pt-[5rem] laptop:pt-0">
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Contact</p>
@@ -45,6 +46,14 @@ export function ContactMe() {
                 Instagram
               </a>
             </div>
+          </div>
+        </Grid>
+      </section>
+
+      <section className="pb-18 tablet:pb-24 laptop:pb-32">
+        <Grid>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+            <FramerCarouselThumbnails />
           </div>
         </Grid>
       </section>

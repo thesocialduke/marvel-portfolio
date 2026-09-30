@@ -10,7 +10,7 @@ export function Accordion({
   items: AccordionItem[]
   size?: 'default' | 'lg'
 }) {
-  const questionClass = size === 'lg' ? 'custom-h2 custom-h2-sm' : 'custom-h3'
+  const questionClass = size === 'lg' ? 'custom-h2 custom-h2-sm' : 'custom-h3 custom-h3-medium'
 
   return (
     <div className="divide-y divide-hyacinth/15">

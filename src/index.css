@@ -186,6 +186,12 @@
   text-transform: uppercase;
 }
 
+/* A lighter step than .custom-h3-bold — enough to read as emphasis
+   without shouting uppercase at full weight. */
+.custom-h3-medium {
+  font-weight: 500;
+}
+
 .custom-h4 {
   font-family: var(--font-modernist);
   font-size: var(--project-title-size);
@@ -346,6 +352,15 @@
 
 .space-y-text-block > * + * {
   margin-top: 1rem;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 input[type='range'].scrubber {

@@ -4,6 +4,7 @@ import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
+import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, bitgetCaseStudy, type CaseStudyData } from '../data/site'
 
@@ -36,12 +37,37 @@ function ProofGrid({ photos }: { photos: { image: string; caption?: string }[] }
   )
 }
 
-export function CaseStudy({ data }: { data: CaseStudyData }) {
+// Meta descriptions should stay under ~160 characters; the on-page summary
+// is written for reading, not for a search snippet, so it's trimmed at a
+// word boundary rather than reused verbatim.
+function truncate(text: string, max: number): string {
+  if (text.length <= max) return text
+  const cut = text.slice(0, max - 1)
+  return `${cut.slice(0, cut.lastIndexOf(' '))}…`
+}
+
+export function CaseStudy({
+  data,
+  image,
+  clientName,
+}: {
+  data: CaseStudyData
+  image?: string
+  clientName?: string
+}) {
   let section = 2
 
   useDocumentMeta({
     title: `${data.title} — Case Study | Ndubuisi Marvellous`,
+    description: truncate(data.summary, 155),
+    image,
+  })
+  useCaseStudyJsonLd({
+    path: data.href,
+    title: data.title,
     description: data.summary,
+    image: image ?? '/avatar.jpg',
+    clientName: clientName ?? data.title,
   })
 
   return (

@@ -4,6 +4,7 @@ import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
 import { ZoomParallax } from '../components/ui/zoom-parallax'
+import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
@@ -63,7 +64,16 @@ const offlineStats = [
 export function BitgetCaseStudy() {
   useDocumentMeta({
     title: 'Growing Bitget’s Community Across Africa — Case Study | Ndubuisi Marvellous',
+    description:
+      'How I led social media and community for Bitget across Africa, driving 30M+ impressions and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
+    image: '/case-studies/bitget.jpg',
+  })
+  useCaseStudyJsonLd({
+    path: '/bitget',
+    title: 'Growing Bitget’s community across Africa',
     description: bitgetCaseStudy.summary,
+    image: '/case-studies/bitget.jpg',
+    clientName: 'Bitget',
   })
 
   return (

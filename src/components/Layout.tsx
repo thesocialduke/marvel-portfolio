@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children, hideFooter = false }: { children: ReactNode; hideFooter?: boolean }) {
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <div className="section-wrapper flex flex-1 flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>
-        <Footer />
+        {!hideFooter && <Footer />}
       </div>
     </div>
   )

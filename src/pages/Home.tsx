@@ -23,7 +23,7 @@ export function Home() {
   useDocumentMeta({
     title: 'Ndubuisi Marvellous — Social & Community Growth for Fintech, Web3 and Tech Brands in Africa',
     description:
-      'Ndubuisi Marvellous drives social media strategy, growth, and community for fintech, Web3, and tech brands entering or scaling across Africa. Case studies from Bitget, Binance, and Base.',
+      'Social media strategy, growth, and community for fintech, Web3, and tech brands entering or scaling across Africa. Case studies from Bitget, Binance, and Base.',
   })
 
   return (
@@ -165,7 +165,7 @@ export function Home() {
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-7 laptop:col-start-7">
             <StaggeredReveal
               lines={[
-                <p key="lead" className="custom-h2 custom-h2-bold relative text-left text-balance uppercase">
+                <p key="lead" className="custom-h2 custom-h2-bold relative text-justify text-balance uppercase">
                   I drive growth and acquisition for brands entering or scaling across Africa, turning strategy
                   into audience growth, engagement, and measurable results.
                 </p>,
@@ -191,7 +191,7 @@ export function Home() {
                 </p>,
               ]}
             />
-            <div className="mt-12 grid grid-cols-2 items-start justify-items-center gap-x-2 gap-y-8 text-center tablet:mt-16 tablet:grid-cols-4 tablet:gap-6">
+            <div className="mt-12 grid grid-cols-2 items-start justify-items-start gap-x-2 gap-y-8 text-left tablet:mt-16 tablet:grid-cols-4 tablet:gap-6">
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <h2

@@ -59,7 +59,7 @@ export const clients = [
 ]
 
 export const stats = [
-  { value: '+5', label: 'years experience' },
+  { value: '5+', label: 'years experience' },
   { value: '40M+', label: 'Cumulative views' },
   { value: '150K+', label: 'Followers' },
   { value: '20K', label: 'Users from ambassador program' },

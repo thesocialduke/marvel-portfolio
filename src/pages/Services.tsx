@@ -56,7 +56,7 @@ export function Services() {
       <section>
         <Grid className="pt-12 tablet:pt-18 laptop:pt-24">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <h2 className="custom-h2 relative text-balance">FAQs</h2>
+            <h2 className="custom-h2 custom-h2-bold relative text-balance">FAQs</h2>
           </div>
         </Grid>
         <Grid className="min-h-[248px] pt-4 pb-12 tablet:pb-14 laptop:pb-18">
@@ -67,10 +67,10 @@ export function Services() {
       </section>
 
       <section>
-        <Grid className="py-12">
+        <Grid className="pb-12 tablet:pb-14 laptop:pb-18">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2">
             <div className="self-start">
-              <ButtonLink to="#contact">Get in touch today →</ButtonLink>
+              <ButtonLink to="/contact">Get in touch today →</ButtonLink>
             </div>
           </div>
         </Grid>

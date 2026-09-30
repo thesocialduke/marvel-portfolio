@@ -16,7 +16,10 @@ export default function App() {
       <Route path="/contact" element={<ContactMe />} />
       <Route path="/bitget" element={<BitgetCaseStudy />} />
       <Route path="/base-southern-africa" element={<BaseCaseStudy />} />
-      <Route path="/binance-street-interviews" element={<CaseStudy data={binanceCaseStudy} />} />
+      <Route
+        path="/binance-street-interviews"
+        element={<CaseStudy data={binanceCaseStudy} image="/case-studies/binance.jpg" clientName="Binance" />}
+      />
       <Route path="/testimonials-component-26" element={<TestimonialsComponent26Page />} />
     </Routes>
   )

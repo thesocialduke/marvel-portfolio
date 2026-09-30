@@ -3,6 +3,7 @@ import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
+import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
@@ -27,7 +28,16 @@ const beforeAfterPairs = [
 export function BaseCaseStudy() {
   useDocumentMeta({
     title: 'Giving Base’s Creator Network a Clear Creative Voice — Case Study | Ndubuisi Marvellous',
+    description:
+      'How I coached Base’s Southern Africa ambassador network into a consistent source of sharper, on-brand video content, including AI-directed campaign films.',
+    image: '/case-studies/base.jpg',
+  })
+  useCaseStudyJsonLd({
+    path: '/base-southern-africa',
+    title: 'Giving Base’s creator network a clear creative voice',
     description: baseCaseStudy.summary,
+    image: '/case-studies/base.jpg',
+    clientName: 'Coinbase (Base)',
   })
 
   return (
