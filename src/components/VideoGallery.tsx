@@ -9,6 +9,7 @@ export function VideoGallery({
   rounded,
   showDescriptions = false,
   muted,
+  titleBold = false,
 }: {
   title?: string
   videos: VideoItem[]
@@ -16,6 +17,7 @@ export function VideoGallery({
   rounded: number
   showDescriptions?: boolean
   muted?: boolean
+  titleBold?: boolean
 }) {
   const cell =
     orientation === 'portrait'
@@ -45,7 +47,7 @@ export function VideoGallery({
               {video.title ? (
                 <div className="space-y-2">
                   <div className="space-y-text-block text-left">
-                    <h4 className="custom-h4">{video.title}</h4>
+                    <h4 className={`custom-h4 ${titleBold ? 'custom-h4-bold-mixed-case' : ''}`}>{video.title}</h4>
                     {showDescriptions && video.description ? (
                       <p className="custom-p relative min-h-[1.5rem]">{video.description}</p>
                     ) : null}

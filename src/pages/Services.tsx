@@ -8,9 +8,9 @@ import { faqs, services } from '../data/site'
 
 export function Services() {
   useDocumentMeta({
-    title: 'Services — Ndubuisi Marvellous',
+    title: 'Social Media Manager & Community Manager Services — Ndubuisi Marvellous',
     description:
-      'Social media strategy, community building, content creation, creator/KOL partnerships, and event planning for brands entering or scaling across Africa.',
+      'Hire a Web3 and fintech social media manager and community manager: strategy, community building, content creation, creator/KOL partnerships, and event planning.',
   })
 
   useJsonLd('faq-jsonld', {

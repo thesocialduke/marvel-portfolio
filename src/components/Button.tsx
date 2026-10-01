@@ -62,8 +62,11 @@ export function ButtonLink({
   }
 
   if (external) {
+    // mailto:/tel: links hand off to another app, not a browser tab — no
+    // reason to open (and briefly flash) a blank new tab for those.
+    const opensNewTab = !to.startsWith('mailto:') && !to.startsWith('tel:')
     return (
-      <a href={to} target="_blank" rel="noreferrer" className={classes}>
+      <a href={to} {...(opensNewTab && { target: '_blank', rel: 'noreferrer' })} className={classes}>
         {children}
       </a>
     )

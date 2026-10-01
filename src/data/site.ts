@@ -9,13 +9,14 @@ export const site = {
   email: 'marvellousndubuisi98@gmail.com',
   linkedin: 'https://www.linkedin.com/in/thesocialduke',
   instagram: 'https://instagram.com/thesocialduke',
+  telegram: 'https://t.me/thesocialduke',
   bookingUrl: 'https://calendar.app.google/kLHEDtD3JrEdKgGd8',
   copyright: '© Ndubuisi Marvellous, 2026',
 }
 
 export const nav = [
   { label: 'Home', href: '/' },
-  { label: 'Case Study', href: '/#case-studies' },
+  { label: 'Proof of Work', href: '/#proof-of-work' },
   { label: 'Services', href: '/services' },
   { label: 'Contact me', href: '/contact' },
 ] as const

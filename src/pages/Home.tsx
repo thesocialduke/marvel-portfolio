@@ -21,9 +21,9 @@ export function Home() {
   }, [])
 
   useDocumentMeta({
-    title: 'Ndubuisi Marvellous — Social & Community Growth for Fintech, Web3 and Tech Brands in Africa',
+    title: 'Ndubuisi Marvellous — Web3 & Fintech Social Media Manager and Community Manager',
     description:
-      'Social media strategy, growth, and community for fintech, Web3, and tech brands entering or scaling across Africa. Case studies from Bitget, Binance, and Base.',
+      'Web3, crypto, and fintech social media manager and community manager based in Africa. I drive growth, strategy, and community for brands like Bitget, Binance, and Coinbase (Base).',
   })
 
   return (
@@ -231,10 +231,10 @@ export function Home() {
         </Grid>
       </section>
 
-      <section id="case-studies" className="scroll-mt-20 py-12 tablet:scroll-mt-24 tablet:py-14 laptop:py-18">
+      <section id="proof-of-work" className="scroll-mt-20 py-12 tablet:scroll-mt-24 tablet:py-14 laptop:py-18">
         <Grid>
           <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <h2 className="custom-h1 custom-h1-bold text-left uppercase">Selected Case Studies</h2>
+            <h2 className="custom-h1 custom-h1-bold text-left uppercase">Proof of Work</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-col gap-4 tablet:gap-6">

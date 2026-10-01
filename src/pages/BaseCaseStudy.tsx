@@ -174,7 +174,7 @@ export function BaseCaseStudy() {
             </p>
           </div>
         </Grid>
-        <VideoGallery videos={baseCaseStudy.videos!} orientation="landscape" rounded={0} showDescriptions />
+        <VideoGallery videos={baseCaseStudy.videos!} orientation="landscape" rounded={0} showDescriptions titleBold />
       </section>
 
       {/* OUTCOME */}

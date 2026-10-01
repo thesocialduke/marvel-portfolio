@@ -45,6 +45,14 @@ export function ContactMe() {
               >
                 Instagram
               </a>
+              <a
+                href={site.telegram}
+                target="_blank"
+                rel="noreferrer"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+              >
+                Telegram
+              </a>
             </div>
           </div>
         </Grid>

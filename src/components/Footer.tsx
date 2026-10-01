@@ -118,6 +118,14 @@ export function Footer() {
               >
                 Instagram
               </a>
+              <a
+                href={site.telegram}
+                target="_blank"
+                rel="noreferrer"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+              >
+                Telegram
+              </a>
             </div>
             <p className="custom-p custom-p-sm text-ink/60">{site.copyright}</p>
           </div>

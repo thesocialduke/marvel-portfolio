@@ -205,6 +205,12 @@
   text-transform: uppercase;
 }
 
+/* Bold without the forced uppercase — for titles that need to keep their
+   original casing/punctuation (e.g. quoted campaign names). */
+.custom-h4-bold-mixed-case {
+  font-weight: 700;
+}
+
 /* Fixed light color for captions overlaid on a photo (behind a dark gradient) —
    deliberately NOT theme-aware, since it must stay light regardless of
    light/dark site mode. */

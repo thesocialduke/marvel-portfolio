@@ -24,7 +24,7 @@ export function VideoPlayer({
     const video = videoRef.current
     if (!video) return
     if (video.paused) {
-      void video.play()
+      video.play().catch(() => setPlaying(false))
       setPlaying(true)
     } else {
       video.pause()
