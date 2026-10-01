@@ -5,10 +5,10 @@ import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { StaggeredReveal } from '../components/StaggeredReveal'
 import { StatCounter } from '../components/StatCounter'
-import { TestimonialsSection } from '../components/ui/testimonials-2'
+import TestimonialCarousel from '../components/TestimonialCarousel'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { Link } from 'react-router-dom'
-import { avatar, bitgetCaseStudy, clients, logos, services, stats } from '../data/site'
+import { avatar, clients, homeTestimonials, logos, services, stats } from '../data/site'
 
 const GRAIN_URL =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
@@ -279,23 +279,11 @@ export function Home() {
         </Grid>
       </section>
 
-      {bitgetCaseStudy.testimonial && (
+      {homeTestimonials.length > 0 && (
         <section className="py-12 tablet:py-14 laptop:py-18">
           <Grid>
             <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-4">
-              <TestimonialsSection
-                quote={
-                  <>
-                    <b className="font-bold">Marvellous</b>
-                    {bitgetCaseStudy.testimonial.quote.slice('Marvellous'.length)}
-                  </>
-                }
-                name={bitgetCaseStudy.testimonial.name}
-                role={bitgetCaseStudy.testimonial.role}
-                avatarSrc="/testimonials/aka-leung.jpg?v=2"
-                avatarAlt={bitgetCaseStudy.testimonial.name}
-                avatarFallback={bitgetCaseStudy.testimonial.name.charAt(0)}
-              />
+              <TestimonialCarousel items={homeTestimonials} />
             </div>
           </Grid>
         </section>

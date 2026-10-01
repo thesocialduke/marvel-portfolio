@@ -150,7 +150,7 @@ export const avatar = '/avatar.jpg'
 
 export type CaseStudyStat = { value: string; label: string }
 export type BeforeAfter = { before: string; after: string }
-export type Testimonial = { quote: string; name: string; role: string }
+export type Testimonial = { quote: string; name: string; role: string; avatar?: string }
 export type GalleryPhoto = { image: string; caption?: string }
 export type ProofSection = { title: string; photos: GalleryPhoto[] }
 
@@ -324,3 +324,16 @@ export const binanceCaseStudy: CaseStudyData = {
   gallery: [{ image: '/case-studies/binance-street-interviews.jpg', caption: 'Viral street interview series' }],
   closing: ['Made crypto feel like a conversation you’d overhear on your own street, not a pitch aimed at you.'],
 }
+
+// Reviews shown in the carousel at the bottom of the home page.
+// To add one, append an object here: { quote, name, role, avatar? } (avatar is a path under /public).
+export const homeTestimonials: Testimonial[] = [
+  { ...bitgetCaseStudy.testimonial!, avatar: '/testimonials/aka-leung.jpg?v=2' },
+  {
+    quote:
+      'Marvellous\u2019s ability to craft compelling content that resonates with our target audience consistently led to increased engagement and brand visibility. Not only did he excel in content creation, but also displayed a keen understanding of analytics, leveraging data insights to refine our social media strategies.',
+    name: 'Olumide Olatunji',
+    role: 'Growth Marketer, Busha',
+    avatar: '/testimonials/olumide-olatunji.jpg',
+  },
+]
