@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
 import { ButtonLink } from './Button'
 import { site } from '../data/site'
@@ -23,7 +24,7 @@ function EmailAction() {
         external
         tone="red"
         fullWidth={false}
-        className="min-w-0 flex-1 shrink px-3 text-[0.65rem] tracking-tight whitespace-nowrap tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
+        className="min-w-0 flex-1 shrink px-3 text-[3.1vw] tracking-tight whitespace-nowrap tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
       >
         {site.email}
       </ButtonLink>
@@ -77,6 +78,8 @@ function BackToTop() {
 }
 
 export function Footer() {
+  const { pathname } = useLocation()
+
   return (
     <>
       <footer id="contact" className="scroll-mt-20 bg-page text-ink tablet:scroll-mt-24">
@@ -102,6 +105,16 @@ export function Footer() {
 
           <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-wrap items-center gap-6">
+              <Link
+                to="/"
+                onClick={() => {
+                  // Already on the home page: the route doesn't change, so scroll up manually.
+                  if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+              >
+                Home
+              </Link>
               <a
                 href={site.linkedin}
                 target="_blank"

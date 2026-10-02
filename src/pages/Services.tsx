@@ -8,7 +8,7 @@ import { faqs, services } from '../data/site'
 
 export function Services() {
   useDocumentMeta({
-    title: 'Social Media Manager & Community Manager Services — Ndubuisi Marvellous',
+    title: 'Social Media Manager & Community Manager Services | Ndubuisi Marvellous',
     description:
       'Hire a Web3 and fintech social media manager and community manager: strategy, community building, content creation, creator/KOL partnerships, and event planning.',
   })

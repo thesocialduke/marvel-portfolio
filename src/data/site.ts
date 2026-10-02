@@ -11,6 +11,9 @@ export const site = {
   instagram: 'https://instagram.com/thesocialduke',
   telegram: 'https://t.me/thesocialduke',
   bookingUrl: 'https://calendar.app.google/kLHEDtD3JrEdKgGd8',
+  // Same appointment schedule as bookingUrl, in Google's embeddable (?gv=true) form.
+  bookingEmbedUrl:
+    'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ZDplLCYiSzk5bsr2frJL1Re4bY4cemRyhpugy5Ou5h8fN8OeBIbTbiFcGqjLWpv1EjNndHv1p?gv=true',
   copyright: '© Ndubuisi Marvellous, 2026',
 }
 
@@ -62,7 +65,7 @@ export const clients = [
 export const stats = [
   { value: '5+', label: 'years experience' },
   { value: '40M+', label: 'Cumulative views' },
-  { value: '150K+', label: 'Followers' },
+  { value: '150K+', label: 'New followers gained' },
   { value: '20K', label: 'Users from ambassador program' },
 ]
 

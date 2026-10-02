@@ -38,6 +38,7 @@ export function ButtonLink({
   external,
   tone = 'default',
   fullWidth = true,
+  beam = false,
   className = '',
 }: {
   to: string
@@ -45,9 +46,11 @@ export function ButtonLink({
   external?: boolean
   tone?: Tone
   fullWidth?: boolean
+  /** Solid red with a pulsing glow and light sweep, for the main call to action. */
+  beam?: boolean
   className?: string
 }) {
-  const classes = cn(baseClasses, fullWidth ? 'w-full' : 'w-auto', toneClasses[tone], className)
+  const classes = cn(baseClasses, fullWidth ? 'w-full' : 'w-auto', toneClasses[tone], beam && 'btn-beam', className)
 
   // Same-page anchors (e.g. "#contact") scroll to a section that's already
   // rendered in the footer on every route — a plain anchor lets the

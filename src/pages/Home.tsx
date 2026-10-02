@@ -21,7 +21,7 @@ export function Home() {
   }, [])
 
   useDocumentMeta({
-    title: 'Ndubuisi Marvellous — Web3 & Fintech Social Media Manager and Community Manager',
+    title: 'Ndubuisi Marvellous | Web3 & Fintech Social Media Manager and Community Manager',
     description:
       'Web3, crypto, and fintech social media manager and community manager based in Africa. I drive growth, strategy, and community for brands like Bitget, Binance, and Coinbase (Base).',
   })
@@ -51,7 +51,7 @@ export function Home() {
                 For Brands Entering And Scaling Across Africa.
               </h1>
               <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-red-600 tablet:justify-end tablet:text-sm">
-                <span className="text-red-600/50">—</span> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
+                <span aria-hidden="true" className="inline-block h-px w-4 bg-red-600/50" /> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
               </p>
             </div>
 
@@ -136,7 +136,7 @@ export function Home() {
 
             <div className="min-w-0 max-w-[70%] text-right tablet:text-left">
               <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-ink/80 tablet:justify-start tablet:text-sm">
-                <span className="text-ink/40">—</span> HI, I'M
+                <span aria-hidden="true" className="inline-block h-px w-4 bg-ink/40" /> HI, I'M
               </p>
               <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-ink/60 tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
                 NDUBUISI

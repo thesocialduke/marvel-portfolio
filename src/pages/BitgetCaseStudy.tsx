@@ -3,10 +3,10 @@ import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
-import { ZoomParallax } from '../components/ui/zoom-parallax'
+import { FramerCarouselThumbnails } from '../components/ui/framer-thumbnails'
 import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
+import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy, site } from '../data/site'
 
 const RED = 'rgb(220 38 38)'
 
@@ -14,17 +14,11 @@ const [dogsPhoto, piPhoto, bitquestPhoto, stocksPhoto] = bitgetCaseStudy.proofSe
 const [okxNewsPhoto, okxTopAppPhoto] = bitgetCaseStudy.proofSections![1].photos
 const [youtubeLivePhoto, twitterSpacePhoto] = bitgetCaseStudy.proofSections![2].photos
 
-// ZoomParallax's first image (index 0) is the only one with no offset
-// override, so it lands centered in the middle of the collage. The P2P
-// Kenya photo is pinned there; later gallery additions fill the other
-// slots in order instead of displacing it.
-const CENTER_PHOTO_SRC = '/events/p2p-merchant-meetup-kenya.jpg'
-const parallaxGallery = bitgetCaseStudy.gallery!
-const centerPhotoIndex = parallaxGallery.findIndex((photo) => photo.image === CENTER_PHOTO_SRC)
-const parallaxPhotos =
-  centerPhotoIndex >= 0
-    ? [parallaxGallery[centerPhotoIndex], ...parallaxGallery.filter((_, i) => i !== centerPhotoIndex)]
-    : parallaxGallery
+const eventCarouselImages = bitgetCaseStudy.gallery!.map((photo, i) => ({
+  id: i + 1,
+  url: photo.image,
+  title: photo.caption ?? '',
+}))
 
 const campaigns = [
   {
@@ -63,7 +57,7 @@ const offlineStats = [
 
 export function BitgetCaseStudy() {
   useDocumentMeta({
-    title: 'Growing Bitget’s Community Across Africa — Case Study | Ndubuisi Marvellous',
+    title: 'Growing Bitget’s Community Across Africa | Case Study | Ndubuisi Marvellous',
     description:
       'How I led social media and community for Bitget across Africa, driving 30M+ impressions and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/bitget.jpg',
@@ -275,7 +269,13 @@ export function BitgetCaseStudy() {
         </Grid>
       </section>
 
-      <ZoomParallax images={parallaxPhotos.map((photo) => ({ src: photo.image, alt: photo.caption }))} />
+      <section className="case-study-serif pb-12 tablet:pb-14 laptop:pb-18">
+        <Grid>
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+            <FramerCarouselThumbnails images={eventCarouselImages} />
+          </div>
+        </Grid>
+      </section>
 
       <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
         <Grid>
@@ -315,7 +315,12 @@ export function BitgetCaseStudy() {
             </Link>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
-            <ButtonLink to="#contact">Work with me</ButtonLink>
+            <ButtonLink to={site.bookingUrl} external beam>
+              Book a call
+              <svg aria-hidden="true" className="size-[1.1em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="square" strokeLinejoin="miter">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
+            </ButtonLink>
           </div>
         </Grid>
       </section>

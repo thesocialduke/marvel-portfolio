@@ -6,7 +6,7 @@ import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
 import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { baseCaseStudy, bitgetCaseStudy, type CaseStudyData } from '../data/site'
+import { baseCaseStudy, bitgetCaseStudy, site, type CaseStudyData } from '../data/site'
 
 // Supports a light `**bold**` markup inside plain-text data strings.
 function withBold(text: string): ReactNode {
@@ -58,7 +58,7 @@ export function CaseStudy({
   let section = 2
 
   useDocumentMeta({
-    title: `${data.title} — Case Study | Ndubuisi Marvellous`,
+    title: `${data.title} | Case Study | Ndubuisi Marvellous`,
     description: truncate(data.summary, 155),
     image,
   })
@@ -316,7 +316,12 @@ export function CaseStudy({
             </Link>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
-            <ButtonLink to="#contact">Work with me</ButtonLink>
+            <ButtonLink to={site.bookingUrl} external beam>
+              Book a call
+              <svg aria-hidden="true" className="size-[1.1em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="square" strokeLinejoin="miter">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
+            </ButtonLink>
           </div>
         </Grid>
       </section>

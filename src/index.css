@@ -292,6 +292,56 @@
   background-position: 0% 100%;
 }
 
+/* Attention-grabbing CTA: solid red, a soft glow that pulses, and a light
+   streak that sweeps across. The glow uses filter (not box-shadow) so it
+   doesn't fight the button's inset ring. Motion is off for reduced-motion. */
+.btn-beam {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(220 38 38);
+  color: var(--color-page);
+  --tw-ring-color: rgb(220 38 38);
+  animation: btn-beam-glow 2s ease-in-out infinite;
+}
+
+.btn-beam::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40%;
+  background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.45), transparent);
+  transform: translateX(-150%) skewX(-20deg);
+  animation: btn-beam-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes btn-beam-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgb(220 38 38 / 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgb(220 38 38 / 0.65));
+  }
+}
+
+@keyframes btn-beam-sweep {
+  0%,
+  35% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(400%) skewX(-20deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-beam,
+  .btn-beam::after {
+    animation: none;
+  }
+}
+
 /* `currentColor` can't be used for the first stop here: this rule also
    sets `color: transparent` on the same element, and currentColor
    resolves against that element's own final color (transparent), not
