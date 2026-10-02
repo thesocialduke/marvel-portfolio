@@ -29,7 +29,8 @@ export function TestimonialsSection({
 
         <Avatar className="mask-[radial-gradient(circle,black_60%,transparent)] size-24 rounded-none *:rounded-none md:size-32">
           {avatarSrc && <AvatarImage alt={avatarAlt} src={avatarSrc} />}
-          <AvatarFallback>{avatarFallback}</AvatarFallback>
+          {/* Delay so the initial doesn't flash while a slow connection loads the photo */}
+          <AvatarFallback delayMs={4000}>{avatarFallback}</AvatarFallback>
         </Avatar>
       </div>
       <figcaption className="flex flex-col justify-center space-y-4 p-8 text-center md:p-6 md:text-left">

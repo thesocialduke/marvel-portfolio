@@ -334,6 +334,6 @@ export const homeTestimonials: Testimonial[] = [
       'Marvellous\u2019s ability to craft compelling content that resonates with our target audience consistently led to increased engagement and brand visibility. Not only did he excel in content creation, but also displayed a keen understanding of analytics, leveraging data insights to refine our social media strategies.',
     name: 'Olumide Olatunji',
     role: 'Growth Marketer, Busha',
-    avatar: '/testimonials/olumide-olatunji.jpg',
+    avatar: '/testimonials/olumide-olatunji.jpg?v=2',
   },
 ]
