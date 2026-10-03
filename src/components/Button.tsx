@@ -39,6 +39,7 @@ export function ButtonLink({
   tone = 'default',
   fullWidth = true,
   beam = false,
+  download = false,
   className = '',
 }: {
   to: string
@@ -48,6 +49,8 @@ export function ButtonLink({
   fullWidth?: boolean
   /** Solid red with a pulsing glow and light sweep, for the main call to action. */
   beam?: boolean
+  /** For links that answer with a file: plain link, no new tab, so the page stays put while the browser downloads. */
+  download?: boolean
   className?: string
 }) {
   const classes = cn(baseClasses, fullWidth ? 'w-full' : 'w-auto', toneClasses[tone], beam && 'btn-beam', className)
@@ -59,6 +62,14 @@ export function ButtonLink({
   if (to.startsWith('#')) {
     return (
       <a href={to} className={classes}>
+        {children}
+      </a>
+    )
+  }
+
+  if (download) {
+    return (
+      <a href={to} download className={classes}>
         {children}
       </a>
     )

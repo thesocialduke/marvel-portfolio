@@ -17,16 +17,16 @@ export function ContactMe() {
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Contact</p>
             <h1 className="custom-h1 custom-h1-bold mt-4 text-balance uppercase">Let’s work together</h1>
-            <p className="custom-p mt-4 max-w-lg text-ink/70">
-              Have a brand to grow, a team to join, or a project in mind? Tell me what you're working on and I'll get back to you.
-            </p>
-            <p className="custom-p mt-4 max-w-lg text-ink/70">
+            <p className="custom-p mt-4 text-ink/70 tablet:whitespace-nowrap">
               Open to full-time and contract roles, and ready to relocate for the right opportunity.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <ButtonLink to={`mailto:${site.email}`} external tone="red" fullWidth={false}>
                 {site.email}
+              </ButtonLink>
+              <ButtonLink to={site.cvUrl} download fullWidth={false}>
+                Download CV ↓
               </ButtonLink>
             </div>
 

@@ -27,14 +27,14 @@ const beforeAfterPairs = [
 
 export function BaseCaseStudy() {
   useDocumentMeta({
-    title: 'Giving Base’s Creator Network a Clear Creative Voice | Case Study | Ndubuisi Marvellous',
+    title: 'Giving Southern Africa’s Creator Network a Clear Creative Voice and Structure | Case Study | Ndubuisi Marvellous',
     description:
       'How I coached Base’s Southern Africa ambassador network into a consistent source of sharper, on-brand video content, including AI-directed campaign films.',
     image: '/case-studies/base.jpg',
   })
   useCaseStudyJsonLd({
     path: '/base-southern-africa',
-    title: 'Giving Base’s creator network a clear creative voice',
+    title: 'Giving Southern Africa’s creator network a clear creative voice and structure',
     description: baseCaseStudy.summary,
     image: '/case-studies/base.jpg',
     clientName: 'Coinbase (Base)',
@@ -52,8 +52,8 @@ export function BaseCaseStudy() {
                 Case study · Coinbase (Base) · Southern Africa
               </p>
             </div>
-            <h1 className="custom-h1 relative max-w-4xl text-balance">
-              Giving Base’s creator network a clear creative voice
+            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">
+              Giving Southern Africa’s creator network a clear creative voice and structure
             </h1>
             <p className="custom-p mt-6 max-w-2xl text-ink/70">
               Base had ambassadors posting every week, but the work looked and sounded uneven. I coached the

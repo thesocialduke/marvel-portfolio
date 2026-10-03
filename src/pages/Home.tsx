@@ -42,9 +42,16 @@ export function Home() {
             <div className="tablet:max-w-[62%]">
               <h1 className="font-modernist text-[7.5vw] leading-[1.1] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[4.8vw] laptop:text-[clamp(2.25rem,3.6vw,3.25rem)]">
                 Building{' '}
+                {/* Drawn as a background so it can sweep in left to right
+                    (text-decoration can't animate its length). */}
                 <span
-                  className="underline decoration-[3px] underline-offset-[0.2em] transition-colors duration-[1200ms] ease-out"
-                  style={{ textDecorationColor: underlineOn ? 'rgb(220 38 38)' : 'transparent' }}
+                  className="transition-[background-size] duration-[1400ms] ease-out"
+                  style={{
+                    backgroundImage: 'linear-gradient(rgb(220 38 38), rgb(220 38 38))',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: '0 calc(100% - 0.14em)',
+                    backgroundSize: underlineOn ? '100% 3px' : '0% 3px',
+                  }}
                 >
                   Social And Community-Led Growth Engines
                 </span>{' '}

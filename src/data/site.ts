@@ -11,6 +11,8 @@ export const site = {
   instagram: 'https://instagram.com/thesocialduke',
   telegram: 'https://t.me/thesocialduke',
   bookingUrl: 'https://calendar.app.google/kLHEDtD3JrEdKgGd8',
+  // Google Doc CV, exported as a PDF so the browser downloads it instead of opening the doc.
+  cvUrl: 'https://docs.google.com/document/d/1YDAPFGXULjpA4gMhmeLX8b_hYRI4HoypwUWCsAebXDw/export?format=pdf',
   // Same appointment schedule as bookingUrl, in Google's embeddable (?gv=true) form.
   bookingEmbedUrl:
     'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ZDplLCYiSzk5bsr2frJL1Re4bY4cemRyhpugy5Ou5h8fN8OeBIbTbiFcGqjLWpv1EjNndHv1p?gv=true',
@@ -318,7 +320,7 @@ export const binanceCaseStudy: CaseStudyData = {
     'Distribute natively across Instagram and TikTok',
   ],
   results: [
-    { value: '39.7K', label: '“Gold or Bitcoin?”' },
+    { value: '40.3K', label: '“Gold or Bitcoin?”' },
     { value: '17.6K', label: '“Give a Bitcoin to someone!”' },
     { value: '15.4K', label: '“Heard about Crypto?”' },
     { value: '11.8K', label: '“Learn Crypto for FREE”' },

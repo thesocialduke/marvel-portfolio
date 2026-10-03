@@ -116,6 +116,13 @@ export function Footer() {
                 Home
               </Link>
               <a
+                href={site.cvUrl}
+                download
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+              >
+                CV
+              </a>
+              <a
                 href={site.linkedin}
                 target="_blank"
                 rel="noreferrer"
