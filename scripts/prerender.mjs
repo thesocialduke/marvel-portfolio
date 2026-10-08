@@ -9,7 +9,7 @@
 // each page file under src/pages.
 import { readFileSync, writeFileSync } from 'node:fs'
 
-const SITE_URL = 'https://thesocialduke.vercel.app'
+const SITE_URL = 'https://ndubuisimarvellous.com'
 
 const routes = [
   {

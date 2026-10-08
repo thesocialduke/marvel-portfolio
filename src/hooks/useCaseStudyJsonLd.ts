@@ -1,6 +1,6 @@
 import { useJsonLd } from './useJsonLd'
 
-const SITE_URL = 'https://thesocialduke.vercel.app'
+const SITE_URL = 'https://ndubuisimarvellous.com'
 
 // CreativeWork + BreadcrumbList structured data for a case study page —
 // gives search engines and AI answer engines a machine-readable summary

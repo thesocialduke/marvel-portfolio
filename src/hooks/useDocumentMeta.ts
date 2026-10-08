@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-const SITE_URL = 'https://thesocialduke.vercel.app'
+const SITE_URL = 'https://ndubuisimarvellous.com'
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)

@@ -55,7 +55,7 @@ export function Services() {
         '@type': 'Service',
         name: service.title,
         description: service.body,
-        provider: { '@type': 'Person', name: 'Ndubuisi Marvellous', url: 'https://thesocialduke.vercel.app/' },
+        provider: { '@type': 'Person', name: 'Ndubuisi Marvellous', url: 'https://ndubuisimarvellous.com/' },
         areaServed: 'Africa',
       },
     })),
