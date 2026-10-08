@@ -129,7 +129,7 @@ export function BinanceCaseStudy() {
       </section>
 
       {/* 01 THE CHALLENGE */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
+      <section className="case-study-serif py-12 tablet:py-14 laptop:pt-24 laptop:pb-12">
         <Grid className="gap-y-8 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">01. The challenge</p>
@@ -148,7 +148,7 @@ export function BinanceCaseStudy() {
       </section>
 
       {/* 02 PROCESS */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
+      <section className="case-study-serif py-12 tablet:py-14 laptop:py-12">
         <Grid className="gap-y-6 pb-12 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. Process</p>
@@ -163,7 +163,7 @@ export function BinanceCaseStudy() {
       </section>
 
       {/* 03 RESULTS */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
+      <section className="case-study-serif py-12 tablet:py-14 laptop:pt-12 laptop:pb-24">
         <Grid className="gap-y-6 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">03. Results</p>

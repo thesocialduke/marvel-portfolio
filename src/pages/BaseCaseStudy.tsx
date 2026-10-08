@@ -19,10 +19,10 @@ const problems = [
 const beforeAfterPairs = [
   // Liseli | the one wearing the blue headband
   { before: '/case-studies/base/before-2.jpg', after: baseCaseStudy.afterImages![0] },
-  // Tebogo | no before photo available for this one
-  { before: null, after: baseCaseStudy.afterImages![1] },
   // Nobantu
   { before: '/case-studies/base/before-1.jpg', after: baseCaseStudy.afterImages![2] },
+  // Tebogo | no before photo available for this one, so it goes last
+  { before: null, after: baseCaseStudy.afterImages![1] },
 ]
 
 export function BaseCaseStudy() {
@@ -100,8 +100,7 @@ export function BaseCaseStudy() {
           </div>
           <div className="col-span-full grid grid-cols-1 gap-4 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-2 laptop:col-span-6 laptop:col-start-8">
             {problems.map((p) => (
-              <div key={p.letter} className="flex flex-col gap-2 bg-hyacinth/5 p-6">
-                <p className="custom-p custom-p-sm text-ink/50">{p.letter}</p>
+              <div key={p.letter} className="flex flex-col gap-2 bg-hyacinth/5 p-6 tablet:p-8">
                 <p className="custom-h4 custom-h4-bold">{p.title}</p>
                 <p className="custom-p text-ink/60">{p.description}</p>
               </div>
@@ -129,16 +128,18 @@ export function BaseCaseStudy() {
                 <div key={pair.after.image} className="flex flex-col gap-4">
                   <div className="grid grid-cols-2 gap-2">
                     {pair.before ? (
-                      <div className="relative aspect-[3/4] overflow-hidden bg-hyacinth/10">
+                      <div className="relative aspect-[9/16] overflow-hidden bg-hyacinth/10">
                         <img loading="lazy" decoding="async" src={pair.before} alt="" className="absolute inset-0 size-full object-cover grayscale" />
-                        <p className="custom-p custom-p-sm absolute top-2 left-2 text-ink/60 uppercase">Before</p>
+                        <span className="custom-p custom-p-sm absolute top-2 left-2 bg-black/70 px-2 py-1 tracking-[0.1em] uppercase" style={{ color: '#fff' }}>
+                          Before
+                        </span>
                       </div>
-                    ) : (
-                      <div className="aspect-[3/4] bg-hyacinth/10" />
-                    )}
-                    <div className="relative aspect-[3/4] overflow-hidden bg-hyacinth/10">
+                    ) : null}
+                    <div className={`relative aspect-[9/16] overflow-hidden bg-hyacinth/10 ${pair.before ? '' : 'col-span-2 mx-auto w-1/2'}`}>
                       <img loading="lazy" decoding="async" src={pair.after.image} alt="" className="absolute inset-0 size-full object-cover" />
-                      <p className="custom-p custom-p-sm absolute top-2 left-2 text-ink/60 uppercase">After</p>
+                      <span className="custom-p custom-p-sm absolute top-2 left-2 bg-red-600 px-2 py-1 tracking-[0.1em] uppercase" style={{ color: '#fff' }}>
+                        After
+                      </span>
                     </div>
                   </div>
                   <p className="custom-h4 custom-h4-bold">{quote}</p>
@@ -149,15 +150,49 @@ export function BaseCaseStudy() {
           </div>
         </Grid>
 
-        {/* Shift table */}
-        <Grid className="mt-12">
-          <div className="col-span-full divide-y divide-ink/15 border-t border-ink/15 tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            {baseCaseStudy.beforeAfter!.map((row) => (
-              <div key={row.before} className="grid grid-cols-1 gap-2 py-5 tablet:grid-cols-2 tablet:gap-6">
-                <p className="custom-p text-ink/50">{row.before}</p>
-                <p className="custom-h4 custom-h4-bold">→ {row.after}</p>
-              </div>
-            ))}
+        {/* What changed: each "before" next to its "after" */}
+        <Grid className="mt-14">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+            <div className="mb-4 hidden grid-cols-[1fr_3rem_1fr] gap-4 tablet:grid">
+              <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/50 uppercase">Before</p>
+              <span />
+              <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'rgb(220 38 38)' }}>
+                After
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 tablet:gap-3">
+              {baseCaseStudy.beforeAfter!.map((row) => (
+                <div key={row.before}>
+                  {/* Phone: one compact card per pair */}
+                  <div className="border-l-[3px] bg-hyacinth/5 px-4 py-3 tablet:hidden" style={{ borderColor: 'rgb(220 38 38)' }}>
+                    <p className="custom-p custom-p-sm text-ink/50 line-through decoration-ink/25">{row.before}</p>
+                    <p className="custom-h4 custom-h4-bold mt-1 flex items-start gap-2">
+                      <span aria-hidden="true" style={{ color: 'rgb(220 38 38)' }}>
+                        →
+                      </span>
+                      <span>{row.after}</span>
+                    </p>
+                  </div>
+
+                  {/* Tablet and up: before | arrow | after */}
+                  <div className="hidden grid-cols-[1fr_3rem_1fr] items-stretch gap-4 tablet:grid">
+                    <div className="flex items-center bg-hyacinth/5 px-5 py-4">
+                      <p className="custom-p text-ink/55 line-through decoration-ink/25">{row.before}</p>
+                    </div>
+                    <div className="flex items-center justify-center" aria-hidden="true">
+                      <span className="grid size-9 place-items-center bg-red-600" style={{ color: '#fff' }}>
+                        <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="square">
+                          <path d="M4 12h16M14 6l6 6-6 6" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div className="flex items-center border-l-[3px] bg-hyacinth/5 px-5 py-4" style={{ borderColor: 'rgb(220 38 38)' }}>
+                      <p className="custom-h4 custom-h4-bold">{row.after}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </Grid>
       </section>
@@ -175,7 +210,7 @@ export function BaseCaseStudy() {
             </p>
           </div>
         </Grid>
-        <VideoGallery videos={baseCaseStudy.videos!} orientation="landscape" rounded={0} showDescriptions titleBold />
+        <VideoGallery videos={baseCaseStudy.videos!} orientation="landscape" rounded={0} showDescriptions titleBold threeUp />
       </section>
 
       <LetsTalkPanel />

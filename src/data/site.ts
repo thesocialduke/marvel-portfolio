@@ -219,7 +219,7 @@ export const bitgetCaseStudy: CaseStudyData = {
     },
   ],
   results: [
-    { value: '30M+', label: 'Total impressions' },
+    { value: '40M+', label: 'Total impressions' },
     { value: '1M+', label: 'Views on education programs' },
     { value: '150K+', label: 'New followers gained' },
     { value: '20K', label: 'Users from ambassador program' },

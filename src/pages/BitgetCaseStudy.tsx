@@ -95,7 +95,7 @@ export function BitgetCaseStudy() {
   useDocumentMeta({
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
-      'How I led social media and community for Bitget across Africa, helping make Bitget Wallet Nigeria’s #1 downloaded crypto app.',
+      'How I led social media and community for Bitget across Africa, driving 40M+ impressions and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/bitget.jpg',
     ogType: 'article',
   })

@@ -10,6 +10,7 @@ export function VideoGallery({
   showDescriptions = false,
   muted,
   titleBold = false,
+  threeUp = false,
 }: {
   title?: string
   videos: VideoItem[]
@@ -18,11 +19,15 @@ export function VideoGallery({
   showDescriptions?: boolean
   muted?: boolean
   titleBold?: boolean
+  /** Landscape videos only: three across on large screens instead of two. */
+  threeUp?: boolean
 }) {
   const cell =
     orientation === 'portrait'
       ? 'col-span-full tablet:col-span-3 tablet:odd:col-start-2 laptop:first:!col-start-2 laptop:odd:col-start-auto laptop:[&:nth-child(4n+1)]:!col-start-2'
-      : 'col-span-full tablet:col-span-6 tablet:col-start-2 laptop:!col-start-auto laptop:first:!col-start-2 laptop:[&:nth-child(2n+1)]:!col-start-2'
+      : threeUp
+        ? 'col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:!col-start-auto laptop:[&:nth-child(3n+1)]:!col-start-2'
+        : 'col-span-full tablet:col-span-6 tablet:col-start-2 laptop:!col-start-auto laptop:first:!col-start-2 laptop:[&:nth-child(2n+1)]:!col-start-2'
 
   return (
     <section className="case-study-serif space-y-6 py-12 tablet:py-14 laptop:py-18">
