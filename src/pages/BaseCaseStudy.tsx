@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
-import { ButtonLink } from '../components/Button'
+import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
+import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { VideoGallery } from '../components/VideoGallery'
 import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy, site } from '../data/site'
+import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
 const BLUE = 'rgb(0 82 255)'
 
@@ -27,10 +27,11 @@ const beforeAfterPairs = [
 
 export function BaseCaseStudy() {
   useDocumentMeta({
-    title: 'Giving Southern Africa’s Creator Network a Clear Creative Voice and Structure | Case Study | Ndubuisi Marvellous',
+    title: 'Base Southern Africa Creator Network Case Study | Ndubuisi Marvellous',
     description:
       'How I coached Base’s Southern Africa ambassador network into a consistent source of sharper, on-brand video content, including AI-directed campaign films.',
     image: '/case-studies/base.jpg',
+    ogType: 'article',
   })
   useCaseStudyJsonLd({
     path: '/base-southern-africa',
@@ -129,14 +130,14 @@ export function BaseCaseStudy() {
                   <div className="grid grid-cols-2 gap-2">
                     {pair.before ? (
                       <div className="relative aspect-[3/4] overflow-hidden bg-hyacinth/10">
-                        <img src={pair.before} alt="" className="absolute inset-0 size-full object-cover grayscale" />
+                        <img loading="lazy" decoding="async" src={pair.before} alt="" className="absolute inset-0 size-full object-cover grayscale" />
                         <p className="custom-p custom-p-sm absolute top-2 left-2 text-ink/60 uppercase">Before</p>
                       </div>
                     ) : (
                       <div className="aspect-[3/4] bg-hyacinth/10" />
                     )}
                     <div className="relative aspect-[3/4] overflow-hidden bg-hyacinth/10">
-                      <img src={pair.after.image} alt="" className="absolute inset-0 size-full object-cover" />
+                      <img loading="lazy" decoding="async" src={pair.after.image} alt="" className="absolute inset-0 size-full object-cover" />
                       <p className="custom-p custom-p-sm absolute top-2 left-2 text-ink/60 uppercase">After</p>
                     </div>
                   </div>
@@ -177,64 +178,11 @@ export function BaseCaseStudy() {
         <VideoGallery videos={baseCaseStudy.videos!} orientation="landscape" rounded={0} showDescriptions titleBold />
       </section>
 
-      {/* OUTCOME */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
-        <Grid className="items-center gap-y-10 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2">
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <img
-                src={baseCaseStudy.gallery![0].image}
-                alt={baseCaseStudy.gallery![0].caption ?? ''}
-                className="absolute inset-0 size-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
-              <p className="custom-p custom-h4-invert absolute inset-x-0 bottom-0 p-4">
-                {baseCaseStudy.gallery![0].caption}
-              </p>
-            </div>
-          </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-8">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Outcome</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">
-              An uneven network turned into a steady source of on-brand content
-            </h2>
-            <p className="custom-p mt-4 text-ink/70">{baseCaseStudy.closing[0]}</p>
-            <p className="custom-p mt-4 text-ink/70">{baseCaseStudy.closing[1]}</p>
-          </div>
-        </Grid>
-      </section>
-
-      {/* NEXT / PREVIOUS / CTA */}
-      <section className="case-study-serif border-t border-ink/15 py-12 tablet:py-14 laptop:py-18">
-        <Grid className="items-center gap-y-8">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Previous case study</p>
-            <Link
-              to={bitgetCaseStudy.href}
-              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-            >
-              ← Bitget Africa
-            </Link>
-          </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-3 laptop:col-start-7">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Next case study</p>
-            <Link
-              to={binanceCaseStudy.href}
-              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-            >
-              {binanceCaseStudy.title} →
-            </Link>
-          </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
-            <ButtonLink to={site.bookingUrl} external beam>
-              Book a call
-              <svg aria-hidden="true" className="size-[1.1em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="square" strokeLinejoin="miter">
-                <path d="M7 17 17 7M8 7h9v9" />
-              </svg>
-            </ButtonLink>
-          </div>
-        </Grid>
-      </section>
+      <LetsTalkPanel />
+      <CaseStudyPager
+        prev={{ href: bitgetCaseStudy.href, title: bitgetCaseStudy.title }}
+        next={{ href: binanceCaseStudy.href, title: binanceCaseStudy.title }}
+      />
     </Layout>
   )
 }

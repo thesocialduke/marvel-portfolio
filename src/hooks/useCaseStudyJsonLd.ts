@@ -37,7 +37,7 @@ export function useCaseStudyJsonLd({
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: 'Proof of Work', item: `${SITE_URL}/#proof-of-work` },
+          { '@type': 'ListItem', position: 2, name: 'Case Studies', item: `${SITE_URL}/#case-studies` },
           { '@type': 'ListItem', position: 3, name: title, item: url },
         ],
       },

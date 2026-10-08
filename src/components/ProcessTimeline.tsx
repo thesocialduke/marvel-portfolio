@@ -27,9 +27,10 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
   }, [])
 
   const total = steps.length * STEP_SECONDS
+  const columns = ({ 3: 'tablet:grid-cols-3', 4: 'tablet:grid-cols-4' } as Record<number, string>)[steps.length] ?? 'tablet:grid-cols-5'
 
   return (
-    <ol ref={ref} className="relative grid grid-cols-1 gap-0 tablet:grid-cols-5 tablet:gap-6">
+    <ol ref={ref} className={`relative grid grid-cols-1 gap-0 tablet:gap-6 ${columns}`}>
       {/* Track and red progress line: horizontal on tablet and up, vertical on phones */}
       <span aria-hidden="true" className="absolute top-1.5 bottom-6 left-1.5 w-px bg-ink/15 tablet:inset-x-0 tablet:top-1.5 tablet:bottom-auto tablet:left-0 tablet:h-px tablet:w-auto" />
       <span

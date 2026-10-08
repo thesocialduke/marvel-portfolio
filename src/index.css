@@ -132,6 +132,13 @@
     background: var(--color-ink);
     color: var(--color-page);
   }
+  /* On black bands the default highlight (black with light text) is
+     identical to the unselected text, so selecting looks like it does nothing. */
+  .on-dark::selection,
+  .on-dark ::selection {
+    background: var(--color-page);
+    color: var(--color-graphite);
+  }
   * {
     @apply border-border outline-ring/50;
   }

@@ -31,10 +31,12 @@ export function useDocumentMeta({
   title,
   description,
   image,
+  ogType = 'website',
 }: {
   title: string
   description: string
   image?: string
+  ogType?: 'website' | 'article' | 'profile'
 }) {
   const { pathname } = useLocation()
 
@@ -53,9 +55,15 @@ export function useDocumentMeta({
     upsertMeta('name', 'twitter:title', title)
     upsertMeta('name', 'twitter:description', description)
     upsertMeta('name', 'twitter:image', ogImage)
+    upsertMeta('property', 'og:type', ogType)
+    upsertMeta('property', 'og:image:alt', title)
+    upsertMeta('name', 'twitter:image:alt', title)
+    // A page with its own wide image gets the large preview card; the default
+    // square avatar looks better as the small one.
+    upsertMeta('name', 'twitter:card', image ? 'summary_large_image' : 'summary')
 
     return () => {
       document.title = previousTitle
     }
-  }, [title, description, image, pathname])
+  }, [title, description, image, ogType, pathname])
 }

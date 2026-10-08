@@ -73,7 +73,7 @@ export function Navbar() {
               className="relative z-20 inline-flex size-8 shrink-0 cursor-pointer items-center justify-center bg-red-600/10 text-ink outline-none transition-[color,transform] active:scale-[0.96] hover:text-red-600 focus-visible:ring-2 focus-visible:ring-hyacinth-hover laptop:size-9"
               onClick={() => setOpen((v) => !v)}
             >
-              <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+              <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
                 <path d="M3 7h18M3 13h18" />
               </svg>
             </button>
@@ -107,7 +107,7 @@ export function Navbar() {
                   className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center text-page outline-none transition-[background-color,transform] active:scale-[0.96] hover:bg-page/10 focus-visible:ring-2 focus-visible:ring-page/40 laptop:size-9"
                   onClick={() => setOpen(false)}
                 >
-                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                  <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
                     <path d="M6 6l12 12M18 6L6 18" />
                   </svg>
                 </button>

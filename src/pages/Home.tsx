@@ -24,6 +24,7 @@ export function Home() {
     title: 'Ndubuisi Marvellous | Web3 & Fintech Social Media Manager and Community Manager',
     description:
       'Web3, crypto, and fintech social media manager and community manager based in Africa. I drive growth, strategy, and community for brands like Bitget, Binance, and Coinbase (Base).',
+    ogType: 'profile',
   })
 
   return (
@@ -63,7 +64,7 @@ export function Home() {
             </div>
 
             <div className="w-full shrink-0 tablet:w-[26%] laptop:w-[22%]">
-              <img
+              <img fetchPriority="high"
                 src={avatar}
                 alt="Ndubuisi Marvellous"
                 className="aspect-[4/3.4] w-full object-cover object-top tablet:aspect-[3/4] tablet:object-center"
@@ -160,7 +161,7 @@ export function Home() {
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
             <StaggeredReveal
               lines={[
-                <img
+                <img loading="lazy" decoding="async"
                   key="about-photo"
                   src="/about-heat-culture.webp"
                   alt="Ndubuisi Marvellous"
@@ -201,12 +202,12 @@ export function Home() {
             <div className="mt-12 grid grid-cols-2 items-start justify-items-start gap-x-2 gap-y-8 text-left tablet:mt-16 tablet:grid-cols-4 tablet:gap-6">
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <h2
+                  <p
                     className="custom-h1 custom-h1-bold custom-h1-stat-mobile-lg"
                     style={{ color: 'rgb(220 38 38)' }}
                   >
                     <StatCounter value={stat.value} />
-                  </h2>
+                  </p>
                   <p className="custom-p mt-2 leading-tight text-ink/60" style={{ fontSize: '0.65rem' }}>
                     {stat.label}
                   </p>
@@ -238,10 +239,10 @@ export function Home() {
         </Grid>
       </section>
 
-      <section id="proof-of-work" className="scroll-mt-20 py-12 tablet:scroll-mt-24 tablet:py-14 laptop:py-18">
+      <section id="case-studies" className="scroll-mt-20 py-12 tablet:scroll-mt-24 tablet:py-14 laptop:py-18">
         <Grid>
           <div className="col-span-full col-start-1 pb-12 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <h2 className="custom-h1 custom-h1-bold text-left uppercase">Proof of Work</h2>
+            <h2 className="custom-h1 custom-h1-bold text-left uppercase">Case Studies</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-col gap-4 tablet:gap-6">
@@ -249,7 +250,7 @@ export function Home() {
                 to={clients[0].href}
                 className="group relative block aspect-square overflow-hidden tablet:aspect-[21/9]"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={clients[0].image}
                   alt={clients[0].title}
                   className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
@@ -268,7 +269,7 @@ export function Home() {
                     to={client.href}
                     className="group relative block aspect-square overflow-hidden tablet:aspect-[4/5]"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={client.image}
                       alt={client.title}
                       className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"

@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ButtonLink } from '../components/Button'
+import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
+import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { ProcessTimeline } from '../components/ProcessTimeline'
 import { VideoModal, type EmbedSource } from '../components/VideoModal'
 import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { baseCaseStudy, bitgetCaseStudy, site } from '../data/site'
+import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
 
 const RED = 'rgb(220 38 38)'
 
@@ -31,8 +31,8 @@ const processSteps = [
   { title: 'Distribute', body: 'Post natively on Instagram and TikTok, built for each feed.' },
 ]
 
-// Add `thumb` (a vertical image in /public, e.g. '/case-studies/binance/learn-crypto-for-free.jpg')
-// to replace the dark placeholder on a card. Clicking a card plays the video in a pop-up.
+// `thumb` is each video's own cover image (from /public/case-studies/binance).
+// Clicking a card plays the video in a pop-up.
 type Episode = EmbedSource & { title: string; views: string; thumb?: string }
 
 const episodes: Episode[] = [
@@ -44,23 +44,27 @@ const episodes: Episode[] = [
   },
   {
     title: 'Gold or Bitcoin?',
+    thumb: '/case-studies/binance/gold-or-bitcoin.webp',
     views: '40.3K',
     tiktok: 'https://www.tiktok.com/@binanceafrica/video/7330925379009416453',
   },
   {
     title: 'Give a Bitcoin to someone!',
+    thumb: '/case-studies/binance/give-a-bitcoin.webp',
     views: '17.6K',
     tiktok: 'https://www.tiktok.com/@binanceafrica/video/7329476147056577798',
     instagram: 'https://www.instagram.com/p/C2r7a6ZMWX-/',
   },
   {
     title: 'Heard about Crypto?',
+    thumb: '/case-studies/binance/heard-about-crypto.webp',
     views: '15.4K',
     tiktok: 'https://www.tiktok.com/@binanceafrica/video/7324238921632697606',
     instagram: 'https://www.instagram.com/p/C2HSeoisvrN/',
   },
   {
     title: 'BTC Vs Gold',
+    thumb: '/case-studies/binance/btc-vs-gold.webp',
     views: '10.5K',
     tiktok: 'https://www.tiktok.com/@binanceafrica/video/7311617269128367366',
     instagram: 'https://www.instagram.com/p/C0vuJ_osGeQ/',
@@ -70,9 +74,11 @@ const episodes: Episode[] = [
 export function BinanceCaseStudy() {
   const [playing, setPlaying] = useState<Episode | null>(null)
   useDocumentMeta({
-    title: 'Turning Complex Crypto Into Shareable Stories | Case Study | Ndubuisi Marvellous',
-    description: summary,
+    title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
+    description:
+      'Short-form street-interview content for Binance Africa that explained crypto simply, built for Instagram and TikTok.',
     image: '/case-studies/binance.jpg',
+    ogType: 'article',
   })
   useCaseStudyJsonLd({
     path: '/binance-street-interviews',
@@ -176,7 +182,7 @@ export function BinanceCaseStudy() {
                     i === 0 ? 'outline-2 -outline-offset-2 outline-red-600' : ''
                   }`}
                 >
-                  {episode.thumb && <img src={episode.thumb} alt="" className="absolute inset-0 size-full object-cover" />}
+                  {episode.thumb && <img loading="lazy" decoding="async" src={episode.thumb} alt="" className="absolute inset-0 size-full object-cover" />}
                   <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                   <span
                     aria-hidden="true"
@@ -188,9 +194,9 @@ export function BinanceCaseStudy() {
                     {episode.title}
                   </span>
                 </button>
-                <h3 className="custom-h1 custom-h1-bold mt-4 text-[2rem]" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold mt-4 text-[2rem]" style={{ color: RED }}>
                   {episode.views}
-                </h3>
+                </p>
                 <p className="custom-p text-ink/60">Views</p>
               </div>
             ))}
@@ -198,37 +204,11 @@ export function BinanceCaseStudy() {
         </Grid>
       </section>
 
-      {/* NEXT / PREVIOUS / CTA */}
-      <section className="case-study-serif border-t border-ink/15 py-12 tablet:py-14 laptop:py-18">
-        <Grid className="items-center gap-y-8">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Previous case study</p>
-            <Link
-              to={baseCaseStudy.href}
-              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-            >
-              ← {baseCaseStudy.title}
-            </Link>
-          </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-3 laptop:col-start-7">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Next case study</p>
-            <Link
-              to={bitgetCaseStudy.href}
-              className="custom-h2 relative mt-2 inline-block text-balance underline decoration-1 underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-            >
-              {bitgetCaseStudy.title} →
-            </Link>
-          </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
-            <ButtonLink to={site.bookingUrl} external beam>
-              Book a call
-              <svg aria-hidden="true" className="size-[1.1em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="square" strokeLinejoin="miter">
-                <path d="M7 17 17 7M8 7h9v9" />
-              </svg>
-            </ButtonLink>
-          </div>
-        </Grid>
-      </section>
+      <LetsTalkPanel />
+      <CaseStudyPager
+        prev={{ href: baseCaseStudy.href, title: baseCaseStudy.title }}
+        next={{ href: bitgetCaseStudy.href, title: bitgetCaseStudy.title }}
+      />
       {playing && <VideoModal title={playing.title} sources={playing} onClose={() => setPlaying(null)} />}
     </Layout>
   )

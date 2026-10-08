@@ -4,6 +4,9 @@ import { Grid } from './Grid'
 import { ButtonLink } from './Button'
 import { site } from '../data/site'
 
+const LIGHT = 'var(--color-page)'
+const LIGHT_MUTED = 'rgb(231 230 226 / 0.7)'
+
 function EmailAction() {
   const [copied, setCopied] = useState(false)
 
@@ -24,7 +27,7 @@ function EmailAction() {
         external
         tone="red"
         fullWidth={false}
-        className="min-w-0 flex-1 shrink px-3 text-[3.1vw] tracking-tight whitespace-nowrap tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
+        className="min-w-0 flex-1 shrink px-3 text-[3.1vw] tracking-tight whitespace-nowrap ring-page/60 tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
       >
         {site.email}
       </ButtonLink>
@@ -32,7 +35,7 @@ function EmailAction() {
         type="button"
         onClick={handleCopy}
         aria-label="Copy email address"
-        className="flex size-9 shrink-0 cursor-pointer items-center justify-center text-red-600 outline-none transition-colors tablet:text-ink/40 tablet:hover:text-red-600 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+        className="flex size-9 shrink-0 cursor-pointer items-center justify-center text-red-600 outline-none transition-colors tablet:text-page/50 tablet:hover:text-red-600 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
       >
         {copied ? (
           <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -82,19 +85,18 @@ export function Footer() {
 
   return (
     <>
-      <footer id="contact" className="scroll-mt-20 bg-page text-ink tablet:scroll-mt-24">
-        {/* Full-bleed, edge to edge — same technique as the Trusted-by
-            logo grid, breaking out of the Grid container. Margin above
-            keeps it clear of whatever section (e.g. the testimonial)
-            precedes the footer; the Grid below then only needs a small
-            top padding so the heading sits close under the line. */}
-        <div className="mt-12 h-px w-full bg-ink/15 tablet:mt-14 laptop:mt-18" />
-
-        <Grid className="gap-y-10 pt-6 pb-10 tablet:pt-8 tablet:pb-14 laptop:pt-10 laptop:pb-18">
+      <footer
+        id="contact"
+        className="on-dark scroll-mt-20 tablet:scroll-mt-24"
+        style={{ background: 'var(--color-graphite)', color: 'var(--color-page)' }}
+      >
+        <Grid className="gap-y-10 py-12 tablet:py-14 laptop:py-18">
           <div className="col-span-full flex flex-col gap-6 tablet:col-span-6 tablet:col-start-2 tablet:flex-row tablet:items-end tablet:justify-between laptop:col-span-12 laptop:col-start-2">
             <div>
-              <h2 className="custom-h2 custom-h2-bold relative text-balance">Would love to hear from you.</h2>
-              <p className="custom-p mt-4 text-ink/70">
+              <h2 className="custom-h2 custom-h2-bold relative text-balance" style={{ color: LIGHT }}>
+                Would love to hear from you.
+              </h2>
+              <p className="custom-p mt-4" style={{ color: LIGHT_MUTED }}>
                 If you have requests or questions, kindly do not hesitate to contact me. 😉
               </p>
             </div>
@@ -103,7 +105,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 pt-6 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
+          <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-page/20 pt-6 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-wrap items-center gap-6">
               <Link
                 to="/"
@@ -112,6 +114,7 @@ export function Footer() {
                   if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
                 }}
                 className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                style={{ color: LIGHT }}
               >
                 Home
               </Link>
@@ -119,6 +122,7 @@ export function Footer() {
                 href={site.cvUrl}
                 download
                 className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                style={{ color: LIGHT }}
               >
                 CV
               </a>
@@ -127,6 +131,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                style={{ color: LIGHT }}
               >
                 LinkedIn
               </a>
@@ -135,6 +140,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                style={{ color: LIGHT }}
               >
                 Instagram
               </a>
@@ -143,11 +149,14 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                style={{ color: LIGHT }}
               >
                 Telegram
               </a>
             </div>
-            <p className="custom-p custom-p-sm text-ink/60">{site.copyright}</p>
+            <p className="custom-p custom-p-sm" style={{ color: LIGHT_MUTED }}>
+              {site.copyright}
+            </p>
           </div>
         </Grid>
       </footer>

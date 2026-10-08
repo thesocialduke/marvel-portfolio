@@ -4,6 +4,14 @@ import { Layout } from '../components/Layout'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { site } from '../data/site'
 
+const RED = 'rgb(220 38 38)'
+
+const socials = [
+  { label: 'LinkedIn', href: site.linkedin },
+  { label: 'Instagram', href: site.instagram },
+  { label: 'Telegram', href: site.telegram },
+]
+
 export function ContactMe() {
   useDocumentMeta({
     title: 'Contact | Ndubuisi Marvellous',
@@ -11,18 +19,27 @@ export function ContactMe() {
   })
 
   return (
-    <Layout hideFooter>
-      <section className="flex min-h-[60svh] items-center pt-18 tablet:pt-[5rem] laptop:pt-0">
-        <Grid>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Contact</p>
-            <h1 className="custom-h1 custom-h1-bold mt-4 text-balance uppercase">Let’s work together</h1>
-            <p className="custom-p mt-4 text-ink/70 tablet:whitespace-nowrap">
+    <Layout>
+      <section className="case-study-serif pt-18 pb-14 tablet:pt-[5rem] tablet:pb-18 laptop:pt-[8.5rem] laptop:pb-24">
+        <Grid className="items-start gap-y-12 laptop:gap-y-0">
+          {/* Details */}
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-5 laptop:col-start-2">
+            <div className="mb-6 flex items-center gap-2">
+              <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
+              <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Contact</p>
+            </div>
+            <h1 className="custom-h1 custom-h1-bold text-balance">Let’s work together</h1>
+            <p className="custom-p mt-6 max-w-md text-ink/70">
               Open to full-time and contract roles, and ready to relocate for the right opportunity.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <ButtonLink to={`mailto:${site.email}`} external tone="red" fullWidth={false}>
+              <ButtonLink
+                to={`mailto:${site.email}`}
+                external
+                tone="red"
+                className="min-w-0 px-3 text-[3.1vw] tracking-tight whitespace-nowrap tablet:px-6 tablet:text-[clamp(0.8rem,1.9vw,1rem)] laptop:text-[clamp(0.72rem,1.2vw,1rem)]"
+              >
                 {site.email}
               </ButtonLink>
               <ButtonLink to={site.cvUrl} download fullWidth={false}>
@@ -30,46 +47,29 @@ export function ContactMe() {
               </ButtonLink>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-6">
-              <a
-                href={site.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
-              >
-                LinkedIn
-              </a>
-              <a
-                href={site.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
-              >
-                Instagram
-              </a>
-              <a
-                href={site.telegram}
-                target="_blank"
-                rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
-              >
-                Telegram
-              </a>
+            <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-ink/15 pt-6">
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                >
+                  {social.label}
+                </a>
+              ))}
             </div>
           </div>
-        </Grid>
-      </section>
 
-      <section className="pb-18 tablet:pb-24 laptop:pb-32">
-        <Grid>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+          {/* Calendar */}
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-8">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Book a call</p>
-            <h2 className="custom-h2 custom-h2-bold mt-4 text-balance">Pick a time that works for you</h2>
             <iframe
               src={site.bookingEmbedUrl}
               title="Book a call with Ndubuisi Marvellous"
               loading="lazy"
-              className="mt-6 h-[760px] w-full border border-ink/15 bg-white"
+              className="mt-4 h-[640px] w-full border border-ink/15 bg-white tablet:h-[700px]"
             />
             <p className="custom-p custom-p-sm mt-3 text-ink/60">
               Calendar not loading?{' '}
