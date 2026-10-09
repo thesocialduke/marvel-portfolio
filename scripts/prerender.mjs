@@ -29,21 +29,22 @@ const SITE_URL = 'https://ndubuisimarvellous.com'
 const routes = [
   {
     path: '/services',
-    title: 'Social Media Manager & Community Manager Services | Ndubuisi Marvellous',
+    title: 'Social Media & Community Manager Services | Ndubuisi Marvellous',
     description:
-      'Hire a Web3 and fintech social media manager and community manager: strategy, community building, content creation, creator/KOL partnerships, and event planning.',
+      'Hire a Web3 and fintech social media and community manager: strategy, community building, content creation, creator/KOL partnerships and events.',
   },
   {
     path: '/contact',
     title: 'Contact | Ndubuisi Marvellous',
-    description: 'Get in touch with Ndubuisi Marvellous for social media strategy, growth, and community work.',
+    description:
+      'Get in touch with Ndubuisi Marvellous, a Web3 and fintech social media and community manager open to full-time and contract roles. Book a call or send an email.',
   },
   {
     path: '/bitget',
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
       'How I led social media and community for Bitget across Africa, driving 40M+ organic views and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
-    image: '/case-studies/bitget.jpg',
+    image: '/case-studies/og-bitget.jpg',
     type: 'article',
   },
   {
@@ -51,7 +52,7 @@ const routes = [
     title: 'Base Southern Africa Creator Network Case Study | Ndubuisi Marvellous',
     description:
       'How I coached Base’s Southern Africa ambassador network into a consistent source of sharper, on-brand video content, including AI-directed campaign films.',
-    image: '/case-studies/base.jpg',
+    image: '/case-studies/og-base.jpg',
     type: 'article',
   },
   {
@@ -59,7 +60,7 @@ const routes = [
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
       'Short-form street-interview content for Binance Africa that explained crypto simply, built for Instagram and TikTok.',
-    image: '/case-studies/binance.jpg',
+    image: '/case-studies/og-binance.jpg',
     type: 'article',
   },
 ]
@@ -102,4 +103,25 @@ for (const route of routes) {
   // vercel.json sets cleanUrls, so /services is served from dist/services.html
   writeFileSync(`dist${route.path}.html`, html)
   console.log(`prerendered head for ${route.path}`)
+}
+
+// 404.html: Vercel serves this (with a 404 status) for any address that isn't a page,
+// so a mistyped link shows the designed "Page not found" screen, not a bare error.
+// It is kept out of search results (noindex), has no canonical, and carries no
+// structured data.
+{
+  let html = template
+  html = html.replace(/<title>.*?<\/title>/s, '<title>Page not found | Ndubuisi Marvellous</title>')
+  html = html.replace(/\s*<link rel="canonical"[^>]*>/, '')
+  html = html.replace(/\s*<meta\s+property="og:url"[^>]*>/, '')
+  html = html.replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/, '')
+  html = html.replace('content="index, follow"', 'content="noindex, follow"')
+  const text = 'This page does not exist. Head back to the home page.'
+  html = setMeta(html, 'name', 'description', text)
+  html = setMeta(html, 'property', 'og:title', 'Page not found | Ndubuisi Marvellous')
+  html = setMeta(html, 'property', 'og:description', text)
+  html = setMeta(html, 'name', 'twitter:title', 'Page not found | Ndubuisi Marvellous')
+  html = setMeta(html, 'name', 'twitter:description', text)
+  writeFileSync('dist/404.html', await withBody(html, '/404'))
+  console.log('prerendered 404.html')
 }

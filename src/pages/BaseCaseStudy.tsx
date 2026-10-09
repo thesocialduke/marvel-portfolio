@@ -3,7 +3,8 @@ import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { VideoGallery } from '../components/VideoGallery'
-import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
+import { JsonLd } from '../components/JsonLd'
+import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
@@ -30,10 +31,10 @@ export function BaseCaseStudy() {
     title: 'Base Southern Africa Creator Network Case Study | Ndubuisi Marvellous',
     description:
       'How I coached Base’s Southern Africa ambassador network into a consistent source of sharper, on-brand video content, including AI-directed campaign films.',
-    image: '/case-studies/base.jpg',
+    image: '/case-studies/og-base.jpg',
     ogType: 'article',
   })
-  useCaseStudyJsonLd({
+  const caseStudyLd = caseStudyJsonLd({
     path: '/base-southern-africa',
     title: 'Giving Southern Africa’s creator network a clear creative voice and structure',
     description: baseCaseStudy.summary,
@@ -43,6 +44,7 @@ export function BaseCaseStudy() {
 
   return (
     <Layout>
+      <JsonLd data={caseStudyLd} />
       {/* HERO */}
       <section className="case-study-serif pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="pb-12 laptop:pb-18">

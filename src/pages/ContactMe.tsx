@@ -16,7 +16,8 @@ const socials = [
 export function ContactMe() {
   useDocumentMeta({
     title: 'Contact | Ndubuisi Marvellous',
-    description: 'Get in touch with Ndubuisi Marvellous for social media strategy, growth, and community work.',
+    description:
+      'Get in touch with Ndubuisi Marvellous, a Web3 and fintech social media and community manager open to full-time and contract roles. Book a call or send an email.',
   })
 
   return (

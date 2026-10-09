@@ -24,10 +24,10 @@ export function Home() {
   }, [])
 
   useDocumentMeta({
-    title: 'Ndubuisi Marvellous | Web3 & Fintech Social Media Manager and Community Manager',
+    title: 'Web3 & Fintech Social Media & Community Manager | Ndubuisi Marvellous',
     description:
-      'Web3, crypto, and fintech social media manager and community manager based in Africa. I drive growth, strategy, and community for brands like Bitget, Binance, and Coinbase (Base).',
-    ogType: 'profile',
+      'Web3, crypto and fintech social media and community manager in Africa. I drive growth, strategy and community for Bitget, Binance and Coinbase (Base).',
+    ogType: 'website',
   })
 
   return (

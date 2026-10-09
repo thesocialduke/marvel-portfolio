@@ -4,7 +4,8 @@ import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
-import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
+import { JsonLd } from '../components/JsonLd'
+import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, bitgetCaseStudy, site, type CaseStudyData } from '../data/site'
 
@@ -62,7 +63,7 @@ export function CaseStudy({
     description: truncate(data.summary, 155),
     image,
   })
-  useCaseStudyJsonLd({
+  const caseStudyLd = caseStudyJsonLd({
     path: data.href,
     title: data.title,
     description: data.summary,
@@ -72,6 +73,7 @@ export function CaseStudy({
 
   return (
     <Layout>
+      <JsonLd data={caseStudyLd} />
       <section className="case-study-serif relative w-full bg-hyacinth/5 pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="relative space-y-4 py-18">
           <div className="col-span-full col-start-1 tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">

@@ -5,7 +5,7 @@ import { Layout } from '../components/Layout'
 import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { ProcessTimeline } from '../components/ProcessTimeline'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { useJsonLd } from '../hooks/useJsonLd'
+import { JsonLd } from '../components/JsonLd'
 import { faqs, services, site } from '../data/site'
 
 const RED = 'rgb(220 38 38)'
@@ -26,12 +26,12 @@ const arrow = (
 
 export function Services() {
   useDocumentMeta({
-    title: 'Social Media Manager & Community Manager Services | Ndubuisi Marvellous',
+    title: 'Social Media & Community Manager Services | Ndubuisi Marvellous',
     description:
-      'Hire a Web3 and fintech social media manager and community manager: strategy, community building, content creation, creator/KOL partnerships, and event planning.',
+      'Hire a Web3 and fintech social media and community manager: strategy, community building, content creation, creator/KOL partnerships and events.',
   })
 
-  useJsonLd('faq-jsonld', {
+  const faqLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: faqs.map((faq) => ({
@@ -42,9 +42,9 @@ export function Services() {
         text: faq.a,
       },
     })),
-  })
+  }
 
-  useJsonLd('services-jsonld', {
+  const servicesLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Services by Ndubuisi Marvellous',
@@ -59,10 +59,12 @@ export function Services() {
         areaServed: 'Africa',
       },
     })),
-  })
+  }
 
   return (
     <Layout>
+      <JsonLd data={faqLd} />
+      <JsonLd data={servicesLd} />
       {/* HERO */}
       <section className="case-study-serif pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="pb-12 laptop:pb-18">

@@ -1,11 +1,9 @@
-import { useJsonLd } from './useJsonLd'
-
 const SITE_URL = 'https://ndubuisimarvellous.com'
 
-// CreativeWork + BreadcrumbList structured data for a case study page —
-// gives search engines and AI answer engines a machine-readable summary
-// of what the work is, who did it, and where it sits in the site.
-export function useCaseStudyJsonLd({
+// CreativeWork + BreadcrumbList structured data for a case study page: a
+// machine-readable summary of what the work is, who did it, and where it sits
+// in the site. Rendered with <JsonLd /> so it ships in the pre-rendered HTML.
+export function caseStudyJsonLd({
   path,
   title,
   description,
@@ -20,7 +18,7 @@ export function useCaseStudyJsonLd({
 }) {
   const url = `${SITE_URL}${path}`
 
-  useJsonLd(`case-study-jsonld-${path}`, {
+  return {
     '@context': 'https://schema.org',
     '@graph': [
       {
@@ -42,5 +40,5 @@ export function useCaseStudyJsonLd({
         ],
       },
     ],
-  })
+  }
 }

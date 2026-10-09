@@ -5,7 +5,8 @@ import { Layout } from '../components/Layout'
 import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
 import { FramerCarouselThumbnails } from '../components/ui/framer-thumbnails'
-import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
+import { JsonLd } from '../components/JsonLd'
+import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
@@ -96,10 +97,10 @@ export function BitgetCaseStudy() {
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
       'How I led social media and community for Bitget across Africa, driving 40M+ organic views and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
-    image: '/case-studies/bitget.jpg',
+    image: '/case-studies/og-bitget.jpg',
     ogType: 'article',
   })
-  useCaseStudyJsonLd({
+  const caseStudyLd = caseStudyJsonLd({
     path: '/bitget',
     title: 'Growing Bitget’s community across Africa',
     description: bitgetCaseStudy.summary,
@@ -109,6 +110,7 @@ export function BitgetCaseStudy() {
 
   return (
     <Layout>
+      <JsonLd data={caseStudyLd} />
       {/* HERO */}
       <section className="case-study-serif pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="pb-12 laptop:pb-18">

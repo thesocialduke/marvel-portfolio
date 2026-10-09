@@ -5,7 +5,8 @@ import { Layout } from '../components/Layout'
 import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { ProcessTimeline } from '../components/ProcessTimeline'
 import { VideoModal, type EmbedSource } from '../components/VideoModal'
-import { useCaseStudyJsonLd } from '../hooks/useCaseStudyJsonLd'
+import { JsonLd } from '../components/JsonLd'
+import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
 
@@ -77,10 +78,10 @@ export function BinanceCaseStudy() {
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
       'Short-form street-interview content for Binance Africa that explained crypto simply, built for Instagram and TikTok.',
-    image: '/case-studies/binance.jpg',
+    image: '/case-studies/og-binance.jpg',
     ogType: 'article',
   })
-  useCaseStudyJsonLd({
+  const caseStudyLd = caseStudyJsonLd({
     path: '/binance-street-interviews',
     title: 'Turning complex crypto into shareable stories',
     description: summary,
@@ -90,6 +91,7 @@ export function BinanceCaseStudy() {
 
   return (
     <Layout>
+      <JsonLd data={caseStudyLd} />
       {/* HERO */}
       <section className="case-study-serif pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="pb-12 laptop:pb-18">
