@@ -3,12 +3,12 @@ import { usePauseOffscreen } from '../hooks/usePauseOffscreen'
 import { Accordion } from '../components/Accordion'
 import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
+import { CaseStudyCard } from '../components/CaseStudyCard'
 import { Layout } from '../components/Layout'
 import { StaggeredReveal } from '../components/StaggeredReveal'
 import { StatCounter } from '../components/StatCounter'
 import TestimonialCarousel from '../components/TestimonialCarousel'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { Link } from 'react-router-dom'
 import { avatar, clients, homeTestimonials, logos, services, stats } from '../data/site'
 
 const GRAIN_URL =
@@ -255,40 +255,11 @@ export function Home() {
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-col gap-4 tablet:gap-6">
-              <Link
-                to={clients[0].href}
-                className="group relative block aspect-square overflow-hidden tablet:aspect-[21/9]"
-              >
-                <img loading="lazy" decoding="async"
-                  src={clients[0].image}
-                  alt={clients[0].title}
-                  className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
-                <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute bottom-6 left-6 inline-block bg-red-600 px-3 py-2 tablet:bottom-8 tablet:left-8">
-                  {clients[0].shortName}
-                  <span style={{ color: 'rgba(255,255,255,0.7)' }}>, {clients[0].category}</span>
-                </h3>
-              </Link>
+              <CaseStudyCard client={clients[0]} className="aspect-square tablet:aspect-[21/9]" />
 
               <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 tablet:gap-6">
                 {clients.slice(1).map((client) => (
-                  <Link
-                    key={client.href}
-                    to={client.href}
-                    className="group relative block aspect-square overflow-hidden tablet:aspect-[4/5]"
-                  >
-                    <img loading="lazy" decoding="async"
-                      src={client.image}
-                      alt={client.title}
-                      className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
-                    <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute bottom-6 left-6 inline-block bg-red-600 px-3 py-2 tablet:bottom-8 tablet:left-8">
-                      {client.shortName}
-                      <span style={{ color: 'rgba(255,255,255,0.7)' }}>, {client.category}</span>
-                    </h3>
-                  </Link>
+                  <CaseStudyCard key={client.href} client={client} className="aspect-square tablet:aspect-[4/5]" />
                 ))}
               </div>
             </div>
