@@ -42,7 +42,7 @@ const routes = [
     path: '/bitget',
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
-      'How I led social media and community for Bitget across Africa, driving 40M+ impressions and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
+      'How I led social media and community for Bitget across Africa, driving 40M+ organic views and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/bitget.jpg',
     type: 'article',
   },

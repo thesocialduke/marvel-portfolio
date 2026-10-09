@@ -68,7 +68,7 @@ export const clients = [
 
 export const stats = [
   { value: '5+', label: 'years experience' },
-  { value: '40M+', label: 'Cumulative views' },
+  { value: '40M+', label: 'Organic views' },
   { value: '150K+', label: 'New followers gained' },
   { value: '20K', label: 'Users from ambassador program' },
 ]
@@ -111,8 +111,8 @@ export const services = [
   },
   {
     title: 'Content Creation',
-    body: 'Need content that feels native to each platform? I create short & long form videos, from UGC-style ads to polished brand promos, educational pieces and brand stories that make complex products easy to understand and fun to watch.',
-    shortBody: 'UGC-style ads, brand promos and educational videos, short and long form',
+    body: 'Need content that feels native to each platform? I create short and long-form videos, from UGC-style ads to polished brand promos, educational pieces and brand stories that make complex products easy to understand and fun to watch.',
+    shortBody: 'UGC-style ads, brand promos and educational videos, short and long-form',
   },
   {
     title: 'B2B/B2C Creator, KOL & Ambassador Partnerships',
@@ -129,7 +129,7 @@ export const services = [
 export const faqs = [
   {
     q: 'Do you work with brands outside crypto/Web3?',
-    a: "My deepest experience is in Fintech and Web3, but the same strategy, social growth, and content approach applies to any fast-moving consumer brand. I'm also especially excited about the AI space right now and would love to bring that same energy to an AI-focused brand. Happy to discuss fit for other industries.",
+    a: "My deepest experience is in Fintech and Web3, but the same strategy, social growth, and content approach applies to any fast-moving consumer brand. I’m also especially excited about the AI space right now and would love to bring that same energy to an AI-focused brand. Happy to discuss fit for other industries.",
   },
   {
     q: 'What does working together look like?',
@@ -183,7 +183,7 @@ export type CaseStudyData = {
 export const bitgetCaseStudy: CaseStudyData = {
   href: '/bitget',
   eyebrow: 'Case study',
-  title: 'Bitget: Top #3 Crypto Exchange Globally',
+  title: 'Bitget: Top 3 Crypto Exchange Globally',
   summary:
     'I led Social Media and Community for Bitget across Africa, driving strategy and growth in one of the world’s most fast-moving markets, from viral campaigns and live community programming to offline activations and full-cycle content production.',
   roleTitle: 'Head of Social Media, Content and Community',
@@ -199,8 +199,8 @@ export const bitgetCaseStudy: CaseStudyData = {
     {
       title: 'Campaigns',
       photos: [
-        { image: '/case-studies/bitget/campaign-dogs.jpg', caption: '$DOGS listing: over 2M+ impressions' },
-        { image: '/case-studies/bitget/campaign-pi.jpg', caption: '$PI listing: over 1M+ impressions' },
+        { image: '/case-studies/bitget/campaign-dogs.jpg', caption: '$DOGS listing: 2M+ impressions' },
+        { image: '/case-studies/bitget/campaign-pi.jpg', caption: '$PI listing: 1M+ impressions' },
         { image: '/case-studies/bitget/campaign-bitquest.jpg', caption: '#BitQuest: 11.9M+ total reach' },
         { image: '/case-studies/bitget/campaign-stocks-vs-crypto.jpg', caption: 'Stocks vs Crypto Showdown challenge' },
       ],
@@ -221,7 +221,7 @@ export const bitgetCaseStudy: CaseStudyData = {
     },
   ],
   results: [
-    { value: '40M+', label: 'Total impressions' },
+    { value: '40M+', label: 'Organic views' },
     { value: '1M+', label: 'Views on education programs' },
     { value: '150K+', label: 'New followers gained' },
     { value: '20K', label: 'Users from ambassador program' },

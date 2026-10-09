@@ -77,7 +77,7 @@ const corePrograms = [
     stat: '#1',
     statLabel: 'Ranking on Google',
     title: 'SEO and educational content',
-    body: 'Community-led articles ranking #1 on Google in Nigeria, Kenya, 1st page in Ethiopia on crypto-related user education.',
+    body: 'Community-led articles on crypto-related user education, ranking #1 on Google in Nigeria and Kenya and on page one in Ethiopia.',
   },
   {
     stat: 'Loop',
@@ -95,7 +95,7 @@ export function BitgetCaseStudy() {
   useDocumentMeta({
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
-      'How I led social media and community for Bitget across Africa, driving 40M+ impressions and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
+      'How I led social media and community for Bitget across Africa, driving 40M+ organic views and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/bitget.jpg',
     ogType: 'article',
   })
@@ -125,7 +125,7 @@ export function BitgetCaseStudy() {
                 <p className="custom-h1 custom-h1-bold" style={{ color: RED }}>
                   40M+
                 </p>
-                <p className="custom-p mt-2 text-ink/60">Total impressions</p>
+                <p className="custom-p mt-2 text-ink/60">Organic views</p>
               </div>
               <div>
                 <p className="custom-h1 custom-h1-bold" style={{ color: RED }}>

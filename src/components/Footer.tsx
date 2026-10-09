@@ -98,7 +98,7 @@ export function Footer() {
                 Would love to hear from you.
               </h2>
               <p className="custom-p mt-4" style={{ color: LIGHT_MUTED }}>
-                If you have requests or questions, kindly do not hesitate to contact me.
+                If you have requests or questions, feel free to reach out.
               </p>
             </div>
             <div className="shrink-0">

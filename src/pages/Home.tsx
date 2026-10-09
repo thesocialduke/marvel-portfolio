@@ -54,9 +54,9 @@ export function Home() {
                     backgroundSize: underlineOn ? '100% 3px' : '0% 3px',
                   }}
                 >
-                  Social And Community-Led Growth Engines
+                  social and community-led growth engines
                 </span>{' '}
-                For Brands Entering And Scaling Across Africa.
+                for brands entering and scaling across Africa.
               </h1>
               <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-red-600 tablet:justify-end tablet:text-sm">
                 <span aria-hidden="true" className="inline-block h-px w-4 bg-red-600/50" /> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
@@ -147,10 +147,10 @@ export function Home() {
 
             <div className="min-w-0 max-w-[70%] text-right tablet:text-left">
               <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-ink/80 tablet:justify-start tablet:text-sm">
-                <span aria-hidden="true" className="inline-block h-px w-4 bg-ink/40" /> HI, I'M
+                <span aria-hidden="true" className="inline-block h-px w-4 bg-ink/40" /> HI, I’M
               </p>
               <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-ink/60 tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
-                NDUBUISI
+                NDUBUISI{' '}
                 <br />
                 MARVELLOUS
               </h2>
@@ -178,7 +178,7 @@ export function Home() {
               lines={[
                 <p key="lead" className="custom-h2 custom-h2-bold relative text-justify text-balance uppercase">
                   I drive growth and acquisition for brands entering or scaling across Africa, turning strategy
-                  into audience growth, engagement, and measurable results.
+                  into an active user base and measurable results.
                 </p>,
                 <p key="brands" className="custom-p mt-4 text-left text-ink/70">
                   With 5+ years of experience across crypto, fintech, SaaS, and emerging tech, I’ve led growth,
@@ -197,8 +197,9 @@ export function Home() {
                   .
                 </p>,
                 <p key="work" className="custom-p mt-2 text-left text-ink/70">
-                  My work spans localized campaigns, creator/KOL partnerships, platform-native content, GTM and
-                  data-driven growth across African markets and beyond.
+                  My work spans localized campaigns, creator/KOL partnerships, platform-native content, go-to-market and
+                  data-driven growth across African markets and beyond. I also build B2B relationships with
+                  communities, affiliates and partners that turn into lasting advocacy.
                 </p>,
               ]}
             />

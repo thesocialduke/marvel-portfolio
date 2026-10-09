@@ -71,7 +71,7 @@ export function Services() {
               <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
               <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Services</p>
             </div>
-            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">I’m open for new projects.</h1>
+            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">I’m open to new projects.</h1>
             <p className="custom-p mt-6 max-w-2xl text-ink/70">See what I can do for you below.</p>
           </div>
         </Grid>
