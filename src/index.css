@@ -377,16 +377,19 @@
   -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
 }
 
+/* Mobile track: 4 copies of the logo set, looping at -25% (one set). It starts
+   14vw in from the left edge, just past the fade, so the first logos on screen
+   are Binance and Bitget in full rather than half-faded at the edge. */
 .trusted-by-track {
-  animation: trusted-by-scroll 14s linear infinite;
+  animation: trusted-by-scroll 12s linear infinite;
 }
 
 @keyframes trusted-by-scroll {
   from {
-    transform: translateX(0);
+    transform: translateX(calc(-25% + 14vw));
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% + 14vw));
   }
 }
 
@@ -410,6 +413,10 @@
   .trusted-by-track,
   .trusted-by-track-x4 {
     animation: none;
+  }
+
+  .trusted-by-track {
+    transform: translateX(14vw);
   }
 }
 

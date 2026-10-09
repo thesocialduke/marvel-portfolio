@@ -1,4 +1,5 @@
 import { ButtonLink } from '../components/Button'
+import { CvMenu } from '../components/CvMenu'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
@@ -42,9 +43,7 @@ export function ContactMe() {
               >
                 {site.email}
               </ButtonLink>
-              <ButtonLink to={site.cvUrl} download fullWidth={false}>
-                Download CV ↓
-              </ButtonLink>
+              <CvMenu variant="button" label="My CV ▾" />
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-ink/15 pt-6">

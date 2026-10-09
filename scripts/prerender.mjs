@@ -3,11 +3,26 @@
 // link previews on WhatsApp, LinkedIn, X and Slack) would then show the home page's
 // title and image for every page. This writes a copy of index.html for each route with
 // that page's own title, description, canonical URL and share image in the <head>.
+// It also renders each page's body with React (src/entry-server.tsx, built by
+// `vite build --ssr`) into <div id="root">, so the text and headings are in the raw HTML
+// for crawlers and AI assistants that don't run JavaScript. The browser then hydrates it.
 // Output is dist/<route>.html (served at /<route> because vercel.json has cleanUrls).
 //
 // KEEP IN SYNC: the title/description below must match the useDocumentMeta() call in
 // each page file under src/pages.
 import { readFileSync, writeFileSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
+import path from 'node:path'
+
+const { render } = await import(pathToFileURL(path.resolve('dist-ssr/entry-server.js')).href)
+
+const ROOT = '<div id="root"></div>'
+async function withBody(html, route) {
+  if (!html.includes(ROOT)) throw new Error('prerender: <div id="root"></div> not found in dist/index.html')
+  const body = await render(route)
+  if (!body.includes('<h1')) throw new Error(`prerender: no <h1> rendered for ${route}`)
+  return html.replace(ROOT, `<div id="root">${body}</div>`)
+}
 
 const SITE_URL = 'https://ndubuisimarvellous.com'
 
@@ -59,9 +74,12 @@ function setMeta(html, attr, key, content) {
 
 const template = readFileSync('dist/index.html', 'utf8')
 
+writeFileSync('dist/index.html', await withBody(template, '/'))
+console.log('prerendered body for /')
+
 for (const route of routes) {
   const url = `${SITE_URL}${route.path}`
-  const image = `${SITE_URL}${route.image ?? '/avatar.jpg'}`
+  const image = `${SITE_URL}${route.image ?? '/og-banner.jpg'}`
   let html = template
 
   html = html.replace(/<title>.*?<\/title>/s, `<title>${escape(route.title)}</title>`)
@@ -77,7 +95,9 @@ for (const route of routes) {
   html = setMeta(html, 'name', 'twitter:description', route.description)
   html = setMeta(html, 'name', 'twitter:image', image)
   html = setMeta(html, 'name', 'twitter:image:alt', route.title)
-  html = setMeta(html, 'name', 'twitter:card', route.image ? 'summary_large_image' : 'summary')
+  html = setMeta(html, 'name', 'twitter:card', 'summary_large_image')
+
+  html = await withBody(html, route.path)
 
   // vercel.json sets cleanUrls, so /services is served from dist/services.html
   writeFileSync(`dist${route.path}.html`, html)

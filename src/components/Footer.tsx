@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
 import { ButtonLink } from './Button'
+import { CvMenu } from './CvMenu'
 import { site } from '../data/site'
 
 const LIGHT = 'var(--color-page)'
@@ -118,14 +119,7 @@ export function Footer() {
               >
                 Home
               </Link>
-              <a
-                href={site.cvUrl}
-                download
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
-                style={{ color: LIGHT }}
-              >
-                CV
-              </a>
+              <CvMenu variant="link" label="CV" />
               <a
                 href={site.linkedin}
                 target="_blank"

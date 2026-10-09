@@ -83,18 +83,21 @@ export function Home() {
         {/* Trusted-by marquee: an infinite right-to-left scroll, faded out
             at both edges via a mask, sitting right under the hero picture. */}
 
-        {/* Mobile: compact row, logos duplicated 2x, track loops at -50%. */}
+        {/* Mobile: compact row. Uses the trimmed copies in /logos/tight (the originals carry
+            empty space inside the file, which made the gaps uneven, Binance especially), so
+            every logo is separated by exactly the same gap (a right margin on each logo, not a
+            flex gap, so every set is exactly the same width and the -25% loop lines up). Logos repeat 4x and the track
+            loops at -25%; it starts with the second set offset in from the left edge so
+            Binance and Bitget are already in view when the page opens. */}
         <div className="trusted-by-fade relative w-full overflow-hidden py-4 tablet:hidden">
           <p className="mb-3 text-center text-[10px] font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
-          <div className="trusted-by-track flex w-max items-center gap-12">
-            {[...logos, ...logos].map((logo, i) => (
+          <div className="trusted-by-track flex w-max items-center">
+            {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
               <img
                 key={`mobile-${logo.src}-${i}`}
-                src={logo.src}
+                src={logo.src.replace('/logos/', '/logos/tight/')}
                 alt={logo.name}
-                className={`shrink-0 object-contain opacity-70 ${
-                  logo.name === 'Binance' || logo.name === 'Hyperbridge' ? 'h-7' : 'h-4'
-                }`}
+                className={`mr-10 shrink-0 object-contain opacity-70 ${logo.name === 'Binance' ? 'h-[22px]' : 'h-4'}`}
               />
             ))}
           </div>

@@ -6,13 +6,15 @@ export function media(path: string) {
 
 export const site = {
   name: 'Ndubuisi Marvellous',
-  email: 'marvellousndubuisi98@gmail.com',
+  email: 'hello@ndubuisimarvellous.com',
   linkedin: 'https://www.linkedin.com/in/thesocialduke',
   instagram: 'https://instagram.com/thesocialduke',
   telegram: 'https://t.me/thesocialduke',
   bookingUrl: 'https://calendar.app.google/kLHEDtD3JrEdKgGd8',
   // Google Doc CV, exported as a PDF so the browser downloads it instead of opening the doc.
   cvUrl: 'https://docs.google.com/document/d/1YDAPFGXULjpA4gMhmeLX8b_hYRI4HoypwUWCsAebXDw/export?format=pdf',
+  // Same Google Doc in Google's clean read-only viewer, for people who'd rather read it than download it.
+  cvViewUrl: 'https://docs.google.com/document/d/1YDAPFGXULjpA4gMhmeLX8b_hYRI4HoypwUWCsAebXDw/preview',
   // Same appointment schedule as bookingUrl, in Google's embeddable (?gv=true) form.
   bookingEmbedUrl:
     'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ZDplLCYiSzk5bsr2frJL1Re4bY4cemRyhpugy5Ou5h8fN8OeBIbTbiFcGqjLWpv1EjNndHv1p?gv=true',

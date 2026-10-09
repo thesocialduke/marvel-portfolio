@@ -43,7 +43,7 @@ export function useDocumentMeta({
   useEffect(() => {
     const previousTitle = document.title
     const url = `${SITE_URL}${pathname === '/' ? '/' : pathname}`
-    const ogImage = image ? `${SITE_URL}${image}` : `${SITE_URL}/avatar.jpg`
+    const ogImage = image ? `${SITE_URL}${image}` : `${SITE_URL}/og-banner.jpg`
 
     document.title = title
     upsertMeta('name', 'description', description)
@@ -58,9 +58,8 @@ export function useDocumentMeta({
     upsertMeta('property', 'og:type', ogType)
     upsertMeta('property', 'og:image:alt', title)
     upsertMeta('name', 'twitter:image:alt', title)
-    // A page with its own wide image gets the large preview card; the default
-    // square avatar looks better as the small one.
-    upsertMeta('name', 'twitter:card', image ? 'summary_large_image' : 'summary')
+    // Every page has a wide share image (its own, or the default banner).
+    upsertMeta('name', 'twitter:card', 'summary_large_image')
 
     return () => {
       document.title = previousTitle
