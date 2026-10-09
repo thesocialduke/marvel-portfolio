@@ -87,6 +87,7 @@ export function VideoPlayer({
             max={1}
             step={0.001}
             value={progress}
+            aria-label="Seek"
             className="scrubber w-full"
             onChange={(e) => {
               const video = videoRef.current

@@ -53,7 +53,7 @@ export function ContactMe() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                  className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ink/60"
                 >
                   {social.label}
                 </a>

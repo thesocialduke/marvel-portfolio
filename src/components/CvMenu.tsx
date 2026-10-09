@@ -28,7 +28,10 @@ export function CvMenu({
       if (!wrapRef.current?.contains(event.target as Node)) setOpen(false)
     }
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setOpen(false)
+      if (event.key === 'Escape') {
+        setOpen(false)
+        wrapRef.current?.querySelector('button')?.focus()
+      }
     }
     document.addEventListener('pointerdown', onPointerDown)
     document.addEventListener('keydown', onKeyDown)
@@ -39,7 +42,6 @@ export function CvMenu({
   }, [open])
 
   const toggleProps = {
-    'aria-haspopup': 'menu' as const,
     'aria-expanded': open,
     'aria-controls': menuId,
     onClick: () => setOpen((value) => !value),
@@ -55,7 +57,7 @@ export function CvMenu({
         <button
           type="button"
           {...toggleProps}
-          className="custom-p custom-p-sm cursor-pointer tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+          className="custom-p custom-p-sm cursor-pointer tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
           style={{ color: 'var(--color-page)' }}
         >
           {label}
@@ -65,7 +67,6 @@ export function CvMenu({
       {open && (
         <div
           id={menuId}
-          role="menu"
           className={cn(
             'absolute left-0 z-50 min-w-[12rem] bg-page ring-1 ring-ink',
             // The footer link sits at the bottom of the page, so its menu opens upward.
@@ -73,7 +74,6 @@ export function CvMenu({
           )}
         >
           <a
-            role="menuitem"
             href={site.cvViewUrl}
             target="_blank"
             rel="noreferrer"
@@ -83,7 +83,6 @@ export function CvMenu({
             View online <span aria-hidden="true">↗</span>
           </a>
           <a
-            role="menuitem"
             href={site.cvUrl}
             download
             onClick={() => setOpen(false)}

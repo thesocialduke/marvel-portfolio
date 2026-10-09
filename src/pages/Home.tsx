@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { usePauseOffscreen } from '../hooks/usePauseOffscreen'
 import { Accordion } from '../components/Accordion'
 import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
@@ -15,6 +16,8 @@ const GRAIN_URL =
 
 export function Home() {
   const [underlineOn, setUnderlineOn] = useState(false)
+  const mobileTrackRef = usePauseOffscreen<HTMLDivElement>()
+  const desktopTrackRef = usePauseOffscreen<HTMLDivElement>()
   useEffect(() => {
     const t = setTimeout(() => setUnderlineOn(true), 300)
     return () => clearTimeout(t)
@@ -46,7 +49,7 @@ export function Home() {
                 {/* Drawn as a background so it can sweep in left to right
                     (text-decoration can't animate its length). */}
                 <span
-                  className="transition-[background-size] duration-[1400ms] ease-out"
+                  className="transition-[background-size] duration-[1400ms] ease-out motion-reduce:transition-none"
                   style={{
                     backgroundImage: 'linear-gradient(rgb(220 38 38), rgb(220 38 38))',
                     backgroundRepeat: 'no-repeat',
@@ -91,12 +94,13 @@ export function Home() {
             Binance and Bitget are already in view when the page opens. */}
         <div className="trusted-by-fade relative w-full overflow-hidden py-4 tablet:hidden">
           <p className="mb-3 text-center text-[10px] font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
-          <div className="trusted-by-track flex w-max items-center">
+          <div ref={mobileTrackRef} className="trusted-by-track flex w-max items-center">
             {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
               <img
                 key={`mobile-${logo.src}-${i}`}
                 src={logo.src.replace('/logos/', '/logos/tight/')}
-                alt={logo.name}
+                alt={i < logos.length ? logo.name : ''}
+                aria-hidden={i >= logos.length ? true : undefined}
                 className={`mr-10 shrink-0 object-contain opacity-70 ${logo.name === 'Binance' ? 'h-[22px]' : 'h-4'}`}
               />
             ))}
@@ -113,7 +117,7 @@ export function Home() {
           <Grid className="relative mt-4">
             <div className="trusted-by-fade relative col-span-full overflow-hidden py-4 tablet:col-span-6 tablet:col-start-2 tablet:py-6 laptop:col-span-12 laptop:col-start-2">
               <p className="mb-3 text-center text-xs font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
-              <div className="trusted-by-track-x4 flex w-max items-center">
+              <div ref={desktopTrackRef} className="trusted-by-track-x4 flex w-max items-center">
                 {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
                   <div
                     key={`desktop-${logo.src}-${i}`}
@@ -121,7 +125,8 @@ export function Home() {
                   >
                     <img
                       src={logo.src}
-                      alt={logo.name}
+                      alt={i < logos.length ? logo.name : ''}
+                      aria-hidden={i >= logos.length ? true : undefined}
                       className={`object-contain ${
                         logo.name === 'Binance' || logo.name === 'Hyperbridge'
                           ? 'h-20 w-36 laptop:h-28 laptop:w-48'

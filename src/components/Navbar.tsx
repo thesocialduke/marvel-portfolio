@@ -27,6 +27,15 @@ export function Navbar() {
     }
   }, [open])
 
+  // The overlay is a full-screen layer, so while it's open the page behind it must
+  // not be reachable with Tab (focus would disappear into content nobody can see).
+  useEffect(() => {
+    if (!open) return
+    const behind = document.querySelectorAll<HTMLElement>('main, footer, [aria-label="Back to top"]')
+    behind.forEach((el) => el.setAttribute('inert', ''))
+    return () => behind.forEach((el) => el.removeAttribute('inert'))
+  }, [open])
+
   useEffect(() => {
     if (!open) return
     function onKeyDown(e: KeyboardEvent) {

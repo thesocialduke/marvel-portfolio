@@ -83,7 +83,7 @@ export function BitgetCampaigns() {
                     href={url}
                     target="_blank"
                     rel="noreferrer"
-                    className="custom-p custom-p-sm underline underline-offset-4 outline-none transition-opacity hover:opacity-70"
+                    className="custom-p custom-p-sm underline underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ink/60"
                   >
                     X post {i + 1} ↗
                   </a>

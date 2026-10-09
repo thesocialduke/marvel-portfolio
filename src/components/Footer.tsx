@@ -56,13 +56,20 @@ function EmailAction() {
 function BackToTop() {
   const [visible, setVisible] = useState(false)
 
+  // An invisible 400px marker at the very top of the page: once it has scrolled out
+  // of view the visitor is past 400px, so the button shows. No scroll listener needed.
   useEffect(() => {
-    function onScroll() {
-      setVisible(window.scrollY > 400)
+    const marker = document.createElement('div')
+    marker.setAttribute('aria-hidden', 'true')
+    marker.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:400px;pointer-events:none;visibility:hidden'
+    document.body.appendChild(marker)
+
+    const observer = new IntersectionObserver(([entry]) => setVisible(!entry.isIntersecting))
+    observer.observe(marker)
+    return () => {
+      observer.disconnect()
+      marker.remove()
     }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
@@ -114,7 +121,7 @@ export function Footer() {
                   // Already on the home page: the route doesn't change, so scroll up manually.
                   if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
                 }}
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
                 style={{ color: LIGHT }}
               >
                 Home
@@ -124,7 +131,7 @@ export function Footer() {
                 href={site.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
                 style={{ color: LIGHT }}
               >
                 LinkedIn
@@ -133,7 +140,7 @@ export function Footer() {
                 href={site.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
                 style={{ color: LIGHT }}
               >
                 Instagram
@@ -142,7 +149,7 @@ export function Footer() {
                 href={site.telegram}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
                 style={{ color: LIGHT }}
               >
                 Telegram

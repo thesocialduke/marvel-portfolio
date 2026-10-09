@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export type EmbedSource = { tiktok?: string; instagram?: string }
 
@@ -18,15 +18,40 @@ function embedUrl(platform: Platform, url: string): string {
 export function VideoModal({ title, sources, onClose }: { title: string; sources: EmbedSource; onClose: () => void }) {
   const available = (['tiktok', 'instagram'] as const).filter((p) => sources[p])
   const [platform, setPlatform] = useState<Platform>(available[0])
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    // Remember what had focus (the button that opened this) so it gets it back on close.
+    const opener = document.activeElement as HTMLElement | null
+    closeRef.current?.focus()
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      // Keep Tab inside the dialog: wrap from the last control to the first and back.
+      if (e.key !== 'Tab' || !dialogRef.current) return
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>('button, iframe, [href], input, [tabindex]:not([tabindex="-1"])')
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
     document.addEventListener('keydown', onKey)
     const previous = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = previous
+      opener?.focus()
     }
   }, [onClose])
 
@@ -34,6 +59,7 @@ export function VideoModal({ title, sources, onClose }: { title: string; sources
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label={title}
@@ -59,6 +85,7 @@ export function VideoModal({ title, sources, onClose }: { title: string; sources
               ))}
           </div>
           <button
+            ref={closeRef}
             type="button"
             onClick={onClose}
             aria-label="Close video"

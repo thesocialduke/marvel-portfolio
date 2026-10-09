@@ -36,7 +36,7 @@ export function StaggeredReveal({
       {lines.map((line, i) => (
         <span
           key={i}
-          className={`block transition-all duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${
+          className={`block transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${
             visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           } ${lineClassName}`}
           style={{ transitionDelay: visible ? `${i * staggerMs}ms` : '0ms' }}

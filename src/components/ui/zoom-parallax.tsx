@@ -1,4 +1,4 @@
-import { useScroll, useTransform, motion } from 'motion/react'
+import { useReducedMotion, useScroll, useTransform, motion } from 'motion/react'
 import { useRef } from 'react'
 
 interface Image {
@@ -18,11 +18,15 @@ export function ZoomParallax({ images }: ZoomParallaxProps) {
     offset: ['start start', 'end end'],
   })
 
-  const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4])
-  const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5])
-  const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6])
-  const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8])
-  const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9])
+  // With "reduce motion" on, the photos stay at their resting size instead of zooming on scroll.
+  const reduceMotion = useReducedMotion()
+  const to = (zoom: number) => (reduceMotion ? 1 : zoom)
+
+  const scale4 = useTransform(scrollYProgress, [0, 1], [1, to(4)])
+  const scale5 = useTransform(scrollYProgress, [0, 1], [1, to(5)])
+  const scale6 = useTransform(scrollYProgress, [0, 1], [1, to(6)])
+  const scale8 = useTransform(scrollYProgress, [0, 1], [1, to(8)])
+  const scale9 = useTransform(scrollYProgress, [0, 1], [1, to(9)])
 
   const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9]
 

@@ -1,10 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useReducedMotion } from 'motion/react'
 
-function useCountUp(target: number, active: boolean, duration = 1500) {
-  const [value, setValue] = useState(0)
+// Counts up from 0 once the number scrolls into view. The first render (and the
+// pre-rendered HTML that crawlers read) shows the real final value; the 0 start is
+// applied before the first paint, so people still see the count-up but nothing that
+// reads the page without running the animation ever sees "0M+".
+function useCountUp(target: number, active: boolean, enabled: boolean, duration = 1500) {
+  const [value, setValue] = useState(target)
+
+  useLayoutEffect(() => {
+    if (enabled) setValue(0)
+  }, [enabled])
 
   useEffect(() => {
-    if (!active) return
+    if (!active || !enabled) return
 
     let start: number | null = null
     let raf: number
@@ -18,7 +27,7 @@ function useCountUp(target: number, active: boolean, duration = 1500) {
 
     raf = requestAnimationFrame(step)
     return () => cancelAnimationFrame(raf)
-  }, [active, target, duration])
+  }, [active, enabled, target, duration])
 
   return value
 }
@@ -30,6 +39,7 @@ const VALUE_PATTERN = /^(\D*)(\d+)(\D*)$/
 export function StatCounter({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const [active, setActive] = useState(false)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
     const el = ref.current
@@ -50,7 +60,7 @@ export function StatCounter({ value }: { value: string }) {
 
   const match = value.match(VALUE_PATTERN)
   const target = match ? parseInt(match[2], 10) : 0
-  const count = useCountUp(target, active)
+  const count = useCountUp(target, active, !reducedMotion && !!match)
 
   if (!match) {
     return (
@@ -60,8 +70,9 @@ export function StatCounter({ value }: { value: string }) {
     )
   }
 
+  // aria-label gives screen readers the final number instead of the counting digits.
   return (
-    <span ref={ref} className="tabular-nums">
+    <span ref={ref} role="img" aria-label={value} className="tabular-nums">
       {match[1]}
       {count}
       {match[3]}
