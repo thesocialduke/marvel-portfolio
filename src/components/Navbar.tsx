@@ -158,8 +158,17 @@ export function Navbar() {
               </motion.ul>
             </div>
 
-            <div className="font-poppins flex items-center justify-between px-6 pb-5 text-xs tracking-wide text-page/60 tablet:px-10 tablet:pb-6 laptop:px-14 laptop:pb-8">
-              <span>{site.copyright}</span>
+            <div className="font-poppins flex items-center justify-between gap-4 px-6 pb-5 text-xs tracking-wide text-page/60 tablet:px-10 tablet:pb-6 laptop:px-14 laptop:pb-8">
+              <Link
+                to="/contact"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 outline-none transition-colors hover:text-page focus-visible:ring-2 focus-visible:ring-page/40"
+              >
+                <span aria-hidden="true" className="inline-block size-2 shrink-0 bg-red-600 motion-safe:animate-pulse" />
+                <span>
+                  Open to work<span className="hidden tablet:inline">: full-time and contract roles</span>
+                </span>
+              </Link>
               <a
                 href={site.linkedin}
                 target="_blank"
