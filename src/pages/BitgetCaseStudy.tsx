@@ -124,19 +124,19 @@ export function BitgetCaseStudy() {
 
             <div className="mt-10 grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:grid-cols-3">
               <div>
-                <p className="custom-h1 custom-h1-bold" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
                   40M+
                 </p>
                 <p className="custom-p mt-2 text-ink/60">Organic views</p>
               </div>
               <div>
-                <p className="custom-h1 custom-h1-bold" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
                   150K+
                 </p>
                 <p className="custom-p mt-2 text-ink/60">New followers gained</p>
               </div>
               <div>
-                <p className="custom-h1 custom-h1-bold" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
                   #1
                 </p>
                 <p className="custom-p mt-2 text-ink/60">Downloaded crypto app in Nigeria (Bitget Wallet)</p>
@@ -240,7 +240,7 @@ export function BitgetCaseStudy() {
           <div className="col-span-full grid grid-cols-1 gap-5 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-2 laptop:col-span-12 laptop:col-start-2 laptop:grid-cols-3">
             {corePrograms.map((program) => (
               <div key={program.title} className="flex flex-col bg-hyacinth/5 p-6 tablet:p-8">
-                <p className="custom-h1 custom-h1-bold text-[2.75rem] normal-case" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold text-[2.75rem] normal-case tabular-nums" style={{ color: RED }}>
                   {program.stat}
                 </p>
                 <p className="custom-p custom-p-sm mt-3 tracking-[0.1em] uppercase">{program.statLabel}</p>
@@ -264,7 +264,7 @@ export function BitgetCaseStudy() {
               <div className="shrink-0 text-right tablet:pb-1 tablet:text-left">
                 {offlineStats.map((stat) => (
                   <div key={stat.label}>
-                    <p className="custom-h1 custom-h1-bold text-[1.75rem] leading-none tablet:text-[2.25rem]" style={{ color: RED }}>
+                    <p className="custom-h1 custom-h1-bold tabular-nums text-[1.75rem] leading-none tablet:text-[2.25rem]" style={{ color: RED }}>
                       {stat.value}
                     </p>
                     <p className="custom-p custom-p-sm mt-2 max-w-[7.5rem] text-ink/60 tablet:max-w-[11rem]">{stat.label}</p>

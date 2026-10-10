@@ -44,7 +44,7 @@ export function ContactMe() {
               >
                 {site.email}
               </ButtonLink>
-              <CvMenu variant="button" label="My CV ▾" />
+              <CvMenu variant="button" label="My Resume ▾" />
             </div>
 
             <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-ink/15 pt-6">

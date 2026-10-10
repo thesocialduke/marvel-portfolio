@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { cn } from '../lib/utils'
 
 export function StaggeredReveal({
   lines,
@@ -32,13 +33,15 @@ export function StaggeredReveal({
   }, [])
 
   return (
-    <span ref={ref} className={`block ${className}`}>
+    <span ref={ref} className={cn('block', className)}>
       {lines.map((line, i) => (
         <span
           key={i}
-          className={`block transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          } ${lineClassName}`}
+          className={cn(
+            'block transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0',
+            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
+            lineClassName,
+          )}
           style={{ transitionDelay: visible ? `${i * staggerMs}ms` : '0ms' }}
         >
           {line}

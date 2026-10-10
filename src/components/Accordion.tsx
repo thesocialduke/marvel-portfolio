@@ -1,3 +1,5 @@
+import { cn } from '../lib/utils'
+
 type AccordionItem = {
   q: string
   a: string
@@ -17,7 +19,7 @@ export function Accordion({
       {items.map((item) => (
         <details key={item.q} className="group py-3 first:pt-0 last:pb-0">
           <summary
-            className={`${questionClass} relative flex cursor-pointer list-none items-center justify-between gap-4 text-balance transition-colors group-open:text-hyacinth [&::-webkit-details-marker]:hidden`}
+            className={cn(questionClass, 'relative flex cursor-pointer list-none items-center justify-between gap-4 text-balance transition-colors duration-200 group-open:text-hyacinth [&::-webkit-details-marker]:hidden')}
           >
             <span>{item.q}</span>
             <svg

@@ -7,6 +7,7 @@ import { JsonLd } from '../components/JsonLd'
 import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
+import { cn } from '../lib/utils'
 
 const BLUE = 'rgb(0 82 255)'
 
@@ -137,7 +138,7 @@ export function BaseCaseStudy() {
                         </span>
                       </div>
                     ) : null}
-                    <div className={`relative aspect-[9/16] overflow-hidden bg-hyacinth/10 ${pair.before ? '' : 'col-span-2 mx-auto w-1/2'}`}>
+                    <div className={cn('relative aspect-[9/16] overflow-hidden bg-hyacinth/10', !pair.before && 'col-span-2 mx-auto w-1/2')}>
                       <img loading="lazy" decoding="async" src={pair.after.image} alt="" className="absolute inset-0 size-full object-cover" />
                       <span className="custom-p custom-p-sm absolute top-2 left-2 bg-red-600 px-2 py-1 tracking-[0.1em] uppercase" style={{ color: '#fff' }}>
                         After

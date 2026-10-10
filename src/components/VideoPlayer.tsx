@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { cn } from '../lib/utils'
 
 export function VideoPlayer({
   src,
@@ -41,7 +42,7 @@ export function VideoPlayer({
           poster={poster}
           playsInline
           muted={muted}
-          className={`h-full w-full bg-graphite object-contain ${aspect}`}
+          className={cn('h-full w-full bg-graphite object-contain', aspect)}
           onTimeUpdate={(e) => {
             const el = e.currentTarget
             if (el.duration) setProgress(el.currentTime / el.duration)
@@ -64,9 +65,9 @@ export function VideoPlayer({
             </svg>
           </button>
         )}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#000a] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-[#000a] opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100" />
         <div
-          className="absolute bottom-6 left-1/2 flex w-full -translate-x-1/2 items-center gap-6 px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
+          className="absolute bottom-6 left-1/2 flex w-full -translate-x-1/2 items-center gap-6 px-6 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
           onClick={(e) => e.stopPropagation()}
         >
           {playing && (

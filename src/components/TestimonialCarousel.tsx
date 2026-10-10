@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { TestimonialsSection } from './ui/testimonials-2'
 import type { Testimonial } from '../data/site'
+import { cn } from '../lib/utils'
 
 export default function TestimonialCarousel({ items }: { items: Testimonial[] }) {
   const [index, setIndex] = useState(0)
@@ -22,7 +23,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
               key={t.name + i}
               aria-hidden={!active}
               inert={!active}
-              className={`col-start-1 row-start-1 transition-opacity duration-300 ${active ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+              className={cn('col-start-1 row-start-1 transition-opacity duration-200', active ? 'opacity-100' : 'pointer-events-none opacity-0')}
             >
               <TestimonialsSection
                 quote={
@@ -54,7 +55,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
                 aria-label={`Show review ${i + 1} of ${items.length}`}
                 aria-current={i === index}
                 onClick={() => setIndex(i)}
-                className={`size-2 cursor-pointer rounded-full ${i === index ? 'bg-foreground' : 'bg-foreground/25'}`}
+                className={cn('size-2 cursor-pointer rounded-full', i === index ? 'bg-foreground' : 'bg-foreground/25')}
               />
             ))}
           </div>

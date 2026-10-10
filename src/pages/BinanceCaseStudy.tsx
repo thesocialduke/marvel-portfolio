@@ -9,6 +9,7 @@ import { JsonLd } from '../components/JsonLd'
 import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
+import { cn } from '../lib/utils'
 
 const RED = 'rgb(220 38 38)'
 
@@ -180,9 +181,10 @@ export function BinanceCaseStudy() {
                   type="button"
                   onClick={() => setPlaying(episode)}
                   aria-label={`Play ${episode.title}`}
-                  className={`relative flex aspect-[9/16] w-full cursor-pointer items-end overflow-hidden bg-graphite p-3 text-left outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-red-600 ${
-                    i === 0 ? 'outline-2 -outline-offset-2 outline-red-600' : ''
-                  }`}
+                  className={cn(
+                    'relative flex aspect-[9/16] w-full cursor-pointer items-end overflow-hidden bg-graphite p-3 text-left outline-none transition-opacity duration-200 hover:opacity-90 focus-visible:ring-2 focus-visible:ring-red-600',
+                    i === 0 && 'outline-2 -outline-offset-2 outline-red-600',
+                  )}
                 >
                   {episode.thumb && <img loading="lazy" decoding="async" src={episode.thumb} alt="" className="absolute inset-0 size-full object-cover" />}
                   <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
@@ -196,7 +198,7 @@ export function BinanceCaseStudy() {
                     {episode.title}
                   </span>
                 </button>
-                <p className="custom-h1 custom-h1-bold mt-4 text-[2rem]" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold mt-4 text-[2rem] tabular-nums" style={{ color: RED }}>
                   {episode.views}
                 </p>
                 <p className="custom-p text-ink/60">Views</p>

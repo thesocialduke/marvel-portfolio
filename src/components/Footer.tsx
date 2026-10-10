@@ -4,6 +4,7 @@ import { Grid } from './Grid'
 import { ButtonLink } from './Button'
 import { CvMenu } from './CvMenu'
 import { site } from '../data/site'
+import { cn } from '../lib/utils'
 
 const LIGHT = 'var(--color-page)'
 const LIGHT_MUTED = 'rgb(231 230 226 / 0.7)'
@@ -77,9 +78,10 @@ function BackToTop() {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top"
-      className={`fixed right-6 bottom-6 z-40 flex size-12 items-center justify-center bg-red-600 text-page shadow-lg outline-none transition-[opacity,transform] hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover ${
-        visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0'
-      }`}
+      className={cn(
+        'fixed right-[max(1.5rem,env(safe-area-inset-right))] bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-40 flex size-12 items-center justify-center bg-red-600 text-page shadow-lg outline-none transition-[opacity,transform] duration-200 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover',
+        visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0',
+      )}
     >
       <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 19V5M5 12l7-7 7 7" />
@@ -126,7 +128,7 @@ export function Footer() {
               >
                 Home
               </Link>
-              <CvMenu variant="link" label="CV" />
+              <CvMenu variant="link" label="Resume" />
               <a
                 href={site.linkedin}
                 target="_blank"

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
+import { Dialog } from 'radix-ui'
 
 export type StripImage = { src: string; alt: string; width: number; height: number; label: string }
 
@@ -6,18 +7,7 @@ export type StripImage = { src: string; alt: string; width: number; height: numb
 // image's proportions). Scrolls sideways on phones. Click an image to see it full size.
 export function ImageStrip({ images }: { images: StripImage[] }) {
   const [open, setOpen] = useState<StripImage | null>(null)
-
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(null)
-    document.addEventListener('keydown', onKey)
-    const previous = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = previous
-    }
-  }, [open])
+  const openerRef = useRef<HTMLElement | null>(null)
 
   return (
     <>
@@ -30,7 +20,10 @@ export function ImageStrip({ images }: { images: StripImage[] }) {
           >
             <button
               type="button"
-              onClick={() => setOpen(image)}
+              onClick={(e) => {
+                openerRef.current = e.currentTarget
+                setOpen(image)
+              }}
               aria-label={`View ${image.label} full size`}
               className="block h-56 w-auto cursor-zoom-in overflow-hidden outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-red-600 tablet:h-auto tablet:w-full"
             >
@@ -48,33 +41,31 @@ export function ImageStrip({ images }: { images: StripImage[] }) {
         ))}
       </div>
 
-      {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={open.label}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
-          onClick={() => setOpen(null)}
-        >
-          <button
-            type="button"
-            onClick={() => setOpen(null)}
-            aria-label="Close image"
-            className="absolute top-4 right-4 cursor-pointer p-1"
-            style={{ color: '#fff' }}
+      <Dialog.Root open={open !== null} onOpenChange={(isOpen) => !isOpen && setOpen(null)}>
+        <Dialog.Portal>
+          {/* Radix Dialog handles Escape, focus trapping, scroll lock and giving focus back. */}
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/85" />
+          <Dialog.Content
+            aria-describedby={undefined}
+            onCloseAutoFocus={(e) => {
+              e.preventDefault()
+              openerRef.current?.focus()
+            }}
+            className="fixed inset-0 z-50 grid place-items-center p-4 outline-none"
+            onClick={(e) => e.target === e.currentTarget && setOpen(null)}
           >
-            <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
-              <path d="M5 5l14 14M19 5L5 19" />
-            </svg>
-          </button>
-          <img
-            src={open.src}
-            alt={open.alt}
-            className="max-h-full max-w-full object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+            <Dialog.Title className="sr-only">{open?.label}</Dialog.Title>
+            <Dialog.Close asChild>
+              <button type="button" aria-label="Close image" className="absolute top-4 right-4 cursor-pointer p-1" style={{ color: '#fff' }}>
+                <svg className="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                  <path d="M5 5l14 14M19 5L5 19" />
+                </svg>
+              </button>
+            </Dialog.Close>
+            {open && <img src={open.src} alt={open.alt} className="max-h-full max-w-full object-contain" />}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </>
   )
 }

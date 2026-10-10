@@ -1,6 +1,7 @@
 import type { VideoItem } from '../data/site'
 import { Grid } from './Grid'
 import { VideoPlayer } from './VideoPlayer'
+import { cn } from '../lib/utils'
 
 export function VideoGallery({
   title,
@@ -40,7 +41,7 @@ export function VideoGallery({
       ) : null}
       <Grid className="gap-y-6">
         {videos.map((video) => (
-          <div key={video.src} className={`${cell} ${orientation === 'portrait' ? 'aspect-[9/16]' : ''}`}>
+          <div key={video.src} className={cn(cell, orientation === 'portrait' && 'aspect-[9/16]')}>
             <div className="space-y-6">
               <VideoPlayer
                 src={video.src}
@@ -52,7 +53,7 @@ export function VideoGallery({
               {video.title ? (
                 <div className="space-y-2">
                   <div className="space-y-text-block text-left">
-                    <h4 className={`custom-h4 ${titleBold ? 'custom-h4-bold-mixed-case' : ''}`}>{video.title}</h4>
+                    <h4 className={cn('custom-h4', titleBold && 'custom-h4-bold-mixed-case')}>{video.title}</h4>
                     {showDescriptions && video.description ? (
                       <p className="custom-p relative min-h-[1.5rem]">{video.description}</p>
                     ) : null}

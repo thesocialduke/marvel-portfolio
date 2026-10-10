@@ -10,6 +10,7 @@ import { StatCounter } from '../components/StatCounter'
 import TestimonialCarousel from '../components/TestimonialCarousel'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { avatar, clients, homeTestimonials, logos, services, stats } from '../data/site'
+import { cn } from '../lib/utils'
 
 const GRAIN_URL =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
@@ -101,7 +102,7 @@ export function Home() {
                 src={logo.src.replace('/logos/', '/logos/tight/')}
                 alt={i < logos.length ? logo.name : ''}
                 aria-hidden={i >= logos.length ? true : undefined}
-                className={`mr-10 shrink-0 object-contain opacity-70 ${logo.name === 'Binance' ? 'h-[22px]' : 'h-4'}`}
+                className={cn('mr-10 shrink-0 object-contain opacity-70', logo.name === 'Binance' ? 'h-[22px]' : 'h-4')}
               />
             ))}
           </div>
@@ -127,11 +128,12 @@ export function Home() {
                       src={logo.src}
                       alt={i < logos.length ? logo.name : ''}
                       aria-hidden={i >= logos.length ? true : undefined}
-                      className={`object-contain ${
+                      className={cn(
+                        'object-contain',
                         logo.name === 'Binance' || logo.name === 'Hyperbridge'
                           ? 'h-20 w-36 laptop:h-28 laptop:w-48'
-                          : 'h-11 w-28 laptop:h-14 laptop:w-32'
-                      }`}
+                          : 'h-11 w-28 laptop:h-14 laptop:w-32',
+                      )}
                     />
                   </div>
                 ))}
