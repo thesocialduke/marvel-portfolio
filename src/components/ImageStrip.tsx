@@ -62,7 +62,16 @@ export function ImageStrip({ images }: { images: StripImage[] }) {
                 </svg>
               </button>
             </Dialog.Close>
-            {open && <img src={open.src} alt={open.alt} className="max-h-full max-w-full object-contain" />}
+            {open && (
+              // Comfortable, not full-bleed: at most 880px wide and 80% of the screen
+              // height, never larger than the screenshot itself, backdrop visible around it.
+              <img
+                src={open.src}
+                alt={open.alt}
+                className="h-auto w-auto object-contain shadow-lg"
+                style={{ maxWidth: `min(88vw, 880px, ${open.width}px)`, maxHeight: '80dvh' }}
+              />
+            )}
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>

@@ -1,17 +1,52 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useReducedMotion } from 'motion/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { TestimonialsSection } from './ui/testimonials-2'
 import type { Testimonial } from '../data/site'
 import { cn } from '../lib/utils'
 
+// How long each review stays up before the next one appears.
+const AUTO_ADVANCE_MS = 7000
+
 export default function TestimonialCarousel({ items }: { items: Testimonial[] }) {
   const [index, setIndex] = useState(0)
-  if (items.length === 0) return null
+  const [inView, setInView] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const reducedMotion = useReducedMotion()
+  const count = items.length
 
-  const go = (delta: number) => setIndex((i) => (i + delta + items.length) % items.length)
+  // Only run the timer while the reviews are on screen.
+  useEffect(() => {
+    const el = rootRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.4 })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  // Move on by itself every few seconds, so visitors who never click still see every review.
+  // The timer restarts whenever the review changes (including when someone clicks), stops
+  // while the mouse is over the reviews or a control has keyboard focus, and doesn't run at
+  // all for visitors who have "reduce motion" turned on.
+  useEffect(() => {
+    if (count < 2 || !inView || paused || reducedMotion) return
+    const timer = setTimeout(() => setIndex((i) => (i + 1) % count), AUTO_ADVANCE_MS)
+    return () => clearTimeout(timer)
+  }, [index, count, inView, paused, reducedMotion])
+
+  if (count === 0) return null
+
+  const go = (delta: number) => setIndex((i) => (i + delta + count) % count)
 
   return (
-    <div>
+    <div
+      ref={rootRef}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
       {/* All slides share one grid cell, so the box is always as tall as the tallest
           review and switching never shifts the page. Mounting them all also preloads photos. */}
       <div className="grid">
