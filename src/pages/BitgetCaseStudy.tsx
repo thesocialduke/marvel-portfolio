@@ -1,6 +1,8 @@
+import { useRef, useState } from 'react'
 import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { ImageStrip, type StripImage } from '../components/ImageStrip'
+import { ImageViewer } from '../components/ImageViewer'
 import { Layout } from '../components/Layout'
 import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
@@ -88,11 +90,43 @@ const corePrograms = [
   },
 ]
 
+// Community operations map: how the B2C channels and B2B relationships were run.
+// Alt text and caption only state what the image itself shows.
+const communityOps = {
+  src: '/case-studies/bitget/ndubuisi-marvellous-bitget-africa-community-operations-1280.webp',
+  srcLarge: '/case-studies/bitget/ndubuisi-marvellous-bitget-africa-community-operations-2400.webp',
+  width: 1280,
+  height: 913,
+  alt: 'Bitget Africa community operations map by Ndubuisi Marvellous',
+  description:
+    'Bitget Africa community operations map by Ndubuisi Marvellous, Head of Social Media and Community: B2C channels (Telegram 60K with three regional moderators, X and Instagram 95K+, education, collaborations, community events) and B2B relationships (Bitget Builders ambassadors, 100+ KOLs and creators, 200+ P2P merchants, partner events).',
+  caption:
+    'How I ran community operations for Bitget Africa. Communications and content covered both sides: retail users (B2C) on Telegram, X, Instagram, education programming, collaborations and community events, and direct relationships (B2B) with Bitget Builders in Francophone Africa, Ethiopia, Ghana and Kenya, 100+ KOLs and creators, 200+ P2P merchants and partner events across Nigeria, Kenya, Ghana, Ethiopia, South Africa and Francophone Africa.',
+}
+
+const communityOpsLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageObject',
+  name: 'Bitget Africa community operations map',
+  contentUrl: `https://ndubuisimarvellous.com${communityOps.srcLarge}`,
+  thumbnailUrl: `https://ndubuisimarvellous.com${communityOps.src}`,
+  width: 2400,
+  height: 1711,
+  caption: communityOps.caption,
+  description: communityOps.description,
+  about: ['Community operations', 'Community management', 'Ambassador programs', 'KOL partnerships', 'Telegram community moderation'],
+  creator: { '@type': 'Person', name: 'Ndubuisi Marvellous', url: 'https://ndubuisimarvellous.com/' },
+  creditText: 'Ndubuisi Marvellous',
+}
+
 const offlineStats = [
   { value: '84.35%', label: 'CSAT across offline events' },
 ]
 
 export function BitgetCaseStudy() {
+  const [opsOpen, setOpsOpen] = useState(false)
+  const opsOpenerRef = useRef<HTMLButtonElement>(null)
+
   useDocumentMeta({
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
@@ -227,11 +261,78 @@ export function BitgetCaseStudy() {
         </Grid>
       </section>
 
+      {/* HOW IT'S RUN: community operations map */}
+      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
+        <Grid className="gap-y-6 pb-10 laptop:gap-y-0">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. How it’s run</p>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Meet the Bitget Africa community</h2>
+            <p className="custom-p mt-4 max-w-3xl text-ink/60">
+              As Head of Social Media and Community, I built and ran the system behind Bitget Africa’s growth: one
+              communications and content engine serving both retail users (B2C) and direct partners (B2B).
+            </p>
+            <p className="custom-p mt-3 max-w-3xl text-ink/60">
+              On the B2C side, a 60K-member Telegram community with a three-person regional moderation team working to
+              my SOPs, 95K+ followers on X and Instagram, education programming and community events. On the B2B side,
+              Bitget Builders ambassadors, 100+ KOLs and creators, 200+ P2P merchants and partner events across Nigeria,
+              Ghana, Kenya, Ethiopia, South Africa and Francophone Africa.
+            </p>
+          </div>
+        </Grid>
+        <Grid>
+          <figure className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+            <button
+              ref={opsOpenerRef}
+              type="button"
+              onClick={() => setOpsOpen(true)}
+              aria-label="View the community operations map full size"
+              aria-describedby="community-ops-description"
+              className="group relative block w-full cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-red-600"
+            >
+              <img
+                src={communityOps.src}
+                srcSet={`${communityOps.src} 1280w, ${communityOps.srcLarge} 2400w`}
+                sizes="(min-width: 1024px) 82vw, 100vw"
+                width={communityOps.width}
+                height={communityOps.height}
+                alt={communityOps.alt}
+                loading="lazy"
+                decoding="async"
+                className="h-auto w-full"
+              />
+              {/* Visible cue that the map opens larger (phones have no zoom cursor). */}
+              <span
+                aria-hidden="true"
+                className="custom-p custom-p-sm absolute right-3 bottom-[8%] inline-flex items-center gap-1.5 bg-ink px-2.5 py-1.5 tracking-wide uppercase transition-colors duration-200 group-hover:bg-red-600 tablet:right-5"
+                style={{ color: 'var(--color-page)' }}
+              >
+                <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                  <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
+                </svg>
+                <span className="tablet:hidden">Tap to enlarge</span>
+                <span className="hidden tablet:inline">View full size</span>
+              </span>
+            </button>
+            <p id="community-ops-description" className="sr-only">
+              {communityOps.description}
+            </p>
+          </figure>
+        </Grid>
+        <JsonLd data={communityOpsLd} />
+        <ImageViewer
+          image={opsOpen ? { src: communityOps.srcLarge, alt: communityOps.alt, width: 2400, label: 'Community operations map' } : null}
+          onClose={() => setOpsOpen(false)}
+          returnFocusTo={opsOpenerRef}
+          maxWidth={1280}
+          scrollOnPhone
+        />
+      </section>
+
       {/* CORE PROGRAMS */}
       <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
         <Grid className="gap-y-6 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. The programs</p>
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">03. The programs</p>
             <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Core programs</h2>
             <p className="custom-p mt-4 max-w-xl text-ink/60">Six programs sit behind the numbers at the top of this page.</p>
           </div>
@@ -256,7 +357,7 @@ export function BitgetCaseStudy() {
       <section className="case-study-serif pt-12 tablet:pt-14 laptop:pt-24">
         <Grid className="pb-8 tablet:pb-10">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">03. Events</p>
+            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Events</p>
             <div className="mt-4 flex items-end justify-between gap-4 tablet:justify-start tablet:gap-12">
               <h2 className="custom-h2 custom-h2-bold custom-h2-lg min-w-0 flex-1 text-balance tablet:max-w-sm tablet:flex-none">
                 Offline events &amp; activations
