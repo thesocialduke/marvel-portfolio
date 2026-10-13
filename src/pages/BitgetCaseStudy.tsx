@@ -119,9 +119,43 @@ const communityOpsLd = {
   creditText: 'Ndubuisi Marvellous',
 }
 
-const offlineStats = [
-  { value: '84.35%', label: 'CSAT across offline events' },
-]
+// Independent press coverage of one of the events: a news article that names me and
+// describes the session I led. Linked under the event photos and described for search
+// engines so the article is tied to my name.
+const pressMention = {
+  url: 'https://techpression.com/bitget-hosts-community-education-day-in-lagos-eyes-africas-crypto-future/',
+  publication: 'Techpression',
+  headline: 'Bitget Hosts Community Education Day in Lagos, eyes Africa’s crypto future',
+  date: 'Sept 2025',
+}
+
+const pressMentionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: 'Bitget Hosts Community Education Day in Lagos, eyes Africa’s crypto future',
+  url: pressMention.url,
+  datePublished: '2025-09-21',
+  author: { '@type': 'Person', name: 'Abimbola Samuel' },
+  publisher: { '@type': 'Organization', name: 'Techpression', url: 'https://techpression.com/' },
+  about: {
+    '@type': 'Event',
+    name: 'Bitget Community Education Day',
+    startDate: '2025-09-20',
+    location: {
+      '@type': 'Place',
+      name: 'Imperial Hall, Lilygate Hotel',
+      address: { '@type': 'PostalAddress', streetAddress: 'Lekki Phase 1', addressLocality: 'Lagos', addressCountry: 'NG' },
+    },
+    organizer: { '@type': 'Organization', name: 'Bitget' },
+  },
+  mentions: {
+    '@type': 'Person',
+    name: 'Ndubuisi Marvellous',
+    alternateName: 'Marvellous Ndubuisi',
+    jobTitle: 'Head of Social Media & Community, Africa',
+    url: 'https://ndubuisimarvellous.com/',
+  },
+}
 
 export function BitgetCaseStudy() {
   const [opsOpen, setOpsOpen] = useState(false)
@@ -303,10 +337,10 @@ export function BitgetCaseStudy() {
               {/* Visible cue that the map opens larger (phones have no zoom cursor). */}
               <span
                 aria-hidden="true"
-                className="custom-p custom-p-sm absolute right-3 bottom-[8%] inline-flex items-center gap-1.5 bg-ink px-2.5 py-1.5 tracking-wide uppercase transition-colors duration-200 group-hover:bg-red-600 tablet:right-5"
+                className="absolute right-3 bottom-[8%] inline-flex items-center gap-1 bg-ink px-1.5 py-1 font-modernist text-[10px] leading-none font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-200 group-hover:bg-red-600 group-focus-visible:bg-red-600 tablet:right-5"
                 style={{ color: 'var(--color-page)' }}
               >
-                <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                <svg className="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
                   <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
                 </svg>
                 <span className="tablet:hidden">Tap to enlarge</span>
@@ -358,21 +392,18 @@ export function BitgetCaseStudy() {
         <Grid className="pb-8 tablet:pb-10">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Events</p>
-            <div className="mt-4 flex items-end justify-between gap-4 tablet:justify-start tablet:gap-12">
-              <h2 className="custom-h2 custom-h2-bold custom-h2-lg min-w-0 flex-1 text-balance tablet:max-w-sm tablet:flex-none">
-                Offline events &amp; activations
-              </h2>
-              <div className="shrink-0 text-right tablet:pb-1 tablet:text-left">
-                {offlineStats.map((stat) => (
-                  <div key={stat.label}>
-                    <p className="custom-h1 custom-h1-bold tabular-nums text-[1.75rem] leading-none tablet:text-[2.25rem]" style={{ color: RED }}>
-                      {stat.value}
-                    </p>
-                    <p className="custom-p custom-p-sm mt-2 max-w-[7.5rem] text-ink/60 tablet:max-w-[11rem]">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Same header pattern as sections 02 and 03 (label, heading, one muted line), with
+                the satisfaction score in bold inside that line, the way the campaign stats above
+                read. The heading stays on one line; it shrinks slightly on narrow phones to fit. */}
+            <h2
+              className="custom-h2 custom-h2-bold custom-h2-lg mt-4 whitespace-nowrap [--fit:5.6vw] tablet:[--fit:4.6vw]"
+              style={{ fontSize: 'min(calc(var(--h2-size) * 1.2), var(--fit))' }}
+            >
+              Offline events &amp; activations
+            </h2>
+            <p className="custom-p mt-4 max-w-xl text-pretty text-ink/60">
+              Attendees rated them <span className="font-bold tabular-nums" style={{ color: RED }}>84.35%</span> on satisfaction (CSAT).
+            </p>
           </div>
         </Grid>
       </section>
@@ -381,6 +412,40 @@ export function BitgetCaseStudy() {
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <FramerCarouselThumbnails images={eventCarouselImages} />
+
+            {/* Press coverage of one of the events. The arrow sits at the end of the
+                headline (not in a separate box) so it reads as one link that leaves the site. */}
+            <a
+              href={pressMention.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group mt-10 block outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-4 focus-visible:ring-offset-page mb-14 tablet:mb-16 laptop:mt-12 laptop:mb-24"
+            >
+              <div className="flex items-center gap-2">
+                <span aria-hidden="true" className="inline-block size-2 shrink-0" style={{ background: RED }} />
+                <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">In the press</p>
+              </div>
+              <p className="custom-h4 custom-h4-bold mt-3 max-w-3xl text-balance">
+                {pressMention.headline}
+                <svg
+                  aria-hidden="true"
+                  className="ml-2 inline-block size-[0.9em] -translate-y-[0.1em] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-[0.25em] motion-reduce:transition-none"
+                  style={{ color: RED }}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="square"
+                >
+                  <path d="M7 17 17 7M8 7h9v9" />
+                </svg>
+              </p>
+              <p className="custom-p custom-p-sm mt-3 text-ink/60">
+                {pressMention.publication} · {pressMention.date}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </p>
+            </a>
+            <JsonLd data={pressMentionLd} />
           </div>
         </Grid>
       </section>

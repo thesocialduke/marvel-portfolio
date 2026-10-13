@@ -36,8 +36,7 @@ function EmailAction() {
       <button
         type="button"
         onClick={handleCopy}
-        aria-label="Copy email address"
-        className="flex size-9 shrink-0 cursor-pointer items-center justify-center text-red-600 outline-none transition-colors tablet:text-page/50 tablet:hover:text-red-600 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+        className="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-1.5 px-1 font-modernist text-[11px] font-semibold tracking-[0.1em] text-red-600 uppercase outline-none transition-colors tablet:text-page/50 tablet:hover:text-red-600 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
       >
         {copied ? (
           <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -49,7 +48,13 @@ function EmailAction() {
             <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
           </svg>
         )}
+        {/* A visible word, since a bare copy icon is easy to miss or misread. */}
+        {copied ? 'Copied' : 'Copy'}
+        <span className="sr-only"> email address</span>
       </button>
+      <span className="sr-only" aria-live="polite">
+        {copied ? 'Email address copied' : ''}
+      </span>
     </div>
   )
 }

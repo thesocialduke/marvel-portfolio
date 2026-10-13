@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { cn } from '../lib/utils'
 
 type Client = { href: string; title: string; shortName: string; category: string; image: string }
 
-// A case study tile on the home page. The small arrow badge is always visible, so
-// the tile reads as a link on a phone too. On a computer the tile reacts when you
-// hover it. A phone has no hover, so there the same reaction plays when the tile
-// scrolls through the middle of the screen: the photo slowly zooms, the badge turns
-// red and the arrow nudges.
+// A case study tile on the home page. An always-visible "View case study" label sits
+// under the title, so the tile plainly reads as a link (photos with a caption on top
+// otherwise look decorative, and phones have no hover to hint at it). On a computer the
+// tile reacts on hover. A phone has no hover, so there the same reaction plays when the
+// tile scrolls through the middle of the screen: the photo zooms, the label turns
+// black and its arrow nudges forward.
 export function CaseStudyCard({ client, className }: { client: Client; className: string }) {
   const ref = useRef<HTMLAnchorElement>(null)
   const [inView, setInView] = useState(false)
@@ -28,39 +30,50 @@ export function CaseStudyCard({ client, className }: { client: Client; className
       ref={ref}
       to={client.href}
       data-active={inView}
-      aria-label={`View the ${client.shortName} case study`}
-      className={`group relative block overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page ${className}`}
+      // Starts with the visible label text so voice control ("click View case study") works.
+      aria-label={`View case study: ${client.shortName}, ${client.category}`}
+      className={cn(
+        'group relative block overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page',
+        className,
+      )}
     >
       <img
         loading="lazy"
         decoding="async"
         src={client.image}
         alt={client.title}
-        className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105 group-data-[active=true]:scale-105 motion-reduce:transition-none"
+        className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 group-data-[active=true]:scale-105 motion-reduce:transition-none"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
 
-      <span
-        aria-hidden="true"
-        className="absolute top-4 right-4 grid size-10 place-items-center rounded-full bg-page/90 text-ink backdrop-blur-sm transition-colors duration-500 group-hover:bg-red-600 group-hover:text-page group-focus-visible:bg-red-600 group-focus-visible:text-page group-data-[active=true]:bg-red-600 group-data-[active=true]:text-page tablet:top-6 tablet:right-6 tablet:size-11"
-      >
-        <svg
-          className="size-[1.15rem] transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-data-[active=true]:translate-x-0.5 group-data-[active=true]:-translate-y-0.5 motion-reduce:transition-none"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M7 17 17 7M8 7h9v9" />
-        </svg>
-      </span>
 
-      <h3 className="custom-h4 custom-h4-invert custom-h4-bold absolute bottom-6 left-6 inline-block bg-red-600 px-3 py-2 tablet:bottom-8 tablet:left-8">
-        {client.shortName}
-        <span style={{ color: 'rgba(255,255,255,0.7)' }}>, {client.category}</span>
-      </h3>
+      <div className="absolute bottom-6 left-6 flex flex-col items-start tablet:bottom-8 tablet:left-8">
+        <h3 className="custom-h4 custom-h4-invert custom-h4-bold inline-block bg-red-600 px-3 py-2">
+          {client.shortName}
+          <span style={{ color: 'rgba(255,255,255,0.9)' }}>, {client.category}</span>
+        </h3>
+        {/* The shared .custom-p style sets its own text colour and would beat the colour
+            and weight, so those live on the inner span and the outer one only swaps the
+            background. */}
+        <span
+          aria-hidden="true"
+          className="custom-p custom-p-sm bg-page tracking-wide uppercase transition-colors duration-200 group-hover:bg-ink group-focus-visible:bg-ink group-data-[active=true]:bg-ink"
+        >
+          <span className="inline-flex items-center gap-2 px-3 py-2 font-semibold text-ink transition-colors duration-200 group-hover:text-page group-focus-visible:text-page group-data-[active=true]:text-page">
+            View case study
+            <svg
+              className="size-4 transition-transform duration-200 group-hover:translate-x-1 group-data-[active=true]:translate-x-1 motion-reduce:transition-none"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="square"
+            >
+              <path d="M4 12h15M13 6l6 6-6 6" />
+            </svg>
+          </span>
+        </span>
+      </div>
     </Link>
   )
 }
