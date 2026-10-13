@@ -138,7 +138,7 @@ export function BitgetCaseStudy() {
     path: '/bitget',
     title: 'Growing Bitget’s community across Africa',
     description: bitgetCaseStudy.summary,
-    image: '/case-studies/bitget.jpg',
+    image: '/case-studies/bitget.webp',
     clientName: 'Bitget',
   })
 

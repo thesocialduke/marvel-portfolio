@@ -44,7 +44,7 @@ export const clients = [
     category: 'Growth & Community',
     description:
       'Owned social and community growth and education for Africa, from campaign strategy to execution across X, Telegram, Blog, Discord & Meta.',
-    image: '/case-studies/bitget.jpg',
+    image: '/case-studies/bitget.webp',
   },
   {
     href: '/base-southern-africa',
@@ -53,7 +53,7 @@ export const clients = [
     category: 'Web3 Infrastructure',
     description:
       'Took an untrained creator community and gave it direction, turning inconsistent clips into branded, clear, on-message content & direction.',
-    image: '/case-studies/base.jpg',
+    image: '/case-studies/base.webp',
   },
   {
     href: '/binance-street-interviews',
@@ -302,7 +302,7 @@ export const baseCaseStudy: CaseStudyData = {
       poster: '/videos/thumbnails/trading-together-referral.jpg',
     },
   ],
-  gallery: [{ image: '/case-studies/base.jpg', caption: 'Base Southern Africa activation' }],
+  gallery: [{ image: '/case-studies/base.webp', caption: 'Base Southern Africa activation' }],
   closing: [
     'Turned an inconsistent creator network into a source of sharper, localized, on-brand content.',
     'Directed AI-generated concepts for Base.Dev’s dashboard update and the Base Batches Program.',

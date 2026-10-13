@@ -10,8 +10,8 @@ export type ThumbnailItem = {
 // Placeholder set built from real photos already in the project — swap
 // these out once the final curated images are supplied.
 export const items: ThumbnailItem[] = [
-  { id: 1, url: '/case-studies/bitget.jpg', title: 'Bitget Africa' },
-  { id: 2, url: '/case-studies/base.jpg', title: 'Base Southern Africa' },
+  { id: 1, url: '/case-studies/bitget.webp', title: 'Bitget Africa' },
+  { id: 2, url: '/case-studies/base.webp', title: 'Base Southern Africa' },
   { id: 3, url: '/case-studies/binance.jpg', title: 'Binance Street Interviews' },
   { id: 4, url: '/events/ethiopia-blockchain-week.jpg', title: 'Ethiopia Blockchain Week' },
   { id: 5, url: '/events/padel-event-capetown.jpg', title: 'VIP Padel Event' },

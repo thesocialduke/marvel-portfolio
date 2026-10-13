@@ -39,7 +39,7 @@ export function BaseCaseStudy() {
     path: '/base-southern-africa',
     title: 'Giving Southern Africa’s creator network a clear creative voice and structure',
     description: baseCaseStudy.summary,
-    image: '/case-studies/base.jpg',
+    image: '/case-studies/base.webp',
     clientName: 'Coinbase (Base)',
   })
 

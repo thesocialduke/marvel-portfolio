@@ -40,6 +40,8 @@ export function VideoPlayer({
           ref={videoRef}
           src={src}
           poster={poster}
+          // Only the poster loads up front; the video itself downloads when someone presses play.
+          preload="none"
           playsInline
           muted={muted}
           className={cn('h-full w-full bg-graphite object-contain', aspect)}
