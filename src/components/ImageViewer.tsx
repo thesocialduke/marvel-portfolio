@@ -1,5 +1,7 @@
-import type { RefObject } from 'react'
+import { useRef, useState, type MouseEvent, type RefObject } from 'react'
+import { flushSync } from 'react-dom'
 import { Dialog } from 'radix-ui'
+import { cn } from '../lib/utils'
 
 export type ViewerImage = { src: string; alt: string; width: number; label: string }
 
@@ -20,14 +22,44 @@ export function ImageViewer({
   returnFocusTo: RefObject<HTMLElement | null>
   /** Largest width in px the image is shown at. */
   maxWidth?: number
-  /** For wide, detailed images: on phones show it larger and let it scroll sideways
-   *  (and pinch-zoom) instead of shrinking it to the screen width. */
+  /** For wide, detailed images: on phones the whole image shows first, and a tap zooms
+   *  in 2x on the tapped spot (drag to move around, tap again to zoom back out). */
   scrollOnPhone?: boolean
 }) {
+  const [zoomed, setZoomed] = useState(false)
+  const boxRef = useRef<HTMLDivElement>(null)
+
+  function toggleZoom(e: MouseEvent<HTMLButtonElement>) {
+    // Only phones zoom; larger screens already show the image big enough.
+    if (!window.matchMedia('(max-width: 639px)').matches) return
+    if (zoomed) {
+      setZoomed(false)
+      return
+    }
+    const rect = e.currentTarget.getBoundingClientRect()
+    // A keyboard press has no pointer position, so zoom into the middle.
+    const fx = e.detail === 0 ? 0.5 : (e.clientX - rect.left) / rect.width
+    const fy = e.detail === 0 ? 0.5 : (e.clientY - rect.top) / rect.height
+    flushSync(() => setZoomed(true))
+    const box = boxRef.current
+    if (!box) return
+    // Keep the tapped spot under the finger.
+    box.scrollLeft = fx * box.scrollWidth - box.clientWidth / 2
+    box.scrollTop = fy * box.scrollHeight - box.clientHeight / 2
+  }
+
   return (
-    <Dialog.Root open={image !== null} onOpenChange={(isOpen) => !isOpen && onClose()}>
+    <Dialog.Root
+      open={image !== null}
+      onOpenChange={(isOpen) => {
+        if (!isOpen) {
+          setZoomed(false)
+          onClose()
+        }
+      }}
+    >
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/85" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/90" />
         <Dialog.Content
           aria-describedby={undefined}
           onCloseAutoFocus={(e) => {
@@ -47,16 +79,30 @@ export function ImageViewer({
           </Dialog.Close>
           {image && scrollOnPhone && (
             <div className="flex max-w-full flex-col items-center gap-3">
-              <div className="max-h-[78dvh] w-[92vw] overflow-auto overscroll-contain tablet:w-auto tablet:overflow-visible">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="block h-auto w-[1100px] max-w-none tablet:w-auto tablet:max-w-[min(92vw,var(--viewer-max))] tablet:max-h-[85dvh]"
-                  style={{ '--viewer-max': `${Math.min(maxWidth, image.width)}px` } as React.CSSProperties}
-                />
+              <div
+                ref={boxRef}
+                className="max-h-[78dvh] w-[92vw] overflow-auto overscroll-contain tablet:w-auto tablet:overflow-visible"
+              >
+                <button
+                  type="button"
+                  onClick={toggleZoom}
+                  aria-label={zoomed ? 'Zoom out' : 'Zoom in'}
+                  className={cn(
+                    'block outline-none focus-visible:ring-2 focus-visible:ring-white tablet:cursor-default',
+                    zoomed ? 'w-[184vw] cursor-zoom-out' : 'w-full cursor-zoom-in',
+                    'tablet:w-auto',
+                  )}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="block h-auto w-full tablet:w-auto tablet:max-w-[min(92vw,var(--viewer-max))] tablet:max-h-[85dvh]"
+                    style={{ '--viewer-max': `${Math.min(maxWidth, image.width)}px` } as React.CSSProperties}
+                  />
+                </button>
               </div>
-              <p className="custom-p custom-p-sm tracking-wide uppercase tablet:hidden" style={{ color: 'rgb(255 255 255 / 0.75)' }}>
-                Drag to explore · pinch to zoom
+              <p className="custom-p custom-p-sm tablet:hidden" style={{ color: 'rgb(255 255 255 / 0.75)' }}>
+                {zoomed ? 'Drag to move around, tap to zoom out' : 'Tap the image to zoom in'}
               </p>
             </div>
           )}
