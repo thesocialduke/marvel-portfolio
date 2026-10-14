@@ -31,7 +31,7 @@ const routes = [
     path: '/services',
     title: 'Social Media & Community Manager Services | Ndubuisi Marvellous',
     description:
-      'Hire a Web3 and fintech social media and community manager: strategy, community building, content creation, creator/KOL partnerships and events.',
+      'Hire a Web3 and fintech social media and community manager: brand strategy, community building, partnerships, community-led growth and events.',
   },
   {
     path: '/contact',
@@ -43,7 +43,7 @@ const routes = [
     path: '/bitget',
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
-      'How I led social media and community for Bitget across Africa, driving 40M+ organic views and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
+      'How I led Bitget’s social media and community across Africa: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/og-bitget.jpg',
     type: 'article',
   },
@@ -59,7 +59,7 @@ const routes = [
     path: '/binance-street-interviews',
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
-      'Short-form street-interview content for Binance Africa that explained crypto simply, built for Instagram and TikTok.',
+      'Making complex products easier to understand: short-form street-interview videos for Binance Africa that explained crypto simply, made for Instagram and TikTok.',
     image: '/case-studies/og-binance.jpg',
     type: 'article',
   },

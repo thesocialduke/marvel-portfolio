@@ -78,7 +78,7 @@ export function BinanceCaseStudy() {
   useDocumentMeta({
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
-      'Short-form street-interview content for Binance Africa that explained crypto simply, built for Instagram and TikTok.',
+      'Making complex products easier to understand: short-form street-interview videos for Binance Africa that explained crypto simply, made for Instagram and TikTok.',
     image: '/case-studies/og-binance.jpg',
     ogType: 'article',
   })
