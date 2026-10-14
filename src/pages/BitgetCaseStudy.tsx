@@ -193,13 +193,13 @@ export function BitgetCaseStudy() {
   useDocumentMeta({
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
-      'How I led social media and community for Bitget across Africa, driving 40M+ organic views and making Bitget Wallet Nigeria’s #1 downloaded crypto app.',
+      'How I led Bitget’s social media and community across Africa: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/og-bitget.jpg',
     ogType: 'article',
   })
   const caseStudyLd = caseStudyJsonLd({
     path: '/bitget',
-    title: 'Growing Bitget’s community across Africa',
+    title: 'Building and scaling Bitget Africa’s community ecosystem',
     description: bitgetCaseStudy.summary,
     image: '/case-studies/bitget.webp',
     clientName: 'Bitget',
@@ -216,8 +216,8 @@ export function BitgetCaseStudy() {
               <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
               <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Case study · Bitget Africa</p>
             </div>
-            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">Growing Bitget’s community across Africa</h1>
-            <p className="custom-p mt-6 max-w-2xl text-ink/70">{bitgetCaseStudy.summary}</p>
+            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">Building and scaling Bitget Africa’s community ecosystem</h1>
+            <p className="custom-p mt-6 max-w-2xl text-pretty text-ink/70">{bitgetCaseStudy.summary}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:grid-cols-3">
               <div>
@@ -329,16 +329,15 @@ export function BitgetCaseStudy() {
         <Grid className="gap-y-6 pb-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
             <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. How it’s run</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Meet the Bitget Africa community</h2>
-            <p className="custom-p mt-4 max-w-3xl text-ink/60">
-              As Head of Social Media and Community, I built and ran the system behind Bitget Africa’s growth: one
-              communications and content engine serving both retail users (B2C) and direct partners (B2B).
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">How I built the community operating model</h2>
+            <p className="custom-p mt-4 max-w-3xl text-pretty text-ink/60">
+              I built a regional operating model that connected two distinct audiences: retail users who needed
+              education, support, and engagement, and ecosystem stakeholders who helped extend Bitget’s reach across
+              African markets.
             </p>
-            <p className="custom-p mt-3 max-w-3xl text-ink/60">
-              On the B2C side, a 60K-member Telegram community with a three-person regional moderation team working to
-              my SOPs, 95K+ followers on X and Instagram, education programming and community events. On the B2B side,
-              Bitget Builders ambassadors, 100+ KOLs and creators, 200+ P2P merchants and partner events across Nigeria,
-              Ghana, Kenya, Ethiopia, South Africa and Francophone Africa.
+            <p className="custom-p mt-3 max-w-3xl text-pretty text-ink/60">
+              A shared communications and content function supported both sides, while each audience had its own
+              engagement channels, programs, and relationship needs.
             </p>
           </div>
         </Grid>

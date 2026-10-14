@@ -141,7 +141,7 @@ export const faqs = [
   },
   {
     q: 'What does working together look like?',
-    a: 'A short discovery call to understand your goals, followed by a strategy and content plan, then execution across your social channels. I share regular updates so you always know what’s live and what’s performing.',
+    a: 'First I get to know your product, audience and goals. Then I build a practical strategy covering positioning, content, community, partnerships and success metrics. I work with your team to run it, track results against the goals we agreed, and keep improving what works.',
   },
   {
     q: 'Do you handle both strategy and execution, or just one?',
@@ -193,7 +193,7 @@ export const bitgetCaseStudy: CaseStudyData = {
   eyebrow: 'Case study',
   title: 'Bitget: Top 3 Crypto Exchange Globally',
   summary:
-    'I led Social Media and Community for Bitget across Africa, driving strategy and growth in one of the world’s most fast-moving markets, from viral campaigns and live community programming to offline activations and full-cycle content production.',
+    'I led social media and community across multiple African markets, building the programs, partner relationships, and regional operating systems that supported audience growth, product education, and community engagement.',
   roleTitle: 'Head of Social Media, Content and Community',
   roleBullets: [
     'Ran viral listing campaigns for $DOGS, $PI, and $PAWS, each built for awareness and follower growth',

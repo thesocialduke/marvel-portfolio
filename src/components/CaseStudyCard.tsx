@@ -7,22 +7,31 @@ type Client = { href: string; title: string; shortName: string; category: string
 // A case study tile on the home page. An always-visible "View case study" label sits
 // under the title, so the tile plainly reads as a link (photos with a caption on top
 // otherwise look decorative, and phones have no hover to hint at it). On a computer the
-// tile reacts on hover. A phone has no hover, so there the same reaction plays when the
-// tile scrolls through the middle of the screen: the photo zooms, the label turns
-// light and its arrow nudges forward.
+// tile reacts on hover. A phone has no hover, so there the same reaction plays once most
+// of the tile is on screen: the photo zooms, the label turns light and its arrow moves
+// forward. Until then the arrow gently nudges on its own (only while on screen, never
+// with reduced motion) to hint that the tile leads somewhere.
 export function CaseStudyCard({ client, className }: { client: Client; className: string }) {
   const ref = useRef<HTMLAnchorElement>(null)
   const [inView, setInView] = useState(false)
+  const [onScreen, setOnScreen] = useState(false)
 
   useEffect(() => {
     const el = ref.current
-    if (!el || !window.matchMedia('(hover: none)').matches) return
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
-      // Only the horizontal band across the middle of the screen counts.
-      rootMargin: '-35% 0px -35% 0px',
-    })
-    observer.observe(el)
-    return () => observer.disconnect()
+    if (!el) return
+    // Any part on screen: lets the arrow's nudge loop run only while it can be seen.
+    const visible = new IntersectionObserver(([entry]) => setOnScreen(entry.isIntersecting))
+    visible.observe(el)
+    // Phones have no hover: the tile reacts once most of it is on screen.
+    let active: IntersectionObserver | undefined
+    if (window.matchMedia('(hover: none)').matches) {
+      active = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.6 })
+      active.observe(el)
+    }
+    return () => {
+      visible.disconnect()
+      active?.disconnect()
+    }
   }, [])
 
   return (
@@ -30,6 +39,7 @@ export function CaseStudyCard({ client, className }: { client: Client; className
       ref={ref}
       to={client.href}
       data-active={inView}
+      data-onscreen={onScreen}
       // Starts with the visible label text so voice control ("click View case study") works.
       aria-label={`View case study: ${client.shortName}, ${client.category}`}
       className={cn(
@@ -63,7 +73,7 @@ export function CaseStudyCard({ client, className }: { client: Client; className
           <span className="inline-flex items-center gap-2 px-3 py-2 font-semibold text-page transition-colors duration-200 group-hover:text-ink group-focus-visible:text-ink group-data-[active=true]:text-ink">
             View case study
             <svg
-              className="size-4 transition-transform duration-200 group-hover:translate-x-1 group-data-[active=true]:translate-x-1 motion-reduce:transition-none"
+              className="size-4 animate-[arrow-nudge_1.8s_ease-in-out_infinite] transition-transform duration-200 [animation-play-state:paused] group-hover:translate-x-1 group-hover:animate-none group-focus-visible:animate-none group-data-[active=true]:translate-x-1 group-data-[active=true]:animate-none group-data-[onscreen=true]:[animation-play-state:running] motion-reduce:animate-none motion-reduce:transition-none"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

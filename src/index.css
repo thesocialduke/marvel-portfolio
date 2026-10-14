@@ -508,3 +508,16 @@ input[type='range'].scrubber::-moz-range-thumb {
     text-wrap: pretty;
   }
 }
+
+/* "View case study" arrow: a small forward nudge, then a pause, so the label reads as
+   a link. Transform only; paused while off screen and skipped with reduced motion. */
+@keyframes arrow-nudge {
+  0%,
+  45%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(5px);
+  }
+}
