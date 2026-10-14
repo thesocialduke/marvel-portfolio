@@ -67,8 +67,8 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
               <span className="custom-h4 custom-h4-bold" style={{ color: 'rgb(220 38 38)' }}>
                 0{i + 1}
               </span>
-              <h3 className="custom-h4 custom-h4-bold mt-2">{step.title}</h3>
-              <p className="custom-p mt-2 text-ink/60">{step.body}</p>
+              <h3 className="custom-h4 custom-h4-bold mt-2 text-balance">{step.title}</h3>
+              <p className="custom-p mt-2 text-pretty text-ink/60">{step.body}</p>
             </div>
           </li>
         )

@@ -7,15 +7,16 @@ import { ProcessTimeline } from '../components/ProcessTimeline'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { JsonLd } from '../components/JsonLd'
 import { faqs, services, site } from '../data/site'
+import { cn } from '../lib/utils'
 
 const RED = 'rgb(220 38 38)'
 
 // Taken from the "What does working together look like?" FAQ answer.
 const howItWorks = [
-  { title: 'Discovery call', body: 'A short call to understand your goals.' },
-  { title: 'Strategy and plan', body: 'A strategy and content plan built around your channels and audience.' },
-  { title: 'Execution', body: 'Content and community run across your social channels.' },
-  { title: 'Regular updates', body: 'You always know what’s live and what’s performing.' },
+  { title: 'Understand the business', body: 'Your product, audience, challenges and goals, and what growth means for your team.' },
+  { title: 'Build the strategy', body: 'A practical plan for positioning, content, community, partnerships, channels and success metrics.' },
+  { title: 'Execute and collaborate', body: 'I work with your team to run campaigns, content and community programs, aligned with your goals.' },
+  { title: 'Measure, learn, and improve', body: 'Track results against agreed goals, learn what works, and keep improving the strategy.' },
 ]
 
 const arrow = (
@@ -28,7 +29,7 @@ export function Services() {
   useDocumentMeta({
     title: 'Social Media & Community Manager Services | Ndubuisi Marvellous',
     description:
-      'Hire a Web3 and fintech social media and community manager: strategy, community building, content creation, creator/KOL partnerships and events.',
+      'Hire a Web3 and fintech social media and community manager: brand strategy, community building, partnerships, community-led growth and events.',
   })
 
   const faqLd = {
@@ -54,7 +55,7 @@ export function Services() {
       item: {
         '@type': 'Service',
         name: service.title,
-        description: service.body,
+        description: [service.tagline, service.body.replace(/\n\n/g, ' ')].filter(Boolean).join(' '),
         provider: { '@type': 'Person', name: 'Ndubuisi Marvellous', url: 'https://ndubuisimarvellous.com/' },
         areaServed: 'Africa',
       },
@@ -87,10 +88,31 @@ export function Services() {
               <div key={service.title} className="flex flex-col bg-hyacinth/5 p-6 tablet:p-8">
                 <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
                 <h3 className="custom-h4 custom-h4-bold mt-5 text-balance">{service.title}</h3>
-                <p className="custom-p mt-3 text-ink/70">{service.body}</p>
+                {/* Weight set inline because the shared .custom-p style overrides font utilities. */}
+                {service.tagline && (
+                  <p className="custom-p mt-3 text-pretty text-ink" style={{ fontWeight: 600 }}>
+                    {service.tagline}
+                  </p>
+                )}
+                {service.body.split('\n\n').map((paragraph, i) => (
+                  <p key={i} className="custom-p mt-3 text-pretty text-ink/70">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             ))}
-            <div className="flex flex-col justify-between gap-8 p-6 tablet:p-8" style={{ background: RED }}>
+            {/* Fills the leftover slot in the last row; when the rows are already full it
+                spans a whole row instead (text left, button right on laptops), so it never
+                sits alone next to empty space whatever the number of services. */}
+            <div
+              className={cn(
+                'flex flex-col justify-between gap-8 p-6 tablet:p-8',
+                services.length % 2 === 0 && 'tablet:col-span-2',
+                services.length % 3 === 0 && 'laptop:col-span-3 laptop:flex-row laptop:items-center',
+                services.length % 3 === 1 && 'laptop:col-span-2',
+              )}
+              style={{ background: RED }}
+            >
               <div>
                 <h3 className="custom-h4 custom-h4-bold text-balance" style={{ color: '#fff' }}>
                   Not sure what you need?
@@ -99,7 +121,7 @@ export function Services() {
                   Book a call and we’ll work it out together.
                 </p>
               </div>
-              <div className="flex">
+              <div className="flex shrink-0">
                 <ButtonLink to={site.bookingUrl} external fullWidth={false} className="bg-page text-ink ring-page hover:text-ink">
                   Book a call
                   {arrow}

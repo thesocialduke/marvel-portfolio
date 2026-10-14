@@ -44,7 +44,9 @@ export const clients = [
     category: 'Growth & Community',
     description:
       'Owned social and community growth and education for Africa, from campaign strategy to execution across X, Telegram, Blog, Discord & Meta.',
-    image: '/case-studies/bitget.webp',
+    image: '/case-studies/bitget-tile.webp',
+    // Shifts the crop so faces sit clear of the title label on the tile.
+    imagePosition: 'center 65%',
   },
   {
     href: '/base-southern-africa',
@@ -62,15 +64,15 @@ export const clients = [
     category: 'Crypto Education',
     description:
       'Bringing crypto education to the street to make crypto feel less abstract and foreign to ordinary people.',
-    image: '/case-studies/binance.jpg',
+    image: '/case-studies/binance-tile.webp',
   },
 ]
 
 export const stats = [
   { value: '5+', label: 'years experience' },
-  { value: '40M+', label: 'Organic views' },
-  { value: '150K+', label: 'New followers gained' },
-  { value: '20K', label: 'Users from ambassador program' },
+  { value: '40M+', label: 'Organic views and impressions generated' },
+  { value: '150K+', label: 'Followers and members gained' },
+  { value: '20K', label: 'Users attributed to an ambassador program' },
 ]
 
 export type VideoItem = {
@@ -98,31 +100,37 @@ export const events: EventPhoto[] = [
   { image: '/events/kol-community-meetup.jpg', event: 'KOL Community Meetup', location: '2024' },
 ]
 
-export const services = [
+export const services: { title: string; tagline?: string; body: string; shortBody: string }[] = [
   {
-    title: 'Social Media Strategy & Growth',
-    body: 'For brands that want to grow a real audience on social media. I plan and run your presence across X, Telegram, Instagram, TikTok, Discord and Meta, with localized campaigns that speak to each audience and move the numbers that matter.',
-    shortBody: 'Localized campaigns across X, Telegram, Instagram, TikTok, Discord and Meta',
+    title: 'Social Media Strategy & Brand Authority',
+    tagline: 'Make your brand worth paying attention to.',
+    // A blank line starts a new paragraph.
+    body: 'I develop social media strategies that help B2B technology companies build credibility, communicate their value, and stay relevant to the audiences that matter.\n\nFrom thought leadership and product storytelling to platform-specific campaigns, I turn your company’s expertise into content that educates, engages, and builds trust.',
+    shortBody: 'Make your brand worth paying attention to.',
   },
   {
-    title: 'B2B/B2C Community Building & Management',
-    body: 'A community needs someone showing up every day. I handle your channel growth, programs, and operations, keep conversations active, and host AMAs, Spaces, and lives that turn followers into advocates.',
-    shortBody: 'Channel growth, community programs, AMAs, Spaces and lives',
+    title: 'Community Building & Management',
+    tagline: 'Turn your audience into an engaged community.',
+    body: 'A strong community is more than an active group chat. It’s an ecosystem of customers, users, advocates, and professionals who find value in being connected to your product and to one another.\n\nI build community strategies and operating systems that support onboarding, engagement, customer education, retention, and advocacy. I also create programs that help teams understand their communities and turn feedback into actionable insights.',
+    shortBody: 'Turn your audience into an engaged community.',
   },
   {
-    title: 'Content Creation',
-    body: 'Need content that feels native to each platform? I create short and long-form videos, from UGC-style ads to polished brand promos, educational pieces and brand stories that make complex products easy to understand and fun to watch.',
-    shortBody: 'UGC-style ads, brand promos and educational videos, short and long-form',
+    title: 'Partnerships & Ecosystem Growth',
+    tagline: 'Build relationships that extend your reach.',
+    body: 'Growth doesn’t happen through owned channels alone. The right partners, creators, ambassadors, and industry communities can help a company build credibility, reach new audiences, and establish a stronger presence in its target markets.\n\nI develop and manage programs that bring these stakeholders together around shared goals, from partner activations and creator campaigns to regional community initiatives.',
+    shortBody: 'Build relationships that extend your reach.',
   },
   {
-    title: 'B2B/B2C Creator, KOL & Ambassador Partnerships',
-    body: 'I find the right creators for your brand, train them, and manage them from brief to delivery. The result is consistent, on-message content from voices your audience already trusts.',
-    shortBody: 'Creator sourcing, training and management from brief to delivery',
+    title: 'Community-Led Growth',
+    tagline: 'Make community a meaningful part of how your business grows.',
+    body: 'I connect community initiatives with content, product education, advocacy, and audience development to help companies attract relevant audiences, deepen product understanding, and create opportunities for organic growth.',
+    shortBody: 'Make community a meaningful part of how your business grows.',
   },
   {
-    title: 'Event Planning & Experiential Marketing',
-    body: 'From meetups to activations, I plan and run events that bring your brand offline. Each one is built to connect with your community in person, create moments people want to share, and gather feedback.',
-    shortBody: 'Meetups, activations and in-person community events',
+    title: 'Events & Experiential Marketing',
+    tagline: 'Create experiences that bring your ecosystem closer together.',
+    body: 'From intimate community meetups to product activations and industry gatherings, I help plan experiences that encourage participation, strengthen relationships, and give people something meaningful to take away.',
+    shortBody: 'Create experiences that bring your ecosystem closer together.',
   },
 ]
 
@@ -221,10 +229,10 @@ export const bitgetCaseStudy: CaseStudyData = {
     },
   ],
   results: [
-    { value: '40M+', label: 'Organic views' },
+    { value: '40M+', label: 'Organic views and impressions generated' },
     { value: '1M+', label: 'Views on education programs' },
-    { value: '150K+', label: 'New followers gained' },
-    { value: '20K', label: 'Users from ambassador program' },
+    { value: '150K+', label: 'Followers and members gained' },
+    { value: '20K', label: 'Users attributed to an ambassador program' },
     { value: '3,500', label: 'Followers gained in one day' },
     { value: '84.35%', label: 'CSAT across offline events' },
   ],

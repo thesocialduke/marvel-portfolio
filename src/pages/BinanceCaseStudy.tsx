@@ -84,7 +84,7 @@ export function BinanceCaseStudy() {
   })
   const caseStudyLd = caseStudyJsonLd({
     path: '/binance-street-interviews',
-    title: 'Turning complex crypto into shareable stories',
+    title: 'Making complex products easier to understand',
     description: summary,
     image: '/case-studies/binance.jpg',
     clientName: 'Binance',
@@ -102,7 +102,7 @@ export function BinanceCaseStudy() {
               <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Case study · Binance Africa</p>
             </div>
             <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">
-              Turning complex crypto into shareable stories
+              Making complex products easier to understand
             </h1>
             <p className="custom-p mt-6 max-w-2xl text-ink/70">{summary}</p>
           </div>

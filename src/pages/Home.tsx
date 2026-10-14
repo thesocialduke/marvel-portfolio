@@ -232,7 +232,7 @@ export function Home() {
       <section className="py-12 tablet:py-14 laptop:py-18">
         <Grid className="items-end gap-y-8 pb-12 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <h2 className="custom-h1 custom-h1-bold text-left text-balance uppercase">What I do</h2>
+            <h2 className="custom-h1 custom-h1-bold text-left text-balance uppercase">What I bring to the table</h2>
           </div>
           <div className="col-span-full hidden tablet:col-span-6 tablet:col-start-2 tablet:block laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
             <ButtonLink to="/services">See all services →</ButtonLink>
@@ -257,13 +257,9 @@ export function Home() {
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-col gap-4 tablet:gap-6">
-              <CaseStudyCard client={clients[0]} className="aspect-square tablet:aspect-[21/9]" />
-
-              <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 tablet:gap-6">
-                {clients.slice(1).map((client) => (
-                  <CaseStudyCard key={client.href} client={client} className="aspect-square tablet:aspect-[4/5]" />
-                ))}
-              </div>
+              {clients.map((client) => (
+                <CaseStudyCard key={client.href} client={client} className="aspect-square tablet:aspect-[21/9]" />
+              ))}
             </div>
           </div>
         </Grid>

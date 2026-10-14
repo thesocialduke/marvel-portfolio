@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 
-type Client = { href: string; title: string; shortName: string; category: string; image: string }
+type Client = { href: string; title: string; shortName: string; category: string; image: string; imagePosition?: string }
 
 // A case study tile on the home page. An always-visible "View case study" label sits
 // under the title, so the tile plainly reads as a link (photos with a caption on top
 // otherwise look decorative, and phones have no hover to hint at it). On a computer the
 // tile reacts on hover. A phone has no hover, so there the same reaction plays when the
 // tile scrolls through the middle of the screen: the photo zooms, the label turns
-// black and its arrow nudges forward.
+// light and its arrow nudges forward.
 export function CaseStudyCard({ client, className }: { client: Client; className: string }) {
   const ref = useRef<HTMLAnchorElement>(null)
   const [inView, setInView] = useState(false)
@@ -42,6 +42,7 @@ export function CaseStudyCard({ client, className }: { client: Client; className
         decoding="async"
         src={client.image}
         alt={client.title}
+        style={client.imagePosition ? { objectPosition: client.imagePosition } : undefined}
         className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 group-data-[active=true]:scale-105 motion-reduce:transition-none"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-graphite/70 via-transparent to-transparent" />
@@ -57,9 +58,9 @@ export function CaseStudyCard({ client, className }: { client: Client; className
             background. */}
         <span
           aria-hidden="true"
-          className="custom-p custom-p-sm bg-page tracking-wide uppercase transition-colors duration-200 group-hover:bg-ink group-focus-visible:bg-ink group-data-[active=true]:bg-ink"
+          className="custom-p custom-p-sm bg-ink tracking-wide uppercase transition-colors duration-200 group-hover:bg-page group-focus-visible:bg-page group-data-[active=true]:bg-page"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-2 font-semibold text-ink transition-colors duration-200 group-hover:text-page group-focus-visible:text-page group-data-[active=true]:text-page">
+          <span className="inline-flex items-center gap-2 px-3 py-2 font-semibold text-page transition-colors duration-200 group-hover:text-ink group-focus-visible:text-ink group-data-[active=true]:text-ink">
             View case study
             <svg
               className="size-4 transition-transform duration-200 group-hover:translate-x-1 group-data-[active=true]:translate-x-1 motion-reduce:transition-none"

@@ -6,19 +6,13 @@ import { ImageViewer } from '../components/ImageViewer'
 import { Layout } from '../components/Layout'
 import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
-import { FramerCarouselThumbnails } from '../components/ui/framer-thumbnails'
 import { JsonLd } from '../components/JsonLd'
+import { EventVideos, type EventVideo } from '../components/EventVideos'
 import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
 const RED = 'rgb(220 38 38)'
-
-const eventCarouselImages = bitgetCaseStudy.gallery!.map((photo, i) => ({
-  id: i + 1,
-  url: photo.image,
-  title: photo.caption ?? '',
-}))
 
 const analyticsImages: StripImage[] = [
   {
@@ -119,6 +113,41 @@ const communityOpsLd = {
   creditText: 'Ndubuisi Marvellous',
 }
 
+// Event highlight videos from the Bitget Africa YouTube channel ("Bitget Africa
+// Community Events" playlist). Names and places come from the video titles.
+const eventVideosPlaylist = 'https://www.youtube.com/playlist?list=PLWYmyziiYzHujVt9R6hIOkUhiy1b0EZ6d'
+const eventVideoThumbs = '/case-studies/bitget/events-video/bitget-africa-'
+const eventVideos: (EventVideo & { uploadDate: string; seconds: number })[] = [
+  { id: 'PM5CGcpZfbI', name: 'P2P Merchant Connect', place: 'Lagos', youtubeTitle: 'Bitget P2P Merchant Connect, Lagos', thumb: `${eventVideoThumbs}p2p-merchant-connect-lagos.webp`, length: '2:42', seconds: 162, uploadDate: '2026-03-31' },
+  { id: 'KZxOoFnJo0o', name: 'Merchant Meetup', place: 'Nairobi', youtubeTitle: 'Bitget Merchant Meetup, Nairobi', thumb: `${eventVideoThumbs}merchant-meetup-nairobi.webp`, length: '1:01', seconds: 61, uploadDate: '2026-02-22' },
+  { id: '456BQ_CZwBs', name: 'Crypto Experience Month 2025', place: 'University of Nairobi', youtubeTitle: 'Crypto Experience Month 2025, University of Nairobi', thumb: `${eventVideoThumbs}crypto-experience-month-2025-university-of-nairobi.webp`, length: '1:33', seconds: 93, uploadDate: '2025-09-17' },
+  { id: 'tq-zxHfCquA', name: 'Ethiopia Blockchain Week', place: 'Ethiopia', youtubeTitle: 'Ethiopia Blockchain Week Highlight', thumb: `${eventVideoThumbs}ethiopia-blockchain-week.webp`, length: '1:35', seconds: 95, uploadDate: '2025-09-17' },
+  { id: 'cn6WVkI5-qI', name: 'El Clasico Watch Party', place: 'Lagos', youtubeTitle: 'Bitget Africa El Clasico Watch Party, Lagos, Nigeria', thumb: `${eventVideoThumbs}el-clasico-watch-party-lagos.webp`, length: '1:13', seconds: 73, uploadDate: '2025-05-15' },
+  { id: '5GAKqdkkV-g', name: 'Community Meetup', place: 'Nairobi', youtubeTitle: 'Bitget Community Meetup, Nairobi Highlight', thumb: `${eventVideoThumbs}community-meetup-nairobi.webp`, length: '1:59', seconds: 119, uploadDate: '2025-05-11' },
+]
+
+// Lets search engines list the highlights as videos tied to this case study.
+const eventVideosLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Bitget Africa community event highlights',
+  itemListElement: eventVideos.map((video, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'VideoObject',
+      name: video.youtubeTitle,
+      description: `Highlight video from ${video.youtubeTitle.replace(/ Highlight$/, '')}, a Bitget Africa community event.`,
+      thumbnailUrl: [`https://ndubuisimarvellous.com${video.thumb}`, `https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`],
+      uploadDate: video.uploadDate,
+      duration: `PT${Math.floor(video.seconds / 60)}M${video.seconds % 60}S`,
+      embedUrl: `https://www.youtube.com/embed/${video.id}`,
+      url: `https://www.youtube.com/watch?v=${video.id}`,
+      publisher: { '@type': 'Organization', name: 'Bitget Africa' },
+    },
+  })),
+}
+
 // Independent press coverage of one of the events: a news article that names me and
 // describes the session I led. Linked under the event photos and described for search
 // engines so the article is tied to my name.
@@ -195,13 +224,13 @@ export function BitgetCaseStudy() {
                 <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
                   40M+
                 </p>
-                <p className="custom-p mt-2 text-ink/60">Organic views</p>
+                <p className="custom-p mt-2 text-ink/60">Organic views and impressions generated</p>
               </div>
               <div>
                 <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
                   150K+
                 </p>
-                <p className="custom-p mt-2 text-ink/60">New followers gained</p>
+                <p className="custom-p mt-2 text-ink/60">Followers and members gained</p>
               </div>
               <div>
                 <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
@@ -256,7 +285,7 @@ export function BitgetCaseStudy() {
               </p>
             </div>
             <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance" style={{ color: 'var(--color-page)' }}>
-              When OKX left Nigeria, Bitget took the top spot
+              Turning a market exit into a growth opportunity
             </h2>
             <div className="mt-8 border-t" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
               <div className="border-b py-5" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
@@ -411,7 +440,25 @@ export function BitgetCaseStudy() {
       <section className="case-study-serif pb-12 tablet:pb-14 laptop:pb-18">
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <FramerCarouselThumbnails images={eventCarouselImages} />
+            {/* Event highlight videos */}
+            <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+              <div className="flex items-center gap-2">
+                <span aria-hidden="true" className="inline-block size-2 shrink-0" style={{ background: RED }} />
+                <h3 className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Event highlights</h3>
+              </div>
+              <a
+                href={eventVideosPlaylist}
+                target="_blank"
+                rel="noreferrer"
+                className="custom-p custom-p-sm underline underline-offset-4 outline-none transition-opacity duration-200 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-red-600"
+              >
+                Watch all on YouTube ↗<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+            <div className="mt-5">
+              <EventVideos videos={eventVideos} />
+            </div>
+            <JsonLd data={eventVideosLd} />
 
             {/* Press coverage of one of the events. The arrow sits at the end of the
                 headline (not in a separate box) so it reads as one link that leaves the site. */}
