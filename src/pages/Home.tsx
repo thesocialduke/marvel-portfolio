@@ -173,8 +173,8 @@ export function Home() {
               lines={[
                 <img loading="lazy" decoding="async"
                   key="about-photo"
-                  src="/about-heat-culture.webp"
-                  alt="Ndubuisi Marvellous"
+                  src="/ndubuisi-marvellous-speaker-abf-2026.webp"
+                  alt="Ndubuisi Marvellous wearing a speaker badge at ABF 2026"
                   className="mx-auto block aspect-[4/5] w-full max-w-[220px] object-cover object-[center_25%] tablet:aspect-[3/4] tablet:max-w-md tablet:object-center laptop:h-[26rem] laptop:w-auto laptop:max-w-none"
                 />,
               ]}

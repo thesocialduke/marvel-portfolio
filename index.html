@@ -2,6 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Google tag (gtag.js). Every pre-rendered page is built from this file, so it is on all of them.
+         Consent Mode: analytics cookies stay off until the visitor accepts in the cookie banner
+         (src/components/CookieBanner.tsx), and a saved choice is applied before anything is sent. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L58GESV6V6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      });
+      try {
+        if (localStorage.getItem('cookie-consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' });
+      } catch (e) {}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L58GESV6V6');
+    </script>
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

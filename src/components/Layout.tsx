@@ -1,5 +1,6 @@
 import { useEffect, type ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
+import { CookieBanner } from './CookieBanner'
 import { Footer } from './Footer'
 import { Navbar } from './Navbar'
 
@@ -22,6 +23,7 @@ export function Layout({ children, hideFooter = false }: { children: ReactNode; 
         <main className="flex-1">{children}</main>
         {!hideFooter && <Footer />}
       </div>
+      <CookieBanner />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
 import { ButtonLink } from './Button'
 import { CvMenu } from './CvMenu'
+import { openCookieSettings } from './CookieBanner'
 import { site } from '../data/site'
 import { cn } from '../lib/utils'
 
@@ -162,9 +163,19 @@ export function Footer() {
                 Telegram
               </a>
             </div>
-            <p className="custom-p custom-p-sm" style={{ color: LIGHT_MUTED }}>
-              {site.copyright}
-            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="custom-p custom-p-sm cursor-pointer underline underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
+                style={{ color: LIGHT_MUTED }}
+              >
+                Cookie settings
+              </button>
+              <p className="custom-p custom-p-sm" style={{ color: LIGHT_MUTED }}>
+                {site.copyright}
+              </p>
+            </div>
           </div>
         </Grid>
       </footer>
