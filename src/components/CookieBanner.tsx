@@ -59,21 +59,18 @@ export function CookieBanner() {
   if (!open) return null
 
   const button =
-    'custom-p custom-p-sm cursor-pointer px-4 py-2.5 tracking-wide uppercase outline-none transition-opacity duration-200 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
+    'cursor-pointer px-3 py-1.5 font-modernist text-[11px] leading-none font-semibold tracking-[0.08em] uppercase outline-none transition-opacity duration-200 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-ink'
 
+  // Compact card: one short line in the standard wording, two equal buttons.
   return (
     <section
-      aria-label="Cookie choice"
-      className="fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-50 bg-ink p-5 shadow-lg tablet:right-auto tablet:max-w-md"
+      aria-label="Cookie consent"
+      className="fixed right-[max(0.75rem,env(safe-area-inset-right))] bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-[max(0.75rem,env(safe-area-inset-left))] z-50 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 bg-ink px-4 py-3 shadow-lg tablet:left-auto tablet:max-w-[22rem]"
     >
-      <p className="custom-p custom-p-sm text-pretty" style={{ color: 'var(--color-page)' }}>
-        I use Google Analytics cookies to see which pages people visit, so I can improve this site. They stay off
-        unless you accept.
+      <p className="text-pretty" style={{ color: 'var(--color-page)', fontSize: '12.5px', lineHeight: 1.45 }}>
+        This website uses cookies to analyse traffic and improve your experience.
       </p>
-      <div className="mt-4 flex gap-3">
-        <button type="button" onClick={() => choose(true)} className={`${button} bg-page`} style={{ color: 'var(--color-ink)' }}>
-          Accept
-        </button>
+      <div className="ml-auto flex gap-2">
         <button
           type="button"
           onClick={() => choose(false)}
@@ -81,6 +78,9 @@ export function CookieBanner() {
           style={{ color: 'var(--color-page)' }}
         >
           Decline
+        </button>
+        <button type="button" onClick={() => choose(true)} className={`${button} bg-page`} style={{ color: 'var(--color-ink)' }}>
+          Accept
         </button>
       </div>
     </section>
