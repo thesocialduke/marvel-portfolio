@@ -2,7 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ndubuisimarvellous.com/</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-21</lastmod>
+    <image:image>
+      <image:loc>https://ndubuisimarvellous.com/ndubuisi-marvellous-speaker-abf-2026.webp</image:loc>
+    </image:image>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -20,7 +23,7 @@
   </url>
   <url>
     <loc>https://ndubuisimarvellous.com/bitget</loc>
-    <lastmod>2026-10-15</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
     <image:image>

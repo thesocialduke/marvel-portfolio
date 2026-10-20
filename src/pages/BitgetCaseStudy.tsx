@@ -130,7 +130,8 @@ const eventVideos: (EventVideo & { uploadDate: string; seconds: number })[] = [
 const eventVideosLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Bitget Africa community event highlights',
+  name: 'Selected Bitget Africa community event highlights',
+  description: 'A selection of highlight videos from Bitget Africa community events, meetups and activations.',
   itemListElement: eventVideos.map((video, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -430,7 +431,7 @@ export function BitgetCaseStudy() {
               Offline events &amp; activations
             </h2>
             <p className="custom-p mt-4 max-w-xl text-pretty text-ink/60">
-              Attendees rated them <span className="font-bold tabular-nums" style={{ color: RED }}>84.35%</span> on satisfaction (CSAT).
+              Attendees rated them <span className="font-bold tabular-nums" style={{ color: RED }}>94.35%</span> on satisfaction (CSAT).
             </p>
           </div>
         </Grid>
@@ -454,6 +455,9 @@ export function BitgetCaseStudy() {
                 Watch all on YouTube ↗<span className="sr-only"> (opens in a new tab)</span>
               </a>
             </div>
+            <p className="custom-p custom-p-sm mt-2 text-pretty text-ink/60">
+              Just a few of the many events and activations.
+            </p>
             <div className="mt-5">
               <EventVideos videos={eventVideos} />
             </div>

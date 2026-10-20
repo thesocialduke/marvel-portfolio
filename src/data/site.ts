@@ -234,7 +234,7 @@ export const bitgetCaseStudy: CaseStudyData = {
     { value: '150K+', label: 'Followers and members gained' },
     { value: '20K', label: 'Users attributed to an ambassador program' },
     { value: '3,500', label: 'Followers gained in one day' },
-    { value: '84.35%', label: 'CSAT across offline events' },
+    { value: '94.35%', label: 'CSAT across offline events' },
   ],
   keyMoment:
     'When OKX exited the market, campaigns I ran were instrumental in driving Bitget Wallet to become the top-downloaded crypto app in Nigeria, making “Bitget” a trending topic.',

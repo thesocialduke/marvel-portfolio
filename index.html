@@ -3,24 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <!-- Google tag (gtag.js). Every pre-rendered page is built from this file, so it is on all of them.
-         Consent Mode: analytics cookies stay off until the visitor accepts in the cookie banner
-         (src/components/CookieBanner.tsx), and a saved choice is applied before anything is sent. -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L58GESV6V6"></script>
+         It only runs on the live domain, so local copies and Vercel previews never send visits.
+         Consent Mode: analytics is off by default in the EEA, UK and Switzerland (where consent is
+         required) and on elsewhere; the cookie banner (src/components/CookieBanner.tsx) lets anyone
+         accept or decline, and a saved choice is applied before anything is sent. Ads stay off (no ads run). -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('consent', 'default', {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-      });
-      try {
-        if (localStorage.getItem('cookie-consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' });
-      } catch (e) {}
-      gtag('js', new Date());
-
-      gtag('config', 'G-L58GESV6V6');
+      if (location.hostname === 'ndubuisimarvellous.com') {
+        var noAds = { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' };
+        gtag('consent', 'default', Object.assign({ analytics_storage: 'denied', region: [
+          'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT',
+          'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'IS', 'LI', 'NO',
+          'GB', 'CH',
+        ] }, noAds));
+        gtag('consent', 'default', Object.assign({ analytics_storage: 'granted' }, noAds));
+        try {
+          var choice = localStorage.getItem('cookie-consent');
+          if (choice === 'granted' || choice === 'denied') gtag('consent', 'update', { analytics_storage: choice });
+        } catch (e) {}
+        gtag('js', new Date());
+        gtag('config', 'G-L58GESV6V6');
+        var tag = document.createElement('script');
+        tag.async = true;
+        tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-L58GESV6V6';
+        document.head.appendChild(tag);
+      }
     </script>
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
