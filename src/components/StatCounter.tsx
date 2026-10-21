@@ -64,7 +64,7 @@ export function StatCounter({ value }: { value: string }) {
 
   if (!match) {
     return (
-      <span ref={ref} className="tabular-nums">
+      <span ref={ref} className="tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
         {value}
       </span>
     )
@@ -72,7 +72,8 @@ export function StatCounter({ value }: { value: string }) {
 
   // aria-label gives screen readers the final number instead of the counting digits.
   return (
-    <span ref={ref} role="img" aria-label={value} className="tabular-nums">
+    // Inline so the shared heading styles can't override it: every digit keeps the same width while counting.
+    <span ref={ref} role="img" aria-label={value} className="tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
       {match[1]}
       {count}
       {match[3]}

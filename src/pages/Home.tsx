@@ -43,9 +43,11 @@ export function Home() {
         />
 
         <Grid className="relative pt-16 tablet:pt-28 laptop:pt-32">
+          {/* Laptop: the heading is sized so it plus the industries line right under it are
+              exactly as tall as the photo (top and bottom level with it). */}
           <div className="col-span-full flex flex-col gap-8 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse tablet:items-start tablet:justify-between laptop:col-span-12 laptop:col-start-2">
             <div className="tablet:max-w-[62%]">
-              <h1 className="font-modernist text-[7.5vw] leading-[1.1] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[4.8vw] laptop:text-[clamp(2.25rem,3.6vw,3.25rem)]">
+              <h1 className="font-modernist text-[7.5vw] leading-[1.1] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[4.8vw] laptop:text-[min(calc(4.59vw-9.4px),3.54rem)] text-balance">
                 Building{' '}
                 {/* Drawn as a background so it can sweep in left to right
                     (text-decoration can't animate its length). */}
@@ -60,7 +62,7 @@ export function Home() {
                 >
                   social and community-led growth engines
                 </span>{' '}
-                for brands entering and scaling across Africa.
+                for brands scaling across emerging markets.
               </h1>
               <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-red-600 tablet:justify-end tablet:text-sm">
                 <span aria-hidden="true" className="inline-block h-px w-4 bg-red-600/50" /> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
@@ -168,14 +170,18 @@ export function Home() {
 
       <section id="about" className="scroll-mt-20 py-12 tablet:py-14 laptop:py-18">
         <Grid className="gap-y-8 laptop:gap-y-0">
+          {/* Desktop: the photo takes the full height of the text column beside it (heading,
+              paragraphs and stats), so the two start and end level at every screen width. */}
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
             <StaggeredReveal
+              className="laptop:h-full"
+              lineClassName="laptop:relative laptop:h-full"
               lines={[
                 <img loading="lazy" decoding="async"
                   key="about-photo"
                   src="/ndubuisi-marvellous-speaker-abf-2026.webp"
                   alt="Ndubuisi Marvellous wearing a speaker badge at ABF 2026"
-                  className="mx-auto block aspect-[4/5] w-full max-w-[220px] object-cover object-[center_25%] tablet:aspect-[3/4] tablet:max-w-md tablet:object-center laptop:h-[26rem] laptop:w-auto laptop:max-w-none"
+                  className="mx-auto block aspect-[4/5] w-full max-w-[220px] object-cover object-[center_25%] tablet:aspect-[3/4] tablet:max-w-md tablet:object-center laptop:absolute laptop:inset-y-0 laptop:left-0 laptop:mx-0 laptop:h-full laptop:w-auto laptop:max-w-full"
                 />,
               ]}
             />
@@ -205,7 +211,7 @@ export function Home() {
                 </p>,
                 <p key="work" className="custom-p mt-2 text-left text-ink/70">
                   My work spans localized campaigns, creator/KOL partnerships, platform-native content, go-to-market and
-                  data-driven growth across African markets and beyond. I also build B2B relationships with
+                  data-driven growth. I also build B2B relationships with
                   communities, affiliates and partners that turn into lasting advocacy.
                 </p>,
               ]}
