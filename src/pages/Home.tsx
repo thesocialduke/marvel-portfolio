@@ -264,7 +264,7 @@ export function Home() {
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-col gap-4 tablet:gap-6">
               {clients.map((client) => (
-                <CaseStudyCard key={client.href} client={client} className="aspect-square tablet:aspect-[21/9]" />
+                <CaseStudyCard key={client.href} client={client} className="aspect-[6/5] tablet:aspect-[8/3]" />
               ))}
             </div>
           </div>
