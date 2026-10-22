@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Dialog } from 'radix-ui'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
+import { ThemeToggle } from './ThemeToggle'
 import { nav, site } from '../data/site'
 import { cn } from '../lib/utils'
+
+// Desktop nav links: 40px-tall hit area and red hover. The current one is marked by a
+// single red underline that slides between links (see Navbar).
+const navLinkBase =
+  "relative inline-flex h-10 items-center font-poppins text-[13px] font-medium tracking-wide uppercase outline-none transition-colors duration-150 hover:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
 
 const listVariants = {
   hidden: {},
@@ -20,6 +26,62 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const [scrolled, setScrolled] = useState(false)
+  const { pathname } = useLocation()
+  // On the home page, the underline moves to "Case Studies" while that section fills the
+  // middle of the screen, and back to "Home" everywhere else on the page.
+  const [inCaseStudies, setInCaseStudies] = useState(false)
+  useEffect(() => {
+    setInCaseStudies(false)
+    if (pathname !== '/') return
+    const el = document.getElementById('case-studies')
+    if (!el) return
+    const observer = new IntersectionObserver(([entry]) => setInCaseStudies(entry.isIntersecting), {
+      rootMargin: '-45% 0px -45% 0px',
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [pathname])
+
+  // A link to where you already are changes nothing in the address, so the router does
+  // nothing. Handle those clicks by scrolling instead: "Home" on the home page goes back
+  // to the top, and "Case Studies" on the home page scrolls to that section every time.
+  const desktopItems = nav.filter((item) => item.href !== '/contact')
+  const currentHref =
+    pathname === '/' ? (inCaseStudies ? '/#case-studies' : '/') : desktopItems.find((item) => item.href === pathname)?.href
+
+  // One underline that slides to the current link: measured from the link's position, moved
+  // with transform only (translate + scaleX on a 1px-wide bar), so it animates smoothly.
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
+  const [bar, setBar] = useState<{ x: number; w: number } | null>(null)
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = currentHref ? linkRefs.current[currentHref] : null
+      setBar(el && el.offsetWidth ? { x: el.offsetLeft, w: el.offsetWidth } : null)
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    document.fonts?.ready.then(measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [currentHref])
+
+  function handleNavClick(e: React.MouseEvent, href: string) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
+    const [path, hash] = href.split('#')
+    if ((path || '/') !== pathname) return
+    if (hash) {
+      const el = document.getElementById(hash)
+      if (!el) return
+      e.preventDefault()
+      setInCaseStudies(true) // underline moves on click, not when the scroll arrives
+      el.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+      window.history.replaceState(null, '', `#${hash}`)
+    } else if (href === '/') {
+      e.preventDefault()
+      setInCaseStudies(false)
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' })
+      if (window.location.hash) window.history.replaceState(null, '', '/')
+    }
+  }
 
   // Once the page has moved even a little, the bar gets a solid background so content
   // never shows through behind the logo and menu button. Passive listener, state only
@@ -46,7 +108,9 @@ export function Navbar() {
         )}
       >
         <Grid>
-          <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-5">
+          {/* Laptop and up: logo left, page links centred in one row, "Contact me" as the only
+              filled button on the right. Smaller screens keep the MENU button and full-screen menu. */}
+          <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:grid laptop:grid-cols-[1fr_auto_1fr] laptop:py-4">
             <Link
               to="/"
               aria-label={site.name}
@@ -55,22 +119,70 @@ export function Navbar() {
               <img src="/brand-logo.svg" alt={site.name} className="h-5 w-auto tablet:h-8" />
             </Link>
 
-            <Dialog.Trigger asChild>
-              {/* Solid black block with the word and two bars, so it reads as the menu at a glance
-                  without competing with the page's red accents; it turns red on hover.
-                  Accessible name stays "Toggle navigation"; the visible word is part of it. */}
-              <button
-                type="button"
-                aria-label="Menu, toggle navigation"
-                className="group relative z-20 inline-flex h-10 shrink-0 cursor-pointer items-center gap-2.5 bg-ink px-3.5 font-modernist text-xs font-semibold tracking-[0.15em] text-page uppercase outline-none transition-[background-color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-red-600 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page laptop:h-11 laptop:px-4"
+            <nav aria-label="Main" className="hidden laptop:block">
+              <ul className="relative flex items-center gap-8">
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'pointer-events-none absolute bottom-1.5 left-0 h-0.5 w-px origin-left bg-red-600 transition-[translate,scale,opacity] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none',
+                    bar ? 'opacity-100' : 'opacity-0',
+                  )}
+                  style={bar ? { translate: `${bar.x}px 0`, scale: `${bar.w} 1` } : undefined}
+                />
+                {desktopItems.map((item) => (
+                    <li key={item.href}>
+                      {/* Current = the page you're on; on the home page, whichever of Home or
+                          Case Studies you're looking at. */}
+                      {(() => {
+                        const current = item.href === currentHref
+                        return (
+                          <Link
+                            ref={(el) => {
+                              linkRefs.current[item.href] = el
+                            }}
+                            to={item.href}
+                            onClick={(e) => handleNavClick(e, item.href)}
+                            aria-current={current ? (item.href.includes('#') ? 'location' : 'page') : undefined}
+                            className={cn(navLinkBase, current ? 'text-ink' : 'text-ink/70')}
+                          >
+                            {item.label}
+                          </Link>
+                        )
+                      })()}
+                    </li>
+                  ))}
+              </ul>
+            </nav>
+
+            <div className="flex items-center gap-2 justify-self-end laptop:gap-3">
+              <ThemeToggle />
+              {/* Same type as the site's other buttons (bold capitals), filled black as the
+                  one highlighted action in the bar; red on hover. */}
+              <Link
+                to="/contact"
+                className="custom-button-label hidden h-10 items-center gap-2 bg-ink px-4 text-sm text-page uppercase hover:text-light outline-none transition-[background-color,color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-red-600 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page laptop:inline-flex"
+                
               >
-                <span aria-hidden="true">Menu</span>
-                <span aria-hidden="true" className="flex w-4 flex-col gap-1">
-                  <span className="h-0.5 w-4 bg-current" />
-                  <span className="h-0.5 w-4 bg-current" />
-                </span>
-              </button>
-            </Dialog.Trigger>
+                Contact me
+              </Link>
+
+              <Dialog.Trigger asChild>
+                {/* Solid black block with the word and two bars, so it reads as the menu at a glance
+                    without competing with the page's red accents; it turns red on hover.
+                    Accessible name stays "Toggle navigation"; the visible word is part of it. */}
+                <button
+                  type="button"
+                  aria-label="Menu, toggle navigation"
+                  className="group relative z-20 inline-flex h-10 shrink-0 cursor-pointer items-center gap-2.5 bg-ink px-3.5 laptop:hidden font-modernist text-xs font-semibold tracking-[0.15em] text-page uppercase outline-none transition-[background-color,color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-red-600 hover:text-light focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page laptop:h-11 laptop:px-4"
+                >
+                  <span aria-hidden="true">Menu</span>
+                  <span aria-hidden="true" className="flex w-4 flex-col gap-1">
+                    <span className="h-0.5 w-4 bg-current" />
+                    <span className="h-0.5 w-4 bg-current" />
+                  </span>
+                </button>
+              </Dialog.Trigger>
+            </div>
           </div>
         </Grid>
       </div>
@@ -95,7 +207,7 @@ export function Navbar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: prefersReducedMotion ? 0 : 0.2, ease: 'easeOut' }}
-                className="fixed inset-0 z-60 flex flex-col bg-ink text-page outline-none"
+                className="fixed inset-0 z-60 flex flex-col bg-night text-light outline-none"
               >
                 <Dialog.Title className="sr-only">Menu</Dialog.Title>
 
@@ -107,7 +219,7 @@ export function Navbar() {
                       <button
                         type="button"
                         aria-label="Close navigation"
-                        className="inline-flex h-10 shrink-0 cursor-pointer items-center gap-2.5 bg-red-600 px-3.5 font-modernist text-xs font-semibold tracking-[0.15em] text-white uppercase outline-none transition-[background-color,color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-page hover:text-ink focus-visible:ring-2 focus-visible:ring-page/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ink laptop:h-11 laptop:px-4"
+                        className="inline-flex h-10 shrink-0 cursor-pointer items-center gap-2.5 bg-red-600 px-3.5 font-modernist text-xs font-semibold tracking-[0.15em] text-white uppercase outline-none transition-[background-color,color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-light hover:text-night focus-visible:ring-2 focus-visible:ring-light/60 focus-visible:ring-offset-2 focus-visible:ring-offset-night laptop:h-11 laptop:px-4"
                       >
                         <span aria-hidden="true">Close</span>
                         <span aria-hidden="true" className="relative block size-4">
@@ -128,7 +240,7 @@ export function Navbar() {
                   >
                     {nav.map((item, i) => {
                       const linkClassName =
-                        'group relative flex items-start gap-3 py-3 outline-none transition-[color] duration-200 focus-visible:ring-2 focus-visible:ring-page/40 tablet:gap-4'
+                        'group relative flex items-start gap-3 py-3 outline-none transition-[color] duration-200 focus-visible:ring-2 focus-visible:ring-light/40 tablet:gap-4'
                       const content = (
                         <>
                           <span className="font-poppins w-6 shrink-0 pt-2 text-xs tabular-nums opacity-60 tablet:w-8 tablet:pt-3 tablet:text-sm">
@@ -144,7 +256,7 @@ export function Navbar() {
                         <motion.li
                           key={item.href}
                           variants={prefersReducedMotion ? undefined : itemVariants}
-                          className="border-b border-page/20 py-2 first:border-t tablet:py-3"
+                          className="border-b border-light/20 py-2 first:border-t tablet:py-3"
                         >
                           {item.href.startsWith('#') ? (
                             // Same-page scroll anchor (the footer's contact section
@@ -153,7 +265,7 @@ export function Navbar() {
                               {content}
                             </a>
                           ) : (
-                            <NavLink to={item.href} end={item.href === '/'} onClick={() => setOpen(false)} className={linkClassName}>
+                            <NavLink to={item.href} end={item.href === '/'} onClick={(e) => { setOpen(false); handleNavClick(e, item.href) }} className={linkClassName}>
                               {content}
                             </NavLink>
                           )}
@@ -163,11 +275,11 @@ export function Navbar() {
                   </motion.ul>
                 </nav>
 
-                <div className="font-poppins flex items-center justify-between gap-4 px-6 pb-5 text-xs tracking-wide text-page/60 tablet:px-10 tablet:pb-6 laptop:px-14 laptop:pb-8">
+                <div className="font-poppins flex items-center justify-between gap-4 px-6 pb-5 text-xs tracking-wide text-light/60 tablet:px-10 tablet:pb-6 laptop:px-14 laptop:pb-8">
                   <Link
                     to="/contact"
                     onClick={() => setOpen(false)}
-                    className="flex items-center gap-2 outline-none transition-colors duration-200 hover:text-page focus-visible:ring-2 focus-visible:ring-page/40"
+                    className="flex items-center gap-2 outline-none transition-colors duration-200 hover:text-light focus-visible:ring-2 focus-visible:ring-light/40"
                   >
                     <span aria-hidden="true" className="inline-block size-2 shrink-0 bg-red-600 motion-safe:animate-pulse" />
                     <span>
@@ -178,7 +290,7 @@ export function Navbar() {
                     href={site.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="outline-none transition-colors duration-200 hover:text-page focus-visible:ring-2 focus-visible:ring-page/40"
+                    className="outline-none transition-colors duration-200 hover:text-light focus-visible:ring-2 focus-visible:ring-light/40"
                   >
                     LinkedIn
                   </a>

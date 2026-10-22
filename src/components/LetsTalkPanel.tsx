@@ -2,7 +2,7 @@ import { ButtonLink } from './Button'
 import { Grid } from './Grid'
 import { site } from '../data/site'
 
-const RED = 'rgb(220 38 38)'
+const RED = 'var(--color-red-600)'
 
 // The closing "Let's talk about you." panel with a Book a call button.
 export function LetsTalkPanel() {
@@ -19,7 +19,7 @@ export function LetsTalkPanel() {
               <h2 className="custom-h2 custom-h2-bold mt-3 text-balance">Let’s talk about you.</h2>
             </div>
             <div className="flex shrink-0">
-              <ButtonLink to={site.bookingUrl} external fullWidth={false} className="bg-red-600 text-page ring-red-600">
+              <ButtonLink to={site.bookingUrl} external fullWidth={false} className="bg-red-600 text-light ring-red-600">
                 Book a call
                 <svg aria-hidden="true" className="size-[1.1em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="square" strokeLinejoin="miter">
                   <path d="M7 17 17 7M8 7h9v9" />

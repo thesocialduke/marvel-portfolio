@@ -12,7 +12,7 @@ import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
-const RED = 'rgb(220 38 38)'
+const RED = 'var(--color-red-600)'
 
 const analyticsImages: StripImage[] = [
   {
@@ -222,19 +222,19 @@ export function BitgetCaseStudy() {
 
             <div className="mt-10 grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:grid-cols-3">
               <div>
-                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
                   40M+
                 </p>
                 <p className="custom-p mt-2 text-ink/60">Organic views and impressions generated</p>
               </div>
               <div>
-                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
                   150K+
                 </p>
                 <p className="custom-p mt-2 text-ink/60">Followers and members gained</p>
               </div>
               <div>
-                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
                   #1
                 </p>
                 <p className="custom-p mt-2 text-ink/60">Downloaded crypto app in Nigeria (Bitget Wallet)</p>
@@ -276,7 +276,7 @@ export function BitgetCaseStudy() {
       </section>
 
       {/* FEATURED STORY (dark band) */}
-      <section className="on-dark case-study-serif py-12 tablet:py-14 laptop:py-24" style={{ background: 'var(--color-graphite)' }}>
+      <section className="on-dark case-study-serif py-12 tablet:py-14 laptop:py-24" style={{ background: 'var(--color-night)' }}>
         <Grid className="items-center gap-y-10 laptop:gap-y-0">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2">
             <div className="flex items-center gap-2">
@@ -285,12 +285,12 @@ export function BitgetCaseStudy() {
                 01. Featured story
               </p>
             </div>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance" style={{ color: 'var(--color-page)' }}>
+            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance" style={{ color: 'var(--color-light)' }}>
               Turning a market exit into a growth opportunity
             </h2>
             <div className="mt-8 border-t" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
               <div className="border-b py-5" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
-                <p className="custom-p" style={{ color: 'var(--color-page)' }}>
+                <p className="custom-p" style={{ color: 'var(--color-light)' }}>
                   OKX announced it was ending operations in Nigeria, leaving many users looking for a new home.
                 </p>
               </div>
@@ -298,7 +298,7 @@ export function BitgetCaseStudy() {
                 <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'rgb(231 230 226 / 0.6)' }}>
                   What I did
                 </p>
-                <p className="custom-p mt-2" style={{ color: 'var(--color-page)' }}>
+                <p className="custom-p mt-2" style={{ color: 'var(--color-light)' }}>
                   I led social strategy through the exit and got Bitget Wallet trending while users chose where to go
                   next. The narrative centered on trust, safety and security.
                 </p>
@@ -307,7 +307,7 @@ export function BitgetCaseStudy() {
                 <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'rgb(231 230 226 / 0.6)' }}>
                   The result
                 </p>
-                <p className="custom-p mt-2" style={{ color: 'var(--color-page)' }}>
+                <p className="custom-p mt-2" style={{ color: 'var(--color-light)' }}>
                   Bitget Wallet became the most downloaded crypto app in Nigeria, and “Bitget” trended nationally.
                 </p>
               </div>
@@ -366,8 +366,7 @@ export function BitgetCaseStudy() {
               {/* Visible cue that the map opens larger (phones have no zoom cursor). */}
               <span
                 aria-hidden="true"
-                className="absolute right-3 bottom-[8%] inline-flex items-center gap-1 bg-ink px-1.5 py-1 font-modernist text-[10px] leading-none font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-200 group-hover:bg-red-600 group-focus-visible:bg-red-600 tablet:right-5"
-                style={{ color: 'var(--color-page)' }}
+                className="absolute right-3 bottom-[8%] inline-flex items-center gap-1 bg-ink px-1.5 py-1 font-modernist text-[10px] leading-none font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-200 group-hover:bg-red-600 group-focus-visible:bg-red-600 tablet:right-5 text-page group-hover:text-light group-focus-visible:text-light"
               >
                 <svg className="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
                   <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
@@ -404,7 +403,7 @@ export function BitgetCaseStudy() {
           <div className="col-span-full grid grid-cols-1 gap-5 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-2 laptop:col-span-12 laptop:col-start-2 laptop:grid-cols-3">
             {corePrograms.map((program) => (
               <div key={program.title} className="flex flex-col bg-hyacinth/5 p-6 tablet:p-8">
-                <p className="custom-h1 custom-h1-bold text-[2.75rem] normal-case tabular-nums" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold text-[2.75rem] normal-case tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
                   {program.stat}
                 </p>
                 <p className="custom-p custom-p-sm mt-3 tracking-[0.1em] uppercase">{program.statLabel}</p>
@@ -431,7 +430,7 @@ export function BitgetCaseStudy() {
               Offline events &amp; activations
             </h2>
             <p className="custom-p mt-4 max-w-xl text-pretty text-ink/60">
-              Attendees rated them <span className="font-bold tabular-nums" style={{ color: RED }}>94.35%</span> on satisfaction (CSAT).
+              Attendees rated them <span className="font-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>94.35%</span> on satisfaction (CSAT).
             </p>
           </div>
         </Grid>
@@ -480,7 +479,7 @@ export function BitgetCaseStudy() {
                 <svg
                   aria-hidden="true"
                   className="ml-2 inline-block size-[0.9em] -translate-y-[0.1em] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-[0.25em] motion-reduce:transition-none"
-                  style={{ color: RED }}
+                  style={{ color: 'var(--color-accent-text)' }}
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"

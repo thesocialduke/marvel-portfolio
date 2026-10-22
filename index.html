@@ -119,7 +119,13 @@
     </script>
 
     <script>
-      document.documentElement.setAttribute('data-theme', 'light')
+      // Light by default; dark only if the visitor chose it with the nav switch. Runs before
+      // the page paints so there is no flash of the wrong theme.
+      try {
+        document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') === 'dark' ? 'dark' : 'light')
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light')
+      }
     </script>
   </head>
   <body>

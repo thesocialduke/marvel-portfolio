@@ -5,7 +5,7 @@ import { Layout } from '../components/Layout'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { site } from '../data/site'
 
-const RED = 'rgb(220 38 38)'
+const RED = 'var(--color-red-600)'
 
 const socials = [
   { label: 'LinkedIn', href: site.linkedin },

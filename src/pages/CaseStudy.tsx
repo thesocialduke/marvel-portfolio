@@ -28,7 +28,7 @@ function ProofGrid({ photos }: { photos: { image: string; caption?: string }[] }
             className="size-full object-cover transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none"
           />
           {photo.caption && (
-            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-graphite/85 via-graphite/10 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-night/85 via-night/10 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <p className="custom-p custom-h4-invert">{photo.caption}</p>
             </div>
           )}
@@ -146,7 +146,7 @@ export function CaseStudy({
                           <div key={img.image} className="group relative aspect-[9/16] overflow-hidden">
                             <img src={img.image} alt={img.caption ?? ''} className="size-full object-cover" />
                             {img.caption && (
-                              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-graphite/85 via-graphite/10 to-transparent p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-night/85 via-night/10 to-transparent p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                 <p className="custom-p custom-h4-invert">{img.caption}</p>
                               </div>
                             )}
@@ -245,7 +245,7 @@ export function CaseStudy({
                       className="size-full object-cover transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none"
                     />
                     {photo.caption && (
-                      <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-graphite/85 via-graphite/10 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                      <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-night/85 via-night/10 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                         <p className="custom-p custom-h4-invert">{photo.caption}</p>
                       </div>
                     )}

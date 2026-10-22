@@ -7,7 +7,7 @@ import { openCookieSettings } from './CookieBanner'
 import { site } from '../data/site'
 import { cn } from '../lib/utils'
 
-const LIGHT = 'var(--color-page)'
+const LIGHT = 'var(--color-light)'
 const LIGHT_MUTED = 'rgb(231 230 226 / 0.7)'
 
 function EmailAction() {
@@ -30,14 +30,14 @@ function EmailAction() {
         external
         tone="red"
         fullWidth={false}
-        className="min-w-0 flex-1 shrink px-3 text-[3.1vw] tracking-tight whitespace-nowrap ring-page/60 tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
+        className="min-w-0 flex-1 shrink px-3 text-[3.1vw] tracking-tight whitespace-nowrap ring-light/60 tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
       >
         {site.email}
       </ButtonLink>
       <button
         type="button"
         onClick={handleCopy}
-        className="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-1.5 px-1 font-modernist text-[11px] font-semibold tracking-[0.1em] text-red-600 uppercase outline-none transition-colors tablet:text-page/50 tablet:hover:text-red-600 focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
+        className="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-1.5 px-1 font-modernist text-[11px] font-semibold tracking-[0.1em] text-red-light uppercase outline-none transition-colors tablet:text-light/60 tablet:hover:text-red-light focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
       >
         {copied ? (
           <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -85,7 +85,7 @@ function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top"
       className={cn(
-        'fixed right-[max(1.5rem,env(safe-area-inset-right))] bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-40 flex size-12 items-center justify-center bg-red-600 text-page shadow-lg outline-none transition-[opacity,transform] duration-200 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover',
+        'fixed right-[max(1.5rem,env(safe-area-inset-right))] bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-40 flex size-12 items-center justify-center bg-red-600 text-light shadow-lg outline-none transition-[opacity,transform] duration-200 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover',
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0',
       )}
     >
@@ -104,7 +104,7 @@ export function Footer() {
       <footer
         id="contact"
         className="on-dark scroll-mt-20 tablet:scroll-mt-24"
-        style={{ background: 'var(--color-graphite)', color: 'var(--color-page)' }}
+        style={{ background: 'var(--color-night)', color: 'var(--color-light)' }}
       >
         <Grid className="gap-y-10 py-12 tablet:py-14 laptop:py-18">
           <div className="col-span-full flex flex-col gap-6 tablet:col-span-6 tablet:col-start-2 tablet:flex-row tablet:items-end tablet:justify-between laptop:col-span-12 laptop:col-start-2">
@@ -121,7 +121,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-page/20 pt-6 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
+          <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-light/20 pt-6 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
             <div className="flex flex-wrap items-center gap-6">
               <Link
                 to="/"
@@ -129,7 +129,7 @@ export function Footer() {
                   // Already on the home page: the route doesn't change, so scroll up manually.
                   if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
                 }}
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
                 style={{ color: LIGHT }}
               >
                 Home
@@ -139,7 +139,7 @@ export function Footer() {
                 href={site.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
                 style={{ color: LIGHT }}
               >
                 LinkedIn
@@ -148,7 +148,7 @@ export function Footer() {
                 href={site.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
                 style={{ color: LIGHT }}
               >
                 Instagram
@@ -157,7 +157,7 @@ export function Footer() {
                 href={site.telegram}
                 target="_blank"
                 rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
+                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
                 style={{ color: LIGHT }}
               >
                 Telegram
@@ -167,7 +167,7 @@ export function Footer() {
               <button
                 type="button"
                 onClick={openCookieSettings}
-                className="custom-p custom-p-sm cursor-pointer underline underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
+                className="custom-p custom-p-sm cursor-pointer underline underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
                 style={{ color: LIGHT_MUTED }}
               >
                 Cookie settings

@@ -11,7 +11,7 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
 import { cn } from '../lib/utils'
 
-const RED = 'rgb(220 38 38)'
+const RED = 'var(--color-red-600)'
 
 const summary =
   'I produced short-form content for Binance Africa that translated complex industry and product concepts into accessible, shareable stories, built to travel on Instagram and TikTok.'
@@ -198,7 +198,7 @@ export function BinanceCaseStudy() {
                     {episode.title}
                   </span>
                 </button>
-                <p className="custom-h1 custom-h1-bold mt-4 text-[2rem] tabular-nums" style={{ color: RED }}>
+                <p className="custom-h1 custom-h1-bold mt-4 text-[2rem] tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
                   {episode.views}
                 </p>
                 <p className="custom-p text-ink/60">Views</p>

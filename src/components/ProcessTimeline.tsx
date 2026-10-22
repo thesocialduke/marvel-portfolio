@@ -52,8 +52,8 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
               className="absolute top-0 left-0 size-[13px] border border-ink bg-page transition-colors duration-700 motion-reduce:transition-none"
               style={{
                 transitionDelay: delay,
-                backgroundColor: playing ? 'rgb(220 38 38)' : undefined,
-                borderColor: playing ? 'rgb(220 38 38)' : undefined,
+                backgroundColor: playing ? 'var(--color-red-600)' : undefined,
+                borderColor: playing ? 'var(--color-red-600)' : undefined,
               }}
             />
             <div
@@ -64,7 +64,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
                 transform: playing ? 'translateY(0)' : 'translateY(14px)',
               }}
             >
-              <span className="custom-h4 custom-h4-bold" style={{ color: 'rgb(220 38 38)' }}>
+              <span className="custom-h4 custom-h4-bold" style={{ color: 'var(--color-accent-text)' }}>
                 0{i + 1}
               </span>
               <h3 className="custom-h4 custom-h4-bold mt-2 text-balance">{step.title}</h3>

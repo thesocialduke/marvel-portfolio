@@ -9,7 +9,7 @@ const toneClasses = {
   // Default fill is an instant color swap; the red tone instead uses the
   // .tone-red-fill class (index.css) so the fill visibly rises bottom-to-top.
   default: 'hover:bg-hyacinth hover:text-page focus-visible:ring-hyacinth-hover',
-  red: 'tone-red-fill hover:text-page hover:ring-red-600 focus-visible:ring-red-600',
+  red: 'tone-red-fill hover:text-light hover:ring-red-600 focus-visible:ring-red-600',
 } as const
 
 type Tone = keyof typeof toneClasses

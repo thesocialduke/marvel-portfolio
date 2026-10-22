@@ -28,8 +28,8 @@ export function CvMenu({
         ) : (
           <button
             type="button"
-            className="custom-p custom-p-sm cursor-pointer tracking-wide uppercase outline-none transition-opacity duration-200 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-page/60"
-            style={{ color: 'var(--color-page)' }}
+            className="custom-p custom-p-sm cursor-pointer tracking-wide uppercase outline-none transition-opacity duration-200 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
+            style={{ color: 'var(--color-light)' }}
           >
             {label}
           </button>

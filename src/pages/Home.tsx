@@ -54,7 +54,7 @@ export function Home() {
                 <span
                   className="transition-[background-size] duration-[1400ms] ease-out motion-reduce:transition-none"
                   style={{
-                    backgroundImage: 'linear-gradient(rgb(220 38 38), rgb(220 38 38))',
+                    backgroundImage: 'linear-gradient(var(--color-red-600), var(--color-red-600))',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: '0 calc(100% - 0.14em)',
                     backgroundSize: underlineOn ? '100% 3px' : '0% 3px',
@@ -64,7 +64,7 @@ export function Home() {
                 </span>{' '}
                 for brands scaling across emerging markets.
               </h1>
-              <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-red-600 tablet:justify-end tablet:text-sm">
+              <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-accent-text tablet:justify-end tablet:text-sm">
                 <span aria-hidden="true" className="inline-block h-px w-4 bg-red-600/50" /> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
               </p>
             </div>
@@ -221,7 +221,7 @@ export function Home() {
                 <div key={stat.label}>
                   <p
                     className="custom-h1 custom-h1-bold custom-h1-stat-mobile-lg"
-                    style={{ color: 'rgb(220 38 38)' }}
+                    style={{ color: 'var(--color-accent-text)' }}
                   >
                     <StatCounter value={stat.value} />
                   </p>

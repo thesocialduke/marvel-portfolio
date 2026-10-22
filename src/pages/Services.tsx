@@ -9,7 +9,7 @@ import { JsonLd } from '../components/JsonLd'
 import { faqs, services, site } from '../data/site'
 import { cn } from '../lib/utils'
 
-const RED = 'rgb(220 38 38)'
+const RED = 'var(--color-red-600)'
 
 // Taken from the "What does working together look like?" FAQ answer.
 const howItWorks = [

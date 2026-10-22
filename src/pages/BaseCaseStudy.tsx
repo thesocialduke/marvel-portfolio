@@ -159,7 +159,7 @@ export function BaseCaseStudy() {
             <div className="mb-4 hidden grid-cols-[1fr_3rem_1fr] gap-4 tablet:grid">
               <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/50 uppercase">Before</p>
               <span />
-              <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'rgb(220 38 38)' }}>
+              <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'var(--color-accent-text)' }}>
                 After
               </p>
             </div>
@@ -167,10 +167,10 @@ export function BaseCaseStudy() {
               {baseCaseStudy.beforeAfter!.map((row) => (
                 <div key={row.before}>
                   {/* Phone: one compact card per pair */}
-                  <div className="border-l-[3px] bg-hyacinth/5 px-4 py-3 tablet:hidden" style={{ borderColor: 'rgb(220 38 38)' }}>
+                  <div className="border-l-[3px] bg-hyacinth/5 px-4 py-3 tablet:hidden" style={{ borderColor: 'var(--color-red-600)' }}>
                     <p className="custom-p custom-p-sm text-ink/50 line-through decoration-ink/25">{row.before}</p>
                     <p className="custom-h4 custom-h4-bold mt-1 flex items-start gap-2">
-                      <span aria-hidden="true" style={{ color: 'rgb(220 38 38)' }}>
+                      <span aria-hidden="true" style={{ color: 'var(--color-accent-text)' }}>
                         →
                       </span>
                       <span>{row.after}</span>
@@ -189,7 +189,7 @@ export function BaseCaseStudy() {
                         </svg>
                       </span>
                     </div>
-                    <div className="flex items-center border-l-[3px] bg-hyacinth/5 px-5 py-4" style={{ borderColor: 'rgb(220 38 38)' }}>
+                    <div className="flex items-center border-l-[3px] bg-hyacinth/5 px-5 py-4" style={{ borderColor: 'var(--color-red-600)' }}>
                       <p className="custom-h4 custom-h4-bold">{row.after}</p>
                     </div>
                   </div>

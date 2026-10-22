@@ -35,6 +35,17 @@
   --color-hyacinth: rgb(0 0 0);
   --color-hyacinth-hover: rgb(102 102 102);
   --color-graphite: rgb(10 10 10);
+  /* Fixed colours that never flip with dark mode: text and surfaces on areas that stay
+     dark in both themes (footer, full-screen menu, photo captions, dark bands). */
+  --color-light: rgb(231 230 226);
+  --color-night: rgb(10 10 10);
+  /* Brand red, split by job so every pairing passes contrast (lightness only, same hue).
+     Fill: behind light text (buttons, badges, the red box) - 4.7:1 with cream.
+     Accent text: small red text - deep on light pages, lifted on dark (see dark block).
+     Red light: red text on the always-dark footer and menu. */
+  --color-red-600: rgb(200 20 20);
+  --color-accent-text: rgb(200 20 20);
+  --color-red-light: rgb(238 76 76);
 
   --grid-template-columns-14: repeat(14, minmax(0, 1fr));
 }
@@ -57,7 +68,7 @@
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(0.48 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
@@ -136,8 +147,8 @@
      identical to the unselected text, so selecting looks like it does nothing. */
   .on-dark::selection,
   .on-dark ::selection {
-    background: var(--color-page);
-    color: var(--color-graphite);
+    background: var(--color-light);
+    color: var(--color-night);
   }
   * {
     @apply border-border outline-ring/50;
@@ -287,7 +298,7 @@
    instead of swapping instantly, by sliding a two-tone gradient that's
    twice the element's height. */
 .tone-red-fill {
-  background-image: linear-gradient(to bottom, transparent 50%, rgb(220 38 38) 50%);
+  background-image: linear-gradient(to bottom, transparent 50%, var(--color-red-600) 50%);
   background-size: 100% 200%;
   background-position: 0% 0%;
   transition:
@@ -307,10 +318,10 @@
 .btn-beam {
   position: relative;
   overflow: hidden;
-  background-color: rgb(220 38 38);
+  background-color: var(--color-red-600);
   color: var(--color-page);
-  --tw-ring-color: rgb(220 38 38);
-  filter: drop-shadow(0 0 8px rgb(220 38 38 / 0.5));
+  --tw-ring-color: var(--color-red-600);
+  filter: drop-shadow(0 0 8px rgb(200 20 20 / 0.5));
 }
 
 .btn-beam::after {
@@ -346,7 +357,8 @@
    resolves against that element's own final color (transparent), not
    the inherited one — so the "default" state color is hardcoded instead. */
 .hover-red-text {
-  background-image: linear-gradient(to bottom, var(--color-page) 50%, rgb(220 38 38) 50%);
+  /* Fixed light colour: it's only used on the always-black full-screen menu. */
+  background-image: linear-gradient(to bottom, var(--color-light) 50%, var(--color-red-light) 50%);
   background-size: 100% 200%;
   background-position: 0% 0%;
   -webkit-background-clip: text;
@@ -520,4 +532,33 @@ input[type='range'].scrubber::-moz-range-thumb {
   20% {
     transform: translateX(5px);
   }
+}
+
+/* Dark mode: chosen with the sun/moon switch in the nav bar (light is the default). The
+   theme tokens flip, so every utility built on them (bg-page, text-ink/60, ...) follows.
+   Areas meant to stay dark use the fixed light/night tokens above. */
+:root[data-theme='dark'] {
+  --color-page: rgb(16 16 15);
+  --color-ink: rgb(231 230 226);
+  --color-hyacinth: rgb(231 230 226);
+  --color-hyacinth-hover: rgb(160 160 156);
+  --color-graphite: rgb(30 30 28);
+  color-scheme: dark;
+  --color-accent-text: rgb(238 76 76);
+  /* Base UI colours used by the review and image components. */
+  --background: rgb(16 16 15);
+  --foreground: rgb(231 230 226);
+  --card: rgb(30 30 28);
+  --card-foreground: rgb(231 230 226);
+  --popover: rgb(30 30 28);
+  --popover-foreground: rgb(231 230 226);
+  --muted: rgb(30 30 28);
+  --muted-foreground: rgb(170 169 165);
+  --border: rgb(231 230 226 / 0.15);
+}
+/* Partner logos are mostly dark or brand-coloured artwork: in dark mode show them all as
+   one light tone so none disappear against the background. */
+:root[data-theme='dark'] .trusted-by-track img,
+:root[data-theme='dark'] .trusted-by-track-x4 img {
+  filter: brightness(0) invert(0.85);
 }
