@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { ImageStrip, type StripImage } from '../components/ImageStrip'
@@ -8,11 +8,13 @@ import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
 import { JsonLd } from '../components/JsonLd'
 import { EventVideos, type EventVideo } from '../components/EventVideos'
+import { Reveal } from '../components/Reveal'
+import { SplitSection } from '../components/SplitSection'
 import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
+import { cn } from '../lib/utils'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 
-const RED = 'var(--color-red-600)'
 
 const analyticsImages: StripImage[] = [
   {
@@ -113,6 +115,107 @@ const communityOpsLd = {
   creditText: 'Ndubuisi Marvellous',
 }
 
+// Education: live sessions I hosted on the Bitget Africa YouTube channel (market updates,
+// VIP and product sessions), and the best-performing #BitQuest learn & earn post on X.
+const eduThumbs = '/case-studies/bitget/education/ndubuisi-marvellous-bitget-live-'
+const liveSessions: (EventVideo & { uploadDate: string; seconds: number })[] = [
+  { id: 'cxpAgjk4avw', name: 'What Is the NFP Report and Why It Matters', place: 'LIVE market updates', youtubeTitle: 'What Is the NFP Report and Why It Matters', thumb: `${eduThumbs}nfp-report-market-update.webp`, length: '43:11', seconds: 2591, uploadDate: '2025-11-05' },
+  { id: 'HJ1z1Z8zsbY', name: 'Gold, Forex & CFD Markets on Bitget', place: 'Product education', youtubeTitle: 'Gold, Forex & CFD Markets on Bitget', thumb: `${eduThumbs}gold-forex-cfd-markets.webp`, length: '43:33', seconds: 2613, uploadDate: '2026-01-09' },
+  { id: 'IbBaE9aMHqM', name: 'VIP Privileges & Smart Investing', place: 'VIP partner sessions', youtubeTitle: 'VIP Privileges & Smart Investing in 2026', thumb: `${eduThumbs}vip-privileges-smart-investing.webp`, length: '32:47', seconds: 1967, uploadDate: '2026-05-11' },
+  { id: 'eJyZ1nSu2ag', name: 'Becoming an Institutional Merchant on Bitget P2P', place: 'P2P merchant onboarding', youtubeTitle: 'Becoming An Institutional Merchant On Bitget P2P', thumb: `${eduThumbs}institutional-merchant-bitget-p2p.webp`, length: '39:35', seconds: 2375, uploadDate: '2026-04-10' },
+  { id: 'bBXalmHFKso', name: 'Beginners Guide to US Stocks Futures', place: 'Product education', youtubeTitle: 'Beginners Guide to US Stocks Futures Trading', thumb: `${eduThumbs}us-stocks-futures-guide.webp`, length: '31:54', seconds: 1914, uploadDate: '2026-05-01' },
+  { id: 'mun02c-qnVg', name: 'CFD Trading for Beginners', place: 'Product education', youtubeTitle: 'CFD (Contract For Difference) Trading For Beginners', thumb: `${eduThumbs}cfd-trading-for-beginners.webp`, length: '58:48', seconds: 3528, uploadDate: '2026-05-21' },
+]
+const liveSessionsUrl = 'https://www.youtube.com/@BitgetAfrica/streams'
+
+// Short explainer videos presented by a KOL on the Bitget Africa channel. I wrote the scripts
+// and directed them.
+const explainerThumbs = '/case-studies/bitget/education/bitget-africa-explainer-'
+const explainers: (EventVideo & { uploadDate: string; seconds: number })[] = [
+  { id: '5jTw79SRsIw', name: 'Trade Gold, Forex and Commodities on Bitget TradFi', place: 'Product education', youtubeTitle: 'Trade Gold, Forex and Commodities on Bitget TradFi', thumb: `${explainerThumbs}trade-gold-forex-commodities-tradfi.webp`, length: '6:12', seconds: 372, uploadDate: '2026-01-15' },
+  { id: 'NWgGdb_uTgw', name: 'Introduction to Bitget Spot Auto Invest', place: 'Product education', youtubeTitle: 'Introduction To Bitget Spot Auto Invest', thumb: `${explainerThumbs}spot-auto-invest.webp`, length: '1:42', seconds: 102, uploadDate: '2025-11-10' },
+  { id: '1BIzUYiFx9c', name: 'How to Invest in US Stocks from Africa', place: 'Product education', youtubeTitle: 'How to Invest in US Stocks from Africa (No Foreign Broker Needed!)', thumb: `${explainerThumbs}invest-in-us-stocks-from-africa.webp`, length: '2:48', seconds: 168, uploadDate: '2026-07-06' },
+  { id: 'P0aKk7HJQsM', name: 'How to Stay Safe on P2P in Nigeria', place: 'User safety', youtubeTitle: 'How To Stay Safe On P2P In Nigeria', thumb: `${explainerThumbs}stay-safe-on-p2p-nigeria.webp`, length: '1:35', seconds: 95, uploadDate: '2025-12-02' },
+  { id: 'BppKcWTiJL8', name: 'Market Cap, Liquidity, Spread, Slippage & Volume Explained', place: 'Crypto basics', youtubeTitle: 'Market Cap, Liquidity, Spread, Slippage & Volume Explained (Beginner’s Guide)', thumb: `${explainerThumbs}market-cap-liquidity-spread-slippage-volume.webp`, length: '2:40', seconds: 160, uploadDate: '2026-03-04' },
+  { id: 'uqYr5i_NYBc', name: 'Early Access to OpenAI Pre-IPO on Bitget', place: 'Product launch', youtubeTitle: 'Eary Access To OpenAI Pre-IPO on Bitget', thumb: `${explainerThumbs}openai-pre-ipo-early-access.webp`, length: '3:04', seconds: 184, uploadDate: '2026-05-12' },
+]
+const explainersUrl = 'https://www.youtube.com/@BitgetAfrica/videos'
+
+const explainersLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Bitget Africa educational explainer videos, scripted and directed by Ndubuisi Marvellous',
+  itemListElement: explainers.slice(0, 4).map((video, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'VideoObject',
+      name: video.youtubeTitle,
+      description: `Bitget Africa ${video.place.toLowerCase()} explainer, scripted and directed by Ndubuisi Marvellous.`,
+      thumbnailUrl: `https://ndubuisimarvellous.com${video.thumb}`,
+      uploadDate: video.uploadDate,
+      duration: `PT${Math.floor(video.seconds / 60)}M${video.seconds % 60}S`,
+      embedUrl: `https://www.youtube.com/embed/${video.id}`,
+      url: `https://www.youtube.com/watch?v=${video.id}`,
+      publisher: { '@type': 'Organization', name: 'Bitget Africa' },
+      director: { '@type': 'Person', name: 'Ndubuisi Marvellous', url: 'https://ndubuisimarvellous.com/' },
+    },
+  })),
+}
+
+const liveSessionsLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Bitget Africa live education sessions hosted by Ndubuisi Marvellous',
+  itemListElement: liveSessions.slice(0, 4).map((video, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'VideoObject',
+      name: video.youtubeTitle,
+      description: `Bitget Africa live session (${video.place.toLowerCase()}) hosted by Ndubuisi Marvellous, Head of Social Media and Community, Africa.`,
+      thumbnailUrl: `https://ndubuisimarvellous.com${video.thumb}`,
+      uploadDate: video.uploadDate,
+      duration: `PT${Math.floor(video.seconds / 60)}M${video.seconds % 60}S`,
+      embedUrl: `https://www.youtube.com/embed/${video.id}`,
+      url: `https://www.youtube.com/watch?v=${video.id}`,
+      publisher: { '@type': 'Organization', name: 'Bitget Africa' },
+      actor: { '@type': 'Person', name: 'Ndubuisi Marvellous', url: 'https://ndubuisimarvellous.com/' },
+    },
+  })),
+}
+
+const seoProof = {
+  image: '/case-studies/bitget/education/bitget-africa-seo-articles-google-ranking-nigeria-kenya-ethiopia.webp',
+  width: 1045,
+  height: 1090,
+  alt: 'Google search results showing Bitget blog articles ranking: How to Buy Crypto via P2P Using OPay in 2026 (Nigeria), How to Buy Crypto in Kenya with M-Pesa on Bitget P2P (Kenya), and How to Buy Crypto in Ethiopia Using Telebirr on Bitget P2P (Ethiopia).',
+  articles: [
+    { country: 'Nigeria', title: 'How to Buy Crypto via P2P Using OPay' },
+    { country: 'Kenya', title: 'How to Buy Crypto in Kenya with M-Pesa on Bitget P2P' },
+    { country: 'Ethiopia', title: 'How to Buy Crypto in Ethiopia Using Telebirr on Bitget P2P' },
+  ],
+}
+
+const seoProofLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageObject',
+  name: 'Bitget Africa SEO articles ranking on Google in Nigeria, Kenya and Ethiopia',
+  contentUrl: `https://ndubuisimarvellous.com${seoProof.image}`,
+  width: seoProof.width,
+  height: seoProof.height,
+  description: seoProof.alt,
+  creator: { '@type': 'Person', name: 'Ndubuisi Marvellous', url: 'https://ndubuisimarvellous.com/' },
+}
+
+const bitquestPost = {
+  url: 'https://x.com/BitgetAfrica/status/1950285812454875544',
+  image: '/case-studies/bitget/education/bitget-africa-bitquest-p2p-quiz-x-post.webp',
+  width: 1086,
+  height: 1836,
+  alt: 'Bitget Africa post on X, 29 July 2025: Win $500 USDT from the #BitQuest quiz on Bitget P2P, quoting the launch of the #BitQuest learn and earn challenge. 352 likes and 223 replies.',
+}
+
 // Event highlight videos from the Bitget Africa YouTube channel ("Bitget Africa
 // Community Events" playlist). Names and places come from the video titles.
 const eventVideosPlaylist = 'https://www.youtube.com/playlist?list=PLWYmyziiYzHujVt9R6hIOkUhiy1b0EZ6d'
@@ -132,7 +235,7 @@ const eventVideosLd = {
   '@type': 'ItemList',
   name: 'Selected Bitget Africa community event highlights',
   description: 'A selection of highlight videos from Bitget Africa community events, meetups and activations.',
-  itemListElement: eventVideos.map((video, i) => ({
+  itemListElement: eventVideos.slice(0, 4).map((video, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     item: {
@@ -187,9 +290,161 @@ const pressMentionLd = {
   },
 }
 
+// Chapters of the case study. On laptops each section's left column shows this list with the
+// current chapter marked, so it reads as one index that follows you down the page.
+const chapters = [
+  { id: 'featured-story', n: '01', label: 'Featured story' },
+  { id: 'operating-model', n: '02', label: 'Operating model' },
+  { id: 'programs', n: '03', label: 'Programs' },
+  { id: 'education', n: '04', label: 'Education' },
+  { id: 'events', n: '05', label: 'Events' },
+]
+
+// Sentence-case sub-heading inside a section, with an optional link out on the right.
+function SubHeading({ children, link }: { children: React.ReactNode; link?: { href: string; label: string } }) {
+  return (
+    <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+      <h3 className="custom-p text-balance text-ink" style={{ fontWeight: 600, fontSize: '1.0625rem' }}>
+        {children}
+      </h3>
+      {link && (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          className="custom-p custom-p-sm inline-flex min-h-6 items-center underline underline-offset-4 outline-none transition-opacity duration-200 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-red-600"
+        >
+          {link.label} ↗<span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      )}
+    </div>
+  )
+}
+
+// Small proof screenshot that opens full size. Same square frame for every proof image.
+function ProofThumb({
+  image,
+  alt,
+  width,
+  height,
+  label,
+  onOpen,
+  openerRef,
+}: {
+  image: string
+  alt: string
+  width: number
+  height: number
+  label: string
+  onOpen: () => void
+  openerRef: React.RefObject<HTMLButtonElement | null>
+}) {
+  return (
+    <button
+      ref={openerRef}
+      type="button"
+      onClick={onOpen}
+      aria-label={label}
+      className="group relative block w-28 cursor-zoom-in text-right outline-none focus-visible:ring-2 focus-visible:ring-red-600 tablet:w-44"
+    >
+      <img
+        src={image}
+        alt={alt}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        className="block aspect-square h-auto w-full object-cover object-top outline outline-1 -outline-offset-1 outline-ink/10"
+      />
+      <span
+        aria-hidden="true"
+        className="mt-2 inline-flex items-center gap-1 bg-ink px-1.5 py-1 font-modernist text-[10px] leading-none font-semibold tracking-[0.1em] whitespace-nowrap text-page uppercase transition-colors duration-200 group-hover:bg-red-600 group-hover:text-light"
+      >
+        <svg className="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+          <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
+        </svg>
+        <span className="tablet:hidden">Enlarge</span>
+        <span className="hidden tablet:inline">View full size</span>
+      </span>
+    </button>
+  )
+}
+
+// Notion-style table of contents: a column of short lines fixed in the right margin on wide
+// screens (1400px+, where the margin is wide enough for the names to sit clear of the content),
+// one per chapter (the current one longer and red). Hovering or focusing it reveals the
+// chapter names beside the lines, with no panel behind them; clicking one jumps there.
+function TableOfContents() {
+  const [current, setCurrent] = useState(chapters[0].id)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const els = chapters.map((c) => document.getElementById(c.id)).filter(Boolean) as HTMLElement[]
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const hit = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
+        if (hit) setCurrent(hit.target.id)
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+    els.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <nav
+      aria-label="On this page"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setOpen(false)}
+      className="fixed top-1/2 right-3 z-40 hidden -translate-y-1/2 min-[1400px]:block"
+    >
+      <ol
+        className="flex flex-col items-end gap-1 py-3"
+      >
+        {chapters.map((c) => {
+          const active = c.id === current
+          return (
+            <li key={c.id}>
+              <a
+                href={`#${c.id}`}
+                aria-current={active ? 'location' : undefined}
+                className="group flex min-h-6 min-w-10 items-center justify-end gap-2 outline-none focus-visible:ring-2 focus-visible:ring-red-600"
+              >
+                <span
+                  className={cn(
+                    'whitespace-nowrap font-poppins text-xs transition-opacity duration-150',
+                    open ? 'opacity-100' : 'sr-only',
+                    active ? 'text-ink' : 'text-ink/50 group-hover:text-ink',
+                  )}
+                  style={active ? { fontWeight: 600 } : undefined}
+                >
+                  {c.label}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'h-0.5 shrink-0 transition-[width,background-color] duration-150',
+                    active ? 'w-5 bg-red-600' : 'w-3 bg-ink/25 group-hover:bg-ink/60',
+                  )}
+                />
+              </a>
+            </li>
+          )
+        })}
+      </ol>
+    </nav>
+  )
+}
+
 export function BitgetCaseStudy() {
   const [opsOpen, setOpsOpen] = useState(false)
   const opsOpenerRef = useRef<HTMLButtonElement>(null)
+  const [bitquestOpen, setBitquestOpen] = useState(false)
+  const [seoOpen, setSeoOpen] = useState(false)
+  const seoOpenerRef = useRef<HTMLButtonElement>(null)
+  const bitquestOpenerRef = useRef<HTMLButtonElement>(null)
 
   useDocumentMeta({
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
@@ -200,7 +455,7 @@ export function BitgetCaseStudy() {
   })
   const caseStudyLd = caseStudyJsonLd({
     path: '/bitget',
-    title: 'Building and scaling Bitget Africa’s community ecosystem',
+    title: 'Building and scaling Bitget’s community ecosystem across Africa',
     description: bitgetCaseStudy.summary,
     image: '/case-studies/bitget.webp',
     clientName: 'Bitget',
@@ -209,15 +464,12 @@ export function BitgetCaseStudy() {
   return (
     <Layout>
       <JsonLd data={caseStudyLd} />
+      <TableOfContents />
       {/* HERO */}
       <section className="case-study-serif pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="pb-12 laptop:pb-18">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <div className="mb-6 flex items-center gap-2">
-              <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
-              <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Case study · Bitget Africa</p>
-            </div>
-            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">Building and scaling Bitget Africa’s community ecosystem</h1>
+            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance" style={{ fontSize: 'calc(var(--h1-size) * 0.8)' }}>Building and scaling Bitget’s community ecosystem across Africa</h1>
             <p className="custom-p mt-6 max-w-2xl text-pretty text-ink/70">{bitgetCaseStudy.summary}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:grid-cols-3">
@@ -231,7 +483,7 @@ export function BitgetCaseStudy() {
                 <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
                   150K+
                 </p>
-                <p className="custom-p mt-2 text-ink/60">Followers and members gained</p>
+                <p className="custom-p mt-2 text-ink/60">New followers and members gained</p>
               </div>
               <div>
                 <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
@@ -270,116 +522,96 @@ export function BitgetCaseStudy() {
       <section className="case-study-serif pt-10 pb-12 tablet:pt-12 tablet:pb-14 laptop:pt-14 laptop:pb-18">
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <ImageStrip images={analyticsImages} />
+            <ImageStrip images={analyticsImages} eager />
           </div>
         </Grid>
       </section>
 
       {/* FEATURED STORY (dark band) */}
-      <section className="on-dark case-study-serif py-12 tablet:py-14 laptop:py-24" style={{ background: 'var(--color-night)' }}>
-        <Grid className="items-center gap-y-10 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-2">
-            <div className="flex items-center gap-2">
-              <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
-              <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'rgb(231 230 226 / 0.8)' }}>
-                01. Featured story
-              </p>
-            </div>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance" style={{ color: 'var(--color-light)' }}>
-              Turning a market exit into a growth opportunity
-            </h2>
-            <div className="mt-8 border-t" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
-              <div className="border-b py-5" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
-                <p className="custom-p" style={{ color: 'var(--color-light)' }}>
-                  OKX announced it was ending operations in Nigeria, leaving many users looking for a new home.
-                </p>
-              </div>
-              <div className="border-b py-5" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
-                <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'rgb(231 230 226 / 0.6)' }}>
-                  What I did
-                </p>
-                <p className="custom-p mt-2" style={{ color: 'var(--color-light)' }}>
-                  I led social strategy through the exit and got Bitget Wallet trending while users chose where to go
-                  next. The narrative centered on trust, safety and security.
-                </p>
-              </div>
-              <div className="border-b py-5" style={{ borderColor: 'rgb(231 230 226 / 0.2)' }}>
-                <p className="custom-p custom-p-sm tracking-[0.1em] uppercase" style={{ color: 'rgb(231 230 226 / 0.6)' }}>
-                  The result
-                </p>
-                <p className="custom-p mt-2" style={{ color: 'var(--color-light)' }}>
-                  Bitget Wallet became the most downloaded crypto app in Nigeria, and “Bitget” trended nationally.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-span-full flex flex-col gap-5 tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-8">
-            <img loading="lazy" decoding="async"
+      <section
+        id="featured-story"
+        className="on-dark case-study-serif scroll-mt-20 py-12 tablet:py-14 laptop:py-24"
+        style={{ background: 'var(--color-night)' }}
+      >
+        <SplitSection dark title="Turning a market exit into a growth opportunity">
+          <Reveal className="flex flex-col gap-4">
+            <p className="custom-p text-pretty" style={{ color: 'var(--color-light)' }}>
+              When OKX announced its exit from Nigeria, crypto users were looking for alternatives. I led Bitget’s social and
+              community response, coordinating community, PR, external partners, and key opinion leaders, using timely
+              communication, localized messaging, and a trust-focused narrative to help position Bitget Wallet in the
+              conversation.
+            </p>
+            <p className="custom-p text-pretty" style={{ color: 'var(--color-light)' }}>
+              The campaign helped put Bitget Wallet in front of users at a critical moment. Bitget Wallet subsequently reached
+              the number-one spot in Nigeria’s app-store rankings and “Bitget” trended nationally.
+            </p>
+          </Reveal>
+          <Reveal delay={100} className="mt-8">
+            <img
+              loading="lazy"
+              decoding="async"
               src="/case-studies/bitget/okx-exit.webp"
               alt="Screenshots of the OKX Nigeria exit trending on X, Bitget Wallet ranked #1 in the Nigerian App Store's Top Charts, and the announcement that Bitget Wallet is Nigeria's #1 downloaded app"
               width={1400}
               height={1111}
-              className="block h-auto w-full"
+              className="block h-auto w-full outline outline-1 -outline-offset-1 outline-light/10"
             />
-          </div>
-        </Grid>
+          </Reveal>
+        </SplitSection>
       </section>
 
-      {/* HOW IT'S RUN: community operations map */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
-        <Grid className="gap-y-6 pb-10 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. How it’s run</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">How I built the community operating model</h2>
-            <p className="custom-p mt-4 max-w-3xl text-pretty text-ink/60">
-              I built a regional operating model that connected two distinct audiences: retail users who needed
-              education, support, and engagement, and ecosystem stakeholders who helped extend Bitget’s reach across
-              African markets.
+      {/* OPERATING MODEL */}
+      <section id="operating-model" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
+        <SplitSection title="The community operating model">
+          <Reveal>
+            <p className="custom-p text-pretty text-ink/60">
+              I built a regional operating model that connected two distinct audiences: retail users who needed education,
+              support, and engagement, and ecosystem stakeholders who helped extend Bitget’s reach across African markets.
             </p>
-            <p className="custom-p mt-3 max-w-3xl text-pretty text-ink/60">
-              A shared communications and content function supported both sides, while each audience had its own
-              engagement channels, programs, and relationship needs.
+            <p className="custom-p mt-3 text-pretty text-ink/60">
+              A shared communications and content function supported both sides, while each audience had its own engagement
+              channels, programs, and relationship needs.
             </p>
-          </div>
-        </Grid>
-        <Grid>
-          <figure className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <button
-              ref={opsOpenerRef}
-              type="button"
-              onClick={() => setOpsOpen(true)}
-              aria-label="View the community operations map full size"
-              aria-describedby="community-ops-description"
-              className="group relative block w-full cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-red-600"
-            >
-              <img
-                src={communityOps.src}
-                srcSet={`${communityOps.src} 1280w, ${communityOps.srcLarge} 2400w`}
-                sizes="(min-width: 1024px) 82vw, 100vw"
-                width={communityOps.width}
-                height={communityOps.height}
-                alt={communityOps.alt}
-                loading="lazy"
-                decoding="async"
-                className="h-auto w-full"
-              />
-              {/* Visible cue that the map opens larger (phones have no zoom cursor). */}
-              <span
-                aria-hidden="true"
-                className="absolute right-3 bottom-[8%] inline-flex items-center gap-1 bg-ink px-1.5 py-1 font-modernist text-[10px] leading-none font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-200 group-hover:bg-red-600 group-focus-visible:bg-red-600 tablet:right-5 text-page group-hover:text-light group-focus-visible:text-light"
+          </Reveal>
+          <Reveal delay={100} className="mt-8">
+            <figure>
+              <button
+                ref={opsOpenerRef}
+                type="button"
+                onClick={() => setOpsOpen(true)}
+                aria-label="View the community operations map full size"
+                aria-describedby="community-ops-description"
+                className="group relative block w-full cursor-zoom-in outline-none focus-visible:ring-2 focus-visible:ring-red-600"
               >
-                <svg className="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
-                  <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
-                </svg>
-                <span className="tablet:hidden">Tap to enlarge</span>
-                <span className="hidden tablet:inline">View full size</span>
-              </span>
-            </button>
-            <p id="community-ops-description" className="sr-only">
-              {communityOps.description}
-            </p>
-          </figure>
-        </Grid>
+                <img
+                  src={communityOps.src}
+                  srcSet={`${communityOps.src} 1280w, ${communityOps.srcLarge} 2400w`}
+                  sizes="(min-width: 1024px) 82vw, 100vw"
+                  width={communityOps.width}
+                  height={communityOps.height}
+                  alt={communityOps.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-auto w-full outline outline-1 -outline-offset-1 outline-ink/10"
+                />
+                {/* Visible cue that the map opens larger (phones have no zoom cursor). */}
+                <span
+                  aria-hidden="true"
+                  className="absolute right-3 bottom-[8%] inline-flex items-center gap-1 bg-ink px-1.5 py-1 font-modernist text-[10px] leading-none font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-200 group-hover:bg-red-600 group-focus-visible:bg-red-600 tablet:right-5 text-page group-hover:text-light group-focus-visible:text-light"
+                >
+                  <svg className="size-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                    <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
+                  </svg>
+                  <span className="tablet:hidden">Tap to enlarge</span>
+                  <span className="hidden tablet:inline">View full size</span>
+                </span>
+              </button>
+              <p id="community-ops-description" className="sr-only">
+                {communityOps.description}
+              </p>
+            </figure>
+          </Reveal>
+        </SplitSection>
         <JsonLd data={communityOpsLd} />
         <ImageViewer
           image={opsOpen ? { src: communityOps.srcLarge, alt: communityOps.alt, width: 2400, label: 'Community operations map' } : null}
@@ -391,114 +623,164 @@ export function BitgetCaseStudy() {
       </section>
 
       {/* CORE PROGRAMS */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:py-24">
-        <Grid className="gap-y-6 pb-10 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">03. The programs</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">Core programs</h2>
-            <p className="custom-p mt-4 max-w-xl text-ink/60">Six programs sit behind the numbers at the top of this page.</p>
+      <section id="programs" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
+        <SplitSection title="Core programs">
+          <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 min-[1280px]:grid-cols-3">
+            {corePrograms.map((program, i) => (
+                <Reveal key={program.title} delay={(i % 3) * 100} className="flex">
+                  <div className="flex w-full flex-col bg-hyacinth/5 p-5 tablet:p-6">
+                    <p className="custom-h1 custom-h1-bold normal-case tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
+                      {program.stat}
+                    </p>
+                    <p className="custom-p custom-p-sm mt-3 tracking-[0.1em] uppercase">{program.statLabel}</p>
+                    <p className="custom-h4 custom-h4-bold mt-5 text-balance">{program.title}</p>
+                    <p className="custom-p mt-2 text-pretty text-ink/60">{program.body}</p>
+                  </div>
+                </Reveal>
+              ))}
           </div>
-        </Grid>
-        <Grid>
-          <div className="col-span-full grid grid-cols-1 gap-5 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-2 laptop:col-span-12 laptop:col-start-2 laptop:grid-cols-3">
-            {corePrograms.map((program) => (
-              <div key={program.title} className="flex flex-col bg-hyacinth/5 p-6 tablet:p-8">
-                <p className="custom-h1 custom-h1-bold text-[2.75rem] normal-case tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
-                  {program.stat}
-                </p>
-                <p className="custom-p custom-p-sm mt-3 tracking-[0.1em] uppercase">{program.statLabel}</p>
-                <p className="custom-h4 custom-h4-bold mt-6">{program.title}</p>
-                <p className="custom-p mt-2 text-ink/60">{program.body}</p>
-              </div>
-            ))}
-          </div>
-        </Grid>
+        </SplitSection>
+      </section>
+
+      {/* EDUCATION */}
+      <section id="education" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
+        <SplitSection title="Educational activities">
+          <Reveal>
+            <p className="custom-p text-pretty text-ink/60">
+              AMAs, product LIVE sessions, audio spaces and quizzes that help new users activate, hosted across X, YouTube
+              Live and Telegram.
+            </p>
+          </Reveal>
+
+          <Reveal delay={100} className="mt-10">
+            <SubHeading link={{ href: liveSessionsUrl, label: 'All lives on YouTube' }}>Live sessions I hosted</SubHeading>
+            <div className="mt-5">
+              <EventVideos videos={liveSessions.slice(0, 4)} twoUp />
+            </div>
+            <JsonLd data={liveSessionsLd} />
+          </Reveal>
+
+          <Reveal className="mt-12">
+            <SubHeading link={{ href: explainersUrl, label: 'All videos on YouTube' }}>Creator-led explainers I scripted and directed</SubHeading>
+            <div className="mt-5">
+              <EventVideos videos={explainers.slice(0, 4)} twoUp />
+            </div>
+            <JsonLd data={explainersLd} />
+          </Reveal>
+
+          <Reveal className="mt-12 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-6 tablet:gap-10">
+            <div>
+              <SubHeading>#BitQuest: a learn &amp; earn challenge on X</SubHeading>
+              <p className="custom-p mt-3 max-w-md text-pretty text-ink/60">
+                A 7-day gamified campaign that simplified key crypto concepts: one lesson posted each day for six days, then a
+                final quiz. This round taught Bitget P2P.
+              </p>
+              <a
+                href={bitquestPost.url}
+                target="_blank"
+                rel="noreferrer"
+                className="custom-p custom-p-sm mt-4 inline-flex min-h-6 items-center underline underline-offset-4 outline-none transition-opacity duration-200 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-red-600"
+              >
+                View the post on X ↗<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+            <ProofThumb
+              image={bitquestPost.image}
+              alt={bitquestPost.alt}
+              width={bitquestPost.width}
+              height={bitquestPost.height}
+              label="View the #BitQuest post full size"
+              onOpen={() => setBitquestOpen(true)}
+              openerRef={bitquestOpenerRef}
+            />
+          </Reveal>
+
+          <Reveal className="mt-12 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-6 tablet:gap-10">
+            <div>
+              <SubHeading>Educational articles ranking on Google</SubHeading>
+              <p className="custom-p mt-3 max-w-md text-pretty text-ink/60">
+                Community-led articles on crypto-related user education, ranking #1 on Google in Nigeria and Kenya and on page
+                one in Ethiopia.
+              </p>
+            </div>
+            <ProofThumb
+              image={seoProof.image}
+              alt={seoProof.alt}
+              width={seoProof.width}
+              height={seoProof.height}
+              label="View the Google ranking screenshots full size"
+              onOpen={() => setSeoOpen(true)}
+              openerRef={seoOpenerRef}
+            />
+          </Reveal>
+          <JsonLd data={seoProofLd} />
+        </SplitSection>
+        <ImageViewer
+          image={seoOpen ? { src: seoProof.image, alt: seoProof.alt, width: seoProof.width, label: 'Google ranking screenshots' } : null}
+          onClose={() => setSeoOpen(false)}
+          returnFocusTo={seoOpenerRef}
+          maxWidth={900}
+        />
+        <ImageViewer
+          image={bitquestOpen ? { src: bitquestPost.image, alt: bitquestPost.alt, width: bitquestPost.width, label: '#BitQuest post on X' } : null}
+          onClose={() => setBitquestOpen(false)}
+          returnFocusTo={bitquestOpenerRef}
+          maxWidth={560}
+        />
       </section>
 
       {/* EVENTS */}
-      <section className="case-study-serif pt-12 tablet:pt-14 laptop:pt-24">
-        <Grid className="pb-8 tablet:pb-10">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">04. Events</p>
-            {/* Same header pattern as sections 02 and 03 (label, heading, one muted line), with
-                the satisfaction score in bold inside that line, the way the campaign stats above
-                read. The heading stays on one line; it shrinks slightly on narrow phones to fit. */}
-            <h2
-              className="custom-h2 custom-h2-bold custom-h2-lg mt-4 whitespace-nowrap [--fit:5.6vw] tablet:[--fit:4.6vw]"
-              style={{ fontSize: 'min(calc(var(--h2-size) * 1.2), var(--fit))' }}
-            >
-              Offline events &amp; activations
-            </h2>
-            <p className="custom-p mt-4 max-w-xl text-pretty text-ink/60">
-              Attendees rated them <span className="font-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>94.35%</span> on satisfaction (CSAT).
-            </p>
-          </div>
-        </Grid>
-      </section>
-
-      <section className="case-study-serif pb-12 tablet:pb-14 laptop:pb-18">
-        <Grid>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            {/* Event highlight videos */}
-            <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
-              <div className="flex items-center gap-2">
-                <span aria-hidden="true" className="inline-block size-2 shrink-0" style={{ background: RED }} />
-                <h3 className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Event highlights</h3>
-              </div>
-              <a
-                href={eventVideosPlaylist}
-                target="_blank"
-                rel="noreferrer"
-                className="custom-p custom-p-sm underline underline-offset-4 outline-none transition-opacity duration-200 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-red-600"
-              >
-                Watch all on YouTube ↗<span className="sr-only"> (opens in a new tab)</span>
-              </a>
+      <section id="events" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
+        <SplitSection
+         
+          title="Offline events & activations"
+          aside={
+            <div className="mt-8 border-t border-ink/15 pt-6">
+              <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
+                94.35%
+              </p>
+              <p className="custom-p mt-2 text-ink/60">Attendee satisfaction (CSAT) across offline events</p>
             </div>
-            <p className="custom-p custom-p-sm mt-2 text-pretty text-ink/60">
-              Just a few of the many events and activations.
-            </p>
+          }
+        >
+          <Reveal>
+            <SubHeading link={{ href: eventVideosPlaylist, label: 'Watch all on YouTube' }}>Event highlights</SubHeading>
             <div className="mt-5">
-              <EventVideos videos={eventVideos} />
+              <EventVideos videos={eventVideos.slice(0, 4)} twoUp />
             </div>
             <JsonLd data={eventVideosLd} />
-
-            {/* Press coverage of one of the events. The arrow sits at the end of the
-                headline (not in a separate box) so it reads as one link that leaves the site. */}
-            <a
-              href={pressMention.url}
-              target="_blank"
-              rel="noreferrer"
-              className="group mt-10 block outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-4 focus-visible:ring-offset-page mb-14 tablet:mb-16 laptop:mt-12 laptop:mb-24"
-            >
-              <div className="flex items-center gap-2">
-                <span aria-hidden="true" className="inline-block size-2 shrink-0" style={{ background: RED }} />
-                <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">In the press</p>
-              </div>
-              <p className="custom-h4 custom-h4-bold mt-3 max-w-3xl text-balance">
-                {pressMention.headline}
-                <svg
-                  aria-hidden="true"
-                  className="ml-2 inline-block size-[0.9em] -translate-y-[0.1em] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-[0.25em] motion-reduce:transition-none"
-                  style={{ color: 'var(--color-accent-text)' }}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="square"
-                >
-                  <path d="M7 17 17 7M8 7h9v9" />
-                </svg>
-              </p>
-              <p className="custom-p custom-p-sm mt-3 text-ink/60">
-                {pressMention.publication} · {pressMention.date}
-                <span className="sr-only"> (opens in a new tab)</span>
-              </p>
-            </a>
+          </Reveal>
+          <Reveal className="mt-12">
+              <a
+                href={pressMention.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group block outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-4 focus-visible:ring-offset-page laptop:mt-14"
+              >
+                <p className="custom-h4 custom-h4-bold max-w-3xl text-balance">
+                  {pressMention.headline}
+                  <svg
+                    aria-hidden="true"
+                    className="ml-2 inline-block size-[0.9em] -translate-y-[0.1em] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-[0.25em] motion-reduce:transition-none"
+                    style={{ color: 'var(--color-accent-text)' }}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="square"
+                  >
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </p>
+                <p className="custom-p custom-p-sm mt-3 text-ink/60">
+                  {pressMention.publication} · {pressMention.date}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </p>
+              </a>
             <JsonLd data={pressMentionLd} />
-          </div>
-        </Grid>
+          </Reveal>
+        </SplitSection>
       </section>
-
 
       {/* TESTIMONIAL */}
       <section className="case-study-serif pt-2 pb-10 tablet:pt-4 tablet:pb-12 laptop:pt-6 laptop:pb-14">

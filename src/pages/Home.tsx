@@ -12,6 +12,15 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { avatar, clients, homeTestimonials, logos, services, stats } from '../data/site'
 import { cn } from '../lib/utils'
 
+// Intrinsic sizes of the trimmed logo files, so the browser reserves their space before they load.
+const logoSize: Record<string, [number, number]> = {
+  Binance: [225, 49],
+  Bitget: [512, 155],
+  Base: [1280, 324],
+  Kyshi: [103, 42],
+  Hyperbridge: [799, 200],
+}
+
 const GRAIN_URL =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
 
@@ -43,11 +52,11 @@ export function Home() {
         />
 
         <Grid className="relative pt-16 tablet:pt-28 laptop:pt-32">
-          {/* Laptop: the heading is sized so it plus the industries line right under it are
-              exactly as tall as the photo (top and bottom level with it). */}
+          {/* Laptop: the heading is sized to be exactly as tall as the photo beside it (top and
+              bottom level with it). */}
           <div className="col-span-full flex flex-col gap-8 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse tablet:items-start tablet:justify-between laptop:col-span-12 laptop:col-start-2">
             <div className="tablet:max-w-[62%]">
-              <h1 className="font-modernist text-[7.5vw] leading-[1.1] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[4.8vw] laptop:text-[min(calc(4.59vw-9.4px),3.54rem)] text-balance">
+              <h1 className="font-modernist text-[7.5vw] leading-[1.1] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[4.8vw] laptop:text-[min(calc(4.35vw-2.85px),3.74rem)] laptop:leading-[1.15] text-balance">
                 Building{' '}
                 {/* Drawn as a background so it can sweep in left to right
                     (text-decoration can't animate its length). */}
@@ -64,13 +73,12 @@ export function Home() {
                 </span>{' '}
                 for brands scaling across emerging markets.
               </h1>
-              <p className="mt-4 flex items-center gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-accent-text tablet:justify-end tablet:text-sm">
-                <span aria-hidden="true" className="inline-block h-px w-4 bg-red-600/50" /> FINTECH | WEB3/CRYPTO | TECH | SAAS | AI
-              </p>
             </div>
 
             <div className="w-full shrink-0 tablet:w-[26%] laptop:w-[22%]">
               <img fetchPriority="high"
+                width={600}
+                height={600}
                 src={avatar}
                 alt="Ndubuisi Marvellous"
                 className="aspect-[4/3.4] w-full object-cover object-top tablet:aspect-[3/4] tablet:object-center"
@@ -96,21 +104,28 @@ export function Home() {
             loops at -25%; it starts with the second set offset in from the left edge so
             Binance and Bitget are already in view when the page opens. */}
         <div className="trusted-by-fade relative w-full overflow-hidden py-4 tablet:hidden">
-          <p className="mb-3 text-center text-[10px] font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
+          <p className="mb-3 text-center text-xs font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
           <div ref={mobileTrackRef} className="trusted-by-track flex w-max items-center">
             {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
               <img
                 key={`mobile-${logo.src}-${i}`}
                 src={logo.src.replace('/logos/', '/logos/tight/')}
+                width={logoSize[logo.name]?.[0]}
+                height={logoSize[logo.name]?.[1]}
                 alt={i < logos.length ? logo.name : ''}
                 aria-hidden={i >= logos.length ? true : undefined}
-                className={cn('mr-10 shrink-0 object-contain opacity-70', logo.name === 'Binance' ? 'h-[22px]' : 'h-4')}
+                className={cn(
+                  'mr-10 w-auto shrink-0 object-contain opacity-70',
+                  // Per-logo heights balanced by eye: Kyshi's thin text and Hyperbridge's light
+                  // wordmark need a little more size to read as strongly as the others.
+                  { Binance: 'h-[22px]', Kyshi: 'h-[21px]', Hyperbridge: 'h-[22px]' }[logo.name] ?? 'h-4',
+                )}
               />
             ))}
           </div>
         </div>
 
-        {/* Tablet/laptop: the original bordered-cell design, now scrolling.
+        {/* Tablet/laptop: the logos scroll in evenly spaced cells (no dividing lines).
             Logos repeat 4x (track loops at -25%) so the track is always
             wider than the viewport, and the loop never shows a gap before
             the next set arrives. Wrapped in the same Grid every other
@@ -118,23 +133,32 @@ export function Home() {
             width; a little extra top margin gives it room to breathe. */}
         <div className="hidden tablet:order-2 tablet:block">
           <Grid className="relative mt-4">
-            <div className="trusted-by-fade relative col-span-full overflow-hidden py-4 tablet:col-span-6 tablet:col-start-2 tablet:py-6 laptop:col-span-12 laptop:col-start-2">
-              <p className="mb-3 text-center text-xs font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
+            <div className="trusted-by-fade relative col-span-full overflow-hidden py-4 tablet:col-span-6 tablet:col-start-2 tablet:py-5 laptop:col-span-12 laptop:col-start-2">
+              <p className="mb-4 text-center text-xs font-medium tracking-wide text-ink/60 uppercase">Trusted by</p>
               <div ref={desktopTrackRef} className="trusted-by-track-x4 flex w-max items-center">
                 {[...logos, ...logos, ...logos, ...logos].map((logo, i) => (
                   <div
                     key={`desktop-${logo.src}-${i}`}
-                    className="flex h-28 w-40 shrink-0 items-center justify-center border-y border-r border-ink/10 p-2 laptop:h-36 laptop:w-56"
+                    className="flex h-12 w-40 shrink-0 items-center justify-center laptop:h-14 laptop:w-52"
                   >
+                    {/* Trimmed artwork with a height per logo, balanced by eye: the bold Base
+                        wordmark sits a little smaller, thin or detailed marks (Kyshi,
+                        Hyperbridge) a little larger, so the row reads evenly. */}
                     <img
-                      src={logo.src}
+                      src={logo.src.replace('/logos/', '/logos/tight/')}
+                      width={logoSize[logo.name]?.[0]}
+                      height={logoSize[logo.name]?.[1]}
                       alt={i < logos.length ? logo.name : ''}
                       aria-hidden={i >= logos.length ? true : undefined}
                       className={cn(
-                        'object-contain',
-                        logo.name === 'Binance' || logo.name === 'Hyperbridge'
-                          ? 'h-20 w-36 laptop:h-28 laptop:w-48'
-                          : 'h-11 w-28 laptop:h-14 laptop:w-32',
+                        'w-auto object-contain',
+                        {
+                          Bitget: 'h-6 laptop:h-[30px]',
+                          Base: 'h-[21px] laptop:h-[26px]',
+                          Kyshi: 'h-[29px] laptop:h-9',
+                          Binance: 'h-6 laptop:h-[30px]',
+                          Hyperbridge: 'h-[27px] laptop:h-[34px]',
+                        }[logo.name] ?? 'h-6 laptop:h-[30px]',
                       )}
                     />
                   </div>
@@ -151,13 +175,10 @@ export function Home() {
               className="flex shrink-0 cursor-pointer flex-col items-center gap-2 text-ink/70 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ink/40"
             >
               <span className="text-lg laptop:text-2xl">↓</span>
-              <span className="font-modernist text-[10px] font-semibold tracking-[0.2em] laptop:text-xs">SCROLL</span>
+              <span className="font-modernist text-xs font-semibold tracking-[0.2em]">SCROLL</span>
             </a>
 
             <div className="min-w-0 max-w-[70%] text-right tablet:text-left">
-              <p className="mb-1 flex items-center justify-end gap-2 font-modernist text-xs font-semibold tracking-[0.15em] text-ink/80 tablet:justify-start tablet:text-sm">
-                <span aria-hidden="true" className="inline-block h-px w-4 bg-ink/40" /> HI, I’M
-              </p>
               <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-ink/60 tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
                 NDUBUISI{' '}
                 <br />
@@ -180,6 +201,8 @@ export function Home() {
                 <img loading="lazy" decoding="async"
                   key="about-photo"
                   src="/ndubuisi-marvellous-speaker-abf-2026.webp"
+                  width={960}
+                  height={1280}
                   alt="Ndubuisi Marvellous wearing a speaker badge at ABF 2026"
                   className="mx-auto block aspect-[4/5] w-full max-w-[220px] object-cover object-[center_25%] tablet:aspect-[3/4] tablet:max-w-md tablet:object-center laptop:absolute laptop:inset-y-0 laptop:left-0 laptop:mx-0 laptop:h-full laptop:w-auto laptop:max-w-full"
                 />,
@@ -189,7 +212,7 @@ export function Home() {
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-7 laptop:col-start-7">
             <StaggeredReveal
               lines={[
-                <p key="lead" className="custom-h2 custom-h2-bold relative text-justify text-balance uppercase">
+                <p key="lead" className="custom-h2 custom-h2-bold relative text-justify text-balance uppercase tablet:text-left laptop:text-justify">
                   I drive growth and acquisition for brands entering or scaling across Africa, turning strategy
                   into an active user base and measurable results.
                 </p>,
@@ -225,7 +248,7 @@ export function Home() {
                   >
                     <StatCounter value={stat.value} />
                   </p>
-                  <p className="custom-p mt-2 leading-tight text-ink/60" style={{ fontSize: '0.65rem' }}>
+                  <p className="custom-p mt-2 leading-tight text-ink/60" style={{ fontSize: '0.75rem' }}>
                     {stat.label}
                   </p>
                 </div>

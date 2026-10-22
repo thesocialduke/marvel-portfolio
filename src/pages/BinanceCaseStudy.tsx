@@ -3,6 +3,7 @@ import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { LetsTalkPanel } from '../components/LetsTalkPanel'
+import { SplitSection } from '../components/SplitSection'
 import { ProcessTimeline } from '../components/ProcessTimeline'
 import { VideoModal, type EmbedSource } from '../components/VideoModal'
 import { JsonLd } from '../components/JsonLd'
@@ -11,11 +12,8 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
 import { cn } from '../lib/utils'
 
-const RED = 'var(--color-red-600)'
-
 const summary =
   'I produced short-form content for Binance Africa that translated complex industry and product concepts into accessible, shareable stories, built to travel on Instagram and TikTok.'
-
 
 const challengeLead =
   'Binance needed content that could reach people on the street.'
@@ -97,11 +95,7 @@ export function BinanceCaseStudy() {
       <section className="case-study-serif pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid className="pb-12 laptop:pb-18">
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <div className="mb-6 flex items-center gap-2">
-              <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
-              <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Case study · Binance Africa</p>
-            </div>
-            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">
+            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance" style={{ fontSize: 'calc(var(--h1-size) * 0.8)' }}>
               Making complex products easier to understand
             </h1>
             <p className="custom-p mt-6 max-w-2xl text-ink/70">{summary}</p>
@@ -132,49 +126,29 @@ export function BinanceCaseStudy() {
       </section>
 
       {/* 01 THE CHALLENGE */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:pt-24 laptop:pb-12">
-        <Grid className="gap-y-8 pb-10 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-10 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">01. The challenge</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 max-w-4xl text-balance">{challengeLead}</h2>
-          </div>
-        </Grid>
-        <Grid>
-          <div className="col-span-full grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-2 laptop:col-span-12 laptop:col-start-2">
+      <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
+        <SplitSection title={challengeLead}>
+          <div className="grid grid-cols-1 gap-6 tablet:grid-cols-2">
             {challengePoints.map((point) => (
-              <p key={point} className="custom-p text-ink/70">
+              <p key={point} className="custom-p text-pretty text-ink/70">
                 {point}
               </p>
             ))}
           </div>
-        </Grid>
+        </SplitSection>
       </section>
 
       {/* 02 PROCESS */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:py-12">
-        <Grid className="gap-y-6 pb-12 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">02. Process</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">From question to feed</h2>
-          </div>
-        </Grid>
-        <Grid>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <ProcessTimeline steps={processSteps} />
-          </div>
-        </Grid>
+      <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
+        <SplitSection title="From question to feed">
+          <ProcessTimeline steps={processSteps} />
+        </SplitSection>
       </section>
 
       {/* 03 RESULTS */}
-      <section className="case-study-serif py-12 tablet:py-14 laptop:pt-12 laptop:pb-24">
-        <Grid className="gap-y-6 pb-10 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">03. Results</p>
-            <h2 className="custom-h2 custom-h2-bold custom-h2-lg mt-4 text-balance">A few episodes</h2>
-          </div>
-        </Grid>
-        <Grid>
-          <div className="col-span-full grid grid-cols-2 gap-6 tablet:col-span-6 tablet:col-start-2 tablet:grid-cols-5 laptop:col-span-12 laptop:col-start-2">
+      <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
+        <SplitSection title="A few episodes">
+          <div className="grid grid-cols-2 gap-4 tablet:grid-cols-5">
             {episodes.map((episode, i) => (
               <div key={episode.title} className={i === 0 ? 'col-span-2 tablet:col-span-1' : ''}>
                 <button
@@ -205,7 +179,7 @@ export function BinanceCaseStudy() {
               </div>
             ))}
           </div>
-        </Grid>
+        </SplitSection>
       </section>
 
       <LetsTalkPanel />

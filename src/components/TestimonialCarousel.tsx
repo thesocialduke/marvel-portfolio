@@ -82,7 +82,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
           <button type="button" aria-label="Previous review" onClick={() => go(-1)} className="cursor-pointer p-2">
             <ChevronLeft className="size-5" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex">
             {items.map((item, i) => (
               <button
                 key={item.name + i}
@@ -90,8 +90,10 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
                 aria-label={`Show review ${i + 1} of ${items.length}`}
                 aria-current={i === index}
                 onClick={() => setIndex(i)}
-                className={cn('size-2 cursor-pointer rounded-full', i === index ? 'bg-foreground' : 'bg-foreground/25')}
-              />
+                className="grid size-6 cursor-pointer place-items-center outline-none focus-visible:ring-2 focus-visible:ring-red-600"
+              >
+                <span aria-hidden="true" className={cn('size-2 rounded-full', i === index ? 'bg-foreground' : 'bg-foreground/25')} />
+              </button>
             ))}
           </div>
           <button type="button" aria-label="Next review" onClick={() => go(1)} className="cursor-pointer p-2">

@@ -1,17 +1,11 @@
 import { ButtonLink } from '../components/Button'
 import { CvMenu } from '../components/CvMenu'
+import { SocialLinks } from '../components/SocialLinks'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { site } from '../data/site'
 
-const RED = 'var(--color-red-600)'
-
-const socials = [
-  { label: 'LinkedIn', href: site.linkedin },
-  { label: 'Instagram', href: site.instagram },
-  { label: 'Telegram', href: site.telegram },
-]
 
 export function ContactMe() {
   useDocumentMeta({
@@ -26,10 +20,6 @@ export function ContactMe() {
         <Grid className="items-start gap-y-12 laptop:gap-y-0">
           {/* Details */}
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-5 laptop:col-start-2">
-            <div className="mb-6 flex items-center gap-2">
-              <span className="inline-block size-2 shrink-0" style={{ background: RED }} />
-              <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Contact</p>
-            </div>
             <h1 className="custom-h1 custom-h1-bold text-balance">Let’s work together</h1>
             <p className="custom-p mt-6 max-w-md text-ink/70">
               Open to full-time and contract roles, and ready to relocate for the right opportunity.
@@ -47,29 +37,18 @@ export function ContactMe() {
               <CvMenu variant="button" label="My Resume ▾" />
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-ink/15 pt-6">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ink/60"
-                >
-                  {social.label}
-                </a>
-              ))}
+            <div className="mt-8 border-t border-ink/15 pt-4">
+              <SocialLinks className="text-ink" />
             </div>
           </div>
 
           {/* Calendar */}
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-6 laptop:col-start-8">
-            <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/60 uppercase">Book a call</p>
             <iframe
               src={site.bookingEmbedUrl}
               title="Book a call with Ndubuisi Marvellous"
               loading="lazy"
-              className="mt-4 h-[640px] w-full border border-ink/15 bg-white tablet:h-[700px]"
+              className="h-[640px] w-full border border-ink/15 bg-white tablet:h-[700px]"
             />
             <p className="custom-p custom-p-sm mt-3 text-ink/60">
               Calendar not loading?{' '}

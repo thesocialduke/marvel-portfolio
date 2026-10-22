@@ -71,7 +71,7 @@ export const clients = [
 export const stats = [
   { value: '5+', label: 'years experience' },
   { value: '40M+', label: 'Organic views and impressions generated' },
-  { value: '150K+', label: 'Followers and members gained' },
+  { value: '150K+', label: 'New followers and members gained' },
   { value: '20K', label: 'Users attributed to ambassador program' },
 ]
 
@@ -231,7 +231,7 @@ export const bitgetCaseStudy: CaseStudyData = {
   results: [
     { value: '40M+', label: 'Organic views and impressions generated' },
     { value: '1M+', label: 'Views on education programs' },
-    { value: '150K+', label: 'Followers and members gained' },
+    { value: '150K+', label: 'New followers and members gained' },
     { value: '20K', label: 'Users attributed to ambassador program' },
     { value: '3,500', label: 'Followers gained in one day' },
     { value: '94.35%', label: 'CSAT across offline events' },
@@ -240,7 +240,7 @@ export const bitgetCaseStudy: CaseStudyData = {
     'When OKX exited the market, campaigns I ran were instrumental in driving Bitget Wallet to become the top-downloaded crypto app in Nigeria, making “Bitget” a trending topic.',
   testimonial: {
     quote:
-      'Marvellous has his own instinct for the sense of humor, and for running social and community campaigns. Leading our Africa social media runs pretty well and is very engaging. He’s fully embedded in the AF market.',
+      'I am pleased to recommend Marvellous, Social Media Manager at Bitget. With a keen understanding of digital marketing and a creative approach to content strategy, Marvellous has consistently elevated our brand presence across various platforms and has significantly contributed to our growth.\n\nI have full confidence in Marvellous’s skills and dedication, making them an invaluable asset.',
     name: 'Aka Leung',
     role: 'Regional Director (MENA, Africa, OC, JP), Bitget',
   },

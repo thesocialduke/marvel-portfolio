@@ -18,14 +18,25 @@ export type EventVideo = {
 // YouTube player loads when someone presses play, inside an on-page dialog (Radix:
 // Escape, backdrop click or the X close it, focus goes back to the thumbnail).
 // Sideways scroll on phones, a grid of three on laptops.
-export function EventVideos({ videos }: { videos: EventVideo[] }) {
+export function EventVideos({
+  videos,
+  twoUp = false,
+  limit,
+}: {
+  videos: EventVideo[]
+  twoUp?: boolean
+  /** Show only this many until "Show all" is pressed. */
+  limit?: number
+}) {
   const [playing, setPlaying] = useState<EventVideo | null>(null)
+  const [expanded, setExpanded] = useState(false)
+  const shown = limit && !expanded ? videos.slice(0, limit) : videos
   const openerRef = useRef<HTMLButtonElement | null>(null)
 
   return (
     <>
-      <ul className="-mx-6 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 tablet:mx-0 tablet:grid tablet:grid-cols-2 tablet:gap-6 tablet:overflow-visible tablet:px-0 tablet:pb-0 laptop:grid-cols-3">
-        {videos.map((video) => (
+      <ul className={`-mx-6 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-2 tablet:mx-0 tablet:grid tablet:grid-cols-2 tablet:gap-6 tablet:overflow-visible tablet:px-0 tablet:pb-0 ${twoUp ? '' : 'laptop:grid-cols-3'}`}>
+        {shown.map((video) => (
           <li key={video.id} className="w-[78vw] shrink-0 snap-start tablet:w-auto">
             <button
               type="button"
@@ -34,7 +45,7 @@ export function EventVideos({ videos }: { videos: EventVideo[] }) {
                 setPlaying(video)
               }}
               aria-label={`Play ${video.name}, ${video.place}`}
-              className="group relative block aspect-video w-full cursor-pointer overflow-hidden bg-graphite outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
+              className="group relative block aspect-video w-full cursor-pointer overflow-hidden bg-graphite outline-none after:pointer-events-none after:absolute after:inset-0 after:outline after:outline-1 after:-outline-offset-1 after:outline-ink/10 after:content-[''] focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
             >
               <img
                 src={video.thumb}
@@ -64,6 +75,16 @@ export function EventVideos({ videos }: { videos: EventVideo[] }) {
           </li>
         ))}
       </ul>
+      {limit && videos.length > limit && (
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          className="custom-p custom-p-sm mt-5 cursor-pointer underline underline-offset-4 outline-none transition-opacity duration-150 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-red-600"
+        >
+          {expanded ? 'Show fewer' : `Show all ${videos.length}`}
+        </button>
+      )}
 
       <Dialog.Root open={playing !== null} onOpenChange={(open) => !open && setPlaying(null)}>
         <Dialog.Portal>

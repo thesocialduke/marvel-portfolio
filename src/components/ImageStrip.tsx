@@ -6,7 +6,7 @@ export type StripImage = { src: string; alt: string; width: number; height: numb
 // One compact row of screenshots that all share the same height (widths follow each
 // image's proportions). Scrolls sideways on phones. Click an image to see it full size;
 // a small badge on each one says so.
-export function ImageStrip({ images }: { images: StripImage[] }) {
+export function ImageStrip({ images, eager = false }: { images: StripImage[]; eager?: boolean }) {
   const [open, setOpen] = useState<StripImage | null>(null)
   const openerRef = useRef<HTMLElement | null>(null)
 
@@ -33,8 +33,8 @@ export function ImageStrip({ images }: { images: StripImage[] }) {
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                loading="lazy"
-                className="block h-full w-auto tablet:h-auto tablet:w-full"
+                loading={eager ? 'eager' : 'lazy'}
+                className="block h-full w-auto outline outline-1 -outline-offset-1 outline-ink/10 tablet:h-auto tablet:w-full"
               />
               {/* Visible cue that the screenshot opens larger (phones have no zoom cursor).
                   Same badge as the community map on the Bitget page. */}

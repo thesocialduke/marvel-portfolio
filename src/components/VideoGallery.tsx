@@ -12,6 +12,7 @@ export function VideoGallery({
   muted,
   titleBold = false,
   threeUp = false,
+  bare = false,
 }: {
   title?: string
   videos: VideoItem[]
@@ -22,6 +23,9 @@ export function VideoGallery({
   titleBold?: boolean
   /** Landscape videos only: three across on large screens instead of two. */
   threeUp?: boolean
+  /** Just the videos in a two-column grid (no section, heading or page grid), for use
+   *  inside a SplitSection. */
+  bare?: boolean
 }) {
   const cell =
     orientation === 'portrait'
@@ -29,6 +33,36 @@ export function VideoGallery({
       : threeUp
         ? 'col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:!col-start-auto laptop:[&:nth-child(3n+1)]:!col-start-2'
         : 'col-span-full tablet:col-span-6 tablet:col-start-2 laptop:!col-start-auto laptop:first:!col-start-2 laptop:[&:nth-child(2n+1)]:!col-start-2'
+
+  if (bare) {
+    return (
+      <div className="grid grid-cols-1 gap-x-6 gap-y-8 tablet:grid-cols-2">
+        {videos.map((video) => (
+          <div key={video.src}>
+            <div className="space-y-6">
+              <VideoPlayer
+                src={video.src}
+                poster={video.poster}
+                orientation={orientation}
+                rounded={rounded}
+                muted={muted}
+              />
+              {video.title ? (
+                <div className="space-y-2">
+                  <div className="space-y-text-block text-left">
+                    <h3 className={cn('custom-h4', titleBold && 'custom-h4-bold-mixed-case')}>{video.title}</h3>
+                    {showDescriptions && video.description ? (
+                      <p className="custom-p relative min-h-[1.5rem]">{video.description}</p>
+                    ) : null}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   return (
     <section className="case-study-serif space-y-6 py-12 tablet:py-14 laptop:py-18">
@@ -53,7 +87,7 @@ export function VideoGallery({
               {video.title ? (
                 <div className="space-y-2">
                   <div className="space-y-text-block text-left">
-                    <h4 className={cn('custom-h4', titleBold && 'custom-h4-bold-mixed-case')}>{video.title}</h4>
+                    <h3 className={cn('custom-h4', titleBold && 'custom-h4-bold-mixed-case')}>{video.title}</h3>
                     {showDescriptions && video.description ? (
                       <p className="custom-p relative min-h-[1.5rem]">{video.description}</p>
                     ) : null}

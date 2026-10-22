@@ -52,6 +52,8 @@ export function CaseStudyCard({ client, className }: { client: Client; className
         decoding="async"
         src={client.image}
         alt={client.title}
+        width={1200}
+        height={700}
         style={client.imagePosition ? { objectPosition: client.imagePosition } : undefined}
         className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 group-data-[active=true]:scale-105 motion-reduce:transition-none"
       />

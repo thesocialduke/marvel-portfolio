@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
 import { ButtonLink } from './Button'
 import { CvMenu } from './CvMenu'
+import { SocialLinks } from './SocialLinks'
 import { openCookieSettings } from './CookieBanner'
 import { site } from '../data/site'
 import { cn } from '../lib/utils'
@@ -107,7 +108,7 @@ export function Footer() {
         style={{ background: 'var(--color-night)', color: 'var(--color-light)' }}
       >
         <Grid className="gap-y-10 py-12 tablet:py-14 laptop:py-18">
-          <div className="col-span-full flex flex-col gap-6 tablet:col-span-6 tablet:col-start-2 tablet:flex-row tablet:items-end tablet:justify-between laptop:col-span-12 laptop:col-start-2">
+          <div className="col-span-full flex flex-col gap-6 tablet:col-span-6 tablet:col-start-2 laptop:flex-row laptop:items-end laptop:justify-between laptop:col-span-12 laptop:col-start-2">
             <div>
               <h2 className="custom-h2 custom-h2-bold relative text-balance" style={{ color: LIGHT }}>
                 Would love to hear from you.
@@ -121,53 +122,27 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-light/20 pt-6 tablet:col-span-8 laptop:col-span-12 laptop:col-start-2">
-            <div className="flex flex-wrap items-center gap-6">
+          <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-light/20 pt-6 tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2" style={{ color: LIGHT }}>
               <Link
                 to="/"
                 onClick={() => {
                   // Already on the home page: the route doesn't change, so scroll up manually.
                   if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
                 }}
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
+                className="custom-p custom-p-sm inline-flex min-h-10 items-center tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
                 style={{ color: LIGHT }}
               >
                 Home
               </Link>
               <CvMenu variant="link" label="Resume" />
-              <a
-                href={site.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
-                style={{ color: LIGHT }}
-              >
-                LinkedIn
-              </a>
-              <a
-                href={site.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
-                style={{ color: LIGHT }}
-              >
-                Instagram
-              </a>
-              <a
-                href={site.telegram}
-                target="_blank"
-                rel="noreferrer"
-                className="custom-p custom-p-sm tracking-wide uppercase outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
-                style={{ color: LIGHT }}
-              >
-                Telegram
-              </a>
+              <SocialLinks />
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
               <button
                 type="button"
                 onClick={openCookieSettings}
-                className="custom-p custom-p-sm cursor-pointer underline underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
+                className="custom-p custom-p-sm inline-flex min-h-10 cursor-pointer items-center underline underline-offset-4 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-light/60"
                 style={{ color: LIGHT_MUTED }}
               >
                 Cookie settings

@@ -4,13 +4,14 @@ import { Dialog } from 'radix-ui'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
 import { ThemeToggle } from './ThemeToggle'
+import { SocialLinks } from './SocialLinks'
 import { nav, site } from '../data/site'
 import { cn } from '../lib/utils'
 
 // Desktop nav links: 40px-tall hit area and red hover. The current one is marked by a
 // single red underline that slides between links (see Navbar).
 const navLinkBase =
-  "relative inline-flex h-10 items-center font-poppins text-[13px] font-medium tracking-wide uppercase outline-none transition-colors duration-150 hover:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
+  "relative inline-flex h-10 items-center font-poppins text-[13px] font-bold tracking-wide uppercase outline-none transition-colors duration-150 hover:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
 
 const listVariants = {
   hidden: {},
@@ -167,18 +168,17 @@ export function Navbar() {
               </Link>
 
               <Dialog.Trigger asChild>
-                {/* Solid black block with the word and two bars, so it reads as the menu at a glance
-                    without competing with the page's red accents; it turns red on hover.
-                    Accessible name stays "Toggle navigation"; the visible word is part of it. */}
+                {/* Phones and tablets: a plain three-bar menu icon (the instantly recognised shape) in a
+                    44px tap area pulled into the gutter so the bars line up with the page edge. */}
                 <button
                   type="button"
-                  aria-label="Menu, toggle navigation"
-                  className="group relative z-20 inline-flex h-10 shrink-0 cursor-pointer items-center gap-2.5 bg-ink px-3.5 laptop:hidden font-modernist text-xs font-semibold tracking-[0.15em] text-page uppercase outline-none transition-[background-color,color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-red-600 hover:text-light focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page laptop:h-11 laptop:px-4"
+                  aria-label="Open menu"
+                  className="relative z-20 -mr-2.5 inline-flex size-11 shrink-0 cursor-pointer items-center justify-center text-ink outline-none transition-[color,scale] duration-150 ease-out active:scale-[0.96] hover:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 laptop:hidden"
                 >
-                  <span aria-hidden="true">Menu</span>
-                  <span aria-hidden="true" className="flex w-4 flex-col gap-1">
-                    <span className="h-0.5 w-4 bg-current" />
-                    <span className="h-0.5 w-4 bg-current" />
+                  <span aria-hidden="true" className="flex w-6 flex-col gap-[5px]">
+                    <span className="h-0.5 w-6 bg-current" />
+                    <span className="h-0.5 w-6 bg-current" />
+                    <span className="h-0.5 w-6 bg-current" />
                   </span>
                 </button>
               </Dialog.Trigger>
@@ -215,16 +215,15 @@ export function Navbar() {
                   <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:py-5">
                     <img src="/brand-logo-white.svg" alt={site.name} className="h-6 w-auto tablet:h-7" />
                     <Dialog.Close asChild>
-                      {/* Mirrors the menu button: same red block, "Close" and the bars crossed. */}
+                      {/* Plain ×, the same bars as the menu icon crossed, in the same 44px tap area. */}
                       <button
                         type="button"
-                        aria-label="Close navigation"
-                        className="inline-flex h-10 shrink-0 cursor-pointer items-center gap-2.5 bg-red-600 px-3.5 font-modernist text-xs font-semibold tracking-[0.15em] text-white uppercase outline-none transition-[background-color,color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-light hover:text-night focus-visible:ring-2 focus-visible:ring-light/60 focus-visible:ring-offset-2 focus-visible:ring-offset-night laptop:h-11 laptop:px-4"
+                        aria-label="Close menu"
+                        className="-mr-2.5 inline-flex size-11 shrink-0 cursor-pointer items-center justify-center text-light outline-none transition-[color,scale] duration-150 ease-out active:scale-[0.96] hover:text-red-light focus-visible:ring-2 focus-visible:ring-light/60"
                       >
-                        <span aria-hidden="true">Close</span>
-                        <span aria-hidden="true" className="relative block size-4">
-                          <span className="absolute top-1/2 left-0 h-0.5 w-4 -translate-y-1/2 rotate-45 bg-current" />
-                          <span className="absolute top-1/2 left-0 h-0.5 w-4 -translate-y-1/2 -rotate-45 bg-current" />
+                        <span aria-hidden="true" className="relative block size-6">
+                          <span className="absolute top-1/2 left-0 h-0.5 w-6 -translate-y-1/2 rotate-45 bg-current" />
+                          <span className="absolute top-1/2 left-0 h-0.5 w-6 -translate-y-1/2 -rotate-45 bg-current" />
                         </span>
                       </button>
                     </Dialog.Close>
@@ -286,14 +285,7 @@ export function Navbar() {
                       Open to work<span className="hidden tablet:inline">: full-time and contract roles</span>
                     </span>
                   </Link>
-                  <a
-                    href={site.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="outline-none transition-colors duration-200 hover:text-light focus-visible:ring-2 focus-visible:ring-light/40"
-                  >
-                    LinkedIn
-                  </a>
+                  <SocialLinks className="-my-2 mx-0" linkClassName="hover:opacity-100 hover:text-light" size="size-4" />
                 </div>
               </motion.div>
             </Dialog.Content>
