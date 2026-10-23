@@ -110,7 +110,7 @@ export function Footer() {
         <Grid className="gap-y-10 py-12 tablet:py-14 laptop:py-18">
           <div className="col-span-full flex flex-col gap-6 tablet:col-span-6 tablet:col-start-2 laptop:flex-row laptop:items-end laptop:justify-between laptop:col-span-12 laptop:col-start-2">
             <div>
-              <h2 className="custom-h2 custom-h2-bold relative text-balance" style={{ color: LIGHT }}>
+              <h2 className="custom-h2 custom-h2-bold relative text-balance" style={{ color: LIGHT, fontSize: 'calc(var(--h2-size) * 0.85)', fontWeight: 600 }}>
                 Would love to hear from you.
               </h2>
               <p className="custom-p mt-4" style={{ color: LIGHT_MUTED }}>

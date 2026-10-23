@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
-import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { SplitSection } from '../components/SplitSection'
 import { ProcessTimeline } from '../components/ProcessTimeline'
 import { VideoModal, type EmbedSource } from '../components/VideoModal'
@@ -13,15 +12,7 @@ import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
 import { cn } from '../lib/utils'
 
 const summary =
-  'I produced short-form content for Binance Africa that translated complex industry and product concepts into accessible, shareable stories, built to travel on Instagram and TikTok.'
-
-const challengeLead =
-  'Binance needed content that could reach people on the street.'
-
-const challengePoints = [
-  'Existing crypto content was jargon-heavy and built for people who already understood the space',
-  'Little to no street-style, camera-first content existed in crypto education at the time',
-]
+  'Binance Africa wanted crypto to reach people who had never touched it. I took it to the street: short, unscripted interviews that turned one crypto idea into one question anyone could answer, made for Instagram and TikTok.'
 
 const processSteps = [
   { title: 'Research', body: 'Find what people already ask, doubt or get wrong about crypto.' },
@@ -76,7 +67,7 @@ export function BinanceCaseStudy() {
   useDocumentMeta({
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
-      'Making complex products easier to understand: short-form street-interview videos for Binance Africa that explained crypto simply, made for Instagram and TikTok.',
+      'How I took crypto to the street for Binance Africa: unscripted street interviews on Instagram and TikTok that drew tens of thousands of views and new followers.',
     image: '/case-studies/og-binance.jpg',
     ogType: 'article',
   })
@@ -125,30 +116,47 @@ export function BinanceCaseStudy() {
         </Grid>
       </section>
 
-      {/* 01 THE CHALLENGE */}
+      {/* 01 THE OPPORTUNITY */}
       <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
-        <SplitSection title={challengeLead}>
-          <div className="grid grid-cols-1 gap-6 tablet:grid-cols-2">
-            {challengePoints.map((point) => (
-              <p key={point} className="custom-p text-pretty text-ink/70">
-                {point}
-              </p>
-            ))}
-          </div>
+        <SplitSection title="Street interviews were winning the feed">
+          <p className="custom-p text-pretty text-ink/70">
+            Look across crypto exchanges’ social pages and one format keeps showing up near the top: street interviews.
+            They regularly outperform almost everything else on the page, often pulling 50% more views or higher.
+          </p>
+          <p className="custom-p mt-3 text-pretty text-ink/70">
+            Binance Africa wanted more of that energy: content that could take crypto out of the jargon and onto the street,
+            where everyday people could see it, question it and talk about it. Alongside that, they wanted a steady flow of
+            educational content across the region.
+          </p>
+          <p className="custom-p mt-3 text-pretty text-ink/70">
+            Most crypto content at the time was built for people who already understood the space. Very little of it met
+            ordinary people where they were.
+          </p>
         </SplitSection>
       </section>
 
       {/* 02 PROCESS */}
       <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
-        <SplitSection title="From question to feed">
-          <ProcessTimeline steps={processSteps} />
+        <SplitSection title="Taking crypto to the street">
+          <p className="custom-p text-pretty text-ink/70">
+            I was brought on as a content creator to make that happen. Every episode started with one idea people already
+            had questions about, framed as a simple question a stranger could answer on camera. No scripts for the people
+            I spoke to; the honesty was the point.
+          </p>
+          <div className="mt-10">
+            <ProcessTimeline steps={processSteps} />
+          </div>
         </SplitSection>
       </section>
 
       {/* 03 RESULTS */}
       <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
-        <SplitSection title="A few episodes">
-          <div className="grid grid-cols-2 gap-4 tablet:grid-cols-5">
+        <SplitSection title="The episodes that travelled">
+          <p className="custom-p text-pretty text-ink/70">
+            The videos ran on Binance Africa’s Instagram and TikTok, drawing tens of thousands of views and growing
+            followers on both pages. A few of them:
+          </p>
+          <div className="mt-8 grid grid-cols-2 gap-4 tablet:grid-cols-5">
             {episodes.map((episode, i) => (
               <div key={episode.title} className={i === 0 ? 'col-span-2 tablet:col-span-1' : ''}>
                 <button
@@ -182,7 +190,17 @@ export function BinanceCaseStudy() {
         </SplitSection>
       </section>
 
-      <LetsTalkPanel />
+      {/* THE OUTCOME */}
+      <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
+        <SplitSection title="Crypto, in the language of the street">
+          <p className="custom-p text-pretty text-ink/70">
+            The series made crypto feel like a conversation you’d overhear on your own street, not a pitch aimed at you.
+            It gave Binance Africa a format its audience actually stopped for, and a repeatable way to turn education into
+            reach.
+          </p>
+        </SplitSection>
+      </section>
+
       <CaseStudyPager
         prev={{ href: baseCaseStudy.href, title: baseCaseStudy.title }}
         next={{ href: bitgetCaseStudy.href, title: bitgetCaseStudy.title }}

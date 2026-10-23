@@ -4,7 +4,6 @@ import { Grid } from '../components/Grid'
 import { ImageStrip, type StripImage } from '../components/ImageStrip'
 import { ImageViewer } from '../components/ImageViewer'
 import { Layout } from '../components/Layout'
-import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { TestimonialsSection } from '../components/ui/testimonials-2'
 import { JsonLd } from '../components/JsonLd'
 import { EventVideos, type EventVideo } from '../components/EventVideos'
@@ -84,6 +83,40 @@ const corePrograms = [
     title: 'Product feedback loop',
     body: 'Recurring community feedback becomes structured insight for product and support teams, covering friction points and emerging trends.',
   },
+]
+
+// OKX exit proof, cropped from one collage into three shots shown side by side.
+const okxShotsDir = '/case-studies/bitget/okx/ndubuisi-marvellous-bitget-okx-'
+const okxShots = [
+  {
+    src: `${okxShotsDir}trending.webp`,
+    width: 492,
+    height: 552,
+    alt: 'X Trending stories with “OKX Ends Nigerian Operations, Users Face Uncertainty” highlighted, shown with the Bitget logo',
+    caption: 'The OKX exit trending on X',
+  },
+  {
+    src: `${okxShotsDir}app-store.webp`,
+    width: 518,
+    height: 537,
+    alt: 'Nigerian App Store Top Charts with Bitget Wallet ranked #1 in Free Apps overall and in Finance',
+    caption: '#1 in the App Store, overall and Finance',
+  },
+  {
+    src: `${okxShotsDir}wallet-1.webp`,
+    width: 868,
+    height: 523,
+    alt: 'Bitget Wallet announcement: Nigeria’s #1 downloaded app, #1 in App Store All Apps and Finance, #5 in Google Play Finance',
+    caption: 'Bitget Wallet: Nigeria’s #1 downloaded app',
+  },
+]
+
+// The growth levers behind the 10,000-followers-a-month target, in the order they were added.
+const growthLevers = [
+  { title: 'KOL partnerships', body: 'Partnered with KOLs to push our campaigns to audiences we couldn’t reach alone.' },
+  { title: 'Organic campaigns and giveaways', body: 'Small, steady campaigns and incentives, the format crypto audiences respond to most.' },
+  { title: 'Riding the trend', body: 'When a token or topic was trending across the region, I found the best way to bring it onto Bitget’s pages.' },
+  { title: 'Business development', body: 'Worked directly with our business developer, learning BD and KOL management along the way.' },
 ]
 
 // Community operations map: how the B2C channels and B2B relationships were run.
@@ -252,52 +285,15 @@ const eventVideosLd = {
   })),
 }
 
-// Independent press coverage of one of the events: a news article that names me and
-// describes the session I led. Linked under the event photos and described for search
-// engines so the article is tied to my name.
-const pressMention = {
-  url: 'https://techpression.com/bitget-hosts-community-education-day-in-lagos-eyes-africas-crypto-future/',
-  publication: 'Techpression',
-  headline: 'Bitget Hosts Community Education Day in Lagos, eyes Africa’s crypto future',
-  date: 'Sept 2025',
-}
-
-const pressMentionLd = {
-  '@context': 'https://schema.org',
-  '@type': 'NewsArticle',
-  headline: 'Bitget Hosts Community Education Day in Lagos, eyes Africa’s crypto future',
-  url: pressMention.url,
-  datePublished: '2025-09-21',
-  author: { '@type': 'Person', name: 'Abimbola Samuel' },
-  publisher: { '@type': 'Organization', name: 'Techpression', url: 'https://techpression.com/' },
-  about: {
-    '@type': 'Event',
-    name: 'Bitget Community Education Day',
-    startDate: '2025-09-20',
-    location: {
-      '@type': 'Place',
-      name: 'Imperial Hall, Lilygate Hotel',
-      address: { '@type': 'PostalAddress', streetAddress: 'Lekki Phase 1', addressLocality: 'Lagos', addressCountry: 'NG' },
-    },
-    organizer: { '@type': 'Organization', name: 'Bitget' },
-  },
-  mentions: {
-    '@type': 'Person',
-    name: 'Ndubuisi Marvellous',
-    alternateName: 'Marvellous Ndubuisi',
-    jobTitle: 'Head of Social Media & Community, Africa',
-    url: 'https://ndubuisimarvellous.com/',
-  },
-}
-
 // Chapters of the case study. On laptops each section's left column shows this list with the
 // current chapter marked, so it reads as one index that follows you down the page.
 const chapters = [
-  { id: 'featured-story', n: '01', label: 'Featured story' },
-  { id: 'operating-model', n: '02', label: 'Operating model' },
-  { id: 'programs', n: '03', label: 'Programs' },
-  { id: 'education', n: '04', label: 'Education' },
-  { id: 'events', n: '05', label: 'Events' },
+  { id: 'growth', n: '01', label: 'Growth' },
+  { id: 'featured-story', n: '02', label: 'Featured story' },
+  { id: 'operating-model', n: '03', label: 'Operating model' },
+  { id: 'programs', n: '04', label: 'Programs' },
+  { id: 'education', n: '05', label: 'Education' },
+  { id: 'events', n: '06', label: 'Events' },
 ]
 
 // Sentence-case sub-heading inside a section, with an optional link out on the right.
@@ -445,11 +441,13 @@ export function BitgetCaseStudy() {
   const [seoOpen, setSeoOpen] = useState(false)
   const seoOpenerRef = useRef<HTMLButtonElement>(null)
   const bitquestOpenerRef = useRef<HTMLButtonElement>(null)
+  const [okxIndex, setOkxIndex] = useState<number | null>(null)
+  const okxOpenerRef = useRef<HTMLButtonElement | null>(null)
 
   useDocumentMeta({
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
-      'How I led Bitget’s social media and community across Africa: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
+      'How I grew Bitget’s social media and community across Africa from a 10,000-followers-a-month target: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/og-bitget.jpg',
     ogType: 'article',
   })
@@ -527,6 +525,51 @@ export function BitgetCaseStudy() {
         </Grid>
       </section>
 
+      {/* THE GROWTH TARGET */}
+      <section id="growth" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
+        <SplitSection
+          title="Growth was the brief"
+          aside={
+            <div className="mt-8 border-t border-ink/15 pt-6">
+              <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
+                10,000+
+              </p>
+              <p className="custom-p mt-2 text-ink/60">New followers a month: the target I was set</p>
+            </div>
+          }
+        >
+          <Reveal>
+            <p className="custom-p text-pretty text-ink/70">
+              When I joined Bitget, I was set one big goal: more than 10,000 new followers every month. There was no single
+              trick for a number that size, so I stacked four levers across every platform.
+            </p>
+          </Reveal>
+          <ol className="mt-8 grid grid-cols-1 gap-x-10 tablet:grid-cols-2">
+            {growthLevers.map((lever, i) => (
+              <li key={lever.title} className="border-t border-ink/15 py-5">
+                <Reveal delay={(i % 2) * 100} className="flex gap-4">
+                  <span className="custom-p custom-p-sm pt-0.5 tabular-nums tracking-[0.1em]" style={{ color: 'var(--color-accent-text)' }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <h3 className="custom-p text-balance text-ink" style={{ fontWeight: 600 }}>
+                      {lever.title}
+                    </h3>
+                    <p className="custom-p mt-1 text-pretty text-ink/60">{lever.body}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+          <Reveal className="mt-6">
+            <p className="custom-p text-pretty text-ink/70">
+              Growth came little by little, and it went beyond followers: Bitget’s user base and trade volume grew across the
+              region too. The business developer I worked alongside was generating $20M to $30M in trade volume every month.
+            </p>
+          </Reveal>
+        </SplitSection>
+      </section>
+
       {/* FEATURED STORY (dark band) */}
       <section
         id="featured-story"
@@ -547,17 +590,48 @@ export function BitgetCaseStudy() {
             </p>
           </Reveal>
           <Reveal delay={100} className="mt-8">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="/case-studies/bitget/okx-exit.webp"
-              alt="Screenshots of the OKX Nigeria exit trending on X, Bitget Wallet ranked #1 in the Nigerian App Store's Top Charts, and the announcement that Bitget Wallet is Nigeria's #1 downloaded app"
-              width={1400}
-              height={1111}
-              className="block h-auto w-full outline outline-1 -outline-offset-1 outline-light/10"
-            />
+            {/* Three proof shots in one row on tablet and up, each sized by its own aspect ratio so
+                they share a height. Phones show the first two side by side and the third below. */}
+            <div className="grid grid-cols-2 gap-3 tablet:flex tablet:items-start">
+              {okxShots.map((shot, i) => (
+                <figure
+                  key={shot.src}
+                  className={cn('m-0', i === 2 && 'col-span-2')}
+                  style={{ flex: `${shot.width / shot.height} 1 0` }}
+                >
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      okxOpenerRef.current = e.currentTarget
+                      setOkxIndex(i)
+                    }}
+                    aria-label={`View full size: ${shot.caption}`}
+                    className="block w-full cursor-zoom-in outline-none transition-opacity duration-150 hover:opacity-85 focus-visible:ring-2 focus-visible:ring-red-600"
+                  >
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src={shot.src}
+                      alt={shot.alt}
+                      width={shot.width}
+                      height={shot.height}
+                      className="block h-auto w-full outline outline-1 -outline-offset-1 outline-light/10"
+                    />
+                  </button>
+                  <figcaption className="custom-p custom-p-sm mt-2" style={{ color: 'var(--color-light)', opacity: 0.6 }}>
+                    {shot.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </Reveal>
         </SplitSection>
+        <ImageViewer
+          image={okxIndex !== null ? { src: okxShots[okxIndex].src, alt: okxShots[okxIndex].alt, width: okxShots[okxIndex].width, label: okxShots[okxIndex].caption } : null}
+          onClose={() => setOkxIndex(null)}
+          returnFocusTo={okxOpenerRef}
+          maxWidth={900}
+        />
       </section>
 
       {/* OPERATING MODEL */}
@@ -646,9 +720,14 @@ export function BitgetCaseStudy() {
       <section id="education" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
         <SplitSection title="Educational activities">
           <Reveal>
-            <p className="custom-p text-pretty text-ink/60">
-              AMAs, product LIVE sessions, audio spaces and quizzes that help new users activate, hosted across X, YouTube
-              Live and Telegram.
+            <p className="custom-p text-pretty text-ink/70">
+              As Bitget grew across the region, so did the questions. People needed to understand the product, the ecosystem
+              and crypto itself, so I started building education into everything we did.
+            </p>
+            <p className="custom-p mt-3 text-pretty text-ink/70">
+              That included launching Bitget Africa’s YouTube channel, which we grew to about 2,000 subscribers with
+              explainers, product education and live market updates. On the B2B side, it meant merchant onboarding and VIP
+              partner sessions.
             </p>
           </Reveal>
 
@@ -662,6 +741,9 @@ export function BitgetCaseStudy() {
 
           <Reveal className="mt-12">
             <SubHeading link={{ href: explainersUrl, label: 'All videos on YouTube' }}>Creator-led explainers I scripted and directed</SubHeading>
+            <p className="custom-p mt-3 max-w-xl text-pretty text-ink/60">
+              Made with a creator from Ghana we partnered with: I wrote the scripts and directed each one.
+            </p>
             <div className="mt-5">
               <EventVideos videos={explainers.slice(0, 4)} twoUp />
             </div>
@@ -744,40 +826,17 @@ export function BitgetCaseStudy() {
           }
         >
           <Reveal>
+            <p className="custom-p text-pretty text-ink/70">
+              As community manager, I took Bitget offline across Africa: sponsoring events, hosting most of them myself, and
+              writing the guide and standard operating structure our events were run on.
+            </p>
+          </Reveal>
+          <Reveal className="mt-10">
             <SubHeading link={{ href: eventVideosPlaylist, label: 'Watch all on YouTube' }}>Event highlights</SubHeading>
             <div className="mt-5">
               <EventVideos videos={eventVideos.slice(0, 4)} twoUp />
             </div>
             <JsonLd data={eventVideosLd} />
-          </Reveal>
-          <Reveal className="mt-12">
-              <a
-                href={pressMention.url}
-                target="_blank"
-                rel="noreferrer"
-                className="group block outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-4 focus-visible:ring-offset-page laptop:mt-14"
-              >
-                <p className="custom-h4 custom-h4-bold max-w-3xl text-balance">
-                  {pressMention.headline}
-                  <svg
-                    aria-hidden="true"
-                    className="ml-2 inline-block size-[0.9em] -translate-y-[0.1em] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-[0.25em] motion-reduce:transition-none"
-                    style={{ color: 'var(--color-accent-text)' }}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="square"
-                  >
-                    <path d="M7 17 17 7M8 7h9v9" />
-                  </svg>
-                </p>
-                <p className="custom-p custom-p-sm mt-3 text-ink/60">
-                  {pressMention.publication} · {pressMention.date}
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </p>
-              </a>
-            <JsonLd data={pressMentionLd} />
           </Reveal>
         </SplitSection>
       </section>
@@ -785,7 +844,7 @@ export function BitgetCaseStudy() {
       {/* TESTIMONIAL */}
       <section className="case-study-serif pt-2 pb-10 tablet:pt-4 tablet:pb-12 laptop:pt-6 laptop:pb-14">
         <Grid>
-          <div className="col-span-full px-6 tablet:col-span-6 tablet:col-start-2 tablet:px-12 laptop:col-span-12 laptop:col-start-2">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 tablet:px-12 laptop:col-span-12 laptop:col-start-2">
             <TestimonialsSection
               quote={bitgetCaseStudy.testimonial!.quote}
               name={bitgetCaseStudy.testimonial!.name}
@@ -798,7 +857,6 @@ export function BitgetCaseStudy() {
         </Grid>
       </section>
 
-      <LetsTalkPanel />
 
 
       <CaseStudyPager

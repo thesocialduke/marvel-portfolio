@@ -266,7 +266,7 @@ export const baseCaseStudy: CaseStudyData = {
   eyebrow: 'Case study',
   title: 'Coinbase (Base): Base Southern Africa',
   summary:
-    'Base had an active network of ambassadors and creators producing consistently, but content quality and depth varied: inconsistent camera, lighting and framing, content that leaned too promotional, limited variety in formats, and no clear creative direction.',
+    'Base had creators across Southern Africa, some on a paid retainer, but little content was being made and what was made was low quality and unstructured. I gave the network a creator guide and an editorial calendar, coached each creator from before to after, produced reference videos, and, at the regional lead’s suggestion, developed AI-directed films for regional campaigns.',
   roleTitle: 'Ambassadors Consultant & Creative Lead',
   roleBullets: [
     '**Coaching**: improved production quality across the ambassador network',
@@ -322,7 +322,7 @@ export const binanceCaseStudy: CaseStudyData = {
   eyebrow: 'Case study',
   title: 'Binance Africa: Viral Street Interviews',
   summary:
-    'Bringing crypto education to the street to make crypto feel less abstract and foreign to ordinary people, through short, punchy street-interview content built to travel.',
+    'Street interviews outperform most other content on crypto exchanges’ social pages, so Binance Africa wanted more of them, plus steady educational content. I went to the street with one simple crypto question per video; the series drew tens of thousands of views and grew followers on Instagram and TikTok.',
   roleTitle: 'Content Creator',
   roleBullets: [
     'Concept, shoot, and produce street-interview style short-form video',

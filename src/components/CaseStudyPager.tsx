@@ -21,7 +21,7 @@ export function CaseStudyPager({ prev, next, cta = false }: { prev: PagerLink; n
               className="group block py-6 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover tablet:pr-8"
             >
               <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/50 uppercase">Previous case study</p>
-              <p className="custom-h4 custom-h4-bold mt-2 text-balance">
+              <p className="custom-h4 mt-2 text-balance uppercase" style={{ fontWeight: 500, fontSize: "calc(var(--project-title-size) * 0.9)" }}>
                 <span className="mr-2 inline-block transition-transform group-hover:-translate-x-1">←</span>
                 {prev.title}
               </p>
@@ -31,7 +31,7 @@ export function CaseStudyPager({ prev, next, cta = false }: { prev: PagerLink; n
               className="group block border-t border-ink/15 py-6 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-hyacinth-hover tablet:border-t-0 tablet:pl-8 tablet:text-right"
             >
               <p className="custom-p custom-p-sm tracking-[0.1em] text-ink/50 uppercase">Next case study</p>
-              <p className="custom-h4 custom-h4-bold mt-2 text-balance">
+              <p className="custom-h4 mt-2 text-balance uppercase" style={{ fontWeight: 500, fontSize: "calc(var(--project-title-size) * 0.9)" }}>
                 {next.title}
                 <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
               </p>

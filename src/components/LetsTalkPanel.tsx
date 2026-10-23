@@ -10,7 +10,7 @@ export function LetsTalkPanel() {
         <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
           <div className="flex flex-col gap-6 bg-hyacinth/5 p-8 tablet:flex-row tablet:items-center tablet:justify-between tablet:p-10 laptop:p-12">
             <div>
-              <h2 className="custom-h2 custom-h2-bold text-balance">Let’s talk about you.</h2>
+              <h2 className="custom-h2 custom-h2-bold text-balance" style={{ fontSize: 'calc(var(--h2-size) * 0.85)', fontWeight: 600 }}>Let’s talk about you.</h2>
             </div>
             <div className="flex shrink-0">
               <ButtonLink to={site.bookingUrl} external fullWidth={false} className="bg-red-600 text-light ring-red-600">

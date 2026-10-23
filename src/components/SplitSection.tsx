@@ -18,7 +18,17 @@ export function SplitSection({
   return (
     <Grid className="gap-y-6 laptop:gap-y-0">
       <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:sticky laptop:top-28 laptop:col-span-4 laptop:col-start-2 laptop:self-start laptop:pr-6">
-        <h2 className="custom-h2 custom-h2-bold text-balance" style={dark ? { color: 'var(--color-light)' } : undefined}>
+        {/* Smaller and a step lighter than page headings: these sit beside the content as
+            labels for each chapter, so they guide the eye without shouting over it. */}
+        <h2
+          className="custom-h2 custom-h2-bold text-balance"
+          style={{
+            fontSize: 'calc(var(--h2-size) * 0.78)',
+            fontWeight: 600,
+            lineHeight: 1.2,
+            ...(dark ? { color: 'var(--color-light)' } : {}),
+          }}
+        >
           {title}
         </h2>
         {aside}

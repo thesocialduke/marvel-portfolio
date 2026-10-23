@@ -244,13 +244,6 @@
   color: var(--color-ink);
 }
 
-/* Case study pages use SK Modernist throughout instead of the site's
-   default Poppins body copy — scoped so the rest of the site (nav,
-   footer, home, services) keeps Poppins for body text. */
-.case-study-serif .custom-p {
-  font-family: var(--font-modernist);
-}
-
 .custom-h2-sm {
   font-size: 1.15rem;
 }
