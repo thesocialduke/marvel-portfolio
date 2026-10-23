@@ -117,7 +117,7 @@ export function Navbar() {
               aria-label={site.name}
               className="relative z-10 flex h-8 items-center outline-none active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
             >
-              <img src="/brand-logo.svg" alt={site.name} className="h-5 w-auto tablet:h-8" />
+              <img src="/brand-logo.svg" alt={site.name} width={136} height={32} className="h-5 w-auto tablet:h-8" />
             </Link>
 
             <nav aria-label="Main" className="hidden laptop:block">
