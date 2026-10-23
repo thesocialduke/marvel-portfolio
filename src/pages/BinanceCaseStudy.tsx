@@ -72,7 +72,7 @@ export function BinanceCaseStudy() {
     ogType: 'article',
   })
   const caseStudyLd = caseStudyJsonLd({
-    path: '/binance-street-interviews',
+    path: '/binance-africa',
     title: 'Making complex products easier to understand',
     description: summary,
     image: '/case-studies/binance.jpg',

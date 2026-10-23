@@ -42,7 +42,7 @@ export default function App() {
         <Route path="/contact" element={<ContactMe />} />
         <Route path="/bitget" element={<BitgetCaseStudy />} />
         <Route path="/base-southern-africa" element={<BaseCaseStudy />} />
-        <Route path="/binance-street-interviews" element={<BinanceCaseStudy />} />
+        <Route path="/binance-africa" element={<BinanceCaseStudy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

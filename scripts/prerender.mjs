@@ -43,7 +43,7 @@ const routes = [
     path: '/bitget',
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
-      'How I led Bitget’s social media and community across Africa: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
+      'How I grew Bitget’s social media and community across Africa from a 10,000-followers-a-month target: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
     image: '/case-studies/og-bitget.jpg',
     type: 'article',
   },
@@ -51,15 +51,15 @@ const routes = [
     path: '/base-southern-africa',
     title: 'Base Southern Africa Creator Network Case Study | Ndubuisi Marvellous',
     description:
-      'How I coached Base’s Southern Africa ambassador network into a consistent source of sharper, on-brand video content, including AI-directed campaign films.',
+      'How I turned Base’s Southern Africa creator network into a steady source of on-brand content: a creator playbook, coaching and AI-directed films.',
     image: '/case-studies/og-base.jpg',
     type: 'article',
   },
   {
-    path: '/binance-street-interviews',
+    path: '/binance-africa',
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
-      'Making complex products easier to understand: short-form street-interview videos for Binance Africa that explained crypto simply, made for Instagram and TikTok.',
+      'How I took crypto to the street for Binance Africa: unscripted street interviews on Instagram and TikTok that drew tens of thousands of views and new followers.',
     image: '/case-studies/og-binance.jpg',
     type: 'article',
   },

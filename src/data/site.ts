@@ -58,7 +58,7 @@ export const clients = [
     image: '/case-studies/base.webp',
   },
   {
-    href: '/binance-street-interviews',
+    href: '/binance-africa',
     title: 'Binance: Viral Street Interviews',
     shortName: 'Binance',
     category: 'Crypto Education',
@@ -318,7 +318,7 @@ export const baseCaseStudy: CaseStudyData = {
 }
 
 export const binanceCaseStudy: CaseStudyData = {
-  href: '/binance-street-interviews',
+  href: '/binance-africa',
   eyebrow: 'Case study',
   title: 'Binance Africa: Viral Street Interviews',
   summary:
