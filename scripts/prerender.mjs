@@ -73,7 +73,22 @@ function setMeta(html, attr, key, content) {
   return html.replace('</head>', `    <meta ${attr}="${key}" content="${escape(content)}" />\n  </head>`)
 }
 
-const template = readFileSync('dist/index.html', 'utf8')
+// Inline the stylesheet and preload the two Latin fonts. On a slow mobile connection the
+// separate CSS request was the main thing holding back the first paint (it queued behind
+// the JavaScript), and the fonts could only start once it had arrived.
+function inlineCss(html) {
+  const link = html.match(/<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/)
+  if (!link) throw new Error('prerender: stylesheet link not found in dist/index.html')
+  const css = readFileSync(`dist${link[1]}`, 'utf8')
+  const fonts = ['geist-latin-wght-normal', 'space-grotesk-latin-wght-normal']
+    .map((name) => css.match(new RegExp(`/assets/${name}-[\\w-]+\\.woff2`))?.[0])
+    .filter(Boolean)
+    .map((href) => `<link rel="preload" href="${href}" as="font" type="font/woff2" crossorigin>`)
+  if (fonts.length !== 2) throw new Error('prerender: font files not found in the stylesheet')
+  return html.replace(link[0], () => `${fonts.join('\n    ')}\n    <style>${css}</style>`)
+}
+
+const template = inlineCss(readFileSync('dist/index.html', 'utf8'))
 
 writeFileSync('dist/index.html', await withBody(template, '/'))
 console.log('prerendered body for /')

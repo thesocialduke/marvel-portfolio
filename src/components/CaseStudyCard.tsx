@@ -51,6 +51,8 @@ export function CaseStudyCard({ client, className }: { client: Client; className
         loading="lazy"
         decoding="async"
         src={client.image}
+        srcSet={`${client.image.replace(/\.webp$/, '-800.webp')} 800w, ${client.image} 1200w`}
+        sizes="(min-width: 1024px) 50vw, 100vw"
         alt={client.title}
         width={1200}
         height={700}

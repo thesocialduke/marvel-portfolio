@@ -9,7 +9,7 @@ import { StaggeredReveal } from '../components/StaggeredReveal'
 import { StatCounter } from '../components/StatCounter'
 import TestimonialCarousel from '../components/TestimonialCarousel'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { avatar, clients, homeTestimonials, logos, services, stats } from '../data/site'
+import { clients, homeTestimonials, logos, services, stats } from '../data/site'
 import { cn } from '../lib/utils'
 
 // Intrinsic sizes of the trimmed logo files, so the browser reserves their space before they load.
@@ -79,7 +79,7 @@ export function Home() {
               <img fetchPriority="high"
                 width={600}
                 height={600}
-                src={avatar}
+                src="/avatar.webp"
                 alt="Ndubuisi Marvellous"
                 className="aspect-[4/3.4] w-full object-cover object-top tablet:aspect-[3/4] tablet:object-center"
               />
@@ -201,6 +201,8 @@ export function Home() {
                 <img loading="lazy" decoding="async"
                   key="about-photo"
                   src="/ndubuisi-marvellous-speaker-abf-2026.webp"
+                  srcSet="/ndubuisi-marvellous-speaker-abf-2026-480.webp 480w, /ndubuisi-marvellous-speaker-abf-2026.webp 800w"
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 448px, 220px"
                   width={960}
                   height={1280}
                   alt="Ndubuisi Marvellous wearing a speaker badge at ABF 2026"
