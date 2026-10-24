@@ -289,7 +289,7 @@ export function Home() {
                     {service.title}
                   </h3>
                   {/* Phones: sits under the title, lined up with it. Laptop: its own column. */}
-                  <p className="custom-p text-pretty laptop:text-right" style={{ color: 'var(--color-ink)', opacity: 0.6 }}>
+                  <p className="custom-p text-pretty" style={{ color: 'var(--color-ink)', opacity: 0.6 }}>
                     {service.shortBody}
                   </p>
                 </li>

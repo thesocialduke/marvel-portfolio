@@ -103,10 +103,10 @@ export const events: EventPhoto[] = [
 export const services: { title: string; tagline?: string; body: string; shortBody: string }[] = [
   {
     title: 'Social Media Strategy',
-    tagline: 'I make your brand worth paying attention to.',
+    tagline: 'I make brands worth paying attention to.',
     // A blank line starts a new paragraph.
     body: 'I develop social media strategies that help Web3, fintech and tech companies build credibility, communicate their value, and stay relevant to the audiences that matter.\n\nFrom thought leadership and product storytelling to platform-specific campaigns, I turn your company’s expertise into content that educates, engages, and builds trust.',
-    shortBody: 'I make your brand worth paying attention to.',
+    shortBody: 'I make brands worth paying attention to.',
   },
   {
     title: 'Community-Led Growth',
@@ -116,15 +116,15 @@ export const services: { title: string; tagline?: string; body: string; shortBod
   },
   {
     title: 'Partnerships & Ecosystem Growth',
-    tagline: 'I build relationships that extend your reach and revenue.',
+    tagline: 'I build relationships that extend reach and revenue.',
     body: 'Growth doesn’t happen through owned channels alone. The right partners, creators, ambassadors, and industry communities can help a company build credibility, reach new audiences, and establish a stronger presence in its target markets.\n\nI develop and manage programs that bring these stakeholders together around shared goals, from partner activations and creator campaigns to regional community initiatives.',
-    shortBody: 'I build relationships that extend your reach and revenue.',
+    shortBody: 'I build relationships that extend reach and revenue.',
   },
   {
     title: 'Offline Events',
-    tagline: 'I create experiences that bring your ecosystem closer together.',
+    tagline: 'I create experiences that bring ecosystems closer together.',
     body: 'From intimate community meetups to product activations and industry gatherings, I help plan experiences that encourage participation, strengthen relationships, and give people something meaningful to take away.',
-    shortBody: 'I create experiences that bring your ecosystem closer together.',
+    shortBody: 'I create experiences that bring ecosystems closer together.',
   },
 ]
 

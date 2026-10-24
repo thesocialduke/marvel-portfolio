@@ -19,7 +19,8 @@ export function Accordion({
 }) {
   const [open, setOpen] = useState<Set<number>>(new Set())
   const baseId = useId()
-  const questionClass = size === 'lg' ? 'custom-h2 custom-h2-sm' : 'custom-h3 custom-h3-medium'
+  // Questions and answers both in the body font (Geist), so the FAQ reads as text, not headings.
+  const questionClass = size === 'lg' ? 'custom-h2 custom-h2-sm font-poppins' : 'custom-h3 custom-h3-medium font-poppins'
 
   const toggle = (i: number) =>
     setOpen((prev) => {
@@ -42,6 +43,8 @@ export function Accordion({
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(i)}
+                // Inline so the heading-font rules in index.css can't override the body font.
+                style={{ fontFamily: 'var(--font-poppins)' }}
                 className={cn(
                   questionClass,
                   'relative flex w-full cursor-pointer items-center justify-between gap-4 py-3 text-left text-balance outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page',
@@ -82,7 +85,7 @@ export function Accordion({
                     isOpen ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0',
                   )}
                 >
-                  {typeof item.a === 'string' ? <p className="custom-p text-ink/60">{item.a}</p> : item.a}
+                  {typeof item.a === 'string' ? <p className="custom-p font-poppins text-ink/60">{item.a}</p> : item.a}
                 </div>
               </div>
             </div>
