@@ -23,9 +23,9 @@ export function SplitSection({
         <h2
           className="custom-h2 custom-h2-bold text-balance"
           style={{
-            fontSize: 'calc(var(--h2-size) * 0.78)',
+            fontSize: 'calc(var(--h2-size) * 0.6)',
             fontWeight: 600,
-            lineHeight: 1.2,
+            lineHeight: 1.45,
             ...(dark ? { color: 'var(--color-light)' } : {}),
           }}
         >

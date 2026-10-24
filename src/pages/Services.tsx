@@ -2,7 +2,6 @@ import { Accordion } from '../components/Accordion'
 import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
-import { LetsTalkPanel } from '../components/LetsTalkPanel'
 import { ProcessTimeline } from '../components/ProcessTimeline'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { JsonLd } from '../components/JsonLd'
@@ -29,7 +28,7 @@ export function Services() {
   useDocumentMeta({
     title: 'Social Media & Community Manager Services | Ndubuisi Marvellous',
     description:
-      'Hire a Web3 and fintech social media and community manager: brand strategy, community building, partnerships, community-led growth and events.',
+      'Web3 and fintech social media and community manager, open to work: social media strategy, community-led growth, partnerships and ecosystem growth, and offline events.',
   })
 
   const faqLd = {
@@ -70,7 +69,7 @@ export function Services() {
       <section className="case-study-serif pt-18 tablet:pt-[5rem] laptop:pt-[8.5rem]">
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">I’m open to new projects.</h1>
+            <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance">I’m open to work.</h1>
           </div>
         </Grid>
       </section>
@@ -146,7 +145,6 @@ export function Services() {
         </Grid>
       </section>
 
-      <LetsTalkPanel />
     </Layout>
   )
 }

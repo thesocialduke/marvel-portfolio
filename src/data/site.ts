@@ -25,7 +25,7 @@ export const nav = [
   { label: 'Home', href: '/' },
   { label: 'Case Studies', href: '/#case-studies' },
   { label: 'Services', href: '/services' },
-  { label: 'Contact me', href: '/contact' },
+  { label: 'Get in touch', href: '/contact' },
 ] as const
 
 export const logos = [
@@ -52,7 +52,7 @@ export const clients = [
     href: '/base-southern-africa',
     title: 'Base Southern Africa (Coinbase: Ambassadors Consultant and Creative Lead)',
     shortName: 'Base',
-    category: 'Web3 Infrastructure',
+    category: 'Ambassador Program',
     description:
       'Took an untrained creator community and gave it direction, turning inconsistent clips into branded, clear, on-message content & direction.',
     image: '/case-studies/base.webp',
@@ -102,35 +102,29 @@ export const events: EventPhoto[] = [
 
 export const services: { title: string; tagline?: string; body: string; shortBody: string }[] = [
   {
-    title: 'Social Media Strategy & Brand Authority',
-    tagline: 'Make your brand worth paying attention to.',
+    title: 'Social Media Strategy',
+    tagline: 'I make your brand worth paying attention to.',
     // A blank line starts a new paragraph.
-    body: 'I develop social media strategies that help B2B technology companies build credibility, communicate their value, and stay relevant to the audiences that matter.\n\nFrom thought leadership and product storytelling to platform-specific campaigns, I turn your company’s expertise into content that educates, engages, and builds trust.',
-    shortBody: 'Make your brand worth paying attention to.',
-  },
-  {
-    title: 'Community Building & Management',
-    tagline: 'Turn your audience into an engaged community.',
-    body: 'A strong community is more than an active group chat. It’s an ecosystem of customers, users, advocates, and professionals who find value in being connected to your product and to one another.\n\nI build community strategies and operating systems that support onboarding, engagement, customer education, retention, and advocacy. I also create programs that help teams understand their communities and turn feedback into actionable insights.',
-    shortBody: 'Turn your audience into an engaged community.',
-  },
-  {
-    title: 'Partnerships & Ecosystem Growth',
-    tagline: 'Build relationships that extend your reach.',
-    body: 'Growth doesn’t happen through owned channels alone. The right partners, creators, ambassadors, and industry communities can help a company build credibility, reach new audiences, and establish a stronger presence in its target markets.\n\nI develop and manage programs that bring these stakeholders together around shared goals, from partner activations and creator campaigns to regional community initiatives.',
-    shortBody: 'Build relationships that extend your reach.',
+    body: 'I develop social media strategies that help Web3, fintech and tech companies build credibility, communicate their value, and stay relevant to the audiences that matter.\n\nFrom thought leadership and product storytelling to platform-specific campaigns, I turn your company’s expertise into content that educates, engages, and builds trust.',
+    shortBody: 'I make your brand worth paying attention to.',
   },
   {
     title: 'Community-Led Growth',
-    tagline: 'Make community a meaningful part of how your business grows.',
-    body: 'I connect community initiatives with content, product education, advocacy, and audience development to help companies attract relevant audiences, deepen product understanding, and create opportunities for organic growth.',
-    shortBody: 'Make community a meaningful part of how your business grows.',
+    tagline: 'I use community to acquire, activate and retain users.',
+    body: 'I treat community as a growth channel: bringing in new users, getting them to their first action, and keeping them coming back.\n\nI build community strategies and operating systems that support onboarding, engagement, customer education, retention and advocacy, and connect them with content, product education and audience development, so community becomes a meaningful part of how your business grows.',
+    shortBody: 'I use community to acquire, activate and retain users.',
   },
   {
-    title: 'Events & Experiential Marketing',
-    tagline: 'Create experiences that bring your ecosystem closer together.',
+    title: 'Partnerships & Ecosystem Growth',
+    tagline: 'I build relationships that extend your reach and revenue.',
+    body: 'Growth doesn’t happen through owned channels alone. The right partners, creators, ambassadors, and industry communities can help a company build credibility, reach new audiences, and establish a stronger presence in its target markets.\n\nI develop and manage programs that bring these stakeholders together around shared goals, from partner activations and creator campaigns to regional community initiatives.',
+    shortBody: 'I build relationships that extend your reach and revenue.',
+  },
+  {
+    title: 'Offline Events',
+    tagline: 'I create experiences that bring your ecosystem closer together.',
     body: 'From intimate community meetups to product activations and industry gatherings, I help plan experiences that encourage participation, strengthen relationships, and give people something meaningful to take away.',
-    shortBody: 'Create experiences that bring your ecosystem closer together.',
+    shortBody: 'I create experiences that bring your ecosystem closer together.',
   },
 ]
 
@@ -348,7 +342,7 @@ export const homeTestimonials: Testimonial[] = [
     quote:
       'Marvellous\u2019s ability to craft compelling content that resonates with our target audience consistently led to increased engagement and brand visibility. Not only did he excel in content creation, but also displayed a keen understanding of analytics, leveraging data insights to refine our social media strategies.',
     name: 'Olumide Olatunji',
-    role: 'Growth Marketer, Busha',
+    role: 'Growth Marketer, Busha (ex Kyshi)',
     avatar: '/testimonials/olumide-olatunji.jpg?v=2',
   },
 ]

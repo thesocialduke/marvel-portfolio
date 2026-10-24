@@ -470,7 +470,7 @@ export function BitgetCaseStudy() {
             <h1 className="custom-h1 custom-h1-bold relative max-w-4xl text-balance" style={{ fontSize: 'calc(var(--h1-size) * 0.8)' }}>Building and scaling Bitget’s community ecosystem across Africa</h1>
             <p className="custom-p mt-6 max-w-2xl text-pretty text-ink/70">{bitgetCaseStudy.summary}</p>
 
-            <div className="mt-10 grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:grid-cols-3">
+            <div className="mt-10 grid grid-cols-1 gap-8 border-t border-ink/15 pt-8 tablet:grid-cols-2 laptop:grid-cols-4">
               <div>
                 <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
                   40M+
@@ -482,6 +482,12 @@ export function BitgetCaseStudy() {
                   150K+
                 </p>
                 <p className="custom-p mt-2 text-ink/60">New followers and members gained</p>
+              </div>
+              <div>
+                <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
+                  20K+
+                </p>
+                <p className="custom-p mt-2 text-ink/60">Users attributed to ambassador program</p>
               </div>
               <div>
                 <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
@@ -529,18 +535,10 @@ export function BitgetCaseStudy() {
       <section id="growth" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
         <SplitSection
           title="Growth was the brief"
-          aside={
-            <div className="mt-8 border-t border-ink/15 pt-6">
-              <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
-                10,000+
-              </p>
-              <p className="custom-p mt-2 text-ink/60">New followers a month: the target I was set</p>
-            </div>
-          }
         >
           <Reveal>
             <p className="custom-p text-pretty text-ink/70">
-              When I joined Bitget, I was set one big goal: more than 10,000 new followers every month. There was no single
+              When I joined Bitget, I was set one big goal: more than <strong className="font-semibold text-ink">10,000 new followers</strong> every month. There was no single
               trick for a number that size, so I stacked four levers across every platform.
             </p>
           </Reveal>
@@ -699,16 +697,17 @@ export function BitgetCaseStudy() {
       {/* CORE PROGRAMS */}
       <section id="programs" className="case-study-serif scroll-mt-20 py-16 tablet:py-20 laptop:py-28">
         <SplitSection title="Core programs">
-          <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 min-[1280px]:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 tablet:grid-cols-3">
             {corePrograms.map((program, i) => (
                 <Reveal key={program.title} delay={(i % 3) * 100} className="flex">
-                  <div className="flex w-full flex-col bg-hyacinth/5 p-5 tablet:p-6">
-                    <p className="custom-h1 custom-h1-bold normal-case tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
+                  {/* Compact cards: smaller number, tighter padding and spacing, body in the small size. */}
+                  <div className="flex w-full flex-col bg-hyacinth/5 p-4 laptop:p-5">
+                    <p className="custom-h1 custom-h1-bold normal-case tabular-nums" style={{ color: 'var(--color-accent-text)', fontSize: 'clamp(1.6rem, 2.6vw, 2.4rem)', lineHeight: 1.2 }}>
                       {program.stat}
                     </p>
-                    <p className="custom-p custom-p-sm mt-3 tracking-[0.1em] uppercase">{program.statLabel}</p>
-                    <p className="custom-h4 custom-h4-bold mt-5 text-balance">{program.title}</p>
-                    <p className="custom-p mt-2 text-pretty text-ink/60">{program.body}</p>
+                    <p className="custom-p custom-p-sm mt-1.5 tracking-[0.1em] uppercase" style={{ fontSize: '0.7rem' }}>{program.statLabel}</p>
+                    <p className="custom-h4 custom-h4-bold mt-3 text-balance" style={{ fontSize: '0.95rem' }}>{program.title}</p>
+                    <p className="custom-p custom-p-sm mt-1.5 text-pretty text-ink/60">{program.body}</p>
                   </div>
                 </Reveal>
               ))}

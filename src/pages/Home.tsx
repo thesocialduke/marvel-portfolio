@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { usePauseOffscreen } from '../hooks/usePauseOffscreen'
-import { Accordion } from '../components/Accordion'
 import { ButtonLink } from '../components/Button'
 import { Grid } from '../components/Grid'
 import { CaseStudyCard } from '../components/CaseStudyCard'
@@ -42,7 +41,7 @@ export function Home() {
 
   return (
     <Layout>
-      <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-page">
+      <section className="relative flex min-h-svh w-full flex-col overflow-hidden bg-page tablet:min-h-0">
         {/* Background texture bleeds full-width; only the content below is
             bounded by the same Grid container every other section uses, so
             the hero no longer runs the full width of ultra-wide screens. */}
@@ -56,7 +55,7 @@ export function Home() {
               bottom level with it). */}
           <div className="col-span-full flex flex-col gap-8 tablet:col-span-6 tablet:col-start-2 tablet:flex-row-reverse tablet:items-start tablet:justify-between laptop:col-span-12 laptop:col-start-2">
             <div className="tablet:max-w-[62%]">
-              <h1 className="font-modernist text-[7.5vw] leading-[1.1] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[4.8vw] laptop:text-[min(calc(4.35vw-2.85px),3.74rem)] laptop:leading-[1.15] text-balance">
+              <h1 className="font-modernist text-[5.6vw] leading-[1.6] font-bold tracking-tight text-ink uppercase tablet:text-right tablet:text-[3.87vw] tablet:leading-[1.4] laptop:text-[min(calc((4.35vw-2.85px)*0.78),calc(3.74rem*0.78))] laptop:leading-[1.49] text-balance">
                 Building{' '}
                 {/* Drawn as a background so it can sweep in left to right
                     (text-decoration can't animate its length). */}
@@ -65,13 +64,16 @@ export function Home() {
                   style={{
                     backgroundImage: 'linear-gradient(var(--color-red-600), var(--color-red-600))',
                     backgroundRepeat: 'no-repeat',
-                    backgroundPosition: '0 calc(100% - 0.14em)',
-                    backgroundSize: underlineOn ? '100% 3px' : '0% 3px',
+                    // Boldonse has a deep descender area, so the line sits 0.27em up from the
+                    // bottom of the text box: just under the baseline instead of halfway to the
+                    // next line. Thickness scales with the type.
+                    backgroundPosition: '0 calc(100% - 0.27em)',
+                    backgroundSize: underlineOn ? '100% max(2px, 0.07em)' : '0% max(2px, 0.07em)',
                   }}
                 >
-                  social and community-led growth engines
+                  social &amp; community-led growth engines
                 </span>{' '}
-                for brands scaling across emerging markets.
+                for brands scaling across emerging markets
               </h1>
             </div>
 
@@ -92,7 +94,7 @@ export function Home() {
             AFTER the desktop marquee instead, so the marquee stays close
             under the hero picture and the spacer absorbs the leftover
             space down to the "Hi, I'm" row. */}
-        <div className="relative flex-1 tablet:order-3" />
+        <div className="relative flex-1 tablet:order-3 tablet:h-10 tablet:flex-none laptop:h-14" />
 
         {/* Trusted-by marquee: an infinite right-to-left scroll, faded out
             at both edges via a mask, sitting right under the hero picture. */}
@@ -175,11 +177,11 @@ export function Home() {
               className="flex shrink-0 cursor-pointer flex-col items-center gap-2 text-ink/70 outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-ink/40"
             >
               <span className="text-lg laptop:text-2xl">↓</span>
-              <span className="font-modernist text-xs font-semibold tracking-[0.2em]">SCROLL</span>
+              <span className="font-modernist text-xs font-semibold tracking-[0.2em]">ABOUT ME</span>
             </a>
 
             <div className="min-w-0 max-w-[70%] text-right tablet:text-left">
-              <h2 className="font-modernist text-[8vw] leading-[0.85] font-bold tracking-tight text-ink/60 tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
+              <h2 style={{ fontFamily: "'Boldonse', var(--font-modernist)", fontSynthesis: 'none' }} className="font-modernist text-[7vw] leading-[1.3] font-bold tracking-normal text-ink/60 tablet:text-[4.5vw] laptop:text-[clamp(2.25rem,3.4vw,3.1rem)]">
                 NDUBUISI{' '}
                 <br />
                 MARVELLOUS
@@ -190,10 +192,10 @@ export function Home() {
       </section>
 
       <section id="about" className="scroll-mt-20 py-12 tablet:py-14 laptop:py-18">
-        <Grid className="gap-y-8 laptop:gap-y-0">
-          {/* Desktop: the photo takes the full height of the text column beside it (heading,
-              paragraphs and stats), so the two start and end level at every screen width. */}
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-4 laptop:col-start-2">
+        <Grid className="gap-y-8 tablet:gap-y-0">
+          {/* Desktop: text and stats on the left, photo on the right spanning both rows, so the photo
+              starts level with the text and ends level with the stats at every screen width. */}
+          <div className="col-span-full tablet:col-span-2 tablet:col-start-6 tablet:row-start-1 laptop:col-span-4 laptop:col-start-10 laptop:row-span-2">
             <StaggeredReveal
               className="laptop:h-full"
               lineClassName="laptop:relative laptop:h-full"
@@ -206,16 +208,16 @@ export function Home() {
                   width={960}
                   height={1280}
                   alt="Ndubuisi Marvellous wearing a speaker badge at ABF 2026"
-                  className="mx-auto block aspect-[4/5] w-full max-w-[220px] object-cover object-[center_25%] tablet:aspect-[3/4] tablet:max-w-md tablet:object-center laptop:absolute laptop:inset-y-0 laptop:left-0 laptop:mx-0 laptop:h-full laptop:w-auto laptop:max-w-full"
+                  className="mx-auto block aspect-[4/5] w-full max-w-[220px] object-cover object-[center_25%] tablet:mx-0 tablet:aspect-[3/4] tablet:max-w-full tablet:object-center laptop:absolute laptop:inset-y-0 laptop:right-0 laptop:mx-0 laptop:h-full laptop:w-auto laptop:max-w-full"
                 />,
               ]}
             />
           </div>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-7 laptop:col-start-7">
+          <div className="col-span-full tablet:col-span-4 tablet:col-start-2 tablet:row-start-1 laptop:col-span-7 laptop:col-start-2">
             <StaggeredReveal
               lines={[
-                <p key="lead" className="custom-h2 custom-h2-bold relative text-justify text-balance uppercase tablet:text-left laptop:text-justify">
-                  I drive growth and acquisition for brands entering or scaling across Africa, turning strategy
+                <p key="lead" className="font-modernist text-[1.3rem] leading-snug font-medium tracking-tight text-pretty text-ink tablet:text-[1.45rem] laptop:text-[1.7rem]">
+                  I drive growth and acquisition for brands, turning strategy
                   into an active user base and measurable results.
                 </p>,
                 <p key="brands" className="custom-p mt-4 text-left text-ink/70">
@@ -241,42 +243,70 @@ export function Home() {
                 </p>,
               ]}
             />
-            <div className="mt-12 grid grid-cols-2 items-start justify-items-start gap-x-2 gap-y-8 text-left tablet:mt-16 tablet:grid-cols-4 tablet:gap-6">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <p
-                    className="custom-h1 custom-h1-bold custom-h1-stat-mobile-lg"
-                    style={{ color: 'var(--color-accent-text)' }}
-                  >
-                    <StatCounter value={stat.value} />
-                  </p>
-                  <p className="custom-p mt-2 leading-tight text-ink/60" style={{ fontSize: '0.75rem' }}>
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+          </div>
+          {/* Stats: their own grid item. Phones: under the text. Tablets: a full-width row of four
+            under both the text and the photo. Laptop: under the text, with the photo beside both. */}
+        <div className="col-span-full mt-4 grid grid-cols-2 items-start justify-items-start gap-x-6 gap-y-8 text-left tablet:col-span-6 tablet:col-start-2 tablet:row-start-2 tablet:mt-12 tablet:grid-cols-4 tablet:gap-x-8 laptop:col-span-7 laptop:col-start-2 laptop:flex laptop:justify-between laptop:gap-10">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <p
+                  className="custom-h1 custom-h1-bold custom-h1-stat-mobile-lg laptop:!text-[calc(var(--h1-size)*0.82)]"
+                  style={{ color: 'var(--color-accent-text)' }}
+                >
+                  <StatCounter value={stat.value} />
+                </p>
+                {/* Laptop: each label is capped at the same width, so every one wraps to two lines
+                    at most and the row's spacing (justify-between) stays even. */}
+                <p className="custom-p mt-2 leading-tight text-ink/60 laptop:max-w-[8.5rem]" style={{ fontSize: '0.75rem' }}>
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </Grid>
       </section>
 
       <section className="py-12 tablet:py-14 laptop:py-18">
-        <Grid className="items-end gap-y-8 pb-12 laptop:gap-y-0">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
-            <h2 className="custom-h1 custom-h1-bold text-left text-balance uppercase">What I do</h2>
-          </div>
-          <div className="col-span-full hidden tablet:col-span-6 tablet:col-start-2 tablet:block laptop:col-span-4 laptop:col-start-10 laptop:justify-self-end">
-            <ButtonLink to="/services">See all services →</ButtonLink>
-          </div>
-        </Grid>
         <Grid>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <Accordion items={services.map((service) => ({ q: service.title, a: service.shortBody }))} />
+            {/* Numbered list in the style of blue2purple.com: small number, big title on the
+                left, a short line on the right, thin rules between rows. */}
+            <ol className="border-t border-ink/15">
+              {services.map((service) => (
+                <li
+                  key={service.title}
+                  className="grid grid-cols-1 gap-y-2 border-b border-ink/15 py-6 laptop:grid-cols-[minmax(0,1fr)_17rem] laptop:items-center laptop:gap-x-8 laptop:py-7"
+                >
+                  <h3
+                    className="text-balance text-ink uppercase"
+                    style={{
+                      fontFamily: "'Boldonse', var(--font-modernist)",
+                      fontSynthesis: 'none',
+                      fontSize: 'clamp(1.2rem, 2.1vw, 1.9rem)',
+                      lineHeight: 1.35,
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  {/* Phones: sits under the title, lined up with it. Laptop: its own column. */}
+                  <p className="custom-p text-pretty laptop:text-right" style={{ color: 'var(--color-ink)', opacity: 0.6 }}>
+                    {service.shortBody}
+                  </p>
+                </li>
+              ))}
+            </ol>
           </div>
         </Grid>
-        <Grid className="mt-8 tablet:hidden">
-          <div className="col-span-full">
-            <ButtonLink to="/services">See all services →</ButtonLink>
+        {/* One "See all services" under the list on every screen size, with the same arrow as
+            "View case study". */}
+        <Grid className="mt-8">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2 tablet:flex tablet:justify-end">
+            <ButtonLink to="/services" className="tablet:w-auto">
+              See all services
+              <svg aria-hidden="true" className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                <path d="M4 12h15M13 6l6 6-6 6" />
+              </svg>
+            </ButtonLink>
           </div>
         </Grid>
       </section>
@@ -287,9 +317,9 @@ export function Home() {
             <h2 className="custom-h1 custom-h1-bold text-left uppercase">Case Studies</h2>
           </div>
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
-            <div className="flex flex-col gap-4 tablet:gap-6">
+            <div className="flex flex-col gap-10 tablet:gap-6">
               {clients.map((client) => (
-                <CaseStudyCard key={client.href} client={client} className="aspect-[6/5] tablet:aspect-[8/3]" />
+                <CaseStudyCard key={client.href} client={client} className="aspect-[4/3] tablet:aspect-[8/3] laptop:aspect-[7/2]" />
               ))}
             </div>
           </div>

@@ -6,7 +6,7 @@ export type ProcessStep = { title: string; body: string }
 const STEP_SECONDS = 1.1
 
 // A timeline that plays once when scrolled into view: a red line draws across
-// (down the side on phones) and each step lights up and fades in as it arrives.
+// (down the side on phones and tablets, where four columns would be too narrow) and each step lights up and fades in as it arrives.
 export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
   const ref = useRef<HTMLOListElement>(null)
   const [playing, setPlaying] = useState(false)
@@ -28,17 +28,17 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
   }, [])
 
   const total = steps.length * STEP_SECONDS
-  const columns = ({ 3: 'tablet:grid-cols-3', 4: 'tablet:grid-cols-4' } as Record<number, string>)[steps.length] ?? 'tablet:grid-cols-5'
+  const columns = ({ 3: 'laptop:grid-cols-3', 4: 'laptop:grid-cols-4' } as Record<number, string>)[steps.length] ?? 'laptop:grid-cols-5'
 
   return (
-    <ol ref={ref} className={cn('relative grid grid-cols-1 gap-0 tablet:gap-6', columns)}>
+    <ol ref={ref} className={cn('relative grid grid-cols-1 gap-0 laptop:gap-6', columns)}>
       {/* Track and red progress line: horizontal on tablet and up, vertical on phones */}
-      <span aria-hidden="true" className="absolute top-1.5 bottom-6 left-1.5 w-px bg-ink/15 tablet:inset-x-0 tablet:top-1.5 tablet:bottom-auto tablet:left-0 tablet:h-px tablet:w-auto" />
+      <span aria-hidden="true" className="absolute top-1.5 bottom-6 left-1.5 w-px bg-ink/15 laptop:inset-x-0 laptop:top-1.5 laptop:bottom-auto laptop:left-0 laptop:h-px laptop:w-auto" />
       <span
         aria-hidden="true"
         className={cn(
-          'absolute top-1.5 bottom-6 left-1.5 w-px origin-top bg-red-600 transition-transform ease-linear motion-reduce:transition-none tablet:inset-x-0 tablet:bottom-auto tablet:left-0 tablet:h-px tablet:w-auto tablet:origin-left',
-          playing ? 'scale-y-100 tablet:scale-x-100' : 'scale-y-0 tablet:scale-x-0 tablet:scale-y-100',
+          'absolute top-1.5 bottom-6 left-1.5 w-px origin-top bg-red-600 transition-transform ease-linear motion-reduce:transition-none laptop:inset-x-0 laptop:bottom-auto laptop:left-0 laptop:h-px laptop:w-auto laptop:origin-left',
+          playing ? 'scale-y-100 laptop:scale-x-100' : 'scale-y-0 laptop:scale-x-0 laptop:scale-y-100',
         )}
         style={{ transitionDuration: `${total}s` }}
       />
@@ -46,7 +46,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
       {steps.map((step, i) => {
         const delay = `${i * STEP_SECONDS}s`
         return (
-          <li key={step.title} className="relative pb-10 pl-10 tablet:pt-10 tablet:pr-2 tablet:pb-0 tablet:pl-0">
+          <li key={step.title} className="relative pb-10 pl-10 laptop:pt-10 laptop:pr-2 laptop:pb-0 laptop:pl-0">
             <span
               aria-hidden="true"
               className="absolute top-0 left-0 size-[13px] border border-ink bg-page transition-colors duration-700 motion-reduce:transition-none"

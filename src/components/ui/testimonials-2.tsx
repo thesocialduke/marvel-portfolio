@@ -35,7 +35,7 @@ export function TestimonialsSection({
         </Avatar>
       </div>
       <figcaption className="flex flex-col justify-center space-y-4 pt-5 text-left md:p-6">
-        <blockquote className="whitespace-pre-line font-modernist text-muted-foreground text-base leading-snug tracking-tight text-pretty md:text-lg md:leading-tight">
+        <blockquote className="whitespace-pre-line font-poppins text-muted-foreground text-base leading-relaxed text-pretty md:text-lg md:leading-snug">
           “{quote}”
         </blockquote>
 

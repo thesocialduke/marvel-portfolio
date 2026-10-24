@@ -71,12 +71,21 @@ export function StatCounter({ value }: { value: string }) {
   }
 
   // aria-label gives screen readers the final number instead of the counting digits.
+  // The final value sits invisibly in the same grid cell as the counting one, so the stat is
+  // always as wide as its finished number. Without it the row reflowed on every frame of the
+  // count (the heading font has no fixed-width digits), and the labels and gaps jumped around.
   return (
-    // Inline so the shared heading styles can't override it: every digit keeps the same width while counting.
-    <span ref={ref} role="img" aria-label={value} className="tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
-      {match[1]}
-      {count}
-      {match[3]}
+    <span ref={ref} role="img" aria-label={value} className="inline-grid">
+      <span aria-hidden="true" className="invisible col-start-1 row-start-1">
+        {value}
+      </span>
+      {/* Zero width of its own (min-w-full), so a wider digit mid-count ("0" is wider than "5")
+          can't push the layout either. */}
+      <span className="col-start-1 row-start-1 w-0 min-w-full whitespace-nowrap">
+        {match[1]}
+        {count}
+        {match[3]}
+      </span>
     </span>
   )
 }

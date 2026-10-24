@@ -4,14 +4,17 @@ import { Dialog } from 'radix-ui'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
 import { ThemeToggle } from './ThemeToggle'
+import { CvMenu } from './CvMenu'
 import { SocialLinks } from './SocialLinks'
 import { nav, site } from '../data/site'
 import { cn } from '../lib/utils'
 
 // Desktop nav links: 40px-tall hit area and red hover. The current one is marked by a
 // single red underline that slides between links (see Navbar).
+// Page links in Boldonse (the heading face), small and with a touch of tracking so the wide
+// letters stay readable at nav size. Boldonse has one weight, so no bold class.
 const navLinkBase =
-  "relative inline-flex h-10 items-center font-poppins text-[13px] font-bold tracking-wide uppercase outline-none transition-colors duration-150 hover:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
+  "relative inline-flex h-10 items-center font-[Boldonse] text-[11.5px] tracking-[0.04em] uppercase [font-synthesis:none] outline-none transition-colors duration-150 hover:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
 
 const listVariants = {
   hidden: {},
@@ -25,6 +28,8 @@ const itemVariants = {
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  // Phone/tablet menu: the Resume row opens in place to show its two links.
+  const [cvOpen, setCvOpen] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
@@ -109,12 +114,17 @@ export function Navbar() {
         )}
       >
         <Grid>
-          {/* Laptop and up: logo left, page links centred in one row, "Contact me" as the only
+          {/* Laptop and up: logo left, page links centred in one row, "Get in touch" as the only
               filled button on the right. Smaller screens keep the MENU button and full-screen menu. */}
           <div className="col-span-full flex items-center justify-between py-3 tablet:col-span-6 tablet:col-start-2 tablet:py-4 laptop:col-span-12 laptop:col-start-2 laptop:grid laptop:grid-cols-[1fr_auto_1fr] laptop:py-4">
             <Link
               to="/"
               aria-label={site.name}
+              // Always lands on the hero: on the home page it scrolls to the top (the route doesn't
+              // change, so the router wouldn't); elsewhere it opens the home page at the top.
+              onClick={() => {
+                if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
+              }}
               className="relative z-10 flex h-8 items-center outline-none active:scale-[0.96] focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
             >
               <img src="/brand-logo.svg" alt={site.name} width={136} height={32} className="h-5 w-auto tablet:h-8" />
@@ -152,19 +162,23 @@ export function Navbar() {
                       })()}
                     </li>
                   ))}
+                {/* Resume: a menu (view online or download), set like the page links. */}
+                <li>
+                  <CvMenu variant="nav" label="Resume" className={cn(navLinkBase, 'text-ink/70')} />
+                </li>
               </ul>
             </nav>
 
             <div className="flex items-center gap-2 justify-self-end laptop:gap-3">
               <ThemeToggle />
-              {/* Same type as the site's other buttons (bold capitals), filled black as the
-                  one highlighted action in the bar; red on hover. */}
+              {/* Set in Boldonse, the heading face, filled black as the one highlighted action in
+                  the bar; red on hover. */}
               <Link
                 to="/contact"
                 className="custom-button-label hidden h-10 items-center gap-2 bg-ink px-4 text-sm text-page uppercase hover:text-light outline-none transition-[background-color,color,scale] duration-150 ease-out active:scale-[0.96] hover:bg-red-600 focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page laptop:inline-flex"
-                
+                style={{ fontFamily: "'Boldonse', var(--font-modernist)", fontSynthesis: 'none', fontSize: '0.8rem', letterSpacing: 0 }}
               >
-                Contact me
+                Get in touch
               </Link>
 
               <Dialog.Trigger asChild>
@@ -237,7 +251,7 @@ export function Navbar() {
                     animate="visible"
                     className="w-full max-w-4xl"
                   >
-                    {nav.map((item, i) => {
+                    {[...nav.slice(0, 3), { label: 'Resume', href: 'resume' }, ...nav.slice(3)].map((item, i) => {
                       const linkClassName =
                         'group relative flex items-start gap-3 py-3 outline-none transition-[color] duration-200 focus-visible:ring-2 focus-visible:ring-light/40 tablet:gap-4'
                       const content = (
@@ -245,11 +259,48 @@ export function Navbar() {
                           <span className="font-poppins w-6 shrink-0 pt-2 text-xs tabular-nums opacity-60 tablet:w-8 tablet:pt-3 tablet:text-sm">
                             {String(i + 1).padStart(2, '0')}
                           </span>
-                          <span className="hover-red-text font-modernist flex-1 text-right text-[clamp(2.25rem,8vw,5.5rem)] leading-[0.95] font-bold uppercase group-hover:translate-x-[-0.25rem]">
+                          <span
+                            className="hover-red-text font-modernist flex-1 text-right text-[clamp(1.6rem,6.6vw,4.75rem)] leading-[1.25] whitespace-nowrap uppercase group-hover:translate-x-[-0.25rem]"
+                            style={{ fontFamily: "'Boldonse', var(--font-modernist)", fontSynthesis: 'none' }}
+                          >
                             {item.label}
                           </span>
                         </>
                       )
+
+                      // Resume: a button that opens two plain links underneath (read online or
+                      // download), so it works inside the menu without a pop-up.
+                      if (item.href === 'resume') {
+                        return (
+                          <motion.li
+                            key="resume"
+                            variants={prefersReducedMotion ? undefined : itemVariants}
+                            className="border-b border-light/20 py-2 tablet:py-3"
+                          >
+                            <button
+                              type="button"
+                              aria-expanded={cvOpen}
+                              aria-controls="menu-resume-links"
+                              onClick={() => setCvOpen((v) => !v)}
+                              className={cn(linkClassName, 'w-full cursor-pointer text-left')}
+                            >
+                              {content}
+                            </button>
+                            <div
+                              id="menu-resume-links"
+                              hidden={!cvOpen}
+                              className="font-poppins flex justify-end gap-6 pb-3 text-sm tracking-wide uppercase tablet:text-base"
+                            >
+                              <a href={site.cvViewUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="text-light/80 outline-none transition-colors hover:text-red-light focus-visible:ring-2 focus-visible:ring-light/40">
+                                View online ↗<span className="sr-only"> (opens in a new tab)</span>
+                              </a>
+                              <a href={site.cvUrl} download onClick={() => setOpen(false)} className="text-light/80 outline-none transition-colors hover:text-red-light focus-visible:ring-2 focus-visible:ring-light/40">
+                                Download PDF ↓
+                              </a>
+                            </div>
+                          </motion.li>
+                        )
+                      }
 
                       return (
                         <motion.li

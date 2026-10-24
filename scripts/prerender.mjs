@@ -31,13 +31,13 @@ const routes = [
     path: '/services',
     title: 'Social Media & Community Manager Services | Ndubuisi Marvellous',
     description:
-      'Hire a Web3 and fintech social media and community manager: brand strategy, community building, partnerships, community-led growth and events.',
+      'Web3 and fintech social media and community manager, open to work: social media strategy, community-led growth, partnerships and ecosystem growth, and offline events.',
   },
   {
     path: '/contact',
     title: 'Contact | Ndubuisi Marvellous',
     description:
-      'Get in touch with Ndubuisi Marvellous, a Web3 and fintech social media and community manager open to full-time and contract roles. Book a call or send an email.',
+      'Get in touch with Ndubuisi Marvellous, open to full-time and contract marketing roles in fintech, payments, AI, SaaS and Web3. Replies within 8 hours by email or LinkedIn.',
   },
   {
     path: '/bitget',

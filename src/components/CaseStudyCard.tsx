@@ -22,15 +22,21 @@ export function CaseStudyCard({ client, className }: { client: Client; className
     // Any part on screen: lets the arrow's nudge loop run only while it can be seen.
     const visible = new IntersectionObserver(([entry]) => setOnScreen(entry.isIntersecting))
     visible.observe(el)
-    // Phones have no hover: the tile reacts once most of it is on screen.
-    let active: IntersectionObserver | undefined
-    if (window.matchMedia('(hover: none)').matches) {
-      active = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.6 })
+    // Touch screens have no hover, and the phone layout puts the button under the photo where
+    // hover can't be relied on either (a narrow desktop window counts too): there the tile
+    // reacts once most of it is on screen. Re-checked when the window crosses the breakpoint.
+    const query = window.matchMedia('(hover: none), (max-width: 639px)')
+    const active = new IntersectionObserver(([entry]) => setInView(query.matches && entry.isIntersecting), { threshold: 0.6 })
+    active.observe(el)
+    const onChange = () => {
+      active.unobserve(el)
       active.observe(el)
     }
+    query.addEventListener('change', onChange)
     return () => {
       visible.disconnect()
-      active?.disconnect()
+      active.disconnect()
+      query.removeEventListener('change', onChange)
     }
   }, [])
 
@@ -43,10 +49,12 @@ export function CaseStudyCard({ client, className }: { client: Client; className
       // Starts with the visible label text so voice control ("click View case study") works.
       aria-label={`View case study: ${client.shortName}, ${client.category}`}
       className={cn(
-        'group relative block overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page',
-        className,
+        'group relative block outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page',
       )}
     >
+      {/* Photo. Phones: the title and link sit under it, on the page background, where they
+          read cleanly; tablets and up: they sit over the bottom of the photo as before. */}
+      <div className={cn('relative overflow-hidden', className)}>
       <img
         loading="lazy"
         decoding="async"
@@ -59,22 +67,24 @@ export function CaseStudyCard({ client, className }: { client: Client; className
         style={client.imagePosition ? { objectPosition: client.imagePosition } : undefined}
         className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 group-data-[active=true]:scale-105 motion-reduce:transition-none"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-transparent" />
+      <div className="absolute inset-0 hidden bg-gradient-to-t from-night/60 via-transparent to-transparent tablet:block" />
+      </div>
 
-
-      <div className="absolute bottom-6 left-6 flex flex-col items-start tablet:bottom-8 tablet:left-8">
-        <h3 className="custom-h4 custom-h4-invert custom-h4-bold inline-block bg-red-600 px-3 py-2">
-          {client.shortName}
-          <span style={{ color: 'rgba(255,255,255,0.9)' }}>, {client.category}</span>
+      <div className="mt-4 flex flex-col items-start tablet:absolute tablet:inset-x-8 tablet:bottom-8 tablet:mt-0">
+        <h3 className="case-card-title custom-h4 custom-h4-bold">
+          <span className="tablet:bg-red-600 tablet:box-decoration-clone tablet:px-3 tablet:py-1">
+            {client.shortName}
+            <span className="case-card-category">, {client.category}</span>
+          </span>
         </h3>
         {/* The shared .custom-p style sets its own text colour and would beat the colour
             and weight, so those live on the inner span and the outer one only swaps the
             background. */}
         <span
           aria-hidden="true"
-          className="custom-p custom-p-sm bg-ink tracking-wide uppercase transition-colors duration-200 group-hover:bg-page group-focus-visible:bg-page group-data-[active=true]:bg-page"
+          className="custom-p custom-p-sm mt-3 bg-ink tracking-wide uppercase transition-colors duration-200 group-hover:bg-page group-focus-visible:bg-page group-data-[active=true]:bg-red-600 tablet:mt-1.5"
         >
-          <span className="inline-flex items-center gap-2 px-3 py-2 font-semibold text-page transition-colors duration-200 group-hover:text-ink group-focus-visible:text-ink group-data-[active=true]:text-ink">
+          <span className="inline-flex items-center gap-2 px-3 py-2 font-semibold text-page transition-colors duration-200 group-hover:text-ink group-focus-visible:text-ink group-data-[active=true]:text-light">
             View case study
             <svg
               className="size-4 animate-[arrow-nudge_1.8s_ease-in-out_infinite] transition-transform duration-200 [animation-play-state:paused] group-hover:translate-x-1 group-hover:animate-none group-focus-visible:animate-none group-data-[active=true]:translate-x-1 group-data-[active=true]:animate-none group-data-[onscreen=true]:[animation-play-state:running] motion-reduce:animate-none motion-reduce:transition-none"

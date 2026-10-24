@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
-import { ButtonLink } from './Button'
 import { CvMenu } from './CvMenu'
+import { DotField } from './DotField'
+import { EmailCopyButton } from './EmailCopyButton'
 import { SocialLinks } from './SocialLinks'
 import { openCookieSettings } from './CookieBanner'
 import { site } from '../data/site'
@@ -11,72 +12,28 @@ import { cn } from '../lib/utils'
 const LIGHT = 'var(--color-light)'
 const LIGHT_MUTED = 'rgb(231 230 226 / 0.7)'
 
-function EmailAction() {
-  const [copied, setCopied] = useState(false)
-
-  async function handleCopy() {
-    try {
-      await navigator.clipboard.writeText(site.email)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch {
-      // Clipboard API unavailable (e.g. insecure context); nothing to fall back to.
-    }
-  }
-
-  return (
-    <div className="flex items-center gap-3">
-      <ButtonLink
-        to={`mailto:${site.email}`}
-        external
-        tone="red"
-        fullWidth={false}
-        className="min-w-0 flex-1 shrink px-3 text-[3.1vw] tracking-tight whitespace-nowrap ring-light/60 tablet:flex-none tablet:px-8 tablet:text-[1rem] tablet:tracking-normal"
-      >
-        {site.email}
-      </ButtonLink>
-      <button
-        type="button"
-        onClick={handleCopy}
-        className="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-1.5 px-1 font-modernist text-[11px] font-semibold tracking-[0.1em] text-red-light uppercase outline-none transition-colors tablet:text-light/60 tablet:hover:text-red-light focus-visible:ring-2 focus-visible:ring-hyacinth-hover"
-      >
-        {copied ? (
-          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-        ) : (
-          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="9" y="9" width="12" height="12" rx="0" />
-            <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
-          </svg>
-        )}
-        {/* A visible word, since a bare copy icon is easy to miss or misread. */}
-        {copied ? 'Copied' : 'Copy'}
-        <span className="sr-only"> email address</span>
-      </button>
-      <span className="sr-only" aria-live="polite">
-        {copied ? 'Email address copied' : ''}
-      </span>
-    </div>
-  )
-}
-
 function BackToTop() {
   const [visible, setVisible] = useState(false)
 
-  // An invisible 400px marker at the very top of the page: once it has scrolled out
-  // of view the visitor is past 400px, so the button shows. No scroll listener needed.
+  // Shows only once the visitor is past 400px AND scrolling back up (the moment they'd want
+  // it), and hides again as soon as they scroll down, so it never sits over what they're
+  // reading. Hidden again near the top.
   useEffect(() => {
-    const marker = document.createElement('div')
-    marker.setAttribute('aria-hidden', 'true')
-    marker.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:400px;pointer-events:none;visibility:hidden'
-    document.body.appendChild(marker)
-
-    const observer = new IntersectionObserver(([entry]) => setVisible(!entry.isIntersecting))
-    observer.observe(marker)
+    let lastY = window.scrollY
+    let frame = 0
+    const onScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const y = window.scrollY
+        if (Math.abs(y - lastY) < 6) return
+        setVisible(y > 400 && y < lastY)
+        lastY = y
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
-      observer.disconnect()
-      marker.remove()
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
     }
   }, [])
 
@@ -86,11 +43,11 @@ function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       aria-label="Back to top"
       className={cn(
-        'fixed right-[max(1.5rem,env(safe-area-inset-right))] bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-40 flex size-12 items-center justify-center bg-red-600 text-light shadow-lg outline-none transition-[opacity,transform] duration-200 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover',
+        'fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex size-10 items-center justify-center bg-red-600 text-light shadow-md outline-none transition-[opacity,translate] duration-200 hover:opacity-80 focus-visible:ring-2 focus-visible:ring-hyacinth-hover tablet:right-[max(1.5rem,env(safe-area-inset-right))] tablet:bottom-[max(1.5rem,env(safe-area-inset-bottom))] tablet:size-11',
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0',
       )}
     >
-      <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 19V5M5 12l7-7 7 7" />
       </svg>
     </button>
@@ -104,22 +61,29 @@ export function Footer() {
     <>
       <footer
         id="contact"
-        className="on-dark scroll-mt-20 tablet:scroll-mt-24"
+        className="on-dark relative isolate scroll-mt-20 tablet:scroll-mt-24"
         style={{ background: 'var(--color-night)', color: 'var(--color-light)' }}
       >
+        <DotField />
         <Grid className="gap-y-10 py-12 tablet:py-14 laptop:py-18">
-          <div className="col-span-full flex flex-col gap-6 tablet:col-span-6 tablet:col-start-2 laptop:flex-row laptop:items-end laptop:justify-between laptop:col-span-12 laptop:col-start-2">
-            <div>
-              <h2 className="custom-h2 custom-h2-bold relative text-balance" style={{ color: LIGHT, fontSize: 'calc(var(--h2-size) * 0.85)', fontWeight: 600 }}>
+          {/* Phones and tablets: heading, line and email button stacked on one left edge.
+              Laptop: heading block left, email button right, centred on each other so the
+              row is balanced across the full width. */}
+          <div className="col-span-full flex flex-col items-start gap-6 tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2 laptop:flex-row laptop:items-center laptop:justify-between laptop:gap-12">
+            <div className="min-w-0">
+              {/* Phones: larger and allowed to wrap onto two lines, so it reads as the closing headline.
+                  Tablet and up: the earlier one-line size. */}
+              <h2
+                className="footer-cta-title custom-h2 custom-h2-bold relative text-balance"
+                style={{ color: LIGHT, fontWeight: 600 }}
+              >
                 Would love to hear from you.
               </h2>
               <p className="custom-p mt-4" style={{ color: LIGHT_MUTED }}>
                 If you have requests or questions, feel free to reach out.
               </p>
             </div>
-            <div className="shrink-0">
-              <EmailAction />
-            </div>
+            <EmailCopyButton tone="dark" />
           </div>
 
           <div className="col-span-full flex flex-wrap items-center justify-between gap-4 border-t border-light/20 pt-6 tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">

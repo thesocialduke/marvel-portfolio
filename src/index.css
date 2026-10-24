@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/space-grotesk";
+@import "@fontsource/boldonse/latin-400.css";
 
 @font-face {
   font-family: 'SK Modernist';
@@ -169,7 +170,7 @@
 
 @media (max-width: 39.99rem) {
   .custom-h1-stat-mobile-lg {
-    font-size: 2.75rem;
+    font-size: 2.25rem;
   }
 }
 
@@ -555,3 +556,117 @@ input[type='range'].scrubber::-moz-range-thumb {
   filter: brightness(0) invert(0.85);
 }
 
+
+/* TRIAL: Boldonse (as on blue2purple.com) for the big headings only. It ships in one weight,
+   so synthesis is off rather than letting the browser fake a bolder version. Remove this
+   block and the import above to go back to Space Grotesk. */
+h1,
+.custom-h1,
+.custom-h2-bold:not(p),
+h2.custom-h4-bold,
+h3.custom-h4-bold {
+  font-family: 'Boldonse', var(--font-modernist);
+  font-synthesis: none;
+  letter-spacing: 0;
+}
+.custom-h1,
+.custom-h2-bold:not(p) {
+  line-height: 1.45;
+}
+/* Card and step titles: Boldonse too, so every heading on the site is one face. */
+h2.custom-h4-bold,
+h3.custom-h4-bold {
+  line-height: 1.4;
+}
+
+/* Dot texture for dark bands (see src/components/DotField.tsx). Square 2px dots on a 7px grid
+   (an inline SVG tile), brighter dots in vertical bands with a hairline at each band's edge,
+   all fading out towards the bottom. --dot-band sets how far apart the bands repeat. */
+.dot-field,
+.dot-field-bands,
+.dot-field-glow {
+  --dot-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='7'%3E%3Crect x='2.5' y='2.5' width='2' height='2' fill='white'/%3E%3C/svg%3E");
+  background-image: var(--dot-tile);
+  background-size: 7px 7px;
+  background-position: left top;
+}
+.dot-field {
+  --dot-band: 448px;
+  opacity: 0.22;
+  mask-image: linear-gradient(to bottom, black 0%, rgb(0 0 0 / 0.55) 55%, transparent 100%);
+}
+.dot-field-bands {
+  opacity: 0.45;
+  mask-image:
+    linear-gradient(to bottom, black 0%, rgb(0 0 0 / 0.4) 60%, transparent 100%),
+    repeating-linear-gradient(to right, transparent 0 196px, black 196px 329px, transparent 329px 448px);
+  mask-composite: intersect;
+}
+.dot-field-lines {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0 328px,
+    rgb(255 255 255 / 0.14) 328px 329px,
+    transparent 329px 448px
+  );
+  mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+}
+.dot-field-glow {
+  opacity: calc(var(--dot-glow, 0) * 0.2);
+  mask-image: radial-gradient(circle 160px at var(--dot-x, 50%) var(--dot-y, 50%), black, transparent);
+  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Phones: the footer is short and the text sits over most of it, so the texture steps back:
+   fainter dots, softer bands, no hairlines. */
+@media (max-width: 639px) {
+  .dot-field {
+    opacity: 0.14;
+  }
+  .dot-field-bands {
+    opacity: 0.24;
+    mask-image:
+      linear-gradient(to bottom, black 0%, rgb(0 0 0 / 0.3) 50%, transparent 85%),
+      repeating-linear-gradient(to right, transparent 0 140px, black 140px 230px, transparent 230px 320px);
+  }
+  .dot-field-lines {
+    display: none;
+  }
+}
+
+/* Case study card titles (src/components/CaseStudyCard.tsx): ink under the photo on phones,
+   light on the red band over the photo from tablet up. */
+.case-card-title {
+  color: var(--color-ink);
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+.case-card-category {
+  color: var(--color-ink);
+  opacity: 0.6;
+}
+@media (min-width: 40rem) {
+  .case-card-title {
+    color: var(--color-light);
+    font-size: var(--project-title-size);
+    line-height: 2.05;
+  }
+  .case-card-category {
+    color: rgb(255 255 255 / 0.9);
+    opacity: 1;
+  }
+}
+
+/* Footer "Would love to hear from you." (src/components/Footer.tsx): large and wrapping on
+   phones, the original size from tablet up. Here rather than as utilities because the shared
+   .custom-h2 rules set their own size and line height. */
+.footer-cta-title {
+  font-size: 1.9rem;
+  line-height: 1.25;
+}
+@media (min-width: 40rem) {
+  .footer-cta-title {
+    font-size: calc(var(--h2-size) * 0.85);
+    line-height: 1.45;
+  }
+}

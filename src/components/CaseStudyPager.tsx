@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
-import { ButtonLink } from './Button'
 import { Grid } from './Grid'
-import { site } from '../data/site'
 
 type PagerLink = { href: string; title: string }
 
-// Previous / next case study links as two compact, evenly split cells, with an
-// optional Book a call button underneath.
-export function CaseStudyPager({ prev, next, cta = false }: { prev: PagerLink; next: PagerLink; cta?: boolean }) {
+// Previous / next case study links as two compact, evenly split cells.
+export function CaseStudyPager({ prev, next }: { prev: PagerLink; next: PagerLink }) {
   return (
     <section className="case-study-serif py-12 tablet:py-14 laptop:py-18">
       <Grid>
@@ -37,16 +34,6 @@ export function CaseStudyPager({ prev, next, cta = false }: { prev: PagerLink; n
               </p>
             </Link>
           </nav>
-          {cta && (
-            <div className="mt-8 flex">
-              <ButtonLink to={site.bookingUrl} external beam fullWidth={false}>
-                Book a call
-                <svg aria-hidden="true" className="size-[1.1em]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="square" strokeLinejoin="miter">
-                  <path d="M7 17 17 7M8 7h9v9" />
-                </svg>
-              </ButtonLink>
-            </div>
-          )}
         </div>
       </Grid>
     </section>

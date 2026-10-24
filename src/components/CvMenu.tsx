@@ -13,10 +13,13 @@ const itemClasses =
 export function CvMenu({
   variant,
   label,
+  className,
 }: {
-  /** "button" is the full-size outlined button; "link" is the small uppercase footer link. */
-  variant: 'button' | 'link'
+  /** "button" is the full-size outlined button; "link" is the small uppercase footer link;
+      "nav" is a top-bar link (styled by the caller through className). */
+  variant: 'button' | 'link' | 'nav'
   label: string
+  className?: string
 }) {
   const [open, setOpen] = useState(false)
 
@@ -25,6 +28,13 @@ export function CvMenu({
       <Popover.Trigger asChild>
         {variant === 'button' ? (
           <Button fullWidth={false}>{label}</Button>
+        ) : variant === 'nav' ? (
+          <button type="button" className={cn('cursor-pointer', className)}>
+            {label}
+            <svg aria-hidden="true" className="ml-1 size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="square">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
         ) : (
           <button
             type="button"
