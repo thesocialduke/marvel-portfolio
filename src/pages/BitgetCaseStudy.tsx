@@ -535,7 +535,7 @@ export function BitgetCaseStudy() {
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
       'How I grew Bitget’s social media and community across Africa from a 10,000-followers-a-month target: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
-    image: '/case-studies/og-bitget.jpg',
+    image: '/case-studies/bitget-case-study-share.jpg',
     ogType: 'article',
   })
   const caseStudyLd = caseStudyJsonLd({

@@ -69,7 +69,7 @@ export function BinanceCaseStudy() {
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
       'How I took crypto to the street for Binance Africa: unscripted street interviews on Instagram and TikTok that drew tens of thousands of views and new followers.',
-    image: '/case-studies/og-binance.jpg',
+    image: '/case-studies/binance-case-study-share.jpg',
     ogType: 'article',
   })
   const caseStudyLd = caseStudyJsonLd({

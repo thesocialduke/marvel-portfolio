@@ -44,7 +44,7 @@ const routes = [
     title: 'Bitget Africa Community Growth Case Study | Ndubuisi Marvellous',
     description:
       'How I grew Bitget’s social media and community across Africa from a 10,000-followers-a-month target: 40M+ organic views and impressions, and Bitget Wallet became Nigeria’s #1 downloaded crypto app.',
-    image: '/case-studies/og-bitget.jpg',
+    image: '/case-studies/bitget-case-study-share.jpg',
     type: 'article',
   },
   {
@@ -52,7 +52,7 @@ const routes = [
     title: 'Base Southern Africa Creator Network Case Study | Ndubuisi Marvellous',
     description:
       'How I turned Base’s Southern Africa creator network into a steady source of on-brand content: a creator playbook, coaching and AI-directed films.',
-    image: '/case-studies/og-base.jpg',
+    image: '/case-studies/base-case-study-share.jpg',
     type: 'article',
   },
   {
@@ -60,7 +60,7 @@ const routes = [
     title: 'Binance Africa Street Interviews Case Study | Ndubuisi Marvellous',
     description:
       'How I took crypto to the street for Binance Africa: unscripted street interviews on Instagram and TikTok that drew tens of thousands of views and new followers.',
-    image: '/case-studies/og-binance.jpg',
+    image: '/case-studies/binance-case-study-share.jpg',
     type: 'article',
   },
 ]
@@ -95,7 +95,7 @@ console.log('prerendered body for /')
 
 for (const route of routes) {
   const url = `${SITE_URL}${route.path}`
-  const image = `${SITE_URL}${route.image ?? '/og-banner.jpg'}`
+  const image = `${SITE_URL}${route.image ?? '/ndubuisi-marvellous-share.jpg'}`
   let html = template
 
   html = html.replace(/<title>.*?<\/title>/s, `<title>${escape(route.title)}</title>`)

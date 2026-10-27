@@ -43,7 +43,7 @@ export function useDocumentMeta({
   useEffect(() => {
     const previousTitle = document.title
     const url = `${SITE_URL}${pathname === '/' ? '/' : pathname}`
-    const ogImage = image ? `${SITE_URL}${image}` : `${SITE_URL}/og-banner.jpg`
+    const ogImage = image ? `${SITE_URL}${image}` : `${SITE_URL}/ndubuisi-marvellous-share.jpg`
 
     document.title = title
     upsertMeta('name', 'description', description)

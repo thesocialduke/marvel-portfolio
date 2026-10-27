@@ -49,7 +49,7 @@ export function BaseCaseStudy() {
     title: 'Base Southern Africa Creator Network Case Study | Ndubuisi Marvellous',
     description:
       'How I turned Base’s Southern Africa creator network into a steady source of on-brand content: a creator playbook, coaching and AI-directed films.',
-    image: '/case-studies/og-base.jpg',
+    image: '/case-studies/base-case-study-share.jpg',
     ogType: 'article',
   })
   const caseStudyLd = caseStudyJsonLd({
