@@ -1,4 +1,5 @@
 import { CaseStudyPager } from '../components/CaseStudyPager'
+import { SourceLink } from '../components/SourceLink'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { VideoGallery } from '../components/VideoGallery'
@@ -104,7 +105,8 @@ export function BaseCaseStudy() {
       <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
         <SplitSection title="A creator network that wasn’t creating">
           <p className="custom-p text-pretty text-ink/70">
-            Base, Coinbase’s onchain network, already had a social media lead. What it needed was someone to make its
+            Base is Coinbase’s Ethereum layer 2, second only to Ethereum among blockchains by value locked in DeFi, per{' '}
+            <SourceLink href="https://defillama.com/chain/base">DefiLlama</SourceLink>. It already had a social media lead. What it needed was someone to make its
             creator network work. Creators were spread across Southern Africa, some of them on a paid retainer, yet very
             little content was coming out. What did come out was low quality, unstructured and hard to use.
           </p>

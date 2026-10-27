@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { SourceLink } from '../components/SourceLink'
 import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { ImageStrip, type StripImage } from '../components/ImageStrip'
@@ -624,7 +625,8 @@ export function BitgetCaseStudy() {
         >
           <Reveal>
             <p className="custom-p text-pretty text-ink/70">
-              When I joined Bitget, I was set one big goal: more than <strong className="font-semibold text-ink">10,000 new followers</strong> every month. There was no single
+              Bitget is a top-10 global crypto exchange by{' '}
+              <SourceLink href="https://www.coingecko.com/en/exchanges/bitget">CoinGecko’s trust ranking</SourceLink>. When I joined, I was set one big goal: more than <strong className="font-semibold text-ink">10,000 new followers</strong> every month. There was no single
               trick for a number that size, so I stacked four levers across every platform.
             </p>
           </Reveal>

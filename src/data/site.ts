@@ -315,7 +315,7 @@ export const binanceCaseStudy: CaseStudyData = {
   eyebrow: 'Case study',
   title: 'Binance Africa: Viral Street Interviews',
   summary:
-    'Street interviews outperform most other content on crypto exchanges’ social pages, so Binance Africa wanted more of them, plus steady educational content. I went to the street with one simple crypto question per video; the series drew tens of thousands of views and grew followers on Instagram and TikTok.',
+    'Street interviews pull about twice the median views of talking-head videos on TikTok, so Binance Africa wanted more of them, plus steady educational content. I went to the street with one simple crypto question per video; the series drew tens of thousands of views and grew followers on Instagram and TikTok.',
   roleTitle: 'Content Creator',
   roleBullets: [
     'Concept, shoot, and produce street-interview style short-form video',

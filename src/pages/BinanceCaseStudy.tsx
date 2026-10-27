@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { SourceLink } from '../components/SourceLink'
 import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
@@ -120,8 +121,11 @@ export function BinanceCaseStudy() {
       <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
         <SplitSection title="Street interviews were winning the feed">
           <p className="custom-p text-pretty text-ink/70">
-            Look across crypto exchanges’ social pages and one format keeps showing up near the top: street interviews.
-            They regularly outperform almost everything else on the page, often pulling 50% more views or higher.
+            Binance is the world’s largest crypto exchange by trading volume, and a top-3 exchange by{' '}
+            <SourceLink href="https://www.coingecko.com/en/exchanges/binance">CoinGecko’s trust ranking</SourceLink>. Look across crypto exchanges’ social pages and one format keeps showing up near the top: street interviews.
+            And the wider data backs it: across 21,037 TikToks, street interviews pulled about 2.2× the median views of
+            talking-head videos, according to{' '}
+            <SourceLink href="https://www.revid.ai/short-form-video-statistics#stat-sfv-r-10">Revid’s short-form video data</SourceLink>.
           </p>
           <p className="custom-p mt-3 text-pretty text-ink/70">
             Binance Africa wanted more of that energy: content that could take crypto out of the jargon and onto the street,
