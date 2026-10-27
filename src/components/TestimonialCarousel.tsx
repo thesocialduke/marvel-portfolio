@@ -1,106 +1,128 @@
-import { useEffect, useRef, useState } from 'react'
-import { useReducedMotion } from 'motion/react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { TestimonialsSection } from './ui/testimonials-2'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import type { Testimonial } from '../data/site'
 import { cn } from '../lib/utils'
+import { TestimonialCard } from './TestimonialCard'
 
-// How long each review stays up before the next one appears.
-const AUTO_ADVANCE_MS = 7000
-
+// Reviews as a row of cards (see TestimonialCard). When the cards don't all fit (phones, or more than three reviews), the row scrolls sideways
+// with the next card peeking in, and arrows plus a dash indicator appear to move through it.
 export default function TestimonialCarousel({ items }: { items: Testimonial[] }) {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [overflows, setOverflows] = useState(false)
   const [index, setIndex] = useState(0)
-  const [inView, setInView] = useState(false)
-  const [paused, setPaused] = useState(false)
-  const rootRef = useRef<HTMLDivElement>(null)
-  const reducedMotion = useReducedMotion()
-  const count = items.length
 
-  // Only run the timer while the reviews are on screen.
-  useEffect(() => {
-    const el = rootRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.4 })
-    observer.observe(el)
-    return () => observer.disconnect()
+  const measure = useCallback(() => {
+    const track = trackRef.current
+    if (!track) return
+    setOverflows(track.scrollWidth > track.clientWidth + 1)
+    // The card whose left edge is closest to the track's left edge is the current one.
+    const cards = [...track.children] as HTMLElement[]
+    const pad = parseFloat(getComputedStyle(track).paddingLeft) || 0
+    let best = 0
+    cards.forEach((card, i) => {
+      if (Math.abs(card.offsetLeft - pad - track.scrollLeft) < Math.abs(cards[best].offsetLeft - pad - track.scrollLeft)) best = i
+    })
+    // At the end of the row the last card can't reach the left edge, so count it as current.
+    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) best = cards.length - 1
+    setIndex(best)
   }, [])
 
-  // Move on by itself every few seconds, so visitors who never click still see every review.
-  // The timer restarts whenever the review changes (including when someone clicks), stops
-  // while the mouse is over the reviews or a control has keyboard focus, and doesn't run at
-  // all for visitors who have "reduce motion" turned on.
   useEffect(() => {
-    if (count < 2 || !inView || paused || reducedMotion) return
-    const timer = setTimeout(() => setIndex((i) => (i + 1) % count), AUTO_ADVANCE_MS)
-    return () => clearTimeout(timer)
-  }, [index, count, inView, paused, reducedMotion])
+    const track = trackRef.current
+    if (!track) return
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(track)
+    track.addEventListener('scroll', measure, { passive: true })
+    return () => {
+      observer.disconnect()
+      track.removeEventListener('scroll', measure)
+    }
+  }, [measure])
 
-  if (count === 0) return null
+  if (items.length === 0) return null
 
-  const go = (delta: number) => setIndex((i) => (i + delta + count) % count)
+  const goTo = (i: number) => {
+    const track = trackRef.current
+    const card = track?.children[Math.max(0, Math.min(items.length - 1, i))] as HTMLElement | undefined
+    if (track && card) track.scrollTo({ left: card.offsetLeft - (parseFloat(getComputedStyle(track).paddingLeft) || 0), behavior: 'smooth' })
+  }
+  const atStart = index === 0
+  const atEnd = index === items.length - 1
 
   return (
-    <div
-      ref={rootRef}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-    >
-      {/* All slides share one grid cell, so the box is always as tall as the tallest
-          review and switching never shifts the page. Mounting them all also preloads photos. */}
-      <div className="grid">
-        {items.map((t, i) => {
-          const firstWord = t.quote.split(' ')[0]
-          const active = i === index
-          return (
-            <div
-              key={t.name + i}
-              aria-hidden={!active}
-              inert={!active}
-              className={cn('col-start-1 row-start-1 transition-opacity duration-200', active ? 'opacity-100' : 'pointer-events-none opacity-0')}
-            >
-              <TestimonialsSection
-                quote={
-                  <>
-                    <b className="font-bold">{firstWord}</b>
-                    {t.quote.slice(firstWord.length)}
-                  </>
-                }
-                name={t.name}
-                role={t.role}
-                avatarSrc={t.avatar}
-                avatarAlt={t.name}
-                avatarFallback={t.name.charAt(0)}
-              />
-            </div>
-          )
-        })}
-      </div>
-      {items.length > 1 && (
-        <div className="mt-4 flex items-center justify-center gap-4">
-          <button type="button" aria-label="Previous review" onClick={() => go(-1)} className="cursor-pointer p-2">
-            <ChevronLeft className="size-5" />
-          </button>
-          <div className="flex">
-            {items.map((item, i) => (
-              <button
-                key={item.name + i}
-                type="button"
-                aria-label={`Show review ${i + 1} of ${items.length}`}
-                aria-current={i === index}
-                onClick={() => setIndex(i)}
-                className="grid size-6 cursor-pointer place-items-center outline-none focus-visible:ring-2 focus-visible:ring-red-600"
-              >
-                <span aria-hidden="true" className={cn('size-2 rounded-full', i === index ? 'bg-foreground' : 'bg-foreground/25')} />
-              </button>
-            ))}
+    <div>
+      <div className="flex items-end justify-between gap-6">
+        <h2 className="custom-h2 custom-h2-bold">Testimonials</h2>
+        {overflows && (
+          <div className="flex shrink-0 gap-2">
+            <ArrowButton label="Previous review" disabled={atStart} onClick={() => goTo(index - 1)}>
+              <ArrowLeft className="size-4" strokeWidth={2} />
+            </ArrowButton>
+            <ArrowButton label="Next review" disabled={atEnd} onClick={() => goTo(index + 1)}>
+              <ArrowRight className="size-4" strokeWidth={2} />
+            </ArrowButton>
           </div>
-          <button type="button" aria-label="Next review" onClick={() => go(1)} className="cursor-pointer p-2">
-            <ChevronRight className="size-5" />
-          </button>
+        )}
+      </div>
+
+      {/* Scrolls sideways only when the cards don't fit; snap keeps a card's edge aligned. On
+          phones the row runs to the screen edges so the next card peeks in from the side. */}
+      <div
+        ref={trackRef}
+        className="relative -mx-6 mt-8 flex snap-x snap-mandatory scroll-px-6 gap-5 overflow-x-auto px-6 tablet:mx-0 tablet:scroll-px-0 tablet:px-0 [scrollbar-width:none] laptop:mt-10 [&::-webkit-scrollbar]:hidden"
+      >
+        {items.map((t, i) => (
+          <TestimonialCard
+            key={t.name + i}
+            t={t}
+            className={cn(
+              'shrink-0 basis-[88%] snap-start',
+              items.length === 1 ? 'tablet:basis-full' : 'tablet:basis-[calc((100%-20px)/2)]',
+              // Three across only once there's room for the role text beside the photo.
+              items.length >= 3 && 'wide:basis-[calc((100%-40px)/3)]',
+            )}
+          />
+        ))}
+      </div>
+
+      {/* Dash indicator: the long dark dash marks the current card. */}
+      {overflows && (
+        <div className="mt-6 flex justify-center gap-1.5">
+          {items.map((t, i) => (
+            <button
+              key={t.name + i}
+              type="button"
+              aria-label={`Show review ${i + 1} of ${items.length}`}
+              aria-current={i === index}
+              onClick={() => goTo(i)}
+              className="grid h-6 cursor-pointer place-items-center outline-none focus-visible:ring-2 focus-visible:ring-red-600"
+            >
+              <span
+                aria-hidden="true"
+                className={cn(
+                  'block h-1 transition-[width,background-color] duration-200',
+                  i === index ? 'w-12 bg-ink' : 'w-7 bg-ink/20',
+                )}
+              />
+            </button>
+          ))}
         </div>
       )}
     </div>
+  )
+}
+
+function ArrowButton({ label, disabled, onClick, children }: { label: string; disabled: boolean; onClick: () => void; children: ReactNode }) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="grid size-11 cursor-pointer place-items-center rounded-full border border-ink/15 bg-card text-ink transition-[opacity,background-color,color] duration-150 hover:bg-ink hover:text-page active:scale-[0.96] disabled:cursor-default disabled:opacity-35 disabled:hover:bg-card disabled:hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+    >
+      {children}
+    </button>
   )
 }

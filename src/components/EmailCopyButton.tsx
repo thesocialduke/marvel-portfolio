@@ -39,7 +39,7 @@ export function EmailCopyButton({ tone, compact = false }: { tone: 'dark' | 'lig
         className={cn(
           'group flex w-full cursor-pointer items-center justify-between gap-3 border px-4 tablet:inline-flex tablet:w-auto tablet:justify-start tablet:gap-4 tablet:px-5 laptop:gap-5 outline-none transition-[background-color,border-color,color,scale] duration-150 ease-out hover:border-red-600 hover:bg-red-600 active:scale-[0.96] focus-visible:ring-2 tablet:px-7 laptop:px-8',
           compact ? 'h-14' : 'h-16 laptop:h-20',
-          dark ? 'border-light/40 text-light focus-visible:ring-light/60' : 'border-ink text-ink hover:text-light focus-visible:ring-red-600',
+          dark ? 'border-light/40 bg-black text-light focus-visible:ring-light/60' : 'border-ink text-ink hover:text-light focus-visible:ring-red-600',
         )}
       >
         <span className={cn('min-w-0 truncate font-poppins text-[clamp(0.85rem,4.1vw,1.25rem)] font-semibold tracking-tight', compact ? 'laptop:text-[1.15rem]' : 'laptop:text-[1.5rem]')}>

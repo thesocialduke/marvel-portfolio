@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { useReducedMotion } from 'motion/react'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 
 // Counts up from 0 once the number scrolls into view. The first render (and the
 // pre-rendered HTML that crawlers read) shows the real final value; the 0 start is

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { SourceLink } from '../components/SourceLink'
 import { CaseStudyPager } from '../components/CaseStudyPager'
 import { Grid } from '../components/Grid'
+import { TestimonialCard } from '../components/TestimonialCard'
 import { Layout } from '../components/Layout'
 import { SplitSection } from '../components/SplitSection'
 import { ProcessTimeline } from '../components/ProcessTimeline'
@@ -9,7 +10,7 @@ import { VideoModal, type EmbedSource } from '../components/VideoModal'
 import { JsonLd } from '../components/JsonLd'
 import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
-import { baseCaseStudy, bitgetCaseStudy } from '../data/site'
+import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy, homeTestimonials } from '../data/site'
 import { cn } from '../lib/utils'
 
 const summary =
@@ -184,25 +185,31 @@ export function BinanceCaseStudy() {
                     {episode.title}
                   </span>
                 </button>
-                <p className="custom-h1 custom-h1-bold mt-4 text-[2rem] tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
+                {/* Sized to the column (five across on tablet and up) so the numbers never run into each other. */}
+                <p className="custom-h1 custom-h1-bold mt-4 tabular-nums" style={{ color: 'var(--color-accent-text)', fontSize: 'clamp(1.6rem, 2vw, 2rem)' }}>
                   {episode.views}
                 </p>
                 <p className="custom-p text-ink/60">Views</p>
               </div>
             ))}
           </div>
-        </SplitSection>
-      </section>
-
-      {/* THE OUTCOME */}
-      <section className="case-study-serif py-16 tablet:py-20 laptop:py-28">
-        <SplitSection title="Crypto, in the language of the street">
-          <p className="custom-p text-pretty text-ink/70">
+          <p className="custom-p mt-10 text-pretty text-ink/70">
             The series made crypto feel like a conversation you’d overhear on your own street, not a pitch aimed at you.
             It gave Binance Africa a format its audience actually stopped for, and a repeatable way to turn education into
             reach.
           </p>
         </SplitSection>
+      </section>
+
+      {/* TESTIMONIAL: the same card as the home page reviews, looked up by name so the logo,
+          photo and wording stay in one place (homeTestimonials in data/site.ts). */}
+      <section className="case-study-serif pt-2 pb-16 tablet:pt-4 tablet:pb-20 laptop:pt-6 laptop:pb-28">
+        <Grid>
+          {/* No heading: the card sits on its own, centred on the page. */}
+          <div className="col-span-full mx-auto w-full max-w-[44rem] laptop:col-span-12 laptop:col-start-2">
+            <TestimonialCard t={homeTestimonials.find((t) => t.name === binanceCaseStudy.testimonial!.name)!} />
+          </div>
+        </Grid>
       </section>
 
       <CaseStudyPager

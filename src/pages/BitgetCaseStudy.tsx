@@ -5,7 +5,7 @@ import { Grid } from '../components/Grid'
 import { ImageStrip, type StripImage } from '../components/ImageStrip'
 import { ImageViewer } from '../components/ImageViewer'
 import { Layout } from '../components/Layout'
-import { TestimonialsSection } from '../components/ui/testimonials-2'
+import { TestimonialCard } from '../components/TestimonialCard'
 import { JsonLd } from '../components/JsonLd'
 import { EventVideos, type EventVideo } from '../components/EventVideos'
 import { Reveal } from '../components/Reveal'
@@ -13,7 +13,7 @@ import { SplitSection } from '../components/SplitSection'
 import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { cn } from '../lib/utils'
-import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
+import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy, homeTestimonials } from '../data/site'
 
 
 const analyticsImages: StripImage[] = [
@@ -920,18 +920,13 @@ export function BitgetCaseStudy() {
         </SplitSection>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="case-study-serif pt-2 pb-10 tablet:pt-4 tablet:pb-12 laptop:pt-6 laptop:pb-14">
+      {/* TESTIMONIAL: the same card as the home page reviews, looked up by name so the logo,
+          photo and wording stay in one place (homeTestimonials in data/site.ts). */}
+      <section className="case-study-serif pt-2 pb-16 tablet:pt-4 tablet:pb-20 laptop:pt-6 laptop:pb-28">
         <Grid>
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 tablet:px-12 laptop:col-span-12 laptop:col-start-2">
-            <TestimonialsSection
-              quote={bitgetCaseStudy.testimonial!.quote}
-              name={bitgetCaseStudy.testimonial!.name}
-              role={bitgetCaseStudy.testimonial!.role}
-              avatarSrc="/testimonials/aka-leung.jpg?v=2"
-              avatarAlt={bitgetCaseStudy.testimonial!.name}
-              avatarFallback={bitgetCaseStudy.testimonial!.name.charAt(0)}
-            />
+          {/* No heading: the card sits on its own, centred on the page. */}
+          <div className="col-span-full mx-auto w-full max-w-[44rem] laptop:col-span-12 laptop:col-start-2">
+            <TestimonialCard t={homeTestimonials.find((t) => t.name === bitgetCaseStudy.testimonial!.name)!} />
           </div>
         </Grid>
       </section>

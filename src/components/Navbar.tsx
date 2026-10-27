@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import { Dialog } from 'radix-ui'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Grid } from './Grid'
@@ -16,15 +16,9 @@ import { cn } from '../lib/utils'
 const navLinkBase =
   "relative inline-flex h-10 items-center font-[Boldonse] text-[11.5px] tracking-[0.04em] uppercase [font-synthesis:none] outline-none transition-colors duration-150 hover:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
 
-const listVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
-}
+// Menu rows rise in one after another (CSS keyframes in index.css): 0.1s, then 0.08s apart.
+const itemEnter = (i: number) => ({ animationDelay: `${100 + i * 80}ms` })
+const itemEnterClass = 'motion-safe:animate-[menu-item-in_0.5s_ease-out_both]'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
@@ -207,21 +201,15 @@ export function Navbar() {
           studioolimpo.it. It is a Radix Dialog: that handles Escape, keeping Tab
           inside the menu, locking page scroll, hiding the page from screen readers
           and returning focus to the menu button on close. Mounted only while open
-          so the enter/exit motion stays simple. */}
-      <AnimatePresence>
-        {open && (
-          <Dialog.Portal forceMount>
+          so the enter/exit motion stays simple. Fades in and out with CSS; Radix keeps it
+          mounted until the fade-out ends. */}
+          <Dialog.Portal>
             {/* Invisible; Radix attaches page scroll locking to the overlay. */}
-            <Dialog.Overlay forceMount className="fixed inset-0 z-60" />
-            <Dialog.Content forceMount asChild aria-describedby={undefined}>
-              <motion.div
+            <Dialog.Overlay className="fixed inset-0 z-60" />
+            <Dialog.Content aria-describedby={undefined} asChild>
+              <div
                 id="site-nav"
-                key="site-nav"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: prefersReducedMotion ? 0 : 0.2, ease: 'easeOut' }}
-                className="fixed inset-0 z-60 flex flex-col bg-night text-light outline-none"
+                className="fixed inset-0 z-60 flex flex-col bg-night text-light outline-none data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 duration-200 ease-out motion-reduce:animate-none"
               >
                 <Dialog.Title className="sr-only">Menu</Dialog.Title>
 
@@ -245,12 +233,7 @@ export function Navbar() {
                 </Grid>
 
                 <nav aria-label="Main" className="flex flex-1 items-center justify-center px-8 tablet:px-16 laptop:px-24">
-                  <motion.ul
-                    variants={prefersReducedMotion ? undefined : listVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="w-full max-w-4xl"
-                  >
+                  <ul className="w-full max-w-4xl">
                     {[...nav.slice(0, 3), { label: 'Resume', href: 'resume' }, ...nav.slice(3)].map((item, i) => {
                       const linkClassName =
                         'group relative flex items-start gap-3 py-3 outline-none transition-[color] duration-200 focus-visible:ring-2 focus-visible:ring-light/40 tablet:gap-4'
@@ -272,11 +255,7 @@ export function Navbar() {
                       // download), so it works inside the menu without a pop-up.
                       if (item.href === 'resume') {
                         return (
-                          <motion.li
-                            key="resume"
-                            variants={prefersReducedMotion ? undefined : itemVariants}
-                            className="border-b border-light/20 py-2 tablet:py-3"
-                          >
+                          <li key="resume" style={itemEnter(i)} className={cn(itemEnterClass, 'border-b border-light/20 py-2 tablet:py-3')}>
                             <button
                               type="button"
                               aria-expanded={cvOpen}
@@ -298,16 +277,12 @@ export function Navbar() {
                                 Download PDF ↓
                               </a>
                             </div>
-                          </motion.li>
+                          </li>
                         )
                       }
 
                       return (
-                        <motion.li
-                          key={item.href}
-                          variants={prefersReducedMotion ? undefined : itemVariants}
-                          className="border-b border-light/20 py-2 first:border-t tablet:py-3"
-                        >
+                        <li key={item.href} style={itemEnter(i)} className={cn(itemEnterClass, 'border-b border-light/20 py-2 first:border-t tablet:py-3')}>
                           {item.href.startsWith('#') ? (
                             // Same-page scroll anchor (the footer's contact section
                             // exists on every route) instead of a route change.
@@ -319,10 +294,10 @@ export function Navbar() {
                               {content}
                             </NavLink>
                           )}
-                        </motion.li>
+                        </li>
                       )
                     })}
-                  </motion.ul>
+                  </ul>
                 </nav>
 
                 <div className="font-poppins flex items-center justify-between gap-4 px-6 pb-5 text-xs tracking-wide text-light/60 tablet:px-10 tablet:pb-6 laptop:px-14 laptop:pb-8">
@@ -338,11 +313,9 @@ export function Navbar() {
                   </Link>
                   <SocialLinks className="-my-2 mx-0" linkClassName="hover:opacity-100 hover:text-light" size="size-4" />
                 </div>
-              </motion.div>
+              </div>
             </Dialog.Content>
           </Dialog.Portal>
-        )}
-      </AnimatePresence>
     </Dialog.Root>
   )
 }

@@ -159,7 +159,20 @@ export const avatar = '/avatar.jpg'
 
 export type CaseStudyStat = { value: string; label: string }
 export type BeforeAfter = { before: string; after: string }
-export type Testimonial = { quote: string; name: string; role: string; avatar?: string }
+// logo: company logo shown at the top of the review card, in its real colours (path under
+// /public); logoDark: a version for dark mode when the logo's own colours would vanish there;
+// company: the logo's alt text, or the name shown instead when there's no logo file.
+export type Testimonial = {
+  quote: string
+  name: string
+  role: string
+  avatar?: string
+  logo?: string
+  logoDark?: string
+  // Overrides the logo's height where its artwork reads smaller than the others at the same size.
+  logoClassName?: string
+  company?: string
+}
 export type GalleryPhoto = { image: string; caption?: string }
 export type ProofSection = { title: string; photos: GalleryPhoto[] }
 
@@ -330,18 +343,44 @@ export const binanceCaseStudy: CaseStudyData = {
     { value: '10.5K', label: '“BTC vs Gold”' },
   ],
   gallery: [{ image: '/case-studies/binance-street-interviews.jpg', caption: 'Viral street interview series' }],
+  testimonial: {
+    quote:
+      'Working with Marvellous was easy. He understands how to make complex things feel simple and relatable, especially for people just getting started, and his content always landed with our audience well. He takes ownership, communicates well and delivers on time. I\u2019d recommend him without hesitation.',
+    name: 'Adiele Greatmen',
+    role: 'Content & Growth Mktg. Manager, Binance Africa',
+  },
   closing: ['Made crypto feel like a conversation you’d overhear on your own street, not a pitch aimed at you.'],
 }
 
 // Reviews shown in the carousel at the bottom of the home page.
-// To add one, append an object here: { quote, name, role, avatar? } (avatar is a path under /public).
+// To add one, append an object here: { quote, name, role, avatar?, logo?, company? } (paths are under /public).
 export const homeTestimonials: Testimonial[] = [
-  { ...bitgetCaseStudy.testimonial!, avatar: '/testimonials/aka-leung.jpg?v=2' },
+  { ...bitgetCaseStudy.testimonial!, avatar: '/testimonials/aka-leung.jpg?v=2', logo: '/logos/tight/bitget.svg', company: 'Bitget' },
+  {
+    ...binanceCaseStudy.testimonial!,
+    avatar: '/testimonials/adiele-greatmen.jpg',
+    logo: '/logos/tight/binance.svg',
+    company: 'Binance',
+  },
+  {
+    quote:
+      'Marvel consistently demonstrated an exceptional ability to drive our brand\u2019s online presence to new heights. His strategic approach to crafting and delivering content was instrumental in consistently delivering compelling content that resonated with our audience.',
+    name: 'Grace Samuel',
+    role: 'Head of Product, Kyshi',
+    avatar: '/testimonials/grace-samuel.jpg',
+    logo: '/logos/kyshi-card.png',
+    logoDark: '/logos/kyshi-dark.png',
+    logoClassName: 'h-7 tablet:h-9',
+    company: 'Kyshi',
+  },
   {
     quote:
       'Marvellous\u2019s ability to craft compelling content that resonates with our target audience consistently led to increased engagement and brand visibility. Not only did he excel in content creation, but also displayed a keen understanding of analytics, leveraging data insights to refine our social media strategies.',
     name: 'Olumide Olatunji',
     role: 'Growth Marketer, Busha (ex Kyshi)',
     avatar: '/testimonials/olumide-olatunji.jpg?v=2',
+    logo: '/logos/busha.png',
+    logoDark: '/logos/busha-dark.png',
+    company: 'Busha',
   },
 ]

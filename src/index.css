@@ -44,6 +44,7 @@
 @theme {
   --breakpoint-tablet: 40rem;
   --breakpoint-laptop: 64rem;
+  --breakpoint-wide: 90rem;
 
   /* Headings in Space Grotesk, body in Geist. Both are self-hosted (fontsource), so no
      render-blocking request to Google Fonts. */
@@ -536,6 +537,14 @@ input[type='range'].scrubber::-moz-range-thumb {
 
 /* "View case study" arrow: a small forward nudge, then a pause, so the label reads as
    a link. Transform only; paused while off screen and skipped with reduced motion. */
+/* Phone menu rows rising in (see Navbar). */
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
 @keyframes arrow-nudge {
   0%,
   45%,
@@ -568,6 +577,15 @@ input[type='range'].scrubber::-moz-range-thumb {
   --muted: rgb(30 30 28);
   --muted-foreground: rgb(170 169 165);
   --border: rgb(231 230 226 / 0.15);
+}
+/* Review-card logos keep their real colours; a logo that would vanish on the dark card
+   swaps to its own dark-mode version (see TestimonialCarousel). */
+.testimonial-logo-dark,
+:root[data-theme='dark'] .testimonial-logo-light {
+  display: none;
+}
+:root[data-theme='dark'] .testimonial-logo-dark {
+  display: block;
 }
 /* Partner logos are mostly dark or brand-coloured artwork: in dark mode show them all as
    one light tone so none disappear against the background. */

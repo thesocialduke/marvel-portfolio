@@ -216,7 +216,7 @@ export function Home() {
           <div className="col-span-full tablet:col-span-4 tablet:col-start-2 tablet:row-start-1 laptop:col-span-7 laptop:col-start-2">
             <StaggeredReveal
               lines={[
-                <p key="lead" className="text-[1.4rem] leading-snug text-pretty text-ink tablet:text-[1.55rem] laptop:text-[1.8rem]" style={{ fontFamily: "'Cal Sans', var(--font-modernist)", fontSynthesis: 'none', letterSpacing: '0.01em' }}>
+                <p key="lead" className="text-[1.4rem] text-pretty text-ink tablet:text-[1.55rem] laptop:text-[1.8rem]" style={{ fontFamily: 'var(--font-poppins)', fontWeight: 600, lineHeight: 1.22, letterSpacing: '-0.025em' }}>
                   I drive growth and acquisition for brands, turning strategy
                   into an active user base and measurable results.
                 </p>,
@@ -303,7 +303,7 @@ export function Home() {
             >
               <span
                 className="uppercase"
-                style={{ fontFamily: "'Cal Sans', var(--font-modernist)", fontSynthesis: 'none', fontSize: 'clamp(1.15rem, 1.6vw, 1.4rem)', lineHeight: 1.3, letterSpacing: '0.02em' }}
+                style={{ fontFamily: 'var(--font-poppins)', fontWeight: 600, fontSize: 'clamp(1.05rem, 1.4vw, 1.25rem)', lineHeight: 1.3, letterSpacing: '0.04em' }}
               >
                 See all services
               </span>
@@ -341,7 +341,7 @@ export function Home() {
       {homeTestimonials.length > 0 && (
         <section className="py-12 tablet:py-14 laptop:py-18">
           <Grid>
-            <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-4">
+            <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
               <TestimonialCarousel items={homeTestimonials} />
             </div>
           </Grid>
