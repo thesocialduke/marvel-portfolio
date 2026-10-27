@@ -3,7 +3,27 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/space-grotesk";
-@import "@fontsource/boldonse/latin-400.css";
+
+/* Boldonse, the heading face. Declared here instead of importing fontsource's CSS so it can use
+   font-display: block: headings wait (briefly; the file is preloaded by scripts/prerender.mjs)
+   rather than flashing in the fallback font and then jumping to Boldonse's much wider letters,
+   which looked like the old layout loading first. */
+@font-face {
+  font-family: 'Boldonse';
+  font-style: normal;
+  font-display: block;
+  font-weight: 400;
+  src: url('../node_modules/@fontsource/boldonse/files/boldonse-latin-400-normal.woff2') format('woff2');
+}
+
+/* Cal Sans: the About intro and the "See all services" row on the home page. */
+@font-face {
+  font-family: 'Cal Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../node_modules/@fontsource/cal-sans/files/cal-sans-latin-400-normal.woff2') format('woff2');
+}
 
 @font-face {
   font-family: 'SK Modernist';

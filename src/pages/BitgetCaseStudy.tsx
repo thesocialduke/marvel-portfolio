@@ -48,14 +48,14 @@ const analyticsImages: StripImage[] = [
 
 const corePrograms = [
   {
-    stat: '20,000+',
-    statLabel: 'New users from ambassadors',
+    stat: '20K+',
+    statLabel: 'New users from',
     title: 'Ambassador program',
     body: 'I built the Bitget Africa ambassador program from scratch: recruiting, training and incentivizing advocates.',
   },
   {
     stat: '1M+',
-    statLabel: 'Views on live programming',
+    statLabel: 'Views on live',
     title: 'Education programming',
     body: 'AMAs, product LIVE sessions, audio spaces and quizzes that help new users activate. Hosted across X, YouTube Live & Telegram',
   },
@@ -73,8 +73,8 @@ const corePrograms = [
   },
   {
     stat: '#1',
-    statLabel: 'Ranking on Google',
-    title: 'SEO and educational content',
+    statLabel: 'Google ranking',
+    title: 'For SEO-driven educational content',
     body: 'Community-led articles on crypto-related user education, ranking #1 on Google in Nigeria and Kenya and on page one in Ethiopia.',
   },
   {
@@ -152,7 +152,7 @@ const communityOpsLd = {
 // VIP and product sessions), and the best-performing #BitQuest learn & earn post on X.
 const eduThumbs = '/case-studies/bitget/education/ndubuisi-marvellous-bitget-live-'
 const liveSessions: (EventVideo & { uploadDate: string; seconds: number })[] = [
-  { id: 'cxpAgjk4avw', name: 'What Is the NFP Report and Why It Matters', place: 'LIVE market updates', youtubeTitle: 'What Is the NFP Report and Why It Matters', thumb: `${eduThumbs}nfp-report-market-update.webp`, length: '43:11', seconds: 2591, uploadDate: '2025-11-05' },
+  { id: 'cxpAgjk4avw', name: 'What Is the NFP Report and Why It Matters', place: 'LIVE market updates', youtubeTitle: 'What Is the NFP Report and Why It Matters', thumb: `${eduThumbs}nfp-report-market-update-3741.webp`, length: '43:11', seconds: 2591, uploadDate: '2025-11-05' },
   { id: 'HJ1z1Z8zsbY', name: 'Gold, Forex & CFD Markets on Bitget', place: 'Product education', youtubeTitle: 'Gold, Forex & CFD Markets on Bitget', thumb: `${eduThumbs}gold-forex-cfd-markets.webp`, length: '43:33', seconds: 2613, uploadDate: '2026-01-09' },
   { id: 'IbBaE9aMHqM', name: 'VIP Privileges & Smart Investing', place: 'VIP partner sessions', youtubeTitle: 'VIP Privileges & Smart Investing in 2026', thumb: `${eduThumbs}vip-privileges-smart-investing.webp`, length: '32:47', seconds: 1967, uploadDate: '2026-05-11' },
   { id: 'eJyZ1nSu2ag', name: 'Becoming an Institutional Merchant on Bitget P2P', place: 'P2P merchant onboarding', youtubeTitle: 'Becoming An Institutional Merchant On Bitget P2P', thumb: `${eduThumbs}institutional-merchant-bitget-p2p.webp`, length: '39:35', seconds: 2375, uploadDate: '2026-04-10' },
@@ -177,14 +177,14 @@ const explainersUrl = 'https://www.youtube.com/@BitgetAfrica/videos'
 const explainersLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Bitget Africa educational explainer videos, scripted and directed by Ndubuisi Marvellous',
+  name: 'Bitget Africa creator-led explainer videos, with scripting and creative direction contributed by Ndubuisi Marvellous',
   itemListElement: explainers.slice(0, 4).map((video, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     item: {
       '@type': 'VideoObject',
       name: video.youtubeTitle,
-      description: `Bitget Africa ${video.place.toLowerCase()} explainer, scripted and directed by Ndubuisi Marvellous.`,
+      description: `Bitget Africa ${video.place.toLowerCase()} explainer made with a Ghanaian creator; Ndubuisi Marvellous contributed to scripting and creative direction.`,
       thumbnailUrl: `https://ndubuisimarvellous.com${video.thumb}`,
       uploadDate: video.uploadDate,
       duration: `PT${Math.floor(video.seconds / 60)}M${video.seconds % 60}S`,
@@ -317,7 +317,7 @@ function SubHeading({ children, link }: { children: React.ReactNode; link?: { hr
   )
 }
 
-// Small proof screenshot that opens full size. Same square frame for every proof image.
+// Small proof screenshot that opens full size. Same landscape (4:3) frame for every proof image.
 function ProofThumb({
   image,
   alt,
@@ -350,7 +350,7 @@ function ProofThumb({
         height={height}
         loading="lazy"
         decoding="async"
-        className="block aspect-square h-auto w-full object-cover object-top outline outline-1 -outline-offset-1 outline-ink/10"
+        className="block aspect-[4/3] h-auto w-full object-cover object-top outline outline-1 -outline-offset-1 outline-ink/10"
       />
       <span
         aria-hidden="true"
@@ -388,6 +388,8 @@ function TableOfContents() {
   }, [])
 
   return (
+    <>
+    <ChapterPill current={current} />
     <nav
       aria-label="On this page"
       onMouseEnter={() => setOpen(true)}
@@ -431,6 +433,90 @@ function TableOfContents() {
         })}
       </ol>
     </nav>
+    </>
+  )
+}
+
+// Screens under 1400px (where the margin list doesn't fit): a small sticky pill in the bottom-left
+// corner that shows the current chapter ("03/06 Operating model") once the reader reaches the
+// first chapter. Tapping it opens the full chapter list to jump around; picking one closes it.
+function ChapterPill({ current }: { current: string }) {
+  const [open, setOpen] = useState(false)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const first = document.getElementById(chapters[0].id)
+    if (!first) return
+    let frame = 0
+    const check = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const footer = document.querySelector('footer')
+        const pastStart = first.getBoundingClientRect().top < window.innerHeight * 0.6
+        const beforeFooter = !footer || footer.getBoundingClientRect().top > window.innerHeight * 0.85
+        setVisible(pastStart && beforeFooter)
+      })
+    }
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', check)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!visible) setOpen(false)
+  }, [visible])
+
+  const index = Math.max(0, chapters.findIndex((c) => c.id === current))
+  const chapter = chapters[index]
+
+  return (
+    <div
+      className={cn(
+        'fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-[max(1rem,env(safe-area-inset-left))] z-40 transition-[opacity,translate] duration-200 min-[1400px]:hidden tablet:bottom-[max(1.5rem,env(safe-area-inset-bottom))] tablet:left-[max(1.5rem,env(safe-area-inset-left))]',
+        visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0',
+      )}
+    >
+      {open && (
+        <nav aria-label="Chapters" className="mb-2 w-60 bg-ink py-2 text-page shadow-lg">
+          <ol>
+            {chapters.map((c) => (
+              <li key={c.id}>
+                <a
+                  href={`#${c.id}`}
+                  onClick={() => setOpen(false)}
+                  aria-current={c.id === current ? 'location' : undefined}
+                  className={cn(
+                    'flex min-h-10 items-center gap-3 px-4 font-poppins text-sm outline-none transition-colors hover:bg-page/10 focus-visible:bg-page/10',
+                    c.id === current ? 'text-page' : 'text-page/60',
+                  )}
+                >
+                  <span className="tabular-nums text-xs text-page/50">{c.n}</span>
+                  {c.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
+      <button
+        type="button"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-10 cursor-pointer items-center gap-2 bg-ink px-3 font-poppins text-xs text-page shadow-md outline-none focus-visible:ring-2 focus-visible:ring-red-600 tablet:h-11 tablet:text-sm"
+      >
+        <span className="tabular-nums text-page/60">
+          {chapter.n}/{String(chapters.length).padStart(2, '0')}
+        </span>
+        <span>{chapter.label}</span>
+        <svg aria-hidden="true" className={cn('size-3 transition-transform duration-150', open && 'rotate-180')} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+          <path d="m6 15 6-6 6 6" />
+        </svg>
+        <span className="sr-only">{open ? ' (close chapter list)' : ' (open chapter list)'}</span>
+      </button>
+    </div>
   )
 }
 
@@ -739,9 +825,9 @@ export function BitgetCaseStudy() {
           </Reveal>
 
           <Reveal className="mt-12">
-            <SubHeading link={{ href: explainersUrl, label: 'All videos on YouTube' }}>Creator-led explainers I scripted and directed</SubHeading>
+            <SubHeading link={{ href: explainersUrl, label: 'All videos on YouTube' }}>Creator-Led Explainers</SubHeading>
             <p className="custom-p mt-3 max-w-xl text-pretty text-ink/60">
-              Made with a creator from Ghana we partnered with: I wrote the scripts and directed each one.
+              Collaborated with a Ghanaian creator on educational videos, contributing to scripting and creative direction.
             </p>
             <div className="mt-5">
               <EventVideos videos={explainers.slice(0, 4)} twoUp />
@@ -815,14 +901,6 @@ export function BitgetCaseStudy() {
         <SplitSection
          
           title="Offline events & activations"
-          aside={
-            <div className="mt-8 border-t border-ink/15 pt-6">
-              <p className="custom-h1 custom-h1-bold tabular-nums" style={{ color: 'var(--color-accent-text)' }}>
-                94.35%
-              </p>
-              <p className="custom-p mt-2 text-ink/60">Attendee satisfaction (CSAT) across offline events</p>
-            </div>
-          }
         >
           <Reveal>
             <p className="custom-p text-pretty text-ink/70">

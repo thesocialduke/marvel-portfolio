@@ -5,7 +5,7 @@ import { useReducedMotion } from 'motion/react'
 // pre-rendered HTML that crawlers read) shows the real final value; the 0 start is
 // applied before the first paint, so people still see the count-up but nothing that
 // reads the page without running the animation ever sees "0M+".
-function useCountUp(target: number, active: boolean, enabled: boolean, duration = 1500) {
+function useCountUp(target: number, active: boolean, enabled: boolean, duration = 700) {
   const [value, setValue] = useState(target)
 
   useLayoutEffect(() => {

@@ -3,7 +3,7 @@ import { cn } from '../lib/utils'
 
 export type ProcessStep = { title: string; body: string }
 
-const STEP_SECONDS = 1.1
+const STEP_SECONDS = 0.18
 
 // A timeline that plays once when scrolled into view: a red line draws across
 // (down the side on phones and tablets, where four columns would be too narrow) and each step lights up and fades in as it arrives.
@@ -27,7 +27,7 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
     return () => observer.disconnect()
   }, [])
 
-  const total = steps.length * STEP_SECONDS
+  const total = Math.max(0.8, steps.length * STEP_SECONDS)
   const columns = ({ 3: 'laptop:grid-cols-3', 4: 'laptop:grid-cols-4' } as Record<number, string>)[steps.length] ?? 'laptop:grid-cols-5'
 
   return (
@@ -57,9 +57,9 @@ export function ProcessTimeline({ steps }: { steps: ProcessStep[] }) {
               }}
             />
             <div
-              className="transition-[opacity,transform] duration-[900ms] ease-out motion-reduce:transition-none"
+              className="transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none"
               style={{
-                transitionDelay: `${i * STEP_SECONDS + 0.15}s`,
+                transitionDelay: `${i * STEP_SECONDS + 0.1}s`,
                 opacity: playing ? 1 : 0,
                 transform: playing ? 'translateY(0)' : 'translateY(14px)',
               }}

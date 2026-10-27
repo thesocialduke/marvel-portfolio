@@ -20,13 +20,6 @@ export function TestimonialsSection({
   return (
     <figure className="mx-auto flex w-full flex-col items-start md:max-w-none md:items-center md:grid md:grid-cols-[auto_1fr] md:gap-x-10">
       <div className="relative flex items-center justify-center md:h-full">
-        {/* The framing lines only on wider screens; on phones they cut through the quote. */}
-        {/* Vertical lines */}
-        <MaskLine className="left-0 hidden md:block" orientation="vertical" />
-        <MaskLine className="right-0 hidden md:block" orientation="vertical" />
-        {/*  Horizontal lines */}
-        <MaskLine className="top-0 hidden md:block md:w-xl" orientation="horizontal" />
-        <MaskLine className="bottom-0 hidden md:block md:w-xl" orientation="horizontal" />
 
         <Avatar className="mask-[radial-gradient(circle,black_60%,transparent)] size-16 rounded-none *:rounded-none md:size-32">
           {avatarSrc && <AvatarImage alt={avatarAlt} src={avatarSrc} />}

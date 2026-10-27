@@ -20,7 +20,7 @@ export function ContactMe() {
       <section className="case-study-serif pt-18 pb-14 tablet:pt-[5rem] tablet:pb-18 laptop:pt-[8.5rem] laptop:pb-24">
         <Grid className="items-start gap-y-12 laptop:gap-y-0">
           {/* Details */}
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-8 laptop:col-start-2">
+          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <h1 className="custom-h1 custom-h1-bold text-balance">Let’s work together</h1>
             <p className="custom-p mt-6 max-w-xl text-ink/70">
               Open to full-time and contract roles in marketing: social media management and content creation,
@@ -34,14 +34,14 @@ export function ContactMe() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <EmailCopyButton tone="light" />
+              <EmailCopyButton tone="light" compact />
               <ButtonLink to={site.linkedin} external fullWidth={false}>
                 LinkedIn ↗
               </ButtonLink>
               <CvMenu variant="button" label="My Resume ▾" />
             </div>
 
-            <div className="mt-8 border-t border-ink/15 pt-4">
+            <div className="mt-8 max-w-3xl border-t border-ink/15 pt-4">
               <SocialLinks className="text-ink" />
             </div>
           </div>

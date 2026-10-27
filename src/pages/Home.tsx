@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { usePauseOffscreen } from '../hooks/usePauseOffscreen'
-import { ButtonLink } from '../components/Button'
+import { Link } from 'react-router-dom'
 import { Grid } from '../components/Grid'
 import { CaseStudyCard } from '../components/CaseStudyCard'
 import { Layout } from '../components/Layout'
@@ -216,22 +216,22 @@ export function Home() {
           <div className="col-span-full tablet:col-span-4 tablet:col-start-2 tablet:row-start-1 laptop:col-span-7 laptop:col-start-2">
             <StaggeredReveal
               lines={[
-                <p key="lead" className="font-modernist text-[1.3rem] leading-snug font-medium tracking-tight text-pretty text-ink tablet:text-[1.45rem] laptop:text-[1.7rem]">
+                <p key="lead" className="text-[1.4rem] leading-snug text-pretty text-ink tablet:text-[1.55rem] laptop:text-[1.8rem]" style={{ fontFamily: "'Cal Sans', var(--font-modernist)", fontSynthesis: 'none', letterSpacing: '0.01em' }}>
                   I drive growth and acquisition for brands, turning strategy
                   into an active user base and measurable results.
                 </p>,
                 <p key="brands" className="custom-p mt-4 text-left text-ink/70">
                   With 5+ years of experience across crypto, fintech, SaaS, and emerging tech, I’ve led growth,
                   content, and community initiatives for brands including{' '}
-                  <a href="https://www.bitget.com" target="_blank" rel="noreferrer" className="underline">
+                  <a href="https://www.bitget.com" target="_blank" rel="noreferrer" className="-mx-0.5 px-0.5 py-2 underline">
                     Bitget
                   </a>
                   ,{' '}
-                  <a href="https://www.binance.com" target="_blank" rel="noreferrer" className="underline">
+                  <a href="https://www.binance.com" target="_blank" rel="noreferrer" className="-mx-0.5 px-0.5 py-2 underline">
                     Binance
                   </a>
                   , and{' '}
-                  <a href="https://www.base.org" target="_blank" rel="noreferrer" className="underline">
+                  <a href="https://www.base.org" target="_blank" rel="noreferrer" className="-mx-0.5 px-0.5 py-2 underline">
                     Coinbase
                   </a>
                   .
@@ -295,18 +295,30 @@ export function Home() {
                 </li>
               ))}
             </ol>
-          </div>
-        </Grid>
-        {/* One "See all services" under the list on every screen size, with the same arrow as
-            "View case study". */}
-        <Grid className="mt-8">
-          <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2 tablet:flex tablet:justify-end">
-            <ButtonLink to="/services" className="tablet:w-auto">
-              See all services
-              <svg aria-hidden="true" className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+            {/* "See all services" as the list's last row: same divider rhythm, label left, arrow
+                right. Hover (or keyboard focus) turns it red and slides the arrow. */}
+            <Link
+              to="/services"
+              className="group flex items-center justify-between gap-6 border-b border-ink/15 py-6 text-ink outline-none transition-colors duration-150 hover:text-accent-text focus-visible:text-accent-text focus-visible:ring-2 focus-visible:ring-red-600 laptop:py-7"
+            >
+              <span
+                className="uppercase"
+                style={{ fontFamily: "'Cal Sans', var(--font-modernist)", fontSynthesis: 'none', fontSize: 'clamp(1.15rem, 1.6vw, 1.4rem)', lineHeight: 1.3, letterSpacing: '0.02em' }}
+              >
+                See all services
+              </span>
+              <svg
+                aria-hidden="true"
+                className="size-6 shrink-0 transition-transform duration-200 ease-[cubic-bezier(0.2,0,0,1)] group-hover:translate-x-1.5 group-focus-visible:translate-x-1.5 motion-reduce:transition-none laptop:size-7"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="square"
+              >
                 <path d="M4 12h15M13 6l6 6-6 6" />
               </svg>
-            </ButtonLink>
+            </Link>
           </div>
         </Grid>
       </section>
