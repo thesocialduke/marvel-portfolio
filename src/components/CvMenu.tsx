@@ -52,6 +52,8 @@ export function CvMenu({
           side={variant === 'link' ? 'top' : 'bottom'}
           align="start"
           sideOffset={variant === 'link' ? 12 : 8}
+          // Tells analytics which resume menu a click came from (it renders outside the footer/navbar).
+          data-area={variant === 'nav' ? 'navbar' : variant === 'link' ? 'footer' : 'page'}
           className="z-50 min-w-[12rem] bg-page ring-1 ring-ink outline-none"
         >
           <Popover.Close asChild>

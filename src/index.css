@@ -16,15 +16,6 @@
   src: url('../node_modules/@fontsource/boldonse/files/boldonse-latin-400-normal.woff2') format('woff2');
 }
 
-/* Cal Sans: the About intro and the "See all services" row on the home page. */
-@font-face {
-  font-family: 'Cal Sans';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url('../node_modules/@fontsource/cal-sans/files/cal-sans-latin-400-normal.woff2') format('woff2');
-}
-
 @font-face {
   font-family: 'SK Modernist';
   src: url('/fonts/sk-modernist-regular.otf') format('opentype');

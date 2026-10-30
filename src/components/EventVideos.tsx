@@ -1,3 +1,4 @@
+import { thumbProps } from '../lib/img'
 import { useRef, useState } from 'react'
 import { Dialog } from 'radix-ui'
 
@@ -48,7 +49,7 @@ export function EventVideos({
               className="group relative block aspect-video w-full cursor-pointer overflow-hidden bg-graphite outline-none after:pointer-events-none after:absolute after:inset-0 after:outline after:outline-1 after:-outline-offset-1 after:outline-ink/10 after:content-[''] focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2 focus-visible:ring-offset-page"
             >
               <img
-                src={video.thumb}
+                {...thumbProps(video.thumb, '(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw')}
                 alt=""
                 width={800}
                 height={450}

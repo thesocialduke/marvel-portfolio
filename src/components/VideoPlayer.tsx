@@ -1,3 +1,4 @@
+import { smallSrc } from '../lib/img'
 import { useRef, useState } from 'react'
 import { cn } from '../lib/utils'
 
@@ -39,7 +40,7 @@ export function VideoPlayer({
         <video
           ref={videoRef}
           src={src}
-          poster={poster}
+          poster={smallSrc(poster)}
           // Only the poster loads up front; the video itself downloads when someone presses play.
           preload="none"
           playsInline

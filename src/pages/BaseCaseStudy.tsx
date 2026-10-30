@@ -10,6 +10,7 @@ import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy } from '../data/site'
 import { cn } from '../lib/utils'
+import { thumbProps } from '../lib/img'
 import { useRef, useState } from 'react'
 import { ImageViewer } from '../components/ImageViewer'
 
@@ -137,7 +138,7 @@ export function BaseCaseStudy() {
           <div className="mt-8 grid grid-cols-2 gap-4 tablet:gap-6">
             <figure>
               <img
-                src={guide.cover}
+                {...thumbProps(guide.cover, '(min-width: 1024px) 28vw, 45vw')}
                 alt="Cover page of the Base Ambassador Mobile Video Production Guide by Ndubuisi Marvellous: planning your video (who it is for, one thing to learn, what to do after watching), scripting, location and equipment."
                 width={960}
                 height={1242}
@@ -176,7 +177,7 @@ export function BaseCaseStudy() {
               className="group block w-full cursor-zoom-in text-left outline-none focus-visible:ring-2 focus-visible:ring-red-600"
             >
               <img
-                src={calendar.src}
+                {...thumbProps(calendar.src, '(min-width: 1024px) 40vw, 90vw')}
                 alt={calendar.alt}
                 width={calendar.width}
                 height={calendar.height}
@@ -222,14 +223,14 @@ export function BaseCaseStudy() {
                   <div className="grid grid-cols-2 gap-2">
                     {pair.before ? (
                       <div className="relative aspect-[9/16] overflow-hidden bg-hyacinth/10">
-                        <img loading="lazy" decoding="async" src={pair.before} alt="" className="absolute inset-0 size-full object-cover grayscale" />
+                        <img loading="lazy" decoding="async" {...thumbProps(pair.before, '(min-width: 1024px) 14vw, 24vw')} alt="" className="absolute inset-0 size-full object-cover grayscale" />
                         <span className="custom-p custom-p-sm absolute top-2 left-2 bg-black/70 px-2 py-1 tracking-[0.1em] uppercase" style={{ color: '#fff' }}>
                           Before
                         </span>
                       </div>
                     ) : null}
                     <div className={cn('relative aspect-[9/16] overflow-hidden bg-hyacinth/10', !pair.before && 'col-span-2 mx-auto w-1/2')}>
-                      <img loading="lazy" decoding="async" src={pair.after.image} alt="" className="absolute inset-0 size-full object-cover" />
+                      <img loading="lazy" decoding="async" {...thumbProps(pair.after.image, '(min-width: 1024px) 14vw, 24vw')} alt="" className="absolute inset-0 size-full object-cover" />
                       <span className="custom-p custom-p-sm absolute top-2 left-2 bg-red-600 px-2 py-1 tracking-[0.1em] uppercase" style={{ color: '#fff' }}>
                         After
                       </span>

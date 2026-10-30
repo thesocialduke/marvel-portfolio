@@ -1,12 +1,12 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { Home } from './pages/Home'
 
-// Only the home page ships in the first download; every other page loads separately,
-// which keeps the first visit (and Google's speed score) fast. Once the browser is
-// idle the other pages are fetched in the background too, so opening one never shows a
-// blank screen while it downloads.
+// Every page loads as its own file, so a visitor only downloads the page they open (each
+// built page also tells the browser to fetch its file straight away; see
+// scripts/prerender.mjs). Once the page has loaded and the browser is idle, the other pages
+// are fetched in the background too, so opening one never shows a blank screen.
 const loaders = {
+  home: () => import('./pages/Home'),
   services: () => import('./pages/Services'),
   contact: () => import('./pages/ContactMe'),
   bitget: () => import('./pages/BitgetCaseStudy'),
@@ -15,6 +15,7 @@ const loaders = {
   notFound: () => import('./pages/NotFound'),
 }
 
+const Home = lazy(() => loaders.home().then((m) => ({ default: m.Home })))
 const Services = lazy(() => loaders.services().then((m) => ({ default: m.Services })))
 const ContactMe = lazy(() => loaders.contact().then((m) => ({ default: m.ContactMe })))
 const BitgetCaseStudy = lazy(() => loaders.bitget().then((m) => ({ default: m.BitgetCaseStudy })))
@@ -25,13 +26,25 @@ const NotFound = lazy(() => loaders.notFound().then((m) => ({ default: m.NotFoun
 export default function App() {
   useEffect(() => {
     const preload = () => Object.values(loaders).forEach((load) => void load())
-    if ('requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(preload, { timeout: 4000 })
-      return () => window.cancelIdleCallback(id)
+    let cancel = () => {}
+    const schedule = () => {
+      if ('requestIdleCallback' in window) {
+        const id = window.requestIdleCallback(preload, { timeout: 4000 })
+        cancel = () => window.cancelIdleCallback(id)
+      } else {
+        // Safari has no requestIdleCallback.
+        const id = setTimeout(preload, 2000)
+        cancel = () => clearTimeout(id)
+      }
     }
-    // Safari has no requestIdleCallback.
-    const id = setTimeout(preload, 2000)
-    return () => clearTimeout(id)
+    // Wait for the page's own images and fonts first, so the background fetches never
+    // compete with them.
+    if (document.readyState === 'complete') schedule()
+    else window.addEventListener('load', schedule, { once: true })
+    return () => {
+      window.removeEventListener('load', schedule)
+      cancel()
+    }
   }, [])
 
   return (

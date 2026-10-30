@@ -100,6 +100,7 @@ export function Navbar() {
           highlight on top and a hairline below). The blur switches on rather than animating,
           and browsers without backdrop-filter get an almost solid background instead. */}
       <div
+        data-area="navbar"
         className={cn(
           'fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color] duration-150 ease-out',
           scrolled

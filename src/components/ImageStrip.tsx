@@ -1,3 +1,4 @@
+import { thumbProps } from '../lib/img'
 import { useRef, useState } from 'react'
 import { ImageViewer } from './ImageViewer'
 
@@ -29,7 +30,7 @@ export function ImageStrip({ images, eager = false }: { images: StripImage[]; ea
               className="group relative block h-56 w-auto cursor-zoom-in overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-red-600 tablet:h-auto tablet:w-full"
             >
               <img
-                src={image.src}
+                {...thumbProps(image.src, '(min-width: 1024px) 18vw, (min-width: 640px) 22vw, 224px')}
                 alt={image.alt}
                 width={image.width}
                 height={image.height}

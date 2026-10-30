@@ -7,12 +7,20 @@ import { Grid } from '../components/Grid'
 import { Layout } from '../components/Layout'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 
+// The kinds of roles on offer, listed on the page (keep in sync with the meta description,
+// scripts/prerender.mjs and public/llms.txt).
+const roles = [
+  'Product marketing and growth',
+  'Social media management and content creation',
+  'Influencer, ambassador and KOL management',
+  'Community growth',
+]
 
 export function ContactMe() {
   useDocumentMeta({
     title: 'Contact | Ndubuisi Marvellous',
     description:
-      'Get in touch with Ndubuisi Marvellous, open to full-time and contract marketing roles in fintech, payments, AI, SaaS and Web3. Replies within 8 hours by email or LinkedIn.',
+      'Get in touch with Ndubuisi Marvellous, open to full-time and contract roles in product marketing, growth, social media, KOL and community in fintech, payments, AI, SaaS and Web3. Replies within 8 hours.',
   })
 
   return (
@@ -22,10 +30,16 @@ export function ContactMe() {
           {/* Details */}
           <div className="col-span-full tablet:col-span-6 tablet:col-start-2 laptop:col-span-12 laptop:col-start-2">
             <h1 className="custom-h1 custom-h1-bold text-balance">Let’s work together</h1>
-            <p className="custom-p mt-6 max-w-xl text-ink/70">
-              Open to full-time and contract roles in marketing: social media management and content creation,
-              influencer, ambassador and KOL management, and community growth. Ready to relocate for the right opportunity.
-            </p>
+            <p className="custom-p mt-6 max-w-xl text-ink/70">Open to full-time and contract marketing roles in:</p>
+            <ul className="mt-3 max-w-xl space-y-2">
+              {roles.map((role) => (
+                <li key={role} className="custom-p flex items-baseline gap-3 text-ink">
+                  <span aria-hidden="true" className="inline-block size-1.5 shrink-0 translate-y-[-0.15em] bg-red-600" />
+                  {role}
+                </li>
+              ))}
+            </ul>
+            <p className="custom-p mt-4 max-w-xl text-ink/70">Ready to relocate for the right opportunity.</p>
             <p className="custom-p mt-3 max-w-xl text-ink/70">
               Industries: fintech, payments and cross-border payments, AI, SaaS and Web3.
             </p>

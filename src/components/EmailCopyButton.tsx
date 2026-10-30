@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { placementOf, track } from '../lib/analytics'
 import { site } from '../data/site'
 import { cn } from '../lib/utils'
 
@@ -10,7 +11,9 @@ export function EmailCopyButton({ tone, compact = false }: { tone: 'dark' | 'lig
   // compact: the same 56px height as the site's other buttons, for rows where it sits beside them.
   const [copied, setCopied] = useState(false)
 
-  async function handleCopy() {
+  async function handleCopy(e: React.MouseEvent<HTMLButtonElement>) {
+    // Counted on click, whether or not the browser lets the copy through.
+    track('copy_email', { placement: placementOf(e.currentTarget) })
     try {
       await navigator.clipboard.writeText(site.email)
     } catch {

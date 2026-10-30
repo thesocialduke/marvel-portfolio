@@ -169,6 +169,8 @@ export type Testimonial = {
   avatar?: string
   logo?: string
   logoDark?: string
+  // The logo file's own width and height, so the browser reserves its space before it loads.
+  logoSize?: [number, number]
   // Overrides the logo's height where its artwork reads smaller than the others at the same size.
   logoClassName?: string
   company?: string
@@ -355,11 +357,12 @@ export const binanceCaseStudy: CaseStudyData = {
 // Reviews shown in the carousel at the bottom of the home page.
 // To add one, append an object here: { quote, name, role, avatar?, logo?, company? } (paths are under /public).
 export const homeTestimonials: Testimonial[] = [
-  { ...bitgetCaseStudy.testimonial!, avatar: '/testimonials/aka-leung.jpg?v=2', logo: '/logos/tight/bitget.svg', company: 'Bitget' },
+  { ...bitgetCaseStudy.testimonial!, avatar: '/testimonials/aka-leung.jpg?v=2', logo: '/logos/tight/bitget.svg', logoSize: [512, 155], company: 'Bitget' },
   {
     ...binanceCaseStudy.testimonial!,
     avatar: '/testimonials/adiele-greatmen.jpg',
     logo: '/logos/tight/binance.svg',
+    logoSize: [225, 49],
     company: 'Binance',
   },
   {
@@ -369,6 +372,7 @@ export const homeTestimonials: Testimonial[] = [
     role: 'Head of Product, Kyshi',
     avatar: '/testimonials/grace-samuel.jpg',
     logo: '/logos/kyshi-card.png',
+    logoSize: [100, 40],
     logoDark: '/logos/kyshi-dark.png',
     logoClassName: 'h-7 tablet:h-9',
     company: 'Kyshi',
@@ -380,6 +384,7 @@ export const homeTestimonials: Testimonial[] = [
     role: 'Growth Marketer, Busha (ex Kyshi)',
     avatar: '/testimonials/olumide-olatunji.jpg?v=2',
     logo: '/logos/busha.png',
+    logoSize: [518, 120],
     logoDark: '/logos/busha-dark.png',
     company: 'Busha',
   },

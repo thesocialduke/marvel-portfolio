@@ -3,6 +3,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
+import { startClickTracking } from './lib/analytics'
 
 const root = document.getElementById('root')!
 const app = (
@@ -12,6 +13,8 @@ const app = (
     </BrowserRouter>
   </StrictMode>
 )
+
+startClickTracking()
 
 // Built pages ship with their text already in the HTML (see scripts/prerender.mjs), so
 // hydrate it; the dev server serves an empty root and renders from scratch.

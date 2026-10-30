@@ -13,6 +13,7 @@ import { SplitSection } from '../components/SplitSection'
 import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { cn } from '../lib/utils'
+import { thumbProps } from '../lib/img'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy, homeTestimonials } from '../data/site'
 
 
@@ -345,7 +346,7 @@ function ProofThumb({
       className="group relative block w-28 cursor-zoom-in text-right outline-none focus-visible:ring-2 focus-visible:ring-red-600 tablet:w-44"
     >
       <img
-        src={image}
+        {...thumbProps(image, '(min-width: 640px) 176px, 112px')}
         alt={alt}
         width={width}
         height={height}
@@ -697,7 +698,7 @@ export function BitgetCaseStudy() {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src={shot.src}
+                      {...thumbProps(shot.src, '(min-width: 1024px) 22vw, 45vw')}
                       alt={shot.alt}
                       width={shot.width}
                       height={shot.height}

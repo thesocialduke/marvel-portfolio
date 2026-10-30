@@ -1,3 +1,4 @@
+import { smallSrc } from '../lib/img'
 import { useEffect, useRef, useState } from 'react'
 
 // A short silent clip that plays like a GIF: autoplays muted and loops, but only while it is
@@ -39,7 +40,7 @@ export function LoopingClip({
     <video
       ref={ref}
       src={reduced ? undefined : src}
-      poster={poster}
+      poster={smallSrc(poster)}
       width={width}
       height={height}
       muted

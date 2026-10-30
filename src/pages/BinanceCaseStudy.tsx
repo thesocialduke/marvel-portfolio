@@ -12,6 +12,7 @@ import { caseStudyJsonLd } from '../data/caseStudyJsonLd'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { baseCaseStudy, binanceCaseStudy, bitgetCaseStudy, homeTestimonials } from '../data/site'
 import { cn } from '../lib/utils'
+import { thumbProps } from '../lib/img'
 
 const summary =
   'Binance Africa wanted crypto to reach people who had never touched it. I took it to the street: short, unscripted interviews that turned one crypto idea into one question anyone could answer, made for Instagram and TikTok.'
@@ -173,7 +174,7 @@ export function BinanceCaseStudy() {
                     i === 0 && 'outline-2 -outline-offset-2 outline-red-600',
                   )}
                 >
-                  {episode.thumb && <img loading="lazy" decoding="async" src={episode.thumb} alt="" className="absolute inset-0 size-full object-cover" />}
+                  {episode.thumb && <img loading="lazy" decoding="async" {...thumbProps(episode.thumb, '(min-width: 640px) 12vw, 45vw')} alt="" className="absolute inset-0 size-full object-cover" />}
                   <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                   <span
                     aria-hidden="true"

@@ -15,12 +15,16 @@ export function TestimonialCard({ t, className }: { t: Testimonial; className?: 
             <img
               src={t.logo}
               alt={t.company ?? ''}
+              width={t.logoSize?.[0]}
+              height={t.logoSize?.[1]}
               className={cn('h-5 w-auto tablet:h-7', t.logoClassName, t.logoDark && 'testimonial-logo-light')}
               loading="lazy"
               decoding="async"
             />
             {t.logoDark && (
-              <img src={t.logoDark} alt={t.company ?? ''} className={cn('testimonial-logo-dark h-5 w-auto tablet:h-7', t.logoClassName)} loading="lazy" decoding="async" />
+              <img src={t.logoDark} alt={t.company ?? ''}
+              width={t.logoSize?.[0]}
+              height={t.logoSize?.[1]} className={cn('testimonial-logo-dark h-5 w-auto tablet:h-7', t.logoClassName)} loading="lazy" decoding="async" />
             )}
           </>
         ) : (

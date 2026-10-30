@@ -37,7 +37,7 @@ const routes = [
     path: '/contact',
     title: 'Contact | Ndubuisi Marvellous',
     description:
-      'Get in touch with Ndubuisi Marvellous, open to full-time and contract marketing roles in fintech, payments, AI, SaaS and Web3. Replies within 8 hours by email or LinkedIn.',
+      'Get in touch with Ndubuisi Marvellous, open to full-time and contract roles in product marketing, growth, social media, KOL and community in fintech, payments, AI, SaaS and Web3. Replies within 8 hours.',
   },
   {
     path: '/bitget',
@@ -90,7 +90,35 @@ function inlineCss(html) {
 
 const template = inlineCss(readFileSync('dist/index.html', 'utf8'))
 
-writeFileSync('dist/index.html', await withBody(template, '/'))
+// Each page's code is a separate file that the main script would only ask for once it runs,
+// a chain that delays the page becoming interactive. A modulepreload link per page (and the
+// shared chunks it imports) lets the browser fetch them in parallel with the main script.
+const manifest = JSON.parse(readFileSync('dist/.vite/manifest.json', 'utf8'))
+const pageFiles = {
+  '/': 'src/pages/Home.tsx',
+  '/services': 'src/pages/Services.tsx',
+  '/contact': 'src/pages/ContactMe.tsx',
+  '/bitget': 'src/pages/BitgetCaseStudy.tsx',
+  '/base-southern-africa': 'src/pages/BaseCaseStudy.tsx',
+  '/binance-africa': 'src/pages/BinanceCaseStudy.tsx',
+  '/404': 'src/pages/NotFound.tsx',
+}
+function withPreloads(html, route) {
+  const files = new Set()
+  const visit = (key) => {
+    const chunk = manifest[key]
+    if (!chunk || chunk.isEntry || files.has(chunk.file)) return
+    files.add(chunk.file)
+    ;(chunk.imports ?? []).forEach(visit)
+  }
+  const key = pageFiles[route]
+  if (!manifest[key]) throw new Error(`prerender: ${key} not found in the build manifest`)
+  visit(key)
+  const links = [...files].map((file) => `<link rel="modulepreload" crossorigin href="/${file}">`).join('\n    ')
+  return html.replace('</head>', `    ${links}\n  </head>`)
+}
+
+writeFileSync('dist/index.html', withPreloads(await withBody(template, '/'), '/'))
 console.log('prerendered body for /')
 
 for (const route of routes) {
@@ -113,7 +141,7 @@ for (const route of routes) {
   html = setMeta(html, 'name', 'twitter:image:alt', route.title)
   html = setMeta(html, 'name', 'twitter:card', 'summary_large_image')
 
-  html = await withBody(html, route.path)
+  html = withPreloads(await withBody(html, route.path), route.path)
 
   // vercel.json sets cleanUrls, so /services is served from dist/services.html
   writeFileSync(`dist${route.path}.html`, html)
@@ -137,6 +165,6 @@ for (const route of routes) {
   html = setMeta(html, 'property', 'og:description', text)
   html = setMeta(html, 'name', 'twitter:title', 'Page not found | Ndubuisi Marvellous')
   html = setMeta(html, 'name', 'twitter:description', text)
-  writeFileSync('dist/404.html', await withBody(html, '/404'))
+  writeFileSync('dist/404.html', withPreloads(await withBody(html, '/404'), '/404'))
   console.log('prerendered 404.html')
 }

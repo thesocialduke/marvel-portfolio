@@ -1,3 +1,4 @@
+import { thumbProps } from '../lib/img'
 import { Grid } from './Grid'
 import type { EventPhoto } from '../data/site'
 
@@ -15,7 +16,9 @@ export function EventGallery({ title, photos }: { title: string; photos: EventPh
             {photos.map((photo, i) => (
               <div key={i} className="group relative aspect-square overflow-hidden">
                 <img
-                  src={photo.image}
+                  {...thumbProps(photo.image, '(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw')}
+                  loading="lazy"
+                  decoding="async"
                   alt={`${photo.event}, ${photo.location}`}
                   className="size-full object-cover transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none"
                 />

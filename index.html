@@ -24,10 +24,26 @@
         } catch (e) {}
         gtag('js', new Date());
         gtag('config', 'G-L58GESV6V6');
-        var tag = document.createElement('script');
-        tag.async = true;
-        tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-L58GESV6V6';
-        document.head.appendChild(tag);
+        // The tag itself (about 170KB) loads once the page has finished loading and the
+        // browser is idle, or on the first tap, scroll or key press if that comes sooner, so it
+        // never competes with the page's own first paint. The calls above are queued in
+        // dataLayer and sent as soon as it arrives, so the visit is still counted.
+        var gtagLoaded = false;
+        var loadGtag = function () {
+          if (gtagLoaded) return;
+          gtagLoaded = true;
+          var tag = document.createElement('script');
+          tag.async = true;
+          tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-L58GESV6V6';
+          document.head.appendChild(tag);
+        };
+        ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (type) {
+          addEventListener(type, loadGtag, { once: true, passive: true });
+        });
+        addEventListener('load', function () {
+          if ('requestIdleCallback' in window) requestIdleCallback(loadGtag, { timeout: 3000 });
+          else setTimeout(loadGtag, 1500);
+        });
       }
     </script>
     <link rel="icon" href="/favicon.ico" sizes="48x48" />

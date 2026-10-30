@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
 import { cn } from '../lib/utils'
 
 export function StaggeredReveal({
@@ -12,25 +13,9 @@ export function StaggeredReveal({
   lineClassName?: string
   staggerMs?: number
 }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.3 },
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+  // Lines already on screen when the page opens just show; see useRevealOnScroll.
+  const [ref, state] = useRevealOnScroll<HTMLSpanElement>({ threshold: 0.3 })
+  const visible = state === 'shown'
 
   return (
     <span ref={ref} className={cn('block', className)}>
@@ -38,8 +23,9 @@ export function StaggeredReveal({
         <span
           key={i}
           className={cn(
-            'block transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0',
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
+            'block',
+            state !== 'static' && 'transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none',
+            state === 'hidden' && 'opacity-0 translate-y-4',
             lineClassName,
           )}
           style={{ transitionDelay: visible ? `${i * staggerMs}ms` : '0ms' }}
